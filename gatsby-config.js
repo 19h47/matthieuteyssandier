@@ -7,6 +7,7 @@
  */
 
 module.exports = {
+  flags: { PRESERVE_WEBPACK_CACHE: true },
   /**
    * Adding plugins to this array adds them to your Gatsby site.
    *
