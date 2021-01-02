@@ -1,12 +1,19 @@
 /**
- * Footer
+ * Next
  *
  * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  * @package Gatsby
  * @subpackage MatthieuTeyssandier
  */
-.Site-footer {
-	$this: &;
+.Next {
+	@extend .d-block;
 
-	@include margin(top 20px bottom 112px);
+	height: 420px;
+
+	img {
+		@include size(100%);
+
+		object-position: center;
+		object-fit: cover;
+	}
 }

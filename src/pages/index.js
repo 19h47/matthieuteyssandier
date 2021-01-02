@@ -20,8 +20,7 @@ const FrontPage = ({ data }) => {
     return (
         <Layout>
             <SEO title="home" />
-            <h1>My WordPress Blog</h1>
-            <h4>Posts</h4>
+
             {data.allWpCaseStudy.edges.map(({ node }) => (
                 <div key={node.slug}>
                     <Link to={node.link}>
