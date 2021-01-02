@@ -10,6 +10,7 @@
   "dependencies": {
     "@19h47/architecture": "19h47/architecture",
     "bootstrap": "^4.5.3",
+    "gatsby-plugin-react-svg": "^3.0.0",
     "locomotive-scroll": "^4.0.6",
     "ress": "^3.0.0"
   },
