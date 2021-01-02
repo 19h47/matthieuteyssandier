@@ -1,0 +1,82 @@
+/**
+ * Basic typography style for copy text
+ */
+
+// @include reset-selection( get_color( black ), get_color( white ) );
+
+h1,
+.h1 {
+	@extend %font-family-title, %font-weight-regular;
+	@include margin(top 0.5em bottom 0.5em);
+
+	font-size: 80px;
+	line-height: (96/80);
+}
+
+h2,
+.h2 {
+	@extend %font-family-title, %font-weight-black;
+	@include margin(top 1em bottom 1em);
+	@include letter-spacing(-20);
+
+	font-size: 23px;
+	line-height: (31/23);
+
+	@include media-breakpoint-up(md) {
+		font-size: 50px;
+		line-height: (55/50);
+	}
+}
+
+h3,
+.h3 {
+	@extend %font-family-title, %font-weight-light;
+	@include margin(top #{(30/30)}em bottom #{(20/30)}em);
+	@include letter-spacing(-20);
+
+	font-size: 30px;
+	line-height: (38/30);
+
+	@include media-breakpoint-up(md) {
+		@include margin(bottom #{(10/48)}em);
+		font-size: 48px;
+		line-height: (54/48);
+	}
+}
+
+h4,
+.h4 {
+	@extend %font-family-title, %font-weight-medium;
+	@include margin(top #{(30/18)}em bottom #{(20/18)}em);
+
+	font-size: 18px;
+	line-height: (22/18);
+
+	@include media-breakpoint-up(md) {
+		@include margin(top #{(60/24)}em bottom #{(30/24)}em);
+
+		font-size: 24px;
+		line-height: (26/24);
+	}
+}
+
+h5,
+.h5 {
+	@extend %font-family-title, %font-weight-black;
+	@include margin(top 0 bottom 0);
+
+	font-size: 18px;
+	line-height: (22/18);
+}
+
+// h4,
+// .h4 {
+// }
+
+// h5,
+// .h5 {
+// }
+
+// h6,
+// .h6 {
+// }
