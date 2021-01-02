@@ -59,7 +59,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Matthieu Teyssandier`,
-        short_name: `MT©2020`,
+        short_name: `MT©2021`,
         start_url: `/`,
         background_color: `#EAE9E8`,
         theme_color: `#000000`,

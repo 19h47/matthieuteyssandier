@@ -9,9 +9,12 @@
   },
   "dependencies": {
     "@19h47/architecture": "19h47/architecture",
-    "@19h47/prettier-config": "^1.0.0",
-    "@wordpress/block-library": "^2.27.0",
     "bootstrap": "^4.5.3",
+    "locomotive-scroll": "^4.0.6",
+    "ress": "^3.0.0"
+  },
+  "devDependencies": {
+    "@19h47/prettier-config": "^1.0.0",
     "gatsby": "^2.29.3",
     "gatsby-cli": "^2.16.2",
     "gatsby-image": "^2.8.0",
@@ -24,20 +27,16 @@
     "gatsby-source-wordpress-experimental": "^6.0.0",
     "gatsby-transformer-sharp": "^2.9.0",
     "html-react-parser": "^1.1.1",
-    "locomotive-scroll": "^4.0.6",
-    "lodash": "^4.17.20",
     "node-sass": "^5.0.0",
+    "prettier": "2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0"
   },
-  "devDependencies": {
-    "dumper.js": "^1.3.1",
-    "prettier": "2.2.1"
-  },
   "homepage": "https://github.com/19h47/matthieuteyssandier#readme",
   "keywords": [
-    "gatsby"
+    "gatsby",
+    "locomotive-scroll"
   ],
   "license": "0BSD",
   "main": "n/a",
