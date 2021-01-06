@@ -1,0 +1,24 @@
+/**
+ * Tease: Case Study
+ *
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ * @package Gatsby
+ * @subpackage MatthieuTeyssandier
+ */
+.Tease-case-study {
+	.gatsby-image-wrapper {
+		@include size(100%, 686px);
+
+		img {
+			object-fit: cover;
+			object-position: center;
+		}
+	}
+	&__title {
+		svg {
+			@include size(42px, 90px);
+
+			min-width: 42px;
+		}
+	}
+}

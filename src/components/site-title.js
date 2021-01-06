@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
 import parse from 'html-react-parser';
 
-const SiteTitle = () => {
+const SiteTitle = ({ color }) => {
     const {
         wp: {
             generalSettings: { title },
@@ -18,10 +18,12 @@ const SiteTitle = () => {
 	`);
 
     return (
-        <Link className="Site-title" to="/">
-            {parse(title)}©{new Date().getFullYear()}
-        </Link>
-    )
-}
+        <div className="Site-title">
+            <Link to="/">{parse(title)}</Link>
+            <button style={{ backgroundColor: color }} type="button" />
+            <Link to="/">{new Date().getFullYear()}</Link>
+        </div>
+    );
+};
 
-export default SiteTitle
+export default SiteTitle;

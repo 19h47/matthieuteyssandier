@@ -6,6 +6,16 @@
  * @subpackage MatthieuTeyssandier
  */
 .Site-title {
+	@extend .d-flex, .align-items-center;
+
 	font-size: 26px;
 	line-height: (31.2/26);
+
+	button {
+		@extend .d-inline-block;
+		@include size(20px);
+		@include margin(right 2px);
+
+		border-radius: 10px;
+	}
 }

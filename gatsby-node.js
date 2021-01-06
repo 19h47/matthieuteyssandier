@@ -6,8 +6,8 @@ exports.createPages = async gatsbyUtilities => {
 	await createIndividualCaseStudyPostPages({ caseStudies, gatsbyUtilities });
 };
 
-const createIndividualCaseStudyPostPages = async ({ caseStudies, gatsbyUtilities }) =>
-	Promise.all(
+const createIndividualCaseStudyPostPages = async ({ caseStudies, gatsbyUtilities }) => {
+	return Promise.all(
 		caseStudies.map(({ caseStudy, next }) => {
 			return gatsbyUtilities.actions.createPage({
 				path: caseStudy.uri,
@@ -19,6 +19,7 @@ const createIndividualCaseStudyPostPages = async ({ caseStudies, gatsbyUtilities
 			});
 		}),
 	);
+};
 
 async function getCaseStudies({ graphql, reporter }) {
 	const graphqlResult = await graphql(/* GraphQL */ `
