@@ -67,21 +67,23 @@ const FrontPage = ({ data }) => {
 										<div className="Wysiwyg">
 											<p>
 												Hello,
-											<br />
-											I’m a freelance designer based in Paris. I’m specialized
-											in art direction and interactive design. I've gained a
-											wealth of knowledge and expertise by working for clients
-											like Veuve Clicquot, Dom Perignon, Chandon, Suez,
-											Nespresso, Arte, Renault, Swile.
-										</p>
+												<br />
+												I’m a freelance designer based in Paris. I’m
+												specialized in art direction and interactive design.
+												I've gained a wealth of knowledge and expertise by
+												working for clients like Veuve Clicquot, Dom
+												Perignon, Chandon, Suez, Nespresso, Arte, Renault,
+												Swile.
+											</p>
 											<p className="color-yellow-dark-grayish">
-												Bonjour,<br />
-												Je suis un designer freelance situé à Paris.À travers
-												mon travail je me suis spécialisé dans la direction
-												artistique et le design interactif. J'ai acquis mon
-												expérience en travaillant pour des clients comme Veuve
-												Clicquot, Dom Pérignon, Chandon, Suez, Nespresso, Arte,
-												Renault, Swile.
+												Bonjour,
+												<br />
+												Je suis un designer freelance situé à Paris.À
+												travers mon travail je me suis spécialisé dans la
+												direction artistique et le design interactif. J'ai
+												acquis mon expérience en travaillant pour des
+												clients comme Veuve Clicquot, Dom Pérignon, Chandon,
+												Suez, Nespresso, Arte, Renault, Swile.
 											</p>
 										</div>
 									</div>

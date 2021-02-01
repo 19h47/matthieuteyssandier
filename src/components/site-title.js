@@ -3,11 +3,11 @@ import { Link, useStaticQuery, graphql } from 'gatsby';
 import parse from 'html-react-parser';
 
 const SiteTitle = ({ color }) => {
-    const {
-        wp: {
-            generalSettings: { title },
-        },
-    } = useStaticQuery(graphql`
+	const {
+		wp: {
+			generalSettings: { title },
+		},
+	} = useStaticQuery(graphql`
 		query title {
 			wp {
 				generalSettings {
@@ -17,13 +17,13 @@ const SiteTitle = ({ color }) => {
 		}
 	`);
 
-    return (
-        <div className="Site-title">
-            <Link to="/">{parse(title)}</Link>
-            <button style={{ backgroundColor: color }} type="button" aria-label={parse(title)} />
-            <Link to="/">{new Date().getFullYear()}</Link>
-        </div>
-    );
+	return (
+		<div className="Site-title">
+			<Link to="/">{parse(title)}</Link>
+			<button style={{ backgroundColor: color }} type="button" aria-label={parse(title)} />
+			<Link to="/">{new Date().getFullYear()}</Link>
+		</div>
+	);
 };
 
 export default SiteTitle;

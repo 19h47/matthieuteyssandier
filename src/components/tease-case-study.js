@@ -5,35 +5,38 @@ import Image from 'gatsby-image';
 import ArrowRight from '../assets/arrow-right.inline.svg';
 
 const TeaseCaseStudy = ({ caseStudy, index, length }) => {
-    const featuredImage = {
-        fluid: caseStudy.featuredImage?.node?.localFile?.childImageSharp?.fluid,
-        alt: caseStudy.featuredImage?.node?.alt || ``,
-    };
+	const featuredImage = {
+		fluid: caseStudy.featuredImage?.node?.localFile?.childImageSharp?.fluid,
+		alt: caseStudy.featuredImage?.node?.alt || ``,
+	};
 
-    return (
-        <div className="Tease-case-study" key={caseStudy.slug} data-color={caseStudy.customFields.color}>
-            {featuredImage?.fluid && (
-                <Link className="d-block" to={caseStudy.link}>
-                    <Image
-                        fluid={featuredImage.fluid}
-                        alt={featuredImage.alt}
-                        backgroundColor={caseStudy.customFields.color}
-                        durationFadeIn={1800}
-                    />
-                </Link>
-            )}
-            <Link to={caseStudy.link}>
-                <h2 className="Tease-case-study__title h1">
-                    {index + 1}&nbsp;&mdash;&nbsp;{length} <br />
-                    {caseStudy.title}
-                    <div className="d-flex align-items-center justify-content-between">
-                        {caseStudy.customFields.date}
-                        <ArrowRight />
-                    </div>
-                </h2>
-            </Link>
-        </div>
-    );
+	return (
+		<div
+			className="Tease-case-study"
+			key={caseStudy.slug}
+			data-color={caseStudy.customFields.color}>
+			{featuredImage?.fluid && (
+				<Link className="d-block" to={caseStudy.link}>
+					<Image
+						fluid={featuredImage.fluid}
+						alt={featuredImage.alt}
+						backgroundColor={caseStudy.customFields.color}
+						durationFadeIn={1800}
+					/>
+				</Link>
+			)}
+			<Link to={caseStudy.link}>
+				<h2 className="Tease-case-study__title h1">
+					{index + 1}&nbsp;&mdash;&nbsp;{length} <br />
+					{caseStudy.title}
+					<div className="d-flex align-items-center justify-content-between">
+						{caseStudy.customFields.date}
+						<ArrowRight />
+					</div>
+				</h2>
+			</Link>
+		</div>
+	);
 };
 
 export default TeaseCaseStudy;
