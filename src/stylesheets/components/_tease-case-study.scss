@@ -6,16 +6,46 @@
  * @subpackage MatthieuTeyssandier
  */
 .Tease-case-study {
+	$this: &;
+
+	&:hover {
+		.gatsby-image-wrapper img {
+			filter: grayscale(0%);
+		}
+
+		#{$this}__image svg {
+			transform: scale(1);
+		}
+	}
+
 	.gatsby-image-wrapper {
 		@include size(100%, 224px);
 
 		img {
+			filter: grayscale(100%);
 			object-fit: cover;
 			object-position: center;
+			transition: opacity 1.8s map-get($easings, ease-out-expo),
+				filter 1.8s map-get($easings, ease-out-expo) !important;
 		}
 
 		@include media-breakpoint-up(md) {
-			height: 686px;
+			height: #{(686 * 100) / 1920}vw;
+			max-height: 686px;
+		}
+	}
+
+	&__image {
+		@extend .d-block;
+		@extend %position-relative, %overflow-hidden;
+
+		svg {
+			@include absolute(top 0 right 0 bottom 0 left 0);
+			@include size(100%);
+
+			will-change: transform;
+			transition: transform 1.8s map-get($easings, ease-out-expo);
+			transform: scale(1.5);
 		}
 	}
 
