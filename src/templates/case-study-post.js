@@ -18,11 +18,14 @@ export const query = graphql`
 					localFile {
 						childImageSharp {
 							fluid(maxWidth: 1000, quality: 100) {
-								...GatsbyImageSharpFluid_withWebp
+								...GatsbyImageSharpFluid_noBase64
 							}
 						}
 					}
 				}
+			}
+			customFields {
+				color
 			}
 		}
 
@@ -77,9 +80,13 @@ const CaseStudyPostTemplate = ({ data: { next, caseStudy } }) => {
 							fluid={featuredImage.fluid}
 							alt={featuredImage.alt}
 							style={{ marginBottom: 50 }}
+							backgroundColor={caseStudy.customFields.color}
+							durationFadeIn={1800}
 						/>
 					)}
 				</header>
+
+				{/* BLOCKS */}
 			</article>
 
 			<div className="Site-container">
@@ -97,13 +104,13 @@ const CaseStudyPostTemplate = ({ data: { next, caseStudy } }) => {
 							to={next.link}
 							rel="next"
 							style={{ backgroundColor: next.customFields.color }}>
-
-
 							{nextFeaturedImage?.fluid && (
 								<Image
 									fluid={nextFeaturedImage.fluid}
 									alt={nextFeaturedImage.alt}
 									style={{ height: '100%' }}
+									backgroundColor={next.customFields.color}
+									durationFadeIn={1800}
 								/>
 							)}
 						</Link>

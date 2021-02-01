@@ -11,13 +11,14 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     };
 
     return (
-        <div className="Tease-case-study" key={caseStudy.slug}>
+        <div className="Tease-case-study" key={caseStudy.slug} data-color={caseStudy.customFields.color}>
             {featuredImage?.fluid && (
                 <Link className="d-block" to={caseStudy.link}>
                     <Image
                         fluid={featuredImage.fluid}
                         alt={featuredImage.alt}
                         backgroundColor={caseStudy.customFields.color}
+                        durationFadeIn={1800}
                     />
                 </Link>
             )}

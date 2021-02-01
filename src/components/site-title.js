@@ -20,7 +20,7 @@ const SiteTitle = ({ color }) => {
     return (
         <div className="Site-title">
             <Link to="/">{parse(title)}</Link>
-            <button style={{ backgroundColor: color }} type="button" />
+            <button style={{ backgroundColor: color }} type="button" aria-label={parse(title)} />
             <Link to="/">{new Date().getFullYear()}</Link>
         </div>
     );

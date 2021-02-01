@@ -7,18 +7,27 @@
  */
 .Tease-case-study {
 	.gatsby-image-wrapper {
-		@include size(100%, 686px);
+		@include size(100%, 224px);
 
 		img {
 			object-fit: cover;
 			object-position: center;
 		}
+
+		@include media-breakpoint-up(md) {
+			height: 686px;
+		}
 	}
+
 	&__title {
 		svg {
-			@include size(42px, 90px);
+			@include size(#{(58 * 100) / 1920}vw, #{(41.99 * 100) / 1920}vw);
 
-			min-width: 42px;
+			min-width: #{(58 * 100) / 1920}vw;
+
+			@include media-breakpoint-up(xxl) {
+				@include size(58px, 41.99px);
+			}
 		}
 	}
 }

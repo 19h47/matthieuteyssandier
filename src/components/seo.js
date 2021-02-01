@@ -10,7 +10,27 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
-const SEO = ({ description, lang, meta, title }) => {
+const SEO = ({ description, lang, meta, title, color }) => {
+
+	const img = new Image();
+	const canvas = document.createElement("canvas");
+	const context = canvas.getContext("2d");
+
+	canvas.width = 16;
+	canvas.height = 16;
+
+	context.drawImage(img, 0, 0);
+
+	context.fillStyle = color;
+	context.fillRect(0, 0, 16, 16);
+	context.fill();
+
+	const faviconLinks = [{
+		rel: "shortcut icon", type: "image/x-icon", sizes: "16x16", href: canvas.toDataURL()
+	}]
+
+	console.log(faviconLinks)
+
 	const { wp, wpUser } = useStaticQuery(
 		graphql`
 			query {
@@ -34,6 +54,7 @@ const SEO = ({ description, lang, meta, title }) => {
 
 	return (
 		<Helmet
+			link={faviconLinks}
 			htmlAttributes={{
 				lang,
 			}}
