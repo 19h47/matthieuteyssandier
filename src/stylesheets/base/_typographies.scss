@@ -9,11 +9,11 @@ h1,
 	@extend %font-family-title, %font-weight-regular;
 	@include margin(top 0.5em bottom 0.5em);
 
-	font-size: calc(40px + (80 - 40) * ((100vw - 335px) / (1920 - 335)));
+	font-size: 40px;
 	line-height: (48/40);
 
-	@include media-breakpoint-down(md) {
-		font-size: 40px;
+	@include media-breakpoint-up(md) {
+		font-size: calc(40px + (80 - 40) * ((100vw - 335px) / (1920 - 335)));
 	}
 	@include media-breakpoint-up(xxl) {
 		font-size: 80px;

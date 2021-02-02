@@ -7,11 +7,10 @@
  */
 .Wysiwyg {
 	line-height: (39/20);
-
-	font-size: calc(20px + (35 - 20) * ((100vw - 335px) / (1920 - 335)));
+	font-size: 20px;
 
 	@include media-breakpoint-up(md) {
-		font-size: 20px;
+		font-size: calc(20px + (35 - 20) * ((100vw - 335px) / (1920 - 335)));
 	}
 	@include media-breakpoint-up(xxl) {
 		font-size: 35px;
