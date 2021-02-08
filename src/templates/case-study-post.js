@@ -91,14 +91,14 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 
 			<div className="Site-container">
 				<div className="row">
-					<div className="col-2">
+					<div className="col-10 col-md-2">
 						<Link to={next.link} rel="next" className="h1 margin-0">
 							Next
 							<br />
 							<span className="color-yellow-dark-grayish">Suivant</span>
 						</Link>
 					</div>
-					<div className="col-8">
+					<div className="col-10 col-md-8">
 						<Link
 							className="Next"
 							to={next.link}

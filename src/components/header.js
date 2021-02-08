@@ -13,7 +13,9 @@ const Header = ({ color }) => {
 						<SiteTitle color={color} />
 					</div>
 
-					<div className="col-5 d-md-none">Projets</div>
+					<div className="col-5 d-md-none">
+						<button type="button" className="font-size-26">Projets</button>
+					</div>
 
 					<div className="d-none d-md-block col-3">
 						<SiteDescription />

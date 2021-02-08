@@ -9,13 +9,13 @@ const Footer = () => {
 		<div className="Site-footer">
 			<div className="Site-container">
 				<div className="row">
-					<div className="col-3 offset-2">
+					<div className="col-12 col-md-3 offset-md-2">
 						<SiteTitle />
 					</div>
-					<div className="col-3">
+					<div className="col-12 col-md-3">
 						<SiteDescription />
 					</div>
-					<div className="col-2">
+					<div className="col-12 col-md-2">
 						<SiteContact />
 					</div>
 				</div>
