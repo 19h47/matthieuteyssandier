@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
 
 import Layout from '../components/layout';
@@ -61,9 +61,9 @@ const FrontPage = ({ data }) => {
 				<div className="row">
 					{data.allWpCaseStudy.edges.map(({ node }, index) => {
 						return (
-							<>
+							<Fragment key={`row-${index}`}>
 								{2 === index && (
-									<div className="col-6">
+									<div className="col-6" key={`column-${index}`}>
 										<div className="Wysiwyg">
 											<p>
 												Hello,
@@ -90,7 +90,7 @@ const FrontPage = ({ data }) => {
 								)}
 
 								{5 === index && (
-									<div className="col-2">
+									<div className="col-2" key={`text-${index}`}>
 										<p>
 											I’m Matthieu Teyssandier, a french desginer with 6+
 											years of experience in the digital, based in Paris. I’ve
@@ -117,14 +117,14 @@ const FrontPage = ({ data }) => {
 								)}
 								<div
 									className={classNames[index % classNames.length]}
-									key={node.slug}>
+									key={`column-${node.slug}-${index}`}>
 									<TeaseCaseStudy
 										caseStudy={node}
 										index={index}
 										length={data.allWpCaseStudy.edges.length}
 									/>
 								</div>
-							</>
+							</Fragment>
 						);
 					})}
 				</div>

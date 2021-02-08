@@ -9,10 +9,6 @@
 html {
 	scroll-behavior: smooth;
 	min-height: 100%;
-
-	&.is-loading {
-		@extend %cursor-wait;
-	}
 }
 
 body {

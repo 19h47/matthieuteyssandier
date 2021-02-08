@@ -16,15 +16,7 @@ module.exports = {
 	 */
 	plugins: [
 		{
-			/**
-			 * First up is the WordPress source plugin that connects Gatsby
-			 * to your WordPress site.
-			 *
-			 * visit the plugin docs to learn more
-			 * https://github.com/gatsbyjs/gatsby-source-wordpress-experimental/blob/master/README.md
-			 *
-			 */
-			resolve: `gatsby-source-wordpress-experimental`,
+			resolve: `gatsby-source-wordpress`,
 			options: {
 				url: process.env.WPGRAPHQL_URL || 'http://wp.matthieuteyssandier.com/graphql',
 			},

@@ -1,0 +1,21 @@
+/**
+ * Wrapper
+ *
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ * @package Gatsby
+ * @subpackage MatthieuTeyssandier
+ */
+.Wrapper {
+	@include autoAlpha(0);
+
+	transition: opacity 0.5s map-get($easings, ease-out-expo),
+		visibility 0.5s map-get($easings, ease-out-expo);
+
+	&.is-loading {
+		@extend %cursor-wait;
+	}
+
+	&.is-ready {
+		@include autoAlpha(1);
+	}
+}
