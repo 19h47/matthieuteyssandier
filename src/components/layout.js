@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { withPrefix } from 'gatsby';
 
 import Loader from '../components/loader';
 import Header from '../components/header';
 import Footer from '../components/footer';
 
-const Layout = ({ isHomePage, children, color }) => {
+const Layout = ({ children, color, location }) => {
+	const isHomePage = location.pathname === withPrefix('/');
 	const [ready, setReady] = useState(false);
 
 	const handleReady = newReady => {
@@ -12,14 +14,16 @@ const Layout = ({ isHomePage, children, color }) => {
 	};
 
 	return (
-		<div
-			className={`global-wrapper${ready ? ' is-ready is-loaded' : ' is-loading'}`}
-			data-is-root-path={isHomePage}
-		>
-			<Loader ready={ready} onComplete={handleReady} />
+		<div className="global-wrapper">
 			<Header color={color} />
 
-			<main>{children}</main>
+			{isHomePage ? <Loader ready={ready} onComplete={handleReady} /> : ''}
+
+			<main
+				className={`Site-main${ready && isHomePage ? ' is-ready is-loaded' : isHomePage ? ' is-loading' : ''
+					}`}>
+				{children}
+			</main>
 
 			<Footer />
 		</div>

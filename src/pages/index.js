@@ -35,7 +35,7 @@ export const query = graphql`
 	}
 `;
 
-const FrontPage = ({ data }) => {
+const FrontPage = ({ location, data }) => {
 	const colors = [
 		...new Set(data.allWpCaseStudy.edges.map(({ node }) => node.customFields.color)),
 	];
@@ -55,7 +55,7 @@ const FrontPage = ({ data }) => {
 	];
 
 	return (
-		<Layout color={color}>
+		<Layout color={color} location={location}>
 			<SEO title="home" color={color} />
 			<div className="Site-container">
 				<div className="row">

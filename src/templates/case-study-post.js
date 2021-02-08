@@ -50,7 +50,7 @@ export const query = graphql`
 	}
 `;
 
-const CaseStudyPostTemplate = ({ data: { next, caseStudy } }) => {
+const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 	const featuredImage = {
 		fluid: caseStudy.featuredImage?.node?.localFile?.childImageSharp?.fluid,
 		alt: caseStudy.featuredImage?.node?.alt || ``,
@@ -62,7 +62,7 @@ const CaseStudyPostTemplate = ({ data: { next, caseStudy } }) => {
 	};
 
 	return (
-		<Layout>
+		<Layout location={location}>
 			<SEO title={caseStudy.title} /* description={caseStudy.excerpt} */ />
 
 			<article className="blog-post" itemScope itemType="https://schema.org/CreativeWork">

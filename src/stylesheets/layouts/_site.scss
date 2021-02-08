@@ -26,4 +26,18 @@
 			@include padding(right $grid-outer-gutter-width / 2 left $grid-outer-gutter-width / 2);
 		}
 	}
+
+	&-main {
+		&.is-loading {
+			@extend %cursor-wait;
+			@include autoAlpha(0);
+
+			transition: opacity 0.5s map-get($easings, ease-out-expo),
+				visibility 0.5s map-get($easings, ease-out-expo);
+		}
+
+		&.is-ready {
+			@include autoAlpha(1);
+		}
+	}
 }
