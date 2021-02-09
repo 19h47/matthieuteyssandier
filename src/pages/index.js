@@ -55,7 +55,7 @@ const FrontPage = ({ location, data }) => {
 	];
 
 	return (
-		<Layout color={color} location={location}>
+		<Layout color={color} location={location} colors={colors}>
 			<SEO title="home" color={color} />
 			<div className="Site-container">
 				<div className="row">
