@@ -16,37 +16,40 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     const image = useRef();
     const tl = useRef();
 
+    const { ref, inView } = useInView({
+        unobserveOnEnter: true,
+    });
+
     useEffect(() => {
-        gsap.set(image.current, { opacity: 0 })
+        gsap.set(image.current, { opacity: 0 });
 
         tl.current = gsap.timeline({
-            paused: true, onComplete: () => {
-                ref.current.classList.add('is-ready');
-            }
+            paused: true,
         });
+
+        tl.current.set(ref.current, { pointerEvents: 'none' });
 
         tl.current.fromTo(
             mask.current,
-            { transformOrigin: '50% 50%', yPercent: 100 },
-            { yPercent: 0, duration: 1, ease: "power4.inOut" },
+            { transformOrigin: '50% 50%', yPercent: 100, smoothOrigin: true },
+            { yPercent: 0, duration: 1, ease: 'power4.inOut' },
         );
         tl.current.set(image.current, { opacity: 1 });
         tl.current.fromTo(
             circle.current,
-            { transformOrigin: '50% 50%', scale: 0 },
-            { scale: 1, duration: 1, ease: "power4.inOut" },
+            { transformOrigin: '50% 50%', scale: 0, smoothOrigin: true },
+            { scale: 1, duration: 1, ease: 'power4.inOut' },
         );
-    });
+        tl.current.set(ref.current, { clearProps: 'all' });
 
-    const { ref } = useInView(
-        {
-            onEnter: ({ unobserve }) => {
-                tl.current.play();
-                unobserve();
-            },
-        },
-        [],
-    );
+        tl.current.reverse();
+
+        if (inView) {
+            tl.current.play();
+        } else {
+            tl.current.reverse(0);
+        }
+    }, [inView, ref]);
 
     return (
         <div className="Tease-case-study" key={caseStudy.slug} ref={ref}>
@@ -54,12 +57,14 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
                 <Link className="Tease-case-study__image" to={caseStudy.link}>
                     <img
                         ref={image}
-                        src={featuredImage.fluid.src}
-                        srcSet={featuredImage.fluid.srcset}
+                        src={featuredImage.fluid.srcWebp}
+                        srcSet={featuredImage.fluid.srcSetWebp}
                         sizes={featuredImage.fluid.sizes}
                         alt={featuredImage.alt}
-
+                        loading="lazy"
+                        style={{ backgroundColor: caseStudy.customFields.color }}
                     />
+
                     <svg
                         className="Tease-case-study__hover"
                         viewBox="0 0 600 600"

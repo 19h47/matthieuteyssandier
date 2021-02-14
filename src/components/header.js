@@ -4,7 +4,7 @@ import SiteTitle from '../components/site-title';
 import SiteDescription from '../components/site-description';
 import SiteContact from '../components/site-contact';
 
-const Header = ({ color }) => {
+const Header = ({ color, ready }) => {
 	return (
 		<div className="Site-header">
 			<div className="Site-container">
@@ -14,7 +14,9 @@ const Header = ({ color }) => {
 					</div>
 
 					<div className="col-5 d-md-none">
-						<button type="button" className="font-size-26">Projets</button>
+						<button type="button" className="font-size-26">
+							Projets
+						</button>
 					</div>
 
 					<div className="d-none d-md-block col-3">

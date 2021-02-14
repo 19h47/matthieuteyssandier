@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
+import TextInView from './text-in-view';
+
 import shuffle from '../utils/shuffle';
 
 const Loader = ({ onComplete, colors }) => {
     const counterRef = useRef();
-    const titleRef = useRef();
+    const currentRef = useRef();
     const elRef = useRef();
     const colorsRef = useRef([]);
 
@@ -16,16 +18,8 @@ const Loader = ({ onComplete, colors }) => {
             onComplete: () => onComplete(true),
         });
 
-        const counterWidth = counterRef.current.firstChild.getBoundingClientRect().width;
-        const counterChildWidth = counterRef.current.firstChild.firstChild.getBoundingClientRect().width;
-
-        timeline.fromTo(
-            [counterRef.current.firstChild, titleRef.current.firstChild],
-            {
-                y: '100%',
-            },
-            { y: 0, duration: 0.7, stagger: 0.1 },
-        );
+        const counterWidth = counterRef.current.getBoundingClientRect().width;
+        const counterChildWidth = counterRef.current.firstChild.getBoundingClientRect().width;
 
         timeline.to(
             counter,
@@ -34,13 +28,13 @@ const Loader = ({ onComplete, colors }) => {
                 progress: '+=100',
                 roundProps: 'progress',
                 onUpdate: () =>
-                    (counterRef.current.querySelector('span').innerHTML = counter.progress),
+                    (currentRef.current.innerHTML = counter.progress),
             },
             'start',
         );
 
         timeline.fromTo(
-            counterRef.current.firstChild.firstChild,
+            counterRef.current.firstChild,
             {
                 x: 0,
             },
@@ -62,17 +56,13 @@ const Loader = ({ onComplete, colors }) => {
             'start',
         );
 
-        // timeline.to(
-        //     shuffle(colorsRef.current),
-        //     {
-        //         scaleX: `${378 / 157}`,
-        //         transformOrigin: 'left center',
-        //         duration: 0.3,
-        //     },
-        // );
-
-        // timeline.to(shuffle(colorsRef.current), { scaleX: 1, stagger: 0.1, duration: 0.6, transformOrigin: 'right center', })
-        timeline.to(shuffle(colorsRef.current), { scale: 0, opacity: 0, stagger: 0.1, duration: 0.6, transformOrigin: 'center', })
+        timeline.to(shuffle(colorsRef.current), {
+            scale: 0,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 0.6,
+            transformOrigin: 'center',
+        });
         timeline.to(elRef.current, { autoAlpha: 0 });
 
         timeline.play();
@@ -94,16 +84,19 @@ const Loader = ({ onComplete, colors }) => {
             </ul>
             <div className="Loader__counter">
                 <div className="Site-container" style={{ height: '100%' }}>
-                    <div className="row" style={{ height: '100%', alignItems: 'center' }}>
-                        <div className="col-2 padding-0" style={{ overflow: 'hidden' }} ref={counterRef}>
-                            <div>
-                                <div style={{ display: 'inline-block' }}>
-                                    100 — <span>0</span>
-                                </div>
+                    <div className="row h-100 align-content-center">
+                        <div
+                            className="col-2 padding-0"
+                            style={{ overflow: 'hidden' }}
+                        >
+                            <div ref={counterRef}>
+                                <TextInView className="d-inline-block">
+                                    100 — <span ref={currentRef}>0</span>
+                                </TextInView>
                             </div>
                         </div>
-                        <div className="col-1 padding-0" style={{ overflow: 'hidden' }} ref={titleRef}>
-                            <div>MT©2020</div>
+                        <div className="col-1 padding-0">
+                            <TextInView>MT©2020</TextInView>
                         </div>
                     </div>
                 </div>

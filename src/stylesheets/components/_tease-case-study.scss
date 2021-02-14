@@ -8,7 +8,7 @@
 .Tease-case-study {
 	$this: &;
 
-	&.is-ready:hover {
+	&:hover {
 		img {
 			filter: grayscale(0%);
 		}
@@ -20,6 +20,7 @@
 
 	img {
 		@include size(100%, 224px);
+		@extend .d-block;
 
 		opacity: 0;
 
