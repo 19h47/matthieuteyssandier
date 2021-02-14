@@ -8,5 +8,5 @@
 .Site-header {
 	$this: &;
 
-	@include margin(top 34px bottom 110px);
+	@include padding(top 34px bottom 110px);
 }

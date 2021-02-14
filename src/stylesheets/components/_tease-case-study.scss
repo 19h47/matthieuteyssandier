@@ -8,26 +8,26 @@
 .Tease-case-study {
 	$this: &;
 
-	&:hover {
-		.gatsby-image-wrapper img {
+	&.is-ready:hover {
+		img {
 			filter: grayscale(0%);
 		}
 
-		#{$this}__image svg {
+		#{$this}__hover {
 			transform: scale(1);
 		}
 	}
 
-	.gatsby-image-wrapper {
+	img {
 		@include size(100%, 224px);
 
-		img {
-			filter: grayscale(100%);
-			object-fit: cover;
-			object-position: center;
-			transition: opacity 1.8s map-get($easings, ease-out-expo),
-				filter 1.8s map-get($easings, ease-out-expo) !important;
-		}
+		opacity: 0;
+
+		filter: grayscale(100%);
+		object-fit: cover;
+		object-position: center;
+		transition: opacity 1.8s map-get($easings, ease-out-expo),
+			filter 1.8s map-get($easings, ease-out-expo);
 
 		@include media-breakpoint-up(md) {
 			height: #{(686 * 100) / 1920}vw;
@@ -38,15 +38,21 @@
 	&__image {
 		@extend .d-block;
 		@extend %position-relative, %overflow-hidden;
+	}
 
-		svg {
-			@include absolute(top 0 right 0 bottom 0 left 0);
-			@include size(100%);
+	// SVGs
+	&__hover {
+		@include absolute(top 0 right 0 bottom 0 left 0);
+		@include size(100%);
 
-			will-change: transform;
-			transition: transform 1.8s map-get($easings, ease-out-expo);
-			transform: scale(1.5);
-		}
+		will-change: transform;
+		transition: transform 1.8s map-get($easings, ease-out-expo);
+		transform: scale(1.5);
+	}
+
+	&__mask {
+		@include absolute(top 0 right 0 bottom 0 left 0);
+		@include size(100%);
 	}
 
 	&__title {

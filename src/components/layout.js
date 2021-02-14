@@ -22,7 +22,7 @@ const Layout = ({ children, color, colors, location }) => {
 			<main
 				className={`Site-main${ready && isHomePage ? ' is-ready is-loaded' : isHomePage ? ' is-loading' : ''
 					}`}>
-				{children}
+				{ready ? children : ''}
 			</main>
 
 			<Footer />

@@ -30,7 +30,7 @@ const Loader = ({ onComplete, colors }) => {
         timeline.to(
             counter,
             {
-                duration: 10,
+                duration: 2,
                 progress: '+=100',
                 roundProps: 'progress',
                 onUpdate: () =>
@@ -45,7 +45,7 @@ const Loader = ({ onComplete, colors }) => {
                 x: 0,
             },
 
-            { x: `${counterWidth - counterChildWidth}px`, duration: 10 },
+            { x: `${counterWidth - counterChildWidth}px`, duration: 2 },
             'start',
         );
 

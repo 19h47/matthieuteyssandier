@@ -28,6 +28,8 @@
 	}
 
 	&-main {
+		min-height: 100vh;
+
 		&.is-loading {
 			@extend %cursor-wait;
 			@include autoAlpha(0);
