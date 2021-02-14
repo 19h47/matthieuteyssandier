@@ -14,7 +14,7 @@ const Layout = ({ children, color, colors, location }) => {
 	};
 
 	return (
-		<div className="global-wrapper">
+		<div className={`global-wrapper${ready ? ' is-ready' : ''}`}>
 			<Header color={color} />
 
 			{isHomePage ? <Loader ready={ready} onComplete={handleReady} colors={colors} /> : ''}

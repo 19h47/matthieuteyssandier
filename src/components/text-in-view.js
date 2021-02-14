@@ -4,6 +4,8 @@ import useInView from 'react-cool-inview';
 const TextInView = ({ children, className }) => {
 	const { ref, inView } = useInView({
 		unobserveOnEnter: true,
+		trackVisibility: true,
+		delay: 100,
 	});
 
 	return (

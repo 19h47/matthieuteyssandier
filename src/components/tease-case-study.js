@@ -18,6 +18,8 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
 
     const { ref, inView } = useInView({
         unobserveOnEnter: true,
+        trackVisibility: true,
+        delay: 100,
     });
 
     useEffect(() => {
@@ -54,7 +56,10 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     return (
         <div className="Tease-case-study" key={caseStudy.slug} ref={ref}>
             {featuredImage?.fluid && (
-                <Link className="Tease-case-study__image" to={caseStudy.link}>
+                <Link
+                    className="Tease-case-study__image"
+                    to={caseStudy.link}
+                >
                     <img
                         ref={image}
                         src={featuredImage.fluid.srcWebp}
@@ -62,7 +67,6 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
                         sizes={featuredImage.fluid.sizes}
                         alt={featuredImage.alt}
                         loading="lazy"
-                        style={{ backgroundColor: caseStudy.customFields.color }}
                     />
 
                     <svg

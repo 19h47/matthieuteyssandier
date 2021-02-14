@@ -25,7 +25,7 @@ const favicon = color => {
 	context.drawImage(img, 0, 0);
 
 	context.fillStyle = color;
-	context.fillRect(0, 0, 16, 16);
+	context.arc(8, 8, 8, 0, 2 * Math.PI);
 	context.fill();
 
 	return [

@@ -8,6 +8,7 @@
 .Text-in-view {
 	transition: clip-path 1.5s map-get($easings, ease-out-expo);
 	clip-path: inset(0 0 100% 0);
+	will-change: clip-path;
 
 	&.is-active {
 		clip-path: inset(0 0 0 0);
