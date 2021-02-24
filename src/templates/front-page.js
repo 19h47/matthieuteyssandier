@@ -29,14 +29,7 @@ export const query = graphql`
 					}
 					featuredImage {
 						node {
-							altText
-							localFile {
-								childImageSharp {
-									fluid(maxWidth: 1420, quality: 100) {
-										...GatsbyImageSharpFluid_withWebp
-									}
-								}
-							}
+							...FeaturedImage
 						}
 					}
 				}

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link, graphql } from 'gatsby';
 import Image from 'gatsby-image';
 import parse from 'html-react-parser';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import TwoImages from '../components/two-images';
 
 export const query = graphql`
 	query CaseStudyPostById($id: String!, $nextPostId: String) {
@@ -12,24 +13,44 @@ export const query = graphql`
 		caseStudy: wpCaseStudy(id: { eq: $id }) {
 			id
 			title
+			categories: caseStudyCategories {
+				nodes {
+					id
+					name
+				}
+			}
 			featuredImage {
 				node {
-					altText
-					localFile {
-						childImageSharp {
-							fluid(maxWidth: 1000, quality: 100) {
-								...GatsbyImageSharpFluid_withWebp
+					...FeaturedImage
+				}
+			}
+			customFields {
+				color
+				date
+				content {
+					english
+					french
+				}
+				layouts {
+					... on WpCaseStudy_Customfields_Layouts_TwoImages {
+						fieldGroupName
+						item0 {
+							image {
+								...FeaturedImage
+							}
+						}
+						item1 {
+							image {
+								...FeaturedImage
 							}
 						}
 					}
 				}
 			}
-			customFields {
-				color
-			}
 		}
 
 		next: wpCaseStudy(id: { eq: $nextPostId }) {
+			title
 			link
 			customFields {
 				color
@@ -56,9 +77,16 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 		alt: caseStudy.featuredImage?.node?.alt || ``,
 	};
 
-	const nextFeaturedImage = {
-		fluid: next.featuredImage?.node?.localFile?.childImageSharp?.fluid,
-		alt: next.featuredImage?.node?.alt || ``,
+	const categories = caseStudy.categories?.nodes;
+
+	const { date, content, layouts } = caseStudy.customFields;
+
+	const nextCaseStudy = {
+		image: {
+			fluid: next.featuredImage?.node?.localFile?.childImageSharp?.fluid,
+			alt: next.featuredImage?.node?.alt || next.title,
+		},
+		color: next.customFields?.color,
 	};
 
 	return (
@@ -71,9 +99,24 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 						<div className="row">
 							<div className="col-10">
 								<h1 itemProp="name">{parse(caseStudy.title)}</h1>
+								{categories.map(category => (
+									<p key={category.id}>{category.name}</p>
+								))}
+								<p>{date}</p>
 							</div>
 						</div>
 					</div>
+
+					<div
+						dangerouslySetInnerHTML={{
+							__html: content.english,
+						}}
+					/>
+					<div
+						dangerouslySetInnerHTML={{
+							__html: content.french,
+						}}
+					/>
 
 					{featuredImage?.fluid && (
 						<Image
@@ -87,6 +130,14 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 				</header>
 
 				{/* BLOCKS */}
+				{layouts.map((layout, index) => {
+					return (
+						<Fragment key={`${layout.fieldGroupName}-${index}`}>
+							{'caseStudy_Customfields_Layouts_TwoImages' ===
+								layout.fieldGroupName && <TwoImages data={layout} />}
+						</Fragment>
+					);
+				})}
 			</article>
 
 			<div className="Site-container">
@@ -100,16 +151,24 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 					</div>
 					<div className="col-10 col-md-8">
 						<Link
-							className="Next"
+							className="Next-case-study"
 							to={next.link}
 							rel="next"
-							style={{ backgroundColor: next.customFields.color }}>
-							{nextFeaturedImage?.fluid && (
+							style={{ backgroundColor: nextCaseStudy.color }}>
+							<svg viewBox="0 0 600 600" preserveAspectRatio="none">
+								<g>
+									<path
+										fill={nextCaseStudy.color}
+										d="M-50-50v700h700V-50H-50z M300,600C134.3,600,0,465.7,0,300S134.3,0,300,0s300,134.3,300,300S465.7,600,300,600z"
+									/>
+								</g>
+							</svg>
+							{nextCaseStudy.image.fluid && (
 								<Image
-									fluid={nextFeaturedImage.fluid}
-									alt={nextFeaturedImage.alt}
+									fluid={nextCaseStudy.image.fluid}
+									alt={nextCaseStudy.image.alt}
 									style={{ height: '100%' }}
-									backgroundColor={next.customFields.color}
+									backgroundColor={nextCaseStudy.color}
 									durationFadeIn={1800}
 								/>
 							)}

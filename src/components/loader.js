@@ -6,42 +6,41 @@ import TextInView from './text-in-view';
 import shuffle from '../utils/shuffle';
 
 const Loader = ({ onComplete, colors }) => {
-    const counterRef = useRef();
-    const currentRef = useRef();
-    const elRef = useRef();
+    // const [counterWidth, setcounterWidth] = useState(0);
+    // const [counterChildWidth, setcounterChildWidth] = useState(0);
+
+    const loaderRef = useRef();
+    const countdownRef = useRef();
     const colorsRef = useRef([]);
 
     useEffect(() => {
-        const counter = { progress: 0 };
+
+        const countdown = { progress: 0 };
         const timeline = gsap.timeline({
             paused: true,
             onComplete: () => onComplete(true),
         });
 
-        const counterWidth = counterRef.current.getBoundingClientRect().width;
-        const counterChildWidth = counterRef.current.firstChild.getBoundingClientRect().width;
-
         timeline.to(
-            counter,
+            countdown,
             {
                 duration: 2,
                 progress: '+=100',
                 roundProps: 'progress',
-                onUpdate: () =>
-                    (currentRef.current.innerHTML = counter.progress),
+                onUpdate: () => (countdownRef.current.innerHTML = countdown.progress),
             },
             'start',
         );
 
-        timeline.fromTo(
-            counterRef.current.firstChild,
-            {
-                x: 0,
-            },
+        // timeline.fromTo(
+        //     counterChildNode.current,
+        //     {
+        //         x: 0,
+        //     },
 
-            { x: `${counterWidth - counterChildWidth}px`, duration: 2 },
-            'start',
-        );
+        //     { x: `${counterWidth - counterChildWidth}px`, duration: 2 },
+        //     'start',
+        // );
 
         timeline.fromTo(
             shuffle(colorsRef.current),
@@ -63,13 +62,15 @@ const Loader = ({ onComplete, colors }) => {
             duration: 0.6,
             transformOrigin: 'center',
         });
-        timeline.to(elRef.current, { autoAlpha: 0 });
+
+        timeline.to(loaderRef.current, { autoAlpha: 0 });
 
         timeline.play();
-    }, [onComplete, counterRef]);
+
+    }, [onComplete]);
 
     return (
-        <div className="Loader" ref={elRef}>
+        <div className="Loader" ref={loaderRef}>
             <ul className="Loader__colors">
                 {colors.slice(0, 7).map((color, index) => (
                     <li
@@ -85,15 +86,10 @@ const Loader = ({ onComplete, colors }) => {
             <div className="Loader__counter">
                 <div className="Site-container" style={{ height: '100%' }}>
                     <div className="row h-100 align-content-center">
-                        <div
-                            className="col-2 padding-0"
-                            style={{ overflow: 'hidden' }}
-                        >
-                            <div ref={counterRef}>
-                                <TextInView className="d-inline-block">
-                                    100 — <span ref={currentRef}>0</span>
-                                </TextInView>
-                            </div>
+                        <div className="col-2 padding-0" style={{ overflow: 'hidden' }}>
+                            <TextInView className="d-inline-block">
+                                100 — <span ref={countdownRef}>0</span>
+                            </TextInView>
                         </div>
                         <div className="col-1 padding-0">
                             <TextInView>MT©2020</TextInView>
