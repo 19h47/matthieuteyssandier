@@ -20,6 +20,18 @@
 		}
 	}
 
+	&--image-text {
+		font-size: 20px;
+		line-height: (30/20);
+
+		@include media-breakpoint-up(md) {
+			font-size: calc(20px + (35 - 20) * ((100vw - 335px) / (1920 - 335)));
+		}
+		@include media-breakpoint-up(xxl) {
+			font-size: 35px;
+		}
+	}
+
 	&__caption {
 		@include margin(top 13px bottom 0);
 	}

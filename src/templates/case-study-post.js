@@ -10,6 +10,7 @@ import LayoutTwoImages from '../layouts/two-images';
 import LayoutImage from '../layouts/image';
 import LayoutLargeImage from '../layouts/large-image';
 import LayoutImageFull from '../layouts/image-full';
+import LayoutImageText from '../layouts/image-text';
 
 export const query = graphql`
 	query CaseStudyPostById($id: String!, $nextPostId: String) {
@@ -81,6 +82,22 @@ export const query = graphql`
 							...FeaturedImage
 						}
 						caption
+					}
+					... on WpCaseStudy_Customfields_Layouts_ImageText {
+						fieldGroupName
+						caption
+						video {
+							localFile {
+								url
+							}
+						}
+						image {
+							...FeaturedImage
+						}
+						content {
+							english
+							french
+						}
 					}
 				}
 			}
@@ -172,21 +189,19 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 
 				<div className="Layouts">
 					{layouts.map((layout, index) => {
-
-
+						console.log(layout)
 						return (
 							<Fragment key={`${layout.fieldGroupName}-${index}`}>
 								{'caseStudy_Customfields_Layouts_TwoImages' ===
 									layout.fieldGroupName && <LayoutTwoImages data={layout} />}
-								{'caseStudy_Customfields_Layouts_Image' === layout.fieldGroupName && (
-									<LayoutImage data={layout} />
-								)}
-								{'caseStudy_Customfields_Layouts_LargeImage' === layout.fieldGroupName && (
-									<LayoutLargeImage data={layout} />
-								)}
-								{'caseStudy_Customfields_Layouts_ImageFull' === layout.fieldGroupName && (
-									<LayoutImageFull data={layout} />
-								)}
+								{'caseStudy_Customfields_Layouts_Image' ===
+									layout.fieldGroupName && <LayoutImage data={layout} />}
+								{'caseStudy_Customfields_Layouts_LargeImage' ===
+									layout.fieldGroupName && <LayoutLargeImage data={layout} />}
+								{'caseStudy_Customfields_Layouts_ImageFull' ===
+									layout.fieldGroupName && <LayoutImageFull data={layout} />}
+								{'caseStudy_Customfields_Layouts_ImageText' ===
+									layout.fieldGroupName && <LayoutImageText data={layout} />}
 							</Fragment>
 						);
 					})}
