@@ -36,8 +36,11 @@
 @import 'layouts/site';
 @import 'layouts/header';
 @import 'layouts/footer';
+@import 'layouts/layout';
+@import 'layouts/layouts';
 
 // Pages
+@import 'pages/case-study';
 
 // Components
 @import 'components/site-title';

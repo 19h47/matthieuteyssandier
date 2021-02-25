@@ -1,0 +1,26 @@
+/**
+ * Layout
+ *
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ * @package Gatsby
+ * @subpackage MatthieuTeyssandier
+ */
+.Layout {
+	@include margin(top 157px bottom 157px);
+
+	video {
+		@include size(100%, auto);
+	}
+
+	&--image-full {
+		@include margin(bottom 0);
+
+		& + * {
+			@include margin(top 0);
+		}
+	}
+
+	&__caption {
+		@include margin(top 13px bottom 0);
+	}
+}

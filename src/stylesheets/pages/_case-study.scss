@@ -1,0 +1,14 @@
+/**
+ * Case study
+ *
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ * @package Gatsby
+ * @subpackage MatthieuTeyssandier
+ */
+.Case-study {
+	&__date {
+		@include margin(top 0 bottom 21px);
+
+		line-height: (58.8/80);
+	}
+}

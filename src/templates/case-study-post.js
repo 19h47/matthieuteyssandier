@@ -5,7 +5,11 @@ import parse from 'html-react-parser';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import TwoImages from '../components/two-images';
+
+import LayoutTwoImages from '../layouts/two-images';
+import LayoutImage from '../layouts/image';
+import LayoutLargeImage from '../layouts/large-image';
+import LayoutImageFull from '../layouts/image-full';
 
 export const query = graphql`
 	query CaseStudyPostById($id: String!, $nextPostId: String) {
@@ -38,12 +42,45 @@ export const query = graphql`
 							image {
 								...FeaturedImage
 							}
+							caption
 						}
 						item1 {
 							image {
 								...FeaturedImage
 							}
+							caption
 						}
+					}
+					... on WpCaseStudy_Customfields_Layouts_Image {
+						fieldGroupName
+						image {
+							...FeaturedImage
+						}
+						caption
+					}
+					... on WpCaseStudy_Customfields_Layouts_LargeImage {
+						fieldGroupName
+						video {
+							localFile {
+								url
+							}
+						}
+						image {
+							...FeaturedImage
+						}
+						caption
+					}
+					... on WpCaseStudy_Customfields_Layouts_ImageFull {
+						fieldGroupName
+						video {
+							localFile {
+								url
+							}
+						}
+						image {
+							...FeaturedImage
+						}
+						caption
 					}
 				}
 			}
@@ -93,21 +130,25 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 		<Layout location={location}>
 			<SEO title={caseStudy.title} /* description={caseStudy.excerpt} */ />
 
-			<article className="blog-post" itemScope itemType="https://schema.org/CreativeWork">
+			<article className="Case-study" itemScope itemType="https://schema.org/CreativeWork">
 				<header>
 					<div className="Site-container">
 						<div className="row">
-							<div className="col-10">
-								<h1 itemProp="name">{parse(caseStudy.title)}</h1>
+							<div className="col-10 col-md-1">
 								{categories.map(category => (
 									<p key={category.id}>{category.name}</p>
 								))}
-								<p>{date}</p>
+							</div>
+							<div className="col-10 col-md-8 offset-md-1">
+								<h1 itemProp="name">{parse(caseStudy.title)}</h1>
+							</div>
+							<div className="col-10 d-flex">
+								<p className="Case-study__date margin-left-auto h1">{date}</p>
 							</div>
 						</div>
 					</div>
 
-					<div
+					{/* <div
 						dangerouslySetInnerHTML={{
 							__html: content.english,
 						}}
@@ -116,8 +157,8 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 						dangerouslySetInnerHTML={{
 							__html: content.french,
 						}}
-					/>
-
+					/> */}
+					{/* 
 					{featuredImage?.fluid && (
 						<Image
 							fluid={featuredImage.fluid}
@@ -126,18 +167,30 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 							backgroundColor={caseStudy.customFields.color}
 							durationFadeIn={1800}
 						/>
-					)}
+					)} */}
 				</header>
 
-				{/* BLOCKS */}
-				{layouts.map((layout, index) => {
-					return (
-						<Fragment key={`${layout.fieldGroupName}-${index}`}>
-							{'caseStudy_Customfields_Layouts_TwoImages' ===
-								layout.fieldGroupName && <TwoImages data={layout} />}
-						</Fragment>
-					);
-				})}
+				<div className="Layouts">
+					{layouts.map((layout, index) => {
+
+
+						return (
+							<Fragment key={`${layout.fieldGroupName}-${index}`}>
+								{'caseStudy_Customfields_Layouts_TwoImages' ===
+									layout.fieldGroupName && <LayoutTwoImages data={layout} />}
+								{'caseStudy_Customfields_Layouts_Image' === layout.fieldGroupName && (
+									<LayoutImage data={layout} />
+								)}
+								{'caseStudy_Customfields_Layouts_LargeImage' === layout.fieldGroupName && (
+									<LayoutLargeImage data={layout} />
+								)}
+								{'caseStudy_Customfields_Layouts_ImageFull' === layout.fieldGroupName && (
+									<LayoutImageFull data={layout} />
+								)}
+							</Fragment>
+						);
+					})}
+				</div>
 			</article>
 
 			<div className="Site-container">
