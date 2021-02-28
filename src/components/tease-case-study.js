@@ -1,11 +1,12 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'gatsby';
 import { gsap } from 'gsap';
 import { useLocomotiveScroll } from 'react-locomotive-scroll';
+import PropTypes from 'prop-types';
 
 import ArrowRight from '../assets/arrow-right.inline.svg';
 
-const TeaseCaseStudy = ({ caseStudy, index, length }) => {
+const TeaseCaseStudy = ({ caseStudy, index, length, ready }) => {
     const featuredImage = {
         fluid: caseStudy.featuredImage?.node?.localFile?.childImageSharp?.fluid,
         alt: caseStudy.featuredImage?.node?.alt || ``,
@@ -18,8 +19,8 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     const ref = useRef();
     const tl = useRef();
 
-    useLayoutEffect(() => {
-        if (scroll) {
+    useEffect(() => {
+        if (scroll && ready) {
             scroll.on('call', ([name, id]) => {
                 if (name === 'inView' && id === ref.current.id) {
                     const $image = ref.current.querySelector('.js-image');
@@ -50,7 +51,7 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
                 }
             });
         }
-    }, [scroll]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [scroll, ready]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div
@@ -119,4 +120,11 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     );
 };
 
+TeaseCaseStudy.defaultProps = {
+    ready: true,
+};
+
+TeaseCaseStudy.propTypes = {
+    ready: PropTypes.bool,
+};
 export default TeaseCaseStudy;

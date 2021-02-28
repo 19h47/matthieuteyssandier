@@ -101,12 +101,13 @@ const FrontPage = ({ location, data }) => {
                                     <div
                                         className={classNames[index % classNames.length]}
                                         key={`column-${node.slug}-${index}`}>
-                                        {ready && <TeaseCaseStudy
+                                        <TeaseCaseStudy
+                                            ready={ready}
                                             caseStudy={node}
                                             index={index}
                                             length={caseStudies.edges.length}
 
-                                        />}
+                                        />
                                     </div>
                                 </Fragment>
                             );
