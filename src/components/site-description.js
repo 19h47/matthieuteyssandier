@@ -23,7 +23,7 @@ const SiteDescription = () => {
 
 	return (
 		<div className="Site-description">
-			<TextInView>{parse(description)}</TextInView>
+			<TextInView data-scroll>{parse(description)}</TextInView>
 			<TextInView>
 				<a
 					href={`https://instagram.com/${instagram}`}

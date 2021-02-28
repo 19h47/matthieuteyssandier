@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import useInView from 'react-cool-inview';
+import React, { useLayoutEffect, useRef } from 'react';
 import { Link } from 'gatsby';
 import { gsap } from 'gsap';
+import { useLocomotiveScroll } from 'react-locomotive-scroll';
 
 import ArrowRight from '../assets/arrow-right.inline.svg';
 
@@ -9,64 +9,69 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     const featuredImage = {
         fluid: caseStudy.featuredImage?.node?.localFile?.childImageSharp?.fluid,
         alt: caseStudy.featuredImage?.node?.alt || ``,
+        width: caseStudy.featuredImage?.node?.localFile?.childImageSharp?.fixed.width,
+        height: caseStudy.featuredImage?.node?.localFile?.childImageSharp?.fixed.height,
     };
 
-    const mask = useRef();
-    const circle = useRef();
-    const image = useRef();
+    const { scroll } = useLocomotiveScroll();
+
+    const ref = useRef();
     const tl = useRef();
 
-    const { ref, inView } = useInView({
-        unobserveOnEnter: true,
-        trackVisibility: true,
-        delay: 100,
-    });
+    useLayoutEffect(() => {
+        if (scroll) {
+            scroll.on('call', ([name, id]) => {
+                if (name === 'inView' && id === ref.current.id) {
+                    const $image = ref.current.querySelector('.js-image');
+                    const $mask = ref.current.querySelector('.js-mask');
+                    const $circle = ref.current.querySelector('.js-circle');
 
-    useEffect(() => {
-        gsap.set(image.current, { opacity: 0 });
+                    tl.current = gsap.timeline({
+                        paused: true,
+                    });
 
-        tl.current = gsap.timeline({
-            paused: true,
-        });
+                    tl.current.set($image, { opacity: 0 });
+                    tl.current.set(ref.current, { pointerEvents: 'none' });
 
-        tl.current.set(ref.current, { pointerEvents: 'none' });
+                    tl.current.fromTo(
+                        $mask,
+                        { transformOrigin: '50% 50%', yPercent: 100, smoothOrigin: true },
+                        { yPercent: 0, duration: 1, ease: 'power4.inOut' },
+                    );
+                    tl.current.set($image, { opacity: 1 });
+                    tl.current.fromTo(
+                        $circle,
+                        { transformOrigin: '50% 50%', scale: 0, smoothOrigin: true },
+                        { scale: 1, duration: 1, ease: 'power4.inOut' },
+                    );
+                    tl.current.set(ref.current, { clearProps: 'all' });
 
-        tl.current.fromTo(
-            mask.current,
-            { transformOrigin: '50% 50%', yPercent: 100, smoothOrigin: true },
-            { yPercent: 0, duration: 1, ease: 'power4.inOut' },
-        );
-        tl.current.set(image.current, { opacity: 1 });
-        tl.current.fromTo(
-            circle.current,
-            { transformOrigin: '50% 50%', scale: 0, smoothOrigin: true },
-            { scale: 1, duration: 1, ease: 'power4.inOut' },
-        );
-        tl.current.set(ref.current, { clearProps: 'all' });
-
-        tl.current.reverse();
-
-        if (inView) {
-            tl.current.play();
-        } else {
-            tl.current.reverse(0);
+                    tl.current.play();
+                }
+            });
         }
-    }, [inView, ref]);
+    }, [scroll]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <div className="Tease-case-study" key={caseStudy.slug} ref={ref}>
+        <div
+            id={`case-study-${caseStudy.id}`}
+            className="Tease-case-study"
+            key={caseStudy.slug}
+            ref={ref}
+            data-scroll
+            data-scroll-call={`inView,case-study-${caseStudy.id}`}>
             {featuredImage?.fluid && (
-                <Link
-                    className="Tease-case-study__image"
-                    to={caseStudy.link}
-                >
+                <Link className="Tease-case-study__image" to={caseStudy.link}>
                     <img
-                        ref={image}
+                        style={{ opacity: 0 }}
                         src={featuredImage.fluid.srcWebp}
                         srcSet={featuredImage.fluid.srcSetWebp}
                         sizes={featuredImage.fluid.sizes}
                         alt={featuredImage.alt}
+                        width={featuredImage.width}
+                        height={featuredImage.height}
                         loading="lazy"
+                        className="js-image"
                     />
 
                     <svg
@@ -82,13 +87,13 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
                     </svg>
 
                     <svg
-                        className="Tease-case-study__mask"
+                        style={{ transformOrigin: '50% 50%', scale: '0' }}
+                        className="Tease-case-study__mask js-mask"
                         viewBox="0 0 600 600"
-                        ref={mask}
                         preserveAspectRatio="none">
                         <mask id={`mask-${index}`}>
                             <rect width="600" height="600" fill="white" />
-                            <circle ref={circle} cx="300" cy="300" r="424.3" />
+                            <circle className="js-circle" cx="300" cy="300" r="424.3" />
                         </mask>
 
                         <rect

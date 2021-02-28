@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { graphql } from 'gatsby';
 
+import Loader from '../components/loader';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import TeaseCaseStudy from '../components/tease-case-study';
@@ -20,6 +21,7 @@ export const query = graphql`
 		caseStudies: allWpCaseStudy {
 			edges {
 				node {
+                    id
 					title
 					link
 					slug
@@ -40,8 +42,13 @@ export const query = graphql`
 
 const FrontPage = ({ location, data }) => {
     const { page, caseStudies } = data;
-    const colors = [...new Set(caseStudies.edges.map(({ node }) => node.customFields.color))];
+    const [ready, setReady] = useState(false);
 
+    const handleReady = newReady => {
+        setReady(newReady);
+    };
+
+    const colors = [...new Set(caseStudies.edges.map(({ node }) => node.customFields.color))];
     const color = colors[Math.floor(Math.random() * colors.length)];
 
     const classNames = [
@@ -56,56 +63,58 @@ const FrontPage = ({ location, data }) => {
         'col-10 col-md-8 offset-md-2',
     ];
 
-    console.log(data);
-
     return (
-        <Layout color={color} location={location} colors={colors}>
-            <SEO title="home" color={color} />
-            <div className="Site-container">
-                <div className="row">
-                    {caseStudies.edges.map(({ node }, index) => {
-                        return (
-                            <Fragment key={`row-${index}`}>
-                                {2 === index && (
-                                    <div className="col-10 col-md-6 margin-top-10 margin-top-md-0" key={`column-${index}`}>
-                                        <div
-                                            className="Wysiwyg"
-                                            dangerouslySetInnerHTML={{ __html: page.content }}
-                                        />
+        <>
+            <Loader ready={ready} onComplete={handleReady} colors={colors} />
+            <Layout color={color} location={location} colors={colors}>
+                <SEO title="home" color={color} />
+                <div className="Site-container">
+                    <div className="row">
+                        {caseStudies.edges.map(({ node }, index) => {
+                            return (
+                                <Fragment key={`row-${index}`}>
+                                    {2 === index && (
+                                        <div className="col-10 col-md-6 margin-top-10 margin-top-md-0" key={`column-${index}`}>
+                                            <div
+                                                className="Wysiwyg"
+                                                dangerouslySetInnerHTML={{ __html: page.content }}
+                                            />
+                                        </div>
+                                    )}
+
+                                    {5 === index && (
+                                        <div className="col-10 col-md-2 margin-top-10" key={`text-${index}`}>
+                                            <div
+                                                dangerouslySetInnerHTML={{
+                                                    __html: page.customFields.biography,
+                                                }}
+                                            />
+                                            {page.customFields.awards && (
+
+                                                <ul className="margin-top-5 margin-top-md-10 list-style-type-none">
+                                                    {page.customFields.awards.map((award, index) => (<li key={index}>{`${award.title} (${award.value})`}</li>))}
+                                                </ul>
+
+                                            )}
+                                        </div>
+                                    )}
+                                    <div
+                                        className={classNames[index % classNames.length]}
+                                        key={`column-${node.slug}-${index}`}>
+                                        {ready && <TeaseCaseStudy
+                                            caseStudy={node}
+                                            index={index}
+                                            length={caseStudies.edges.length}
+
+                                        />}
                                     </div>
-                                )}
-
-                                {5 === index && (
-                                    <div className="col-10 col-md-2 margin-top-10" key={`text-${index}`}>
-                                        <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: page.customFields.biography,
-                                            }}
-                                        />
-                                        {page.customFields.awards && (
-
-                                            <ul className="margin-top-5 margin-top-md-10 list-style-type-none">
-                                                {page.customFields.awards.map((award, index) => (<li key={index}>{`${award.title} (${award.value})`}</li>))}
-                                            </ul>
-
-                                        )}
-                                    </div>
-                                )}
-                                <div
-                                    className={classNames[index % classNames.length]}
-                                    key={`column-${node.slug}-${index}`}>
-                                    <TeaseCaseStudy
-                                        caseStudy={node}
-                                        index={index}
-                                        length={caseStudies.edges.length}
-                                    />
-                                </div>
-                            </Fragment>
-                        );
-                    })}
+                                </Fragment>
+                            );
+                        })}
+                    </div>
                 </div>
-            </div>
-        </Layout>
+            </Layout>
+        </>
     );
 };
 

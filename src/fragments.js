@@ -8,6 +8,10 @@ export const fragments = graphql`
 				fluid(maxWidth: 1420, quality: 100) {
 					...GatsbyImageSharpFluid_withWebp
 				}
+				fixed {
+					height
+					width
+				}
 			}
 		}
 	}

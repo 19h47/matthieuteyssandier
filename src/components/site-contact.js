@@ -2,6 +2,8 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import parse from 'html-react-parser';
 
+import TextInView from './text-in-view';
+
 const SiteDescription = () => {
 	const {
 		wp: {
@@ -19,11 +21,9 @@ const SiteDescription = () => {
 
 	return (
 		<div className="Site-contact">
-			Drop me a line for freelance work
-			<br />
-			<a href={`mailto:${parse(publicEmail)}`}>{parse(publicEmail)}</a>
-			<br />
-			Available in Freelance
+			<TextInView>Drop me a line for freelance work</TextInView>
+			<TextInView><a href={`mailto:${parse(publicEmail)}`}>{parse(publicEmail)}</a></TextInView>
+			<TextInView>Available in Freelance</TextInView>
 		</div>
 	);
 };

@@ -1,5 +1,5 @@
 /**
- * Tease: Case Study
+ * Tease: Case study
  *
  * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  * @package Gatsby
@@ -22,13 +22,11 @@
 		@include size(100%, 224px);
 		@extend .d-block;
 
-		opacity: 0;
-
 		filter: grayscale(100%);
 		object-fit: cover;
 		object-position: center;
-		transition: opacity 1.8s map-get($easings, ease-out-expo),
-			filter 1.8s map-get($easings, ease-out-expo);
+		transition: filter 1.8s map-get($easings, ease-out-expo);
+		will-change: opacity, filter;
 
 		@include media-breakpoint-up(md) {
 			height: #{(686 * 100) / 1920}vw;
