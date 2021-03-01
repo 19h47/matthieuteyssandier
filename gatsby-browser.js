@@ -1,5 +1,3 @@
-import './src/stylesheets/styles.scss';
-
 import React from 'react';
 
 import { AppProvider } from './src/provider';
