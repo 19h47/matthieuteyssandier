@@ -1,5 +1,5 @@
 import React from 'react';
 
-import Provider from './src/provider';
+import { AppProvider } from './src/provider';
 
-export const wrapRootElement = ({ element }) => <Provider>{element}</Provider>;
+export const wrapRootElement = ({ element }) => <AppProvider>{element}</AppProvider>;
