@@ -126,14 +126,8 @@ export const query = graphql`
 `;
 
 const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
-	const featuredImage = {
-		fluid: caseStudy.featuredImage?.node?.localFile?.childImageSharp?.fluid,
-		alt: caseStudy.featuredImage?.node?.alt || ``,
-	};
-
 	const categories = caseStudy.categories?.nodes;
-
-	const { date, content, layouts } = caseStudy.customFields;
+	const { date, layouts } = caseStudy.customFields;
 
 	const nextCaseStudy = {
 		image: {
@@ -164,27 +158,6 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 							</div>
 						</div>
 					</div>
-
-					{/* <div
-						dangerouslySetInnerHTML={{
-							__html: content.english,
-						}}
-					/>
-					<div
-						dangerouslySetInnerHTML={{
-							__html: content.french,
-						}}
-					/> */}
-					{/* 
-					{featuredImage?.fluid && (
-						<Image
-							fluid={featuredImage.fluid}
-							alt={featuredImage.alt}
-							style={{ marginBottom: 50 }}
-							backgroundColor={caseStudy.customFields.color}
-							durationFadeIn={1800}
-						/>
-					)} */}
 				</header>
 
 				<div className="Layouts">

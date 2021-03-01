@@ -66,7 +66,7 @@ const FrontPage = ({ location, data }) => {
     return (
         <>
             <Loader ready={ready} onComplete={handleReady} colors={colors} />
-            <Layout color={color} location={location} colors={colors}>
+            <Layout color={color} location={location} colors={colors} ready={ready}>
                 <SEO title="home" color={color} />
                 <div className="Site-container">
                     <div className="row">

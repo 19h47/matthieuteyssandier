@@ -1,23 +1,32 @@
-import React, { useState, useLayoutEffect } from 'react';
-import { useLocomotiveScroll } from 'react-locomotive-scroll';
+import React, { useRef, useEffect } from 'react';
+import useInView from 'react-cool-inview';
 import PropTypes from 'prop-types';
-import uniqueId from 'lodash.uniqueid'
+import gsap from 'gsap';
 
-const TextInView = ({ children, className, ready }) => {
-	const [id] = useState(uniqueId('text-in-view-'))
-	const { scroll } = useLocomotiveScroll();
+const TextInView = ({ children, className }) => {
+	const tl = useRef();
 
-	useLayoutEffect(() => {
-		if (scroll && ready) {
-			scroll.on('call', ([name, callId]) => {
-				if (name === 'inView' && id === callId) {
-				}
-			});
-		}
-	}, [scroll, ready, id]);
+	const { ref } = useInView({
+		onEnter: ({ unobserve }) => {
+			tl.current.play();
+			unobserve();
+		},
+	});
+
+	useEffect(() => {
+		tl.current = gsap.timeline({
+			paused: true,
+		});
+
+		tl.current.fromTo(
+			ref.current,
+			{ clipPath: 'inset(0 0 100% 0)' },
+			{ clipPath: 'inset(0 0 0% 0)', duration: 1.5, ease: 'power4.inOut' },
+		);
+	}, [ref]);
 
 	return (
-		<div id={id} className={`Text-in-view${className ? ` ${className}` : ''}`} data-scroll data-scroll-call={`inview,${id}`}>
+		<div className={`Text-in-view${className ? ` ${className}` : ''}`} ref={ref}>
 			{children}
 		</div>
 	);
@@ -25,13 +34,11 @@ const TextInView = ({ children, className, ready }) => {
 
 TextInView.defaultProps = {
 	className: '',
-	ready: true
 };
 
 TextInView.propTypes = {
 	children: PropTypes.node.isRequired,
 	className: PropTypes.string,
-	ready: PropTypes.bool
 };
 
 export default TextInView;

@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'gatsby';
 import { gsap } from 'gsap';
-import { useLocomotiveScroll } from 'react-locomotive-scroll';
-import PropTypes from 'prop-types';
+import useInView from 'react-cool-inview';
 
 import ArrowRight from '../assets/arrow-right.inline.svg';
 
-const TeaseCaseStudy = ({ caseStudy, index, length, ready }) => {
+const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     const featuredImage = {
         fluid: caseStudy.featuredImage?.node?.localFile?.childImageSharp?.fluid,
         alt: caseStudy.featuredImage?.node?.alt || ``,
@@ -14,53 +13,48 @@ const TeaseCaseStudy = ({ caseStudy, index, length, ready }) => {
         height: caseStudy.featuredImage?.node?.localFile?.childImageSharp?.fixed.height,
     };
 
-    const { scroll } = useLocomotiveScroll();
-
-    const ref = useRef();
     const tl = useRef();
 
+    const { ref } = useInView({
+        rootMargin: '-100px 0px',
+        onEnter: ({ unobserve }) => {
+            tl.current.play();
+            unobserve();
+        },
+    });
+
     useEffect(() => {
-        if (scroll && ready) {
-            scroll.on('call', ([name, id]) => {
-                if (name === 'inView' && id === ref.current.id) {
-                    const $image = ref.current.querySelector('.js-image');
-                    const $mask = ref.current.querySelector('.js-mask');
-                    const $circle = ref.current.querySelector('.js-circle');
+        const $image = ref.current.querySelector('.js-image');
+        const $mask = ref.current.querySelector('.js-mask');
+        const $circle = ref.current.querySelector('.js-circle');
 
-                    tl.current = gsap.timeline({
-                        paused: true,
-                    });
+        tl.current = gsap.timeline({
+            paused: true,
+        });
 
-                    tl.current.set($image, { opacity: 0 });
-                    tl.current.set(ref.current, { pointerEvents: 'none' });
+        tl.current.set($image, { opacity: 0 });
+        tl.current.set(ref.current, { pointerEvents: 'none' });
 
-                    tl.current.fromTo(
-                        $mask,
-                        { transformOrigin: '50% 50%', yPercent: 100, smoothOrigin: true },
-                        { yPercent: 0, duration: 1, ease: 'power4.inOut' },
-                    );
-                    tl.current.set($image, { opacity: 1 });
-                    tl.current.fromTo(
-                        $circle,
-                        { transformOrigin: '50% 50%', scale: 0, smoothOrigin: true },
-                        { scale: 1, duration: 1, ease: 'power4.inOut' },
-                    );
-                    tl.current.set(ref.current, { clearProps: 'all' });
-
-                    tl.current.play();
-                }
-            });
-        }
-    }, [scroll, ready]); // eslint-disable-line react-hooks/exhaustive-deps
+        tl.current.fromTo(
+            $mask,
+            { transformOrigin: '50% 50%', yPercent: 100, smoothOrigin: true },
+            { yPercent: 0, duration: 1, ease: 'power4.inOut' },
+        );
+        tl.current.set($image, { opacity: 1 });
+        tl.current.fromTo(
+            $circle,
+            { transformOrigin: '50% 50%', scale: 0, smoothOrigin: true },
+            { scale: 1, duration: 1, ease: 'power4.inOut' },
+        );
+        tl.current.set(ref.current, { clearProps: 'all' });
+    }, [tl, ref]);
 
     return (
         <div
-            id={`case-study-${caseStudy.id}`}
             className="Tease-case-study"
             key={caseStudy.slug}
             ref={ref}
-            data-scroll
-            data-scroll-call={`inView,case-study-${caseStudy.id}`}>
+            style={{ pointerEvents: 'none' }}>
             {featuredImage?.fluid && (
                 <Link className="Tease-case-study__image" to={caseStudy.link}>
                     <img
@@ -120,11 +114,4 @@ const TeaseCaseStudy = ({ caseStudy, index, length, ready }) => {
     );
 };
 
-TeaseCaseStudy.defaultProps = {
-    ready: true,
-};
-
-TeaseCaseStudy.propTypes = {
-    ready: PropTypes.bool,
-};
 export default TeaseCaseStudy;

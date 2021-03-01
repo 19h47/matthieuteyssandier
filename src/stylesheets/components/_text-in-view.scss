@@ -6,12 +6,8 @@
  * @subpackage MatthieuTeyssandier
  */
 .Text-in-view {
-	will-change: clip-path;
+	// will-change: clip-path;
 
-	clip-path: inset(0 0 100% 0);
-	transition: clip-path 1.5s map-get($easings, ease-out-expo);
-
-	&.is-inview {
-		clip-path: inset(0 0 0 0);
-	}
+	// clip-path: inset(0 0 100% 0);
+	// transition: clip-path 1.5s map-get($easings, ease-out-expo);
 }

@@ -13,10 +13,7 @@
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-source-wordpress": "^4.0.3",
     "gsap": "^3.6.0",
-    "locomotive-scroll": "^4.1.0",
-    "lodash": "^4.17.21",
-    "lodash.uniqueid": "^4.0.1",
-    "react-locomotive-scroll": "^0.1.7",
+    "react-cool-inview": "^1.2.0",
     "ress": "^3.0.0"
   },
   "devDependencies": {
