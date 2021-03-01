@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
 import parse from 'html-react-parser';
 import styled from 'styled-components';
+// import PropTypes from 'prop-types';
 
 const Container = styled.div`
 	font-size: 26px;
@@ -15,16 +16,20 @@ const Button = styled.button`
 	border-radius: 10px;
 `;
 
-const SiteTitle = ({ color }) => {
+const SiteTitle = () => {
 	const {
 		wp: {
 			generalSettings: { title },
+			caseStudiesColors: { color },
 		},
 	} = useStaticQuery(graphql`
 		query title {
 			wp {
 				generalSettings {
 					title
+				}
+				caseStudiesColors {
+					color
 				}
 			}
 		}
@@ -43,5 +48,9 @@ const SiteTitle = ({ color }) => {
 		</Container>
 	);
 };
+
+SiteTitle.defaultProps = {};
+
+SiteTitle.propTypes = {};
 
 export default SiteTitle;

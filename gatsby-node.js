@@ -28,13 +28,15 @@ const createIndividualPage = async ({ pages, gatsbyUtilities }) => {
 		pages.map(({ page }) => {
 			return gatsbyUtilities.actions.createPage({
 				path: page.uri,
-				component: page.isFrontPage ? path.resolve(`./src/templates/front-page.js`) : path.resolve(`./src/pages/index.js`),
+				component: page.isFrontPage
+					? path.resolve(`./src/templates/front-page.js`)
+					: path.resolve(`./src/pages/index.js`),
 				context: {
-					id: page.id
-				}
-			})
-		})
-	)
+					id: page.id,
+				},
+			});
+		}),
+	);
 };
 
 const getPages = async ({ graphql, reporter }) => {
@@ -53,15 +55,12 @@ const getPages = async ({ graphql, reporter }) => {
 	`);
 
 	if (graphqlResult.errors) {
-		reporter.panicOnBuild(
-			`There was an error loading your pages`,
-			graphqlResult.errors,
-		);
+		reporter.panicOnBuild(`There was an error loading your pages`, graphqlResult.errors);
 		return;
 	}
 
 	return graphqlResult.data.allWpPage.edges;
-}
+};
 
 const getCaseStudies = async ({ graphql, reporter }) => {
 	const graphqlResult = await graphql(/* GraphQL */ `
@@ -74,6 +73,9 @@ const getCaseStudies = async ({ graphql, reporter }) => {
 					caseStudy: node {
 						id
 						uri
+						customFields {
+							color
+						}
 					}
 
 					next {
@@ -93,4 +95,4 @@ const getCaseStudies = async ({ graphql, reporter }) => {
 	}
 
 	return graphqlResult.data.allWpCaseStudy.edges;
-}
+};

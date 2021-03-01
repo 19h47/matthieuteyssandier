@@ -11,7 +11,7 @@ const Footer = () => {
 				<div className="row">
 					<div className="col-12 col-md-3 offset-md-2">
 						<TextInView className="Site-footer__copyright">
-							Dev by <a href="https://19h47.fr">19h47</a>
+							Dev by <a href="https://19h47.fr" target="_blank" rel="noopener noreferrer">19h47</a>
 						</TextInView>
 					</div>
 					<div className="col-12 col-md-3">
