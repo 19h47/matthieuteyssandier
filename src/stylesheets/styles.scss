@@ -34,7 +34,6 @@
 // Layout
 @import 'layouts/loader';
 @import 'layouts/site';
-@import 'layouts/header';
 @import 'layouts/footer';
 @import 'layouts/layout';
 @import 'layouts/layouts';
@@ -43,8 +42,6 @@
 @import 'pages/case-study';
 
 // Components
-@import 'components/site-title';
-@import 'components/site-description';
 @import 'components/site-contact';
 @import 'components/next-case-study';
 @import 'components/tease-case-study';
@@ -64,7 +61,7 @@
 @import '~@19h47/architecture/src/stylesheets/utilities/sizes';
 // @import '~@19h47/architecture/src/stylesheets/utilities/text-aligns';
 // @import '~@19h47/architecture/src/stylesheets/utilities/text-decorations';
-// @import '~@19h47/architecture/src/stylesheets/utilities/text-transforms';
+@import '~@19h47/architecture/src/stylesheets/utilities/text-transforms';
 // @import '~@19h47/architecture/src/stylesheets/utilities/vertical-aligns';
 // @import '~@19h47/architecture/src/stylesheets/utilities/visibilities';
 // @import '~@19h47/architecture/src/stylesheets/utilities/white-spaces';

@@ -1,8 +1,14 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import parse from 'html-react-parser';
+import styled from 'styled-components';
 
 import TextInView from './text-in-view';
+
+const Container = styled.div`
+	font-size: 16px;
+	line-height: ${24 / 16};
+`;
 
 const SiteDescription = () => {
 	const {
@@ -22,7 +28,7 @@ const SiteDescription = () => {
 	`);
 
 	return (
-		<div className="Site-description">
+		<Container>
 			<TextInView data-scroll>{parse(description)}</TextInView>
 			<TextInView>
 				<a
@@ -40,7 +46,7 @@ const SiteDescription = () => {
 					@{parse(twitter)}
 				</a>
 			</TextInView>
-		</div>
+		</Container>
 	);
 };
 

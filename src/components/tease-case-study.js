@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import { gsap } from 'gsap';
 import useInView from 'react-cool-inview';
 
+import TextInView from './text-in-view';
 import ArrowRight from '../assets/arrow-right.inline.svg';
 
 const TeaseCaseStudy = ({ caseStudy, index, length }) => {
@@ -26,7 +27,7 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     useEffect(() => {
         const $image = ref.current.querySelector('.js-image');
         const $mask = ref.current.querySelector('.js-mask');
-        const $circle = ref.current.querySelector('.js-circle');
+        const $circle = ref.current.querySelector('circle');
 
         tl.current = gsap.timeline({
             paused: true,
@@ -37,7 +38,7 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
 
         tl.current.fromTo(
             $mask,
-            { transformOrigin: '50% 50%', yPercent: 100, smoothOrigin: true },
+            { transformOrigin: '50% 50%', yPercent: -100, smoothOrigin: true },
             { yPercent: 0, duration: 1, ease: 'power4.inOut' },
         );
         tl.current.set($image, { opacity: 1 });
@@ -88,7 +89,7 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
                         preserveAspectRatio="none">
                         <mask id={`mask-${index}`}>
                             <rect width="600" height="600" fill="white" />
-                            <circle className="js-circle" cx="300" cy="300" r="424.3" />
+                            <circle cx="300" cy="300" r="424.3" />
                         </mask>
 
                         <rect
@@ -102,12 +103,17 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
             )}
             <Link to={caseStudy.link}>
                 <h2 className="Tease-case-study__title h1">
-                    {index + 1}&nbsp;&mdash;&nbsp;{length} <br />
-                    {caseStudy.title}
-                    <div className="d-flex align-items-center justify-content-between">
+                    <TextInView>
+                        {index + 1}&nbsp;&mdash;&nbsp;{length} <br />
+                    </TextInView>
+                    <TextInView>
+                        {caseStudy.title}
+                    </TextInView>
+
+                    <TextInView className="d-flex align-items-center justify-content-between">
                         {caseStudy.customFields.date}
                         <ArrowRight />
-                    </div>
+                    </TextInView>
                 </h2>
             </Link>
         </div>

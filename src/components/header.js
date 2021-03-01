@@ -1,12 +1,22 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import SiteTitle from '../components/site-title';
 import SiteDescription from '../components/site-description';
 import SiteContact from '../components/site-contact';
 
-const Header = ({ color, ready }) => {
+const Container = styled.div`
+	padding-top: 34px; 
+	padding-bottom: 110px;
+`
+
+const Button = styled.button`
+	font-size: 26px;
+`;
+
+const Header = ({ color }) => {
 	return (
-		<div className="Site-header">
+		<Container className="Site-header">
 			<div className="Site-container">
 				<div className="row">
 					<div className="col-5 col-md-3 offset-md-2">
@@ -14,9 +24,9 @@ const Header = ({ color, ready }) => {
 					</div>
 
 					<div className="col-5 d-md-none">
-						<button type="button" className="font-size-26">
+						<Button type="button">
 							Projets
-						</button>
+						</Button>
 					</div>
 
 					<div className="d-none d-md-block col-3">
@@ -28,7 +38,7 @@ const Header = ({ color, ready }) => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</Container>
 	);
 };
 

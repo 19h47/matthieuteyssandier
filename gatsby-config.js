@@ -15,6 +15,7 @@ module.exports = {
 	 * If you need any more you can search here: https://www.gatsbyjs.com/plugins/
 	 */
 	plugins: [
+		`gatsby-plugin-styled-components`,
 		{
 			resolve: `gatsby-source-wordpress`,
 			options: {

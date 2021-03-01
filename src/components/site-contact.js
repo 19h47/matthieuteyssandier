@@ -4,7 +4,7 @@ import parse from 'html-react-parser';
 
 import TextInView from './text-in-view';
 
-const SiteDescription = () => {
+const SiteContact = () => {
 	const {
 		wp: {
 			generalSettings: { publicEmail },
@@ -28,4 +28,4 @@ const SiteDescription = () => {
 	);
 };
 
-export default SiteDescription;
+export default SiteContact;
