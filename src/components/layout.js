@@ -5,7 +5,7 @@ import { AppContext } from '../provider';
 import Header from '../components/header';
 import Footer from '../components/footer';
 
-import './src/stylesheets/styles.scss';
+import '../stylesheets/styles.scss';
 
 const Layout = ({ children, color, ready }) => {
 
