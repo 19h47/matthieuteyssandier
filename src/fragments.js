@@ -9,4 +9,12 @@ export const fragments = graphql`
 			}
 		}
 	}
+	fragment TeaseCaseStudyImage on WpMediaItem {
+		altText
+		localFile {
+			childImageSharp {
+				gatsbyImageData(layout: CONSTRAINED, height: 688)
+			}
+		}
+	}
 `;

@@ -6,6 +6,7 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image';
 
 import TextInView from './text-in-view';
 import ArrowRight from '../assets/arrow-right.inline.svg';
+import CanvasCaseStudy from './canvas-case-study';
 
 const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     const image = getImage(caseStudy.featuredImage.node.localFile);
@@ -55,18 +56,7 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
             style={{ pointerEvents: 'none' }}>
             <Link className="Tease-case-study__image" to={caseStudy.link}>
                 <GatsbyImage image={image} className="js-image d-block" alt={alt} style={{ opacity: '0' }} />
-
-                <svg
-                    className="Tease-case-study__hover"
-                    viewBox="0 0 600 600"
-                    preserveAspectRatio="none">
-                    <g>
-                        <path
-                            fill={caseStudy.customFields.color}
-                            d="M-50-50v700h700V-50H-50z M300,600C134.3,600,0,465.7,0,300S134.3,0,300,0s300,134.3,300,300S465.7,600,300,600z"
-                        />
-                    </g>
-                </svg>
+                <CanvasCaseStudy color={caseStudy.customFields.color} />
 
                 <svg
                     style={{ transformOrigin: '50% 50%', scale: '0' }}

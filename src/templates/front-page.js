@@ -32,7 +32,7 @@ export const query = graphql`
 					}
 					featuredImage {
 						node {
-							...FeaturedImage
+							...TeaseCaseStudyImage
 						}
 					}
 				}
