@@ -13,7 +13,7 @@ export const fragments = graphql`
 		altText
 		localFile {
 			childImageSharp {
-				gatsbyImageData(layout: CONSTRAINED, height: 688)
+				gatsbyImageData(layout: CONSTRAINED, height: 688, placeholder: DOMINANT_COLOR)
 			}
 		}
 	}
