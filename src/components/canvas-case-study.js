@@ -12,7 +12,7 @@ const Canvas = styled.canvas`
 	left: 0;
 	width: 100%;
 	height: 100%;
-    z-index: 1;
+	z-index: 1;
 `;
 
 const CanvasCaseStudy = ({ color }) => {
@@ -43,8 +43,14 @@ const CanvasCaseStudy = ({ color }) => {
         }
     };
 
-    const handleMouseEnter = () => tl.current.play();
-    const handleMouseLeave = () => tl.current.reverse();
+    const handleMouseEnter = () => {
+        tl.current.timeScale(1);
+        tl.current.play();
+    };
+    const handleMouseLeave = () => {
+        tl.current.timeScale(1.5);
+        tl.current.reverse();
+    };
 
     useLayoutEffect(() => {
         if (canvas.current) {
