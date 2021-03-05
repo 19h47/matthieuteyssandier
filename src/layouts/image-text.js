@@ -1,19 +1,19 @@
 import React from 'react';
-import Image from 'gatsby-image';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 const LayoutText = ({ data }) => {
-    const { image, video, caption, content } = data;
+    const { video, caption, content } = data;
+    const image = getImage(data.image.localFile);
 
     return (
         <div className="Layout Layout--image-text">
             <div className="Site-container">
                 <div className="row">
                     <div className="col-10 col-md-4 offset-md-2">
-                        {image?.localFile?.childImageSharp?.fluid && (
-                            <Image
-                                fluid={image.localFile.childImageSharp.fluid}
+                        {image && (
+                            <GatsbyImage
+                                image={image}
                                 alt={image.altText}
-                                durationFadeIn={1800}
                             />
                         )}
                         {video && (

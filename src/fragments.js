@@ -5,13 +5,7 @@ export const fragments = graphql`
 		altText
 		localFile {
 			childImageSharp {
-				fluid(maxWidth: 1420, quality: 100) {
-					...GatsbyImageSharpFluid_withWebp
-				}
-				fixed {
-					height
-					width
-				}
+				gatsbyImageData(layout: CONSTRAINED)
 			}
 		}
 	}

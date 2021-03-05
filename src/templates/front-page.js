@@ -61,6 +61,8 @@ const FrontPage = ({ location, data }) => {
         setReady(newReady);
     };
 
+    console.log(data);
+
     const classNames = [
         'col-10 col-md-6',
         'col-10 col-md-4',

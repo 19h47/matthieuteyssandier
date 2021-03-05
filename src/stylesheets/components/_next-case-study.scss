@@ -6,24 +6,13 @@
  * @subpackage MatthieuTeyssandier
  */
 .Next-case-study {
-	@extend %position-relative;
-	@extend .d-block;
-
-	height: 420px;
-
 	svg {
 		@include absolute(top 0 right 0 bottom 0 left 0);
 		@include size(100%);
 
+		will-change: transform;
+		transition: transform 1.8s map-get($easings, ease-out-expo);
+		transform: scale(1.5);
 		z-index: 2;
-	}
-
-	img {
-		@include size(100%);
-		@extend %position-relative;
-
-		object-position: center;
-		object-fit: cover;
-		z-index: 1;
 	}
 }

@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 import { Link, graphql } from 'gatsby';
-import Image from 'gatsby-image';
+import { getImage } from 'gatsby-plugin-image';
 import parse from 'html-react-parser';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import NextCaseStudy from '../components/next-case-study';
 
 import LayoutTwoImages from '../layouts/two-images';
 import LayoutImage from '../layouts/image';
@@ -111,14 +112,7 @@ export const query = graphql`
 			}
 			featuredImage {
 				node {
-					altText
-					localFile {
-						childImageSharp {
-							fluid(maxWidth: 1420, quality: 100) {
-								...GatsbyImageSharpFluid_withWebp
-							}
-						}
-					}
+					...FeaturedImage
 				}
 			}
 		}
@@ -130,11 +124,11 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 	const { date, layouts } = caseStudy.customFields;
 
 	const nextCaseStudy = {
-		image: {
-			fluid: next.featuredImage?.node?.localFile?.childImageSharp?.fluid,
-			alt: next.featuredImage?.node?.alt || next.title,
-		},
+		image: getImage(next.featuredImage.node.localFile),
+		alt: next.featuredImage?.node?.alt || next.title,
 		color: next.customFields?.color,
+		link: next.link,
+		title: next.title,
 	};
 
 	return (
@@ -162,7 +156,6 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 
 				<div className="Layouts">
 					{layouts.map((layout, index) => {
-						console.log(layout)
 						return (
 							<Fragment key={`${layout.fieldGroupName}-${index}`}>
 								{'caseStudy_Customfields_Layouts_TwoImages' ===
@@ -191,29 +184,7 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 						</Link>
 					</div>
 					<div className="col-10 col-md-8">
-						<Link
-							className="Next-case-study"
-							to={next.link}
-							rel="next"
-							style={{ backgroundColor: nextCaseStudy.color }}>
-							<svg viewBox="0 0 600 600" preserveAspectRatio="none">
-								<g>
-									<path
-										fill={nextCaseStudy.color}
-										d="M-50-50v700h700V-50H-50z M300,600C134.3,600,0,465.7,0,300S134.3,0,300,0s300,134.3,300,300S465.7,600,300,600z"
-									/>
-								</g>
-							</svg>
-							{nextCaseStudy.image.fluid && (
-								<Image
-									fluid={nextCaseStudy.image.fluid}
-									alt={nextCaseStudy.image.alt}
-									style={{ height: '100%' }}
-									backgroundColor={nextCaseStudy.color}
-									durationFadeIn={1800}
-								/>
-							)}
-						</Link>
+						<NextCaseStudy {...nextCaseStudy} />
 					</div>
 				</div>
 			</div>

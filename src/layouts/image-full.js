@@ -1,20 +1,20 @@
 import React from 'react';
-import Image from 'gatsby-image';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 const ImageFull = ({ data }) => {
-    const { image, video, caption } = data;
+    const { video, caption } = data;
+    const image = data.image?.localFile ? getImage(data.image.localFile) : false;
 
     return (
         <div className="Layout Layout--image-full">
             {image && (
-                <Image
-                    fluid={image.localFile.childImageSharp.fluid}
+                <GatsbyImage
+                    image={image}
                     alt={image.altText}
                     style={{ height: '100%' }}
-                    durationFadeIn={1800}
                 />
             )}
-            {video && <video autoPlay loop muted playsInline src={video.localFile.url}></video>}
+            {video && <video autoPlay loop muted playsInline src={video.localFile.url} />}
 
             {caption && (
                 <div className="Site-container">

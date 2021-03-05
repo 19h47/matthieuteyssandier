@@ -36,15 +36,9 @@ module.exports = {
 				path: `${__dirname}/content/assets`,
 			},
 		},
-
-		/**
-		 * The following two plugins are required if you want to use Gatsby image
-		 * See https://www.gatsbyjs.com/docs/gatsby-image/#setting-up-gatsby-image
-		 * if you're curious about it.
-		 */
-		`gatsby-transformer-sharp`,
+		`gatsby-plugin-image`,
 		`gatsby-plugin-sharp`,
-
+		`gatsby-transformer-sharp`,
 		{
 			// See https://www.gatsbyjs.com/plugins/gatsby-plugin-manifest/?=gatsby-plugin-manifest
 			resolve: `gatsby-plugin-manifest`,
