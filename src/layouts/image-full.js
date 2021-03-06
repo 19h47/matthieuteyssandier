@@ -39,7 +39,7 @@ const ImageFull = ({ data }) => {
                         placeholder="dominantColor"
                         image={image}
                         alt={image.altText}
-                        style={{ height: '100%' }}
+                        style={{ height: '100%', verticalAlign: 'middle' }}
                     />
                 )}
                 {video && <video autoPlay loop muted playsInline src={video.localFile.url} />}

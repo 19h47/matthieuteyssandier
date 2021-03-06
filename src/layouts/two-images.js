@@ -39,7 +39,7 @@ const TwoImages = ({ data }) => {
                     <div className="col-10 col-md-4 offset-md-2 margin-top-auto">
                         {image0 && (
                             <Content color={image0.backgroundColor} inview={inView}>
-                                <GatsbyImage image={image0} alt={item0.image.altText} />
+                                <GatsbyImage image={image0} alt={item0.image.altText} style={{ verticalAlign: 'middle' }} />
                             </Content>
                         )}
                         <p className="Layout__caption">{item0.caption}</p>
@@ -47,7 +47,7 @@ const TwoImages = ({ data }) => {
                     <div className="col-10 col-md-4 margin-top-auto">
                         {image1 && (
                             <Content color={image1.backgroundColor} inview={inView}>
-                                <GatsbyImage image={image1} alt={item1.image.altText} />
+                                <GatsbyImage image={image1} alt={item1.image.altText} style={{ verticalAlign: 'middle' }} />
                             </Content>
                         )}
                         <p className="Layout__caption">{item1.caption}</p>

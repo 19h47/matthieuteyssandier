@@ -1,7 +1,6 @@
 import React, { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import PropTypes from 'prop-types';
-
 import styled from 'styled-components';
 
 const Canvas = styled.canvas`
@@ -12,13 +11,19 @@ const Canvas = styled.canvas`
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: 1;
+	z-index: 2;
 `;
 
 const CanvasCaseStudy = ({ color }) => {
     const context = useRef(null);
     const canvas = useRef(null);
-    const canvasProps = useRef({ width: 0, height: 0, radiusX: 0, radiusY: 0 });
+    const canvasProps = useRef({
+        radiusX: 0,
+        radiusY: 0,
+        width: 0,
+        height: 0,
+    });
+
     const tl = useRef(null);
 
     const draw = () => {
@@ -59,16 +64,14 @@ const CanvasCaseStudy = ({ color }) => {
             canvas.current.width = width;
             canvas.current.height = height;
 
-            canvasProps.current = {
-                radiusX: width / Math.sqrt(2),
-                radiusY: height / Math.sqrt(2),
-                width,
-                height,
-            };
+            canvasProps.current.radiusX = width / Math.sqrt(2);
+            canvasProps.current.radiusY = height / Math.sqrt(2);
+            canvasProps.current.width = width;
+            canvasProps.current.height = height;
 
             context.current = canvas.current.getContext('2d');
 
-            tl.current = new gsap.timeline({
+            tl.current = gsap.timeline({
                 paused: true,
                 onUpdate: draw,
             });
@@ -87,12 +90,10 @@ const CanvasCaseStudy = ({ color }) => {
 
 CanvasCaseStudy.defaultProps = {
     color: '#ffffff',
-    hover: false,
 };
 
 CanvasCaseStudy.propTypes = {
     color: PropTypes.string.isRequired,
-    hover: PropTypes.bool.isRequired,
 };
 
 export default CanvasCaseStudy;

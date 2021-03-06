@@ -16,7 +16,7 @@ const Loader = ({ onComplete, colors }) => {
     useEffect(() => {
 
         const countdown = { progress: 0 };
-        const timeline = gsap.timeline({
+        const timeline = new gsap.timeline({
             paused: true,
             onComplete: () => onComplete(true),
         });

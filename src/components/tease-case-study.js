@@ -1,18 +1,39 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { Link } from 'gatsby';
 import { gsap } from 'gsap';
 import useInView from 'react-cool-inview';
 import { getImage, GatsbyImage } from 'gatsby-plugin-image';
+import styled from 'styled-components';
 
 import TextInView from './text-in-view';
 import ArrowRight from '../assets/arrow-right.inline.svg';
 import CanvasCaseStudy from './canvas-case-study';
 
+const Canvas = styled.canvas`
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+`;
+
 const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     const image = getImage(caseStudy.featuredImage.node.localFile);
     const alt = caseStudy.featuredImage?.node?.alt || caseStudy.title;
 
-    const tl = useRef();
+    const context = useRef(null);
+    const canvas = useRef(null);
+    const canvasProps = useRef({
+        width: 0,
+        height: 0,
+        radiusX: 0,
+        radiusY: 0,
+    });
+
+    const tl = useRef(null);
 
     const { ref } = useInView({
         rootMargin: '-100px 0px',
@@ -22,31 +43,80 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
         },
     });
 
-    useEffect(() => {
-        const $image = ref.current.querySelector('.js-image');
-        const $mask = ref.current.querySelector('.js-mask');
-        const $circle = ref.current.querySelector('circle');
+    const drawRect = () => {
+        if (canvas.current) {
+            const { offsetWidth, offsetHeight } = canvas.current;
+            const { width, height } = canvasProps.current;
 
-        tl.current = gsap.timeline({
-            paused: true,
-        });
+            context.current.clearRect(offsetWidth, 0, -offsetWidth, offsetHeight);
+            context.current.fillStyle = caseStudy.customFields.color;
+            context.current.beginPath();
+            context.current.rect(width, 0, -width, height);
+            context.current.fill();
+        }
+    };
 
-        tl.current.set($image, { opacity: 0 });
-        tl.current.set(ref.current, { pointerEvents: 'none' });
+    const drawEllipse = () => {
+        if (canvas.current) {
+            const { offsetWidth, offsetHeight } = canvas.current;
+            const { width, height, radiusX, radiusY } = canvasProps.current;
 
-        tl.current.fromTo(
-            $mask,
-            { transformOrigin: '50% 50%', yPercent: -100, smoothOrigin: true },
-            { yPercent: 0, duration: 1, ease: 'power4.inOut' },
-        );
-        tl.current.set($image, { opacity: 1 });
-        tl.current.fromTo(
-            $circle,
-            { transformOrigin: '50% 50%', scale: 0, smoothOrigin: true },
-            { scale: 1, duration: 1, ease: 'power4.inOut' },
-        );
-        tl.current.set(ref.current, { clearProps: 'all' });
-    }, [tl, ref]);
+            context.current.clearRect(offsetWidth, 0, -offsetWidth, offsetHeight);
+            context.current.fillStyle = caseStudy.customFields.color;
+            context.current.beginPath();
+            context.current.ellipse(
+                width / 2,
+                height / 2,
+                radiusX,
+                radiusY,
+                Math.PI,
+                0,
+                2 * Math.PI,
+            );
+            context.current.rect(offsetWidth, 0, -offsetWidth, offsetHeight);
+            context.current.fill();
+        }
+    };
+
+    useLayoutEffect(() => {
+        if (canvas.current) {
+            const $image = ref.current.querySelector('.js-image');
+            const { offsetWidth: width, offsetHeight: height } = canvas.current;
+
+            canvas.current.width = width;
+            canvas.current.height = height;
+
+            canvasProps.current.width = width;
+
+            context.current = canvas.current.getContext('2d');
+
+            tl.current = gsap.timeline({
+                paused: true,
+            });
+
+            tl.current.set($image, { opacity: 0 });
+            tl.current.set(ref.current, { pointerEvents: 'none' });
+
+            tl.current.to(canvasProps.current, {
+                duration: 1,
+                ease: 'power4.inOut',
+                height,
+                onUpdate: drawRect,
+            });
+
+            tl.current.set($image, { opacity: 1 });
+
+            tl.current.to(canvasProps.current, {
+                duration: 1,
+                ease: 'power4.inOut',
+                radiusX: width / Math.sqrt(2),
+                radiusY: height / Math.sqrt(2),
+                onUpdate: drawEllipse,
+            });
+
+            tl.current.set(ref.current, { clearProps: 'all' });
+        }
+    });
 
     return (
         <div
@@ -55,26 +125,14 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
             ref={ref}
             style={{ pointerEvents: 'none' }}>
             <Link className="Tease-case-study__image" to={caseStudy.link}>
-                <GatsbyImage image={image} className="js-image d-block" alt={alt} style={{ opacity: '0' }} />
+                <GatsbyImage
+                    image={image}
+                    className="js-image d-block"
+                    alt={alt}
+                    style={{ opacity: '0' }}
+                />
                 <CanvasCaseStudy color={caseStudy.customFields.color} />
-
-                <svg
-                    style={{ transformOrigin: '50% 50%', scale: '0' }}
-                    className="Tease-case-study__mask js-mask"
-                    viewBox="0 0 600 600"
-                    preserveAspectRatio="none">
-                    <mask id={`mask-${index}`}>
-                        <rect width="600" height="600" fill="white" />
-                        <circle cx="300" cy="300" r="424.3" />
-                    </mask>
-
-                    <rect
-                        mask={`url(#mask-${index})`}
-                        fill={caseStudy.customFields.color}
-                        width="600"
-                        height="600"
-                    />
-                </svg>
+                <Canvas ref={canvas} />
             </Link>
 
             <Link to={caseStudy.link}>

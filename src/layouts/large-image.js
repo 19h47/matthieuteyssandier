@@ -41,16 +41,11 @@ const LargeImage = ({ data }) => {
                                 <GatsbyImage
                                     image={image}
                                     alt={image.altText}
-                                    style={{ height: '100%' }}
+                                    style={{ height: '100%', verticalAlign: 'middle' }}
                                 />
                             )}
                             {video && (
-                                <video
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                    src={video.localFile.url}></video>
+                                <video autoPlay loop muted playsInline src={video.localFile.url} style={{ verticalAlign: 'middle' }} />
                             )}
                         </Content>
                         {caption && <p className="Layout__caption">{caption}</p>}
