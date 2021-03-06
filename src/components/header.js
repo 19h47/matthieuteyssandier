@@ -6,12 +6,14 @@ import SiteDescription from '../components/site-description';
 import SiteContact from '../components/site-contact';
 
 const Container = styled.div`
-	padding-top: 34px; 
+	padding-top: 34px;
 	padding-bottom: 110px;
-`
+`;
 
 const Button = styled.button`
+	position: relative;
 	font-size: 26px;
+	z-index: 10;
 `;
 
 const Header = ({ color }) => {
@@ -20,21 +22,21 @@ const Header = ({ color }) => {
 			<div className="Site-container">
 				<div className="row">
 					<div className="col-5 col-md-3 offset-md-2">
-						<SiteTitle color={color} />
+						<SiteTitle color={color} style={{ position: 'relative', zIndex: '10' }} />
 					</div>
 
 					<div className="col-5 d-md-none">
-						<Button type="button">
+						<Button type="button" style={{ position: 'relative', zIndex: '10' }}>
 							Projets
 						</Button>
 					</div>
 
 					<div className="d-none d-md-block col-3">
-						<SiteDescription />
+						<SiteDescription style={{ position: 'relative', zIndex: '10' }} />
 					</div>
 
 					<div className="d-none d-md-block col-2">
-						<SiteContact />
+						<SiteContact style={{ position: 'relative', zIndex: '10' }} />
 					</div>
 				</div>
 			</div>

@@ -10,7 +10,7 @@ const Container = styled.div`
 	line-height: ${24 / 16};
 `;
 
-const SiteDescription = () => {
+const SiteDescription = ({ style }) => {
 	const {
 		wp: {
 			generalSettings: { description, instagram, twitter },
@@ -28,7 +28,7 @@ const SiteDescription = () => {
 	`);
 
 	return (
-		<Container>
+		<Container style={style}>
 			<TextInView data-scroll>{parse(description)}</TextInView>
 			<TextInView>
 				<a

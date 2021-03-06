@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import { AppContext } from '../provider';
+
 import Header from '../components/header';
 import Footer from '../components/footer';
+import Menu from '../components/menu';
 
 import '../stylesheets/styles.scss';
 
@@ -24,15 +25,18 @@ const Layout = ({ children, ready }) => {
 	`);
 
 	return (
-		<AppContext.Consumer>
-			{context => (
-				<div className={`global-wrapper`} style={{ marginTop: ready ? false : '100vh' }}>
-					<Header color={color} />
-					<main className={`Site-main`}>{children}</main>
-					<Footer />
-				</div>
-			)}
-		</AppContext.Consumer>
+
+
+
+		<div className={`global-wrapper`} style={{ marginTop: ready ? false : '100vh' }}>
+			<Header color={color} />
+			<Menu />
+			<main className={`Site-main`}>{children}</main>
+			<Footer />
+		</div>
+
+
+
 	);
 };
 

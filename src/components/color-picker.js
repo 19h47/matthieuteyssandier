@@ -3,6 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import parse from 'html-react-parser';
 
+import { AppContext } from '../provider';
+
 const Container = styled.div``;
 
 const Button = styled.button`
@@ -13,12 +15,12 @@ const Button = styled.button`
 `;
 
 const ColorPicker = () => {
-    const {
-        wp: {
-            caseStudiesColors: { colors },
-        },
-        allWpCaseStudy: { edges: caseStudies },
-    } = useStaticQuery(graphql`
+	const {
+		wp: {
+			caseStudiesColors: { colors },
+		},
+		allWpCaseStudy: { edges: caseStudies },
+	} = useStaticQuery(graphql`
 		query colors {
 			wp {
 				caseStudiesColors {
@@ -31,24 +33,41 @@ const ColorPicker = () => {
 					node {
 						id
 						title
+						customFields {
+							color
+						}
 					}
 				}
 			}
 		}
 	`);
 
-    return (
-        <Container>
-            {colors.map((color, index) => (
-                <Button
-                    key={caseStudies[index].node.id}
-                    className="d-inline-block"
-                    style={{ backgroundColor: color }}
-                    type="button"
-                    aria-label={parse(caseStudies[index].node.title)}></Button>
-            ))}
-        </Container>
-    );
+	return (
+		<AppContext.Consumer>
+			{context => {
+				const { toggleColor } = context;
+
+				return (
+					<Container>
+						{colors.map((color, index) => {
+							const caseStudy = caseStudies[index].node;
+
+							return (
+								<Button
+									key={caseStudy.id}
+									className="d-inline-block"
+									style={{ backgroundColor: color }}
+									type="button"
+									aria-label={parse(caseStudy.title)}
+									onClick={() => toggleColor(color)}
+								></Button>
+							)
+						})}
+					</Container>
+				);
+			}}
+		</AppContext.Consumer>
+	);
 };
 
 export default ColorPicker;

@@ -11,7 +11,7 @@ const Container = styled.div`
 	line-height: ${31.2 / 26};
 `;
 
-const SiteTitle = () => {
+const SiteTitle = ({ style }) => {
 	const {
 		wp: {
 			generalSettings: { title },
@@ -27,7 +27,7 @@ const SiteTitle = () => {
 	`);
 
 	return (
-		<Container className="d-flex align-items-center">
+		<Container className="d-flex align-items-center" style={style}>
 			<Link to="/">{parse(title)}</Link>
 			<ColorPicker />
 			<Link to="/">{new Date().getFullYear()}</Link>

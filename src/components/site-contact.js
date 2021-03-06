@@ -11,7 +11,7 @@ const Container = styled.div`
 	line-height: ${24 / 16};
 `;
 
-const SiteContact = () => {
+const SiteContact = ({ style }) => {
 	const {
 		wp: {
 			generalSettings: { publicEmail },
@@ -27,7 +27,7 @@ const SiteContact = () => {
 	`);
 
 	return (
-		<Container>
+		<Container style={style}>
 			<TextInView>Drop me a line for freelance work</TextInView>
 			<TextInView>
 				<a href={`mailto:${parse(publicEmail)}`}>{parse(publicEmail)}</a>
