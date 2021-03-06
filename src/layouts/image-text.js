@@ -3,6 +3,8 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import useInView from 'react-cool-inview';
 import styled from 'styled-components';
 
+import TextInView from '../components/text-in-view';
+
 const Content = styled.div`
 	position: relative;
 
@@ -53,11 +55,12 @@ const LayoutText = ({ data }) => {
                                     src={video.localFile.url}></video>
                             )}
                         </Content>
-                        {caption && <p className="Layout__caption">{caption}</p>}
+                        {caption && <TextInView><p className="Layout__caption">{caption}</p></TextInView>}
                     </div>
                     <div className="col-10 col-md-4">
                         {content?.french && (
                             <div
+                                className="Layout__content"
                                 dangerouslySetInnerHTML={{
                                     __html: content.french,
                                 }}
@@ -65,7 +68,7 @@ const LayoutText = ({ data }) => {
                         )}
                         {content?.english && (
                             <div
-                                className="color-yellow-dark-grayish"
+                                className="Layout__content color-yellow-dark-grayish"
                                 dangerouslySetInnerHTML={{
                                     __html: content.english,
                                 }}

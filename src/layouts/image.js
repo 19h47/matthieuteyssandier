@@ -3,6 +3,8 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import useInView from 'react-cool-inview';
 import styled from 'styled-components';
 
+import TextInView from '../components/text-in-view';
+
 const Content = styled.div`
 	position: relative;
 
@@ -45,7 +47,11 @@ const LayoutImage = ({ data }) => {
                                 />
                             </Content>
                         )}
-                        {caption && <p className="Layout__caption">{caption}</p>}
+                        {caption && (
+                            <TextInView>
+                                <p className="Layout__caption">{caption}</p>
+                            </TextInView>
+                        )}
                     </div>
                 </div>
             </div>

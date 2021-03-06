@@ -3,6 +3,8 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import useInView from 'react-cool-inview';
 import styled from 'styled-components';
 
+import TextInView from '../components/text-in-view';
+
 const Content = styled.div`
 	position: relative;
 
@@ -33,24 +35,40 @@ const TwoImages = ({ data }) => {
     });
 
     return (
-        <div className="Layout" ref={ref}>
+        <div className="Layout Layout--two-images" ref={ref}>
             <div className="Site-container">
                 <div className="row d-flex">
                     <div className="col-10 col-md-4 offset-md-2 margin-top-auto">
                         {image0 && (
                             <Content color={image0.backgroundColor} inview={inView}>
-                                <GatsbyImage image={image0} alt={item0.image.altText} style={{ verticalAlign: 'middle' }} />
+                                <GatsbyImage
+                                    image={image0}
+                                    alt={item0.image.altText}
+                                    style={{ verticalAlign: 'middle' }}
+                                />
                             </Content>
                         )}
-                        <p className="Layout__caption">{item0.caption}</p>
+                        {item0.caption && (
+                            <TextInView>
+                                <p className="Layout__caption">{item0.caption}</p>
+                            </TextInView>
+                        )}
                     </div>
                     <div className="col-10 col-md-4 margin-top-auto">
                         {image1 && (
                             <Content color={image1.backgroundColor} inview={inView}>
-                                <GatsbyImage image={image1} alt={item1.image.altText} style={{ verticalAlign: 'middle' }} />
+                                <GatsbyImage
+                                    image={image1}
+                                    alt={item1.image.altText}
+                                    style={{ verticalAlign: 'middle' }}
+                                />
                             </Content>
                         )}
-                        <p className="Layout__caption">{item1.caption}</p>
+                        {item1.caption && (
+                            <TextInView>
+                                <p className="Layout__caption">{item1.caption}</p>
+                            </TextInView>
+                        )}
                     </div>
                 </div>
             </div>

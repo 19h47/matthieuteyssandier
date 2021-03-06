@@ -9,7 +9,7 @@
 	$this: &;
 
 	&:hover {
-		img {
+		.gatsby-image-wrapper {
 			filter: grayscale(0%);
 		}
 
@@ -18,15 +18,16 @@
 		}
 	}
 
-	img {
+	.gatsby-image-wrapper {
 		@include size(100%, 224px);
 		@extend .d-block;
 
 		filter: grayscale(100%);
+
 		object-fit: cover;
 		object-position: center;
 		transition: filter 1.8s map-get($easings, ease-out-expo) !important;
-		will-change: opacity, filter;
+		will-change: filter;
 
 		@include media-breakpoint-up(md) {
 			height: #{(686 * 100) / 1920}vw;

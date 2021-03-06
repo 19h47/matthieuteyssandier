@@ -6,12 +6,14 @@ import parse from 'html-react-parser';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import NextCaseStudy from '../components/next-case-study';
+import TextInView from '../components/text-in-view';
 
 import LayoutTwoImages from '../layouts/two-images';
 import LayoutImage from '../layouts/image';
 import LayoutLargeImage from '../layouts/large-image';
 import LayoutImageFull from '../layouts/image-full';
 import LayoutImageText from '../layouts/image-text';
+import LayoutVideo from '../layouts/video';
 
 export const query = graphql`
 	query CaseStudyPostById($id: String!, $nextPostId: String) {
@@ -38,6 +40,15 @@ export const query = graphql`
 					french
 				}
 				layouts {
+					... on WpCaseStudy_Customfields_Layouts_Video {
+						fieldGroupName
+						caption
+						video {
+							localFile {
+								url
+							}
+						}
+					}
 					... on WpCaseStudy_Customfields_Layouts_TwoImages {
 						fieldGroupName
 						item0 {
@@ -121,7 +132,7 @@ export const query = graphql`
 
 const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 	const categories = caseStudy.categories?.nodes;
-	const { date, layouts } = caseStudy.customFields;
+	const { date, layouts, color } = caseStudy.customFields;
 
 	const nextCaseStudy = {
 		image: getImage(next.featuredImage.node.localFile),
@@ -139,16 +150,24 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 				<header>
 					<div className="Site-container">
 						<div className="row">
-							<div className="col-10 col-md-1">
-								{categories.map(category => (
-									<p key={category.id}>{category.name}</p>
-								))}
+							<div className="col-10 col-md-2">
+								{categories.length && (
+									<ul className="Case-study__categories">
+										{categories.map(category => (
+											<li key={category.id}>{category.name}</li>
+										))}
+									</ul>
+								)}
 							</div>
-							<div className="col-10 col-md-8 offset-md-1">
-								<h1 itemProp="name">{parse(caseStudy.title)}</h1>
+							<div className="col-10 col-md-8">
+								<TextInView>
+									<h1 itemProp="name" className="Case-study__title">{parse(caseStudy.title)}</h1>
+								</TextInView>
 							</div>
 							<div className="col-10 d-flex">
-								<p className="Case-study__date margin-left-auto h1">{date}</p>
+								<TextInView className="margin-left-auto">
+									<p className="Case-study__date h1">{date}</p>
+								</TextInView>
 							</div>
 						</div>
 					</div>
@@ -168,6 +187,10 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 									layout.fieldGroupName && <LayoutImageFull data={layout} />}
 								{'caseStudy_Customfields_Layouts_ImageText' ===
 									layout.fieldGroupName && <LayoutImageText data={layout} />}
+								{'caseStudy_Customfields_Layouts_Video' ===
+									layout.fieldGroupName && (
+										<LayoutVideo data={layout} color={color} />
+									)}
 							</Fragment>
 						);
 					})}

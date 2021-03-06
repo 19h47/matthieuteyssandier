@@ -11,4 +11,17 @@
 
 		line-height: (58.8/80);
 	}
+
+	&__categories {
+		@extend %list-style-type-none, %margin-0, %text-align-right;
+
+		line-height: (24/16);
+		writing-mode: vertical-rl;
+		transform: rotate(180deg);
+	}
+
+	&__title {
+		@extend %margin-top-0;
+		@include margin(bottom 198px);
+	}
 }

@@ -3,6 +3,8 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import useInView from 'react-cool-inview';
 import styled from 'styled-components';
 
+import TextInView from '../components/text-in-view';
+
 const Content = styled.div`
 	position: relative;
 
@@ -45,10 +47,21 @@ const LargeImage = ({ data }) => {
                                 />
                             )}
                             {video && (
-                                <video autoPlay loop muted playsInline src={video.localFile.url} style={{ verticalAlign: 'middle' }} />
+                                <video
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    src={video.localFile.url}
+                                    style={{ verticalAlign: 'middle' }}
+                                />
                             )}
                         </Content>
-                        {caption && <p className="Layout__caption">{caption}</p>}
+                        {caption && (
+                            <TextInView>
+                                <p className="Layout__caption">{caption}</p>
+                            </TextInView>
+                        )}
                     </div>
                 </div>
             </div>

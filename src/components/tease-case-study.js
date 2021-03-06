@@ -127,7 +127,7 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
             <Link className="Tease-case-study__image" to={caseStudy.link}>
                 <GatsbyImage
                     image={image}
-                    className="js-image d-block"
+                    className="js-image"
                     alt={alt}
                     style={{ opacity: '0' }}
                 />
@@ -135,7 +135,7 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
                 <Canvas ref={canvas} />
             </Link>
 
-            <Link to={caseStudy.link}>
+            <Link to={caseStudy.link} style={{ display: 'block' }}>
                 <h2 className="Tease-case-study__title h1">
                     <TextInView>
                         {index + 1}&nbsp;&mdash;&nbsp;{length} <br />

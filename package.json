@@ -23,11 +23,11 @@
   },
   "devDependencies": {
     "@19h47/prettier-config": "^1.0.0",
-    "gatsby": "^3.0.2",
+    "gatsby": "^3.0.3",
     "gatsby-plugin-manifest": "^3.0.0",
     "gatsby-plugin-offline": "^4.0.0",
     "gatsby-plugin-react-helmet": "^4.0.0",
-    "gatsby-plugin-sass": "4.0.1",
+    "gatsby-plugin-sass": "4.0.2",
     "gatsby-plugin-sharp": "^3.0.0",
     "gatsby-source-filesystem": "^3.0.0",
     "gatsby-transformer-sharp": "^3.0.0",
