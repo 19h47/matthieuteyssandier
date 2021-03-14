@@ -11,7 +11,7 @@ const Container = styled.div`
 	width: 20px;
 	overflow: hidden;
 	margin-right: 2px;
-	transition: width 1s var(--ease-out-expo);
+	transition: width ${props => props.$length * 0.1}s var(--ease-out-expo);
 	will-change: width;
 `;
 
@@ -35,16 +35,16 @@ const Ul = styled.ul`
 const Li = styled.li`
 	display: flex;
 	margin-right: 2px;
+	z-index: ${props => (props.$length - props.$index).toString()};
 
 	&:last-child {
 		margin-right: 0;
 	}
 
 	&:not(:first-child) {
-		opacity: ${props => (props.$active ? '1' : '0')};
-		transform: ${props => (props.$active ? 'translate3d(0,0,0)' : `translate3d(${props.$index * -100}%, 0, 0)`)};
-		will-change: opacity, transform;
-		transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
+		transform: ${props => (props.$active ? 'translate3d(0,0,0)' : `translate3d(calc(${props.$index * -100}% - ${2 * props.$index}px), 0, 0)`)};
+		will-change: transform;
+		transition: transform 0.5s var(--ease-out-expo) ${props => (props.$length - props.$index) * 0.1}s;
 	}
 `;
 
@@ -110,7 +110,7 @@ const ColorPicker = () => {
 	}, [menu]);
 
 	return (
-		<Container onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} ref={container}>
+		<Container onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} ref={container} $length={colors.length}>
 			<Ul>
 				{colors.map((color, index) => {
 					const caseStudy = caseStudies[index].node;
@@ -118,9 +118,10 @@ const ColorPicker = () => {
 					return (
 						<Li
 							key={caseStudy.id}
-							style={{ transitionDelay: `${index * 0.01}s` }}
 							$active={active}
-							$index={index}>
+							$index={index}
+							$length={colors.length}
+						>
 							<Button
 								className="d-inline-block"
 								style={{ backgroundColor: color }}
