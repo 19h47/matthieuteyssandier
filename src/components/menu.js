@@ -24,6 +24,10 @@ const Canvas = styled.canvas`
 	height: 100%;
 `;
 
+const TextInView = styled.div`
+	clip-path: inset(0 0 100% 0);
+`;
+
 const diameter = (w, h, x, y) => {
     const width = Math.max(w - x, x) * 2;
     const height = Math.max(h - y, y) * 2;
@@ -35,6 +39,7 @@ const Menu = () => {
     const { x, y } = useMousePosition();
     const context = useRef(null);
     const canvas = useRef();
+    const container = useRef();
     const { color, setColor, menu, setMenu } = useContext(AppContext);
     const paramsRef = useRef({ x: 0, y: 0, radius: 0 });
 
@@ -56,6 +61,12 @@ const Menu = () => {
 
             paramsRef.current.x = x;
             paramsRef.current.y = y;
+
+            gsap.to(container.current.querySelector('.js-button'), {
+                clipPath: 'inset(0 0 0% 0)',
+                duration: 1.5,
+                ease: 'power4.inOut',
+            });
 
             gsap.to(params, {
                 duration: 1.5,
@@ -94,6 +105,12 @@ const Menu = () => {
 
         paramsRef.current.radius = radius;
 
+        gsap.to(container.current.querySelector('.js-button'), {
+            clipPath: 'inset(0 0 100% 0)',
+            duration: 1.5,
+            ease: 'power4.inOut',
+        });
+
         gsap.to(paramsRef.current, {
             duration: 1.5,
             ease: 'power4.out',
@@ -114,20 +131,21 @@ const Menu = () => {
     };
 
     return (
-        <Container style={{ paddingTop: '34px' }}>
+        <Container style={{ paddingTop: '34px' }} ref={container}>
             <Canvas ref={canvas} />
             <div className="Site-container">
                 <div className="row">
                     <div className="col-2">
-                        <button
-                            type="button"
-                            onClick={handleClick}
-                            style={{
-                                textTransform: 'uppercase',
-                                display: menu ? 'block' : 'none',
-                            }}>
-                            Quitter le menu
-						</button>
+                        <TextInView className="js-button">
+                            <button
+                                type="button"
+                                onClick={handleClick}
+                                style={{
+                                    textTransform: 'uppercase',
+                                }}>
+                                Quitter le menu
+							</button>
+                        </TextInView>
                     </div>
                 </div>
             </div>

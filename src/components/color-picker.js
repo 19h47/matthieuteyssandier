@@ -30,22 +30,21 @@ const Ul = styled.ul`
 	display: flex;
 	align-items: center;
 	flex-wrap: nowrap;
+`;
 
-	li {
-		display: flex;
-		margin-right: 2px;
+const Li = styled.li`
+	display: flex;
+	margin-right: 2px;
 
-		&:last-child {
-			margin-right: 0;
-		}
+	&:last-child {
+		margin-right: 0;
+	}
 
-		&:not(:first-child) {
-			opacity: ${props => (props.$active ? '1' : '0')};
-			transform: ${props =>
-		props.$active ? 'translate3d(0,0,0)' : 'translate3d(-100%, 0, 0)'};
-			will-change: opacity, transform;
-			transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
-		}
+	&:not(:first-child) {
+		opacity: ${props => (props.$active ? '1' : '0')};
+		transform: ${props => (props.$active ? 'translate3d(0,0,0)' : `translate3d(${props.$index * -100}%, 0, 0)`)};
+		will-change: opacity, transform;
+		transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
 	}
 `;
 
@@ -112,12 +111,16 @@ const ColorPicker = () => {
 
 	return (
 		<Container onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} ref={container}>
-			<Ul $active={active}>
+			<Ul>
 				{colors.map((color, index) => {
 					const caseStudy = caseStudies[index].node;
 
 					return (
-						<li key={caseStudy.id} style={{ transitionDelay: `${index * 0.01}s` }}>
+						<Li
+							key={caseStudy.id}
+							style={{ transitionDelay: `${index * 0.01}s` }}
+							$active={active}
+							$index={index}>
 							<Button
 								className="d-inline-block"
 								style={{ backgroundColor: color }}
@@ -125,7 +128,7 @@ const ColorPicker = () => {
 								aria-label={parse(caseStudy.title)}
 								onClick={() => handleClick(color)}
 							/>
-						</li>
+						</Li>
 					);
 				})}
 			</Ul>
