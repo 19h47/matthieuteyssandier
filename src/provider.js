@@ -8,13 +8,10 @@ const initialState = {
 const AppContext = createContext(initialState);
 
 const AppProvider = ({ children }) => {
-    const [active, setActive] = useState(false);
+    const [menu, setMenu] = useState(false);
     const [color, setColor] = useState(null);
 
-    const toggleActive = () => setActive(!active);
-    const toggleColor = (color) => setColor(color);
-
-    return <AppContext.Provider value={{ active, toggleActive, color, toggleColor }}>{children}</AppContext.Provider>;
+    return <AppContext.Provider value={{ menu, setMenu, color, setColor }}>{children}</AppContext.Provider>;
 };
 
 export { AppProvider, AppContext };

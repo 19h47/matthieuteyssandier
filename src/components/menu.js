@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect, useLayoutEffect } from 'react';
+import React, { useRef, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
 
@@ -12,10 +12,6 @@ const Container = styled.div`
 	bottom: 0;
 	left: 0;
 	z-index: 5;
-	// transition: background-color 0.5s cubic-bezier(0.42, 0, 0.58, 1);
-	// will-change: background-color;
-	// background-color: ${props => (props.color ? props.color : 'transparent')};
-	display: ${props => (props.color ? 'block' : 'none')};
 `;
 
 const Canvas = styled.canvas`
@@ -33,85 +29,103 @@ const diameter = (w, h, x, y) => {
     const height = Math.max(h - y, y) * 2;
     const diameter = Math.sqrt(width * width + height * height);
     return diameter;
-}
+};
 
 const Menu = () => {
     const { x, y } = useMousePosition();
     const context = useRef(null);
-    const canvas = useRef(null);
-    const canvasProps = useRef({
-        width: 0,
-        height: 0,
-        x,
-        y,
-    });
-    const { color, toggleColor } = useContext(AppContext);
+    const canvas = useRef();
+    const { color, setColor, menu, setMenu } = useContext(AppContext);
+    const paramsRef = useRef({ x: 0, y: 0, radius: 0 });
 
-    const draw = () => {
-        if (canvas.current) {
-            const { x, y, radiusX, radiusY } = canvasProps.current;
-
-            context.current.fillStyle = color;
-            context.current.beginPath();
-            context.current.ellipse(x, y, radiusX, radiusY, Math.PI, 0, 2 * Math.PI);
-            context.current.fill();
-        }
+    const draw = (x, y, radius) => {
+        context.current.fillStyle = color;
+        context.current.beginPath();
+        context.current.ellipse(x, y, radius, radius, Math.PI, 0, 2 * Math.PI);
+        context.current.fill();
     };
-
-    const clear = () => {
-        if (canvas.current) {
-            const { width, height } = canvasProps.current;
-
-            context.current.clearRect(0, 0, width, height);
-            context.current.beginPath();
-        }
-    }
 
     useEffect(() => {
         if (color) {
-            const radius = diameter(canvas.current.width, canvas.current.height, x, y)
+            const radius = diameter(canvas.current.width, canvas.current.height, x, y) / 2;
+            const params = {
+                x: x,
+                y: y,
+                radius: 0,
+            };
 
-            canvasProps.current.x = x;
-            canvasProps.current.y = y;
+            paramsRef.current.x = x;
+            paramsRef.current.y = y;
 
-            canvasProps.current.radiusX = 0;
-            canvasProps.current.radiusY = 0;
-
-            gsap.fromTo(canvasProps.current, { radiusX: 0, radiusY: 0 }, {
-                duration: 3,
+            gsap.to(params, {
+                duration: 1.5,
                 ease: 'power4.out',
-                radiusX: radius,
-                radiusY: radius,
-                onUpdate: draw,
+                radius: radius,
+                onUpdate: () => draw(params.x, params.y, params.radius),
+                onStart: () => {
+                    document.documentElement.style.setProperty('overflow', 'hidden');
+                    document.documentElement.style.setProperty('height', '100%');
+                },
             });
-            // draw();
         }
-
-        return clear()
     }, [color]);
 
-    useLayoutEffect(() => {
-        console.log('menu');
-        if (canvas.current) {
-            const { offsetWidth: width, offsetHeight: height } = canvas.current;
+    useEffect(() => {
+        const { offsetWidth: width, offsetHeight: height } = canvas.current;
 
-            canvas.current.width = width;
-            canvas.current.height = height;
+        canvas.current.width = width;
+        canvas.current.height = height;
 
-            canvasProps.current.width = width;
-            canvasProps.current.height = height;
+        context.current = canvas.current.getContext('2d');
 
-            context.current = canvas.current.getContext('2d');
-        }
-    });
+        const handleResize = e => {
+            context.current.canvas.height = window.innerHeight;
+            context.current.canvas.width = window.innerWidth;
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const handleClick = () => {
+        const radius = diameter(canvas.current.width, canvas.current.height, x, y) / 2;
+
+        paramsRef.current.radius = radius;
+
+        gsap.to(paramsRef.current, {
+            duration: 1.5,
+            ease: 'power4.out',
+            radius: 0,
+            onUpdate: () => {
+                context.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
+                draw(paramsRef.current.x, paramsRef.current.y, paramsRef.current.radius);
+            },
+            onComplete: () => {
+                setMenu(false);
+                document.documentElement.style.removeProperty('overflow');
+                document.documentElement.style.removeProperty('height');
+            },
+            onStart: () => {
+                setColor(null);
+            },
+        });
+    };
 
     return (
-        <Container color={color} style={{ paddingTop: '34px' }}>
+        <Container style={{ paddingTop: '34px' }}>
             <Canvas ref={canvas} />
             <div className="Site-container">
                 <div className="row">
                     <div className="col-2">
-                        <button type="button" onClick={() => toggleColor(null)} style={{ textTransform: 'uppercase' }}>
+                        <button
+                            type="button"
+                            onClick={handleClick}
+                            style={{
+                                textTransform: 'uppercase',
+                                display: menu ? 'block' : 'none',
+                            }}>
                             Quitter le menu
 						</button>
                     </div>

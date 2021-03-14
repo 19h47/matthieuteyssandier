@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, useStaticQuery } from 'gatsby';
 
-
 import Header from '../components/header';
 import Footer from '../components/footer';
 import Menu from '../components/menu';
@@ -25,18 +24,12 @@ const Layout = ({ children, ready }) => {
 	`);
 
 	return (
-
-
-
 		<div className={`global-wrapper`} style={{ marginTop: ready ? false : '100vh' }}>
 			<Header color={color} />
 			<Menu />
 			<main className={`Site-main`}>{children}</main>
 			<Footer />
 		</div>
-
-
-
 	);
 };
 

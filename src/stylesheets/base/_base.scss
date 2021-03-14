@@ -6,6 +6,10 @@
  * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  */
 
+:root {
+	--ease-out-expo: #{map-get($easings, ease-out-expo)};
+}
+
 html {
 	// scroll-behavior: smooth;
 	min-height: 100%;
