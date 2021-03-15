@@ -15,12 +15,6 @@ const Container = styled.div`
 	will-change: width;
 `;
 
-const Button = styled.button`
-	width: 20px;
-	height: 20px;
-	border-radius: 10px;
-`;
-
 const Ul = styled.ul`
 	list-style-type: none;
 	position: absolute;
@@ -46,6 +40,12 @@ const Li = styled.li`
 		will-change: transform;
 		transition: transform 0.5s var(--ease-out-expo) ${props => (props.$length - props.$index) * 0.1}s;
 	}
+`;
+
+const Button = styled.button`
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
 `;
 
 const ColorPicker = () => {
