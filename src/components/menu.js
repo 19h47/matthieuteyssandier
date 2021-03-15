@@ -6,12 +6,15 @@ import useMousePosition from '../hooks/use-mouse-position';
 import { AppContext } from '../provider';
 
 const Container = styled.div`
+padding-top: 34px;
 	position: fixed;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
 	z-index: 5;
+    opacity: ${props => props.$active ? '1' : '0'};
+    visibility: ${props => props.$active ? 'visible' : 'hidden'};
 `;
 
 const Canvas = styled.canvas`
@@ -131,7 +134,7 @@ const Menu = () => {
     };
 
     return (
-        <Container style={{ paddingTop: '34px' }} ref={container}>
+        <Container $active={menu} ref={container}>
             <Canvas ref={canvas} />
             <div className="Site-container">
                 <div className="row">
