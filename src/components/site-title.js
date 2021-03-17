@@ -30,7 +30,7 @@ const SiteTitle = ({ style }) => {
 		<Container className="d-flex align-items-center" style={style}>
 			<Link to="/">{parse(title)}</Link>
 			<ColorPicker />
-			<Link to="/">{new Date().getFullYear()}</Link>
+			<Link to="/" style={{ marginLeft: '2px' }}>{new Date().getFullYear()}</Link>
 		</Container>
 	);
 };
