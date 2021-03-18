@@ -114,8 +114,7 @@ const ColorPicker = () => {
 
 	useEffect(() => {
 		const { children } = container.current.firstChild;
-		const width = (children.length * 20) + ((children.length - 1) * 2);
-
+		const width = children.length * 20 + (children.length - 1) * 2;
 
 		tl.current = gsap.timeline({ paused: true });
 
@@ -125,20 +124,23 @@ const ColorPicker = () => {
 			{
 				duration: colors.length * 0.1,
 				width,
-				ease: 'power4.inOut'
+				ease: 'power4.inOut',
 			},
 		);
 		tl.current.fromTo(
 			children,
 			{
-				x: index => ((children[index].scrollWidth * index) + (index * 2)) * -1,
+				x: index => ((20 * index) + (2 * index)) * -1,
 			},
-			{ stagger: index => (colors.length - index) * 0.1, x: 0, ease: 'power4.inOut', duration: 0.5 },
-			`-=${colors.length * 0.1}`
+			{
+				stagger: index => (colors.length - index) * 0.1,
+				x: 0,
+				ease: 'power4.inOut',
+				duration: 0.5,
+			},
+			`-=${(colors.length - 1) * 0.1}`,
 		);
 	}, []);
-
-	// props.$length - props.$index) * 0.1
 
 	return (
 		<Container

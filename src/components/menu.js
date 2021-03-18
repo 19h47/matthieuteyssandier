@@ -88,7 +88,7 @@ const Menu = ({ caseStudies }) => {
 
             gsap.to(params, {
                 duration: 1.5,
-                ease: 'power4.out',
+                ease: 'power4.inOut',
                 radius: radius,
                 onUpdate: () => draw(params.x, params.y, params.radius),
                 onStart: () => {
@@ -203,7 +203,7 @@ const Menu = ({ caseStudies }) => {
                                             style={{
                                                 width: '453px',
                                                 height: '246px',
-                                                margin: '0 10px'
+                                                margin: '0 10px',
                                             }}
                                             imgStyle={{
                                                 width: '453px',
@@ -223,7 +223,7 @@ const Menu = ({ caseStudies }) => {
                                             style={{
                                                 width: '453px',
                                                 height: '246px',
-                                                margin: '0 10px'
+                                                margin: '0 10px',
                                             }}
                                             imgStyle={{
                                                 width: '453px',
@@ -243,7 +243,7 @@ const Menu = ({ caseStudies }) => {
                                             style={{
                                                 width: '453px',
                                                 height: '246px',
-                                                margin: '0 10px'
+                                                margin: '0 10px',
                                             }}
                                             imgStyle={{
                                                 width: '453px',
@@ -263,7 +263,7 @@ const Menu = ({ caseStudies }) => {
                                             style={{
                                                 width: '453px',
                                                 height: '246px',
-                                                margin: '0 10px'
+                                                margin: '0 10px',
                                             }}
                                             imgStyle={{
                                                 width: '453px',
@@ -283,7 +283,7 @@ const Menu = ({ caseStudies }) => {
                                             style={{
                                                 width: '453px',
                                                 height: '246px',
-                                                margin: '0 10px'
+                                                margin: '0 10px',
                                             }}
                                             imgStyle={{
                                                 width: '453px',

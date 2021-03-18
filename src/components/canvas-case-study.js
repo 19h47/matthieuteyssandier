@@ -78,7 +78,7 @@ const CanvasCaseStudy = ({ color }) => {
 
             tl.current.to(canvasProps.current, {
                 duration: 1.5,
-                ease: 'power4.out',
+                ease: 'power4.inOut',
                 radiusX: width / 2,
                 radiusY: height / 2,
             });
