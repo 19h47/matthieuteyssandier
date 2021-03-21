@@ -1,12 +1,12 @@
-import React, { useRef, useContext, useEffect } from 'react';
+import React, { useRef, useContext, useEffect, } from 'react';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
-import { getImage, GatsbyImage } from 'gatsby-plugin-image';
 
-import useMousePosition from '../hooks/use-mouse-position';
 import { AppContext } from '../provider';
+import MenuItem from './menu-item';
 
 const Container = styled.div`
+
 	padding-top: 34px;
 	position: fixed;
 	top: 0;
@@ -33,17 +33,10 @@ const TextInView = styled.div`
 `;
 
 const Ul = styled.ul`
+	margin-top: 150px;
 	position: relative;
 	list-style-type: none;
 	height: 100%;
-`;
-
-const Li = styled.li`
-	position: absolute;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
 `;
 
 const diameter = (w, h, x, y) => {
@@ -54,11 +47,10 @@ const diameter = (w, h, x, y) => {
 };
 
 const Menu = ({ caseStudies }) => {
-    const { x, y } = useMousePosition();
     const context = useRef(null);
     const canvas = useRef();
     const container = useRef();
-    const { color, setColor, menu, setMenu } = useContext(AppContext);
+    const { position: { x, y }, color, setColor, menu, setMenu } = useContext(AppContext);
     const paramsRef = useRef({ x: 0, y: 0, radius: 0 });
 
     const draw = (x, y, radius) => {
@@ -66,6 +58,36 @@ const Menu = ({ caseStudies }) => {
         context.current.beginPath();
         context.current.ellipse(x, y, radius, radius, Math.PI, 0, 2 * Math.PI);
         context.current.fill();
+    };
+
+    const handleClick = () => {
+        const radius = diameter(canvas.current.width, canvas.current.height, x, y) / 2;
+
+        paramsRef.current.radius = radius;
+
+        gsap.to(container.current.querySelector('.js-button'), {
+            clipPath: 'inset(0 0 100% 0)',
+            duration: 1.5,
+            ease: 'power4.inOut',
+        });
+
+        gsap.to(paramsRef.current, {
+            duration: 1,
+            ease: 'power4.out',
+            radius: 0,
+            onUpdate: () => {
+                context.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
+                draw(paramsRef.current.x, paramsRef.current.y, paramsRef.current.radius);
+            },
+            onComplete: () => {
+                setMenu(false);
+                document.documentElement.style.removeProperty('overflow');
+                document.documentElement.style.removeProperty('height');
+            },
+            onStart: () => {
+                setColor(null);
+            },
+        });
     };
 
     useEffect(() => {
@@ -97,9 +119,10 @@ const Menu = ({ caseStudies }) => {
                 },
             });
         }
-    }, [color]);
+    });
 
     useEffect(() => {
+        console.log('Menu');
         const { offsetWidth: width, offsetHeight: height } = canvas.current;
 
         canvas.current.width = width;
@@ -107,7 +130,7 @@ const Menu = ({ caseStudies }) => {
 
         context.current = canvas.current.getContext('2d');
 
-        const handleResize = e => {
+        const handleResize = () => {
             context.current.canvas.height = window.innerHeight;
             context.current.canvas.width = window.innerWidth;
         };
@@ -117,36 +140,6 @@ const Menu = ({ caseStudies }) => {
 
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-
-    const handleClick = () => {
-        const radius = diameter(canvas.current.width, canvas.current.height, x, y) / 2;
-
-        paramsRef.current.radius = radius;
-
-        gsap.to(container.current.querySelector('.js-button'), {
-            clipPath: 'inset(0 0 100% 0)',
-            duration: 1.5,
-            ease: 'power4.inOut',
-        });
-
-        gsap.to(paramsRef.current, {
-            duration: 1.5,
-            ease: 'power4.out',
-            radius: 0,
-            onUpdate: () => {
-                context.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
-                draw(paramsRef.current.x, paramsRef.current.y, paramsRef.current.radius);
-            },
-            onComplete: () => {
-                setMenu(false);
-                document.documentElement.style.removeProperty('overflow');
-                document.documentElement.style.removeProperty('height');
-            },
-            onStart: () => {
-                setColor(null);
-            },
-        });
-    };
 
     return (
         <Container $active={menu} ref={container}>
@@ -169,136 +162,9 @@ const Menu = ({ caseStudies }) => {
             </div>
 
             <Ul>
-                {caseStudies.map(caseStudy => {
-                    const { node } = caseStudy;
-                    const image = getImage(node.featuredImage.node.localFile);
-                    const alt = node.featuredImage?.node?.alt || node.title;
-
-                    return (
-                        <Li
-                            className="Site-container"
-                            key={node.id}
-                            style={{ opacity: node.customFields.color === color ? '1' : '0' }}>
-                            <div className="row">
-                                <div className="col-10 col-md-6 offset-md-2">
-                                    <div
-                                        className="h1"
-                                        style={{
-                                            fontWeight: '700',
-                                            textTransform: 'uppercase',
-                                            textAlign: 'center',
-                                        }}>
-                                        {node.title}
-                                    </div>
-                                </div>
-                                <div className="col-10">
-                                    <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
-                                        <GatsbyImage
-                                            image={image}
-                                            className="js-image"
-                                            alt={alt}
-                                            objectFit="cover"
-                                            objectPosition="center"
-                                            layout="fixed"
-                                            style={{
-                                                width: '453px',
-                                                height: '246px',
-                                                margin: '0 10px',
-                                            }}
-                                            imgStyle={{
-                                                width: '453px',
-                                                minWidth: '453px',
-                                                height: '246px',
-                                                mixBlendMode: 'multiply',
-                                                filter: 'grayscale(100%)',
-                                            }}
-                                        />
-                                        <GatsbyImage
-                                            image={image}
-                                            className="js-image"
-                                            alt={alt}
-                                            objectFit="cover"
-                                            objectPosition="center"
-                                            layout="fixed"
-                                            style={{
-                                                width: '453px',
-                                                height: '246px',
-                                                margin: '0 10px',
-                                            }}
-                                            imgStyle={{
-                                                width: '453px',
-                                                minWidth: '453px',
-                                                height: '246px',
-                                                mixBlendMode: 'multiply',
-                                                filter: 'grayscale(100%)',
-                                            }}
-                                        />
-                                        <GatsbyImage
-                                            image={image}
-                                            className="js-image"
-                                            alt={alt}
-                                            objectFit="cover"
-                                            objectPosition="center"
-                                            layout="fixed"
-                                            style={{
-                                                width: '453px',
-                                                height: '246px',
-                                                margin: '0 10px',
-                                            }}
-                                            imgStyle={{
-                                                width: '453px',
-                                                minWidth: '453px',
-                                                height: '246px',
-                                                mixBlendMode: 'multiply',
-                                                filter: 'grayscale(100%)',
-                                            }}
-                                        />
-                                        <GatsbyImage
-                                            image={image}
-                                            className="js-image"
-                                            alt={alt}
-                                            objectFit="cover"
-                                            objectPosition="center"
-                                            layout="fixed"
-                                            style={{
-                                                width: '453px',
-                                                height: '246px',
-                                                margin: '0 10px',
-                                            }}
-                                            imgStyle={{
-                                                width: '453px',
-                                                minWidth: '453px',
-                                                height: '246px',
-                                                mixBlendMode: 'multiply',
-                                                filter: 'grayscale(100%)',
-                                            }}
-                                        />
-                                        <GatsbyImage
-                                            image={image}
-                                            className="js-image"
-                                            alt={alt}
-                                            objectFit="cover"
-                                            objectPosition="center"
-                                            layout="fixed"
-                                            style={{
-                                                width: '453px',
-                                                height: '246px',
-                                                margin: '0 10px',
-                                            }}
-                                            imgStyle={{
-                                                width: '453px',
-                                                minWidth: '453px',
-                                                height: '246px',
-                                                mixBlendMode: 'multiply',
-                                                filter: 'grayscale(100%)',
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </Li>
-                    );
-                })}
+                {caseStudies.map(caseStudy => (
+                    <MenuItem key={caseStudy.node.id} caseStudy={caseStudy.node} />
+                ))}
             </Ul>
         </Container>
     );

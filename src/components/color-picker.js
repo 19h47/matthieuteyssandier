@@ -9,39 +9,21 @@ import { AppContext } from '../provider';
 const Container = styled.div`
 	position: relative;
 	height: 20px;
-	/* width: 20px; */
 	overflow: hidden;
-	/* transition: width ${props => props.$length * 0.1}s var(--ease-out-expo); */
-	/* will-change: width; */
 `;
 
 const Ul = styled.ul`
 	list-style-type: none;
-	/* position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0; */
 	display: flex;
 `;
 
 const Li = styled.li`
-	/* display: flex; */
 	margin-right: 2px;
 	z-index: ${props => (props.$length - props.$index).toString()};
 
 	&:last-child {
 		margin-right: 0;
 	}
-
-	/* &:not(:first-child) {
-		transform: ${props =>
-		props.$active
-			? 'translate3d(0,0,0)'
-			: `translate3d(calc(${props.$index * -100}% - ${2 * props.$index}px), 0, 0)`};
-		will-change: transform;
-		transition: transform 0.5s var(--ease-out-expo)
-			${props => (props.$length - props.$index) * 0.1}s;
-	} */
 `;
 
 const Button = styled.button`
@@ -52,7 +34,7 @@ const Button = styled.button`
 
 const ColorPicker = () => {
 	const container = useRef();
-	const { setColor, menu, setMenu } = useContext(AppContext);
+	const { setPosition, setColor, menu, setMenu } = useContext(AppContext);
 	const [active, setActive] = useState(false);
 	const tl = useRef(null);
 
@@ -68,7 +50,6 @@ const ColorPicker = () => {
 					colors
 				}
 			}
-
 			allWpCaseStudy {
 				edges {
 					node {
@@ -83,9 +64,10 @@ const ColorPicker = () => {
 		}
 	`);
 
-	const handleClick = color => {
+	const handleClick = (event, color) => {
 		if (active) {
 			setColor(color);
+			setPosition({ x: event.clientX, y: event.clientY })
 			setMenu(true);
 		}
 	};
@@ -116,29 +98,27 @@ const ColorPicker = () => {
 		const { children } = container.current.firstChild;
 		const width = children.length * 20 + (children.length - 1) * 2;
 
-		tl.current = gsap.timeline({ paused: true });
+		tl.current = gsap.timeline({ paused: true, defaults: { ease: 'power4.inOut' } });
 
 		tl.current.fromTo(
 			container.current,
 			{ width: '20px' },
 			{
-				duration: colors.length * 0.1,
+				duration: children.length * 0.1,
 				width,
-				ease: 'power4.inOut',
 			},
 		);
 		tl.current.fromTo(
 			children,
 			{
-				x: index => ((20 * index) + (2 * index)) * -1,
+				x: index => ((20 * index) + (2 * index)) * -1, // widths + margins
 			},
 			{
-				stagger: index => (colors.length - index) * 0.1,
+				stagger: index => (children.length - index) * 0.1,
 				x: 0,
-				ease: 'power4.inOut',
 				duration: 0.5,
 			},
-			`-=${(colors.length - 1) * 0.1}`,
+			`-=${(children.length - 1) * 0.1}`,
 		);
 	}, []);
 
@@ -163,7 +143,7 @@ const ColorPicker = () => {
 								style={{ backgroundColor: color }}
 								type="button"
 								aria-label={parse(caseStudy.title)}
-								onClick={() => handleClick(color)}
+								onClick={(event) => handleClick(event, color)}
 							/>
 						</Li>
 					);

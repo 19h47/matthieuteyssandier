@@ -4,6 +4,20 @@
 
 // @include reset-selection( get_color( black ), get_color( white ) );
 
+.h0 {
+	@extend %font-family-title, %font-weight-regular;
+
+	font-size: 70px;
+	line-height: (140/140);
+
+	@include media-breakpoint-up(md) {
+		font-size: calc(70px + (140 - 70) * ((100vw - 335px) / (1920 - 335)));
+	}
+	@include media-breakpoint-up(xxl) {
+		font-size: 140px;
+	}
+}
+
 h1,
 .h1 {
 	@extend %font-family-title, %font-weight-regular;

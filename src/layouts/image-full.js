@@ -15,7 +15,7 @@ const Content = styled.div`
 		bottom: 0;
 		left: 0;
 		display: block;
-		background-color: ${props => props.color};
+		background-color: ${props => props.$color};
 		content: '';
 		opacity: ${props => (props.inview ? '0' : '1')};
 		transition: opacity 1.5s cubic-bezier(0.42, 0, 0.58, 1);
@@ -35,12 +35,12 @@ const ImageFull = ({ data }) => {
 
     return (
         <div className="Layout Layout--image-full" ref={ref}>
-            <Content color={image.backgroundColor} inview={inView}>
+            <Content $color={image.backgroundColor} inview={inView}>
                 {image && (
                     <GatsbyImage
                         placeholder="dominantColor"
                         image={image}
-                        alt={image.altText}
+                        alt={image.altText || ''}
                         style={{ height: '100%', verticalAlign: 'middle' }}
                     />
                 )}

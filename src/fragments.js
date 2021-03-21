@@ -17,4 +17,12 @@ export const fragments = graphql`
 			}
 		}
 	}
+	fragment TeaseCaseStudyImageMenu on WpMediaItem {
+		altText
+		localFile {
+			childImageSharp {
+				gatsbyImageData(layout: FIXED, height: 246, placeholder: DOMINANT_COLOR)
+			}
+		}
+	}
 `;

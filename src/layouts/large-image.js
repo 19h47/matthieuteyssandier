@@ -42,7 +42,7 @@ const LargeImage = ({ data }) => {
                             {image && (
                                 <GatsbyImage
                                     image={image}
-                                    alt={image.altText}
+                                    alt={image.altText || ''}
                                     style={{ height: '100%', verticalAlign: 'middle' }}
                                 />
                             )}

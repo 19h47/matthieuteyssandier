@@ -34,7 +34,13 @@ const Layout = ({ children, ready }) => {
 						}
 						featuredImage {
 							node {
-								...TeaseCaseStudyImage
+								...TeaseCaseStudyImageMenu
+							}
+						}
+						categories: caseStudyCategories {
+							nodes {
+								id
+								name
 							}
 						}
 					}

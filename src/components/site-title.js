@@ -27,7 +27,7 @@ const SiteTitle = ({ style }) => {
 	`);
 
 	return (
-		<Container className="d-flex align-items-center" style={style}>
+		<Container className="d-flex align-items-center font-family-title" style={style}>
 			<Link to="/">{parse(title)}</Link>
 			<ColorPicker />
 			<Link to="/" style={{ marginLeft: '2px' }}>{new Date().getFullYear()}</Link>
