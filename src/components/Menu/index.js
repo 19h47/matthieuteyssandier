@@ -1,43 +1,9 @@
-import React, { useRef, useContext, useEffect, } from 'react';
-import styled from 'styled-components';
+import React, { useRef, useContext, useEffect } from 'react';
 import { gsap } from 'gsap';
 
-import { AppContext } from '../provider';
-import MenuItem from './menu-item';
-
-const Container = styled.div`
-
-	padding-top: 34px;
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 5;
-	opacity: ${props => (props.$active ? '1' : '0')};
-	visibility: ${props => (props.$active ? 'visible' : 'hidden')};
-`;
-
-const Canvas = styled.canvas`
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-`;
-
-const TextInView = styled.div`
-	clip-path: inset(0 0 100% 0);
-`;
-
-const Ul = styled.ul`
-	margin-top: 150px;
-	position: relative;
-	list-style-type: none;
-	height: 100%;
-`;
+import { Container, Canvas, TextInView, Ul } from './style';
+import { AppContext } from '../../provider';
+import MenuItem from '../MenuItem';
 
 const diameter = (w, h, x, y) => {
     const width = Math.max(w - x, x) * 2;
@@ -50,7 +16,13 @@ const Menu = ({ caseStudies }) => {
     const context = useRef(null);
     const canvas = useRef();
     const container = useRef();
-    const { position: { x, y }, color, setColor, menu, setMenu } = useContext(AppContext);
+    const {
+        position: { x, y },
+        color,
+        setColor,
+        menu,
+        setMenu,
+    } = useContext(AppContext);
     const paramsRef = useRef({ x: 0, y: 0, radius: 0 });
 
     const draw = (x, y, radius) => {
@@ -60,37 +32,52 @@ const Menu = ({ caseStudies }) => {
         context.current.fill();
     };
 
-    const handleClick = () => {
+    const close = () => {
         const radius = diameter(canvas.current.width, canvas.current.height, x, y) / 2;
+        const tl = gsap.timeline({ paused: true, immediateRender: true });
 
         paramsRef.current.radius = radius;
 
-        gsap.to(container.current.querySelector('.js-button'), {
+        tl.to(container.current.querySelector('.js-button'), {
             clipPath: 'inset(0 0 100% 0)',
             duration: 1.5,
             ease: 'power4.inOut',
         });
 
-        gsap.to(paramsRef.current, {
-            duration: 1,
-            ease: 'power4.out',
-            radius: 0,
-            onUpdate: () => {
-                context.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
-                draw(paramsRef.current.x, paramsRef.current.y, paramsRef.current.radius);
+        tl.to(
+            paramsRef.current,
+            {
+                duration: 1,
+                ease: 'power4.out',
+                radius: 0,
+                onUpdate: () => {
+                    context.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
+                    draw(paramsRef.current.x, paramsRef.current.y, paramsRef.current.radius);
+                },
+                onComplete: () => {
+                    document.documentElement.style.removeProperty('overflow');
+                    document.documentElement.style.removeProperty('height');
+                },
             },
-            onComplete: () => {
-                setMenu(false);
-                document.documentElement.style.removeProperty('overflow');
-                document.documentElement.style.removeProperty('height');
-            },
-            onStart: () => {
-                setColor(null);
-            },
-        });
+        );
+        tl.set(container.current, { autoAlpha: 0 });
+
+        tl.play();
     };
 
+    const handleClick = () => {
+        setMenu(false);
+        setColor(null);
+    }
+
     useEffect(() => {
+        if (!menu) {
+            close();
+        }
+    }, [menu])
+
+    useEffect(() => {
+        console.log(color);
         if (color) {
             const radius = diameter(canvas.current.width, canvas.current.height, x, y) / 2;
             const params = {
@@ -102,6 +89,7 @@ const Menu = ({ caseStudies }) => {
             paramsRef.current.x = x;
             paramsRef.current.y = y;
 
+            gsap.set(container.current, { autoAlpha: 1 });
             gsap.to(container.current.querySelector('.js-button'), {
                 clipPath: 'inset(0 0 0% 0)',
                 duration: 1.5,
@@ -119,7 +107,7 @@ const Menu = ({ caseStudies }) => {
                 },
             });
         }
-    });
+    }, [color]);
 
     useEffect(() => {
         console.log('Menu');
@@ -129,16 +117,6 @@ const Menu = ({ caseStudies }) => {
         canvas.current.height = height;
 
         context.current = canvas.current.getContext('2d');
-
-        const handleResize = () => {
-            context.current.canvas.height = window.innerHeight;
-            context.current.canvas.width = window.innerWidth;
-        };
-
-        handleResize();
-        window.addEventListener('resize', handleResize);
-
-        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     return (

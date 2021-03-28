@@ -1,45 +1,13 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { AppContext } from '../provider';
-import styled from 'styled-components';
+import { Link } from 'gatsby';
 import { getImage, GatsbyImage } from 'gatsby-plugin-image';
 import { gsap } from 'gsap';
 
-const Container = styled.li`
-	position: absolute;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
-`;
-
-const Images = styled.div`
-	mix-blend-mode: multiply;
-	filter: grayscale(100%);
-`;
-
-const H0 = styled.div`
-	text-transform: uppercase;
-	text-align: center;
-	height: 280px;
-	margin-top: 0;
-	margin-bottom: -50px;
-`;
-
-const Column = styled.div`
-	font-size: 35px;
-	line-height: 100%;
-
-	p {
-		margin: 0;
-	}
-`;
-
-const Footer = styled.footer`
-    margin-top: 50px;
-`
+import { AppContext } from '../../provider';
+import { Container, Images, Column, Footer } from './style';
 
 const MenuItem = ({ caseStudy }) => {
-    const { color } = useContext(AppContext);
+    const { color, setColor, setMenu } = useContext(AppContext);
     const image = getImage(caseStudy.featuredImage.node.localFile);
     const alt = caseStudy.featuredImage?.node?.alt || caseStudy.title;
     const container = useRef();
@@ -52,21 +20,26 @@ const MenuItem = ({ caseStudy }) => {
     );
 
     useEffect(() => {
-        console.log('MenuItem');
+        // console.log('MenuItem');
         tl.current.fromTo(
-            [container.current, title.current, columns.current.querySelectorAll('p')],
+            [
+                title.current,
+                container.current.querySelectorAll('.gatsby-image-wrapper'),
+                columns.current.querySelectorAll('p'),
+            ],
             { clipPath: 'inset(0 0 100% 0)' },
             {
                 clipPath: 'inset(0 0 0% 0)',
                 duration: 1.5,
                 ease: 'power4.inOut',
+                stagger: 0.05,
             },
         );
     }, []);
 
     useEffect(() => {
         if (color && color === caseStudy.customFields.color) {
-            tl.current.play();
+            tl.current.delay(2).play();
         }
 
         if (color && color !== caseStudy.customFields.color) {
@@ -76,10 +49,10 @@ const MenuItem = ({ caseStudy }) => {
         if (null === color) {
             tl.current.timeScale(2).reverse();
         }
-    }, [color, caseStudy.customFields.color]);
+    }, [color]);
 
     const createImages = () => {
-        console.log('createImages')
+        console.log('createImages');
         const images = [];
 
         for (let i = 0; i < 5; i++) {
@@ -109,13 +82,29 @@ const MenuItem = ({ caseStudy }) => {
         return images;
     };
 
+    const handleClick = () => {
+        setMenu(false);
+        setColor(null);
+    }
+
     return (
         <Container>
             <div className="row">
                 <div className="col-10">
-                    <H0 ref={title} className="h0">
+                    <Link
+                        className="h0"
+                        style={{
+                            textTransform: 'uppercase',
+                            textAlign: 'center',
+                            height: '280px',
+                            marginTop: '0',
+                            marginBottom: '-50px',
+                        }}
+                        ref={title}
+                        to={caseStudy.link}
+                        onClick={handleClick}>
                         {caseStudy.title}
-                    </H0>
+                    </Link>
                 </div>
                 <Images
                     className="col-10 d-flex justify-content-center flex-nowrap"
@@ -144,7 +133,7 @@ const MenuItem = ({ caseStudy }) => {
                     </Column>
                 </div>
             </Footer>
-        </Container >
+        </Container>
     );
 };
 

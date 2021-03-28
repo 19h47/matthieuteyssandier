@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import parse from 'html-react-parser';
 // import PropTypes from 'prop-types';
 
-import ColorPicker from './color-picker';
+import ColorPicker from './ColorPicker';
 
 const Container = styled.div`
 	font-size: 26px;

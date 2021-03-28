@@ -1,36 +1,10 @@
 import { useStaticQuery, graphql } from 'gatsby';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
 import parse from 'html-react-parser';
 import { gsap } from 'gsap';
 
-import { AppContext } from '../provider';
-
-const Container = styled.div`
-	position: relative;
-	height: 20px;
-	overflow: hidden;
-`;
-
-const Ul = styled.ul`
-	list-style-type: none;
-	display: flex;
-`;
-
-const Li = styled.li`
-	margin-right: 2px;
-	z-index: ${props => (props.$length - props.$index).toString()};
-
-	&:last-child {
-		margin-right: 0;
-	}
-`;
-
-const Button = styled.button`
-	width: 20px;
-	height: 20px;
-	border-radius: 10px;
-`;
+import { Container, Ul, Li, Button } from './style.js';
+import { AppContext } from '../../provider';
 
 const ColorPicker = () => {
 	const container = useRef();
@@ -67,7 +41,7 @@ const ColorPicker = () => {
 	const handleClick = (event, color) => {
 		if (active) {
 			setColor(color);
-			setPosition({ x: event.clientX, y: event.clientY })
+			setPosition({ x: event.clientX, y: event.clientY });
 			setMenu(true);
 		}
 	};
@@ -90,7 +64,7 @@ const ColorPicker = () => {
 		if (false === menu && tl.current) {
 			setActive(false);
 			tl.current.timeScale(1.25);
-			tl.current.reverse();
+			tl.current.reverse().delay(2);
 		}
 	}, [menu]);
 
@@ -111,14 +85,14 @@ const ColorPicker = () => {
 		tl.current.fromTo(
 			children,
 			{
-				x: index => ((20 * index) + (2 * index)) * -1, // widths + margins
+				x: index => (20 * index + 2 * index) * -1, // widths + margins
 			},
 			{
 				stagger: index => (children.length - index) * 0.1,
 				x: 0,
 				duration: 0.5,
 			},
-			`-=${(children.length - 1) * 0.1}`,
+			`-= ${(children.length - 1) * 0.1} `,
 		);
 	}, []);
 
@@ -139,11 +113,10 @@ const ColorPicker = () => {
 							$index={index}
 							$length={colors.length}>
 							<Button
-								className="d-block"
-								style={{ backgroundColor: color }}
+								$backgroundColor={color}
 								type="button"
 								aria-label={parse(caseStudy.title)}
-								onClick={(event) => handleClick(event, color)}
+								onClick={event => handleClick(event, color)}
 							/>
 						</Li>
 					);

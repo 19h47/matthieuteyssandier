@@ -58,32 +58,30 @@ const CanvasCaseStudy = ({ color }) => {
     };
 
     useLayoutEffect(() => {
-        if (canvas.current) {
-            const { offsetWidth: width, offsetHeight: height } = canvas.current;
+        const { offsetWidth: width, offsetHeight: height } = canvas.current;
 
-            canvas.current.width = width;
-            canvas.current.height = height;
+        canvas.current.width = width;
+        canvas.current.height = height;
 
-            canvasProps.current.radiusX = width / Math.sqrt(2);
-            canvasProps.current.radiusY = height / Math.sqrt(2);
-            canvasProps.current.width = width;
-            canvasProps.current.height = height;
+        canvasProps.current.radiusX = width / Math.sqrt(2);
+        canvasProps.current.radiusY = height / Math.sqrt(2);
+        canvasProps.current.width = width;
+        canvasProps.current.height = height;
 
-            context.current = canvas.current.getContext('2d');
+        context.current = canvas.current.getContext('2d');
 
-            tl.current = gsap.timeline({
-                paused: true,
-                onUpdate: draw,
-            });
+        tl.current = gsap.timeline({
+            paused: true,
+            onUpdate: draw,
+        });
 
-            tl.current.to(canvasProps.current, {
-                duration: 1.5,
-                ease: 'power4.inOut',
-                radiusX: width / 2,
-                radiusY: height / 2,
-            });
-        }
-    });
+        tl.current.to(canvasProps.current, {
+            duration: 1.5,
+            ease: 'power4.inOut',
+            radiusX: width / 2,
+            radiusY: height / 2,
+        });
+    }, []);
 
     return <Canvas ref={canvas} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />;
 };

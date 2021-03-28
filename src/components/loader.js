@@ -19,6 +19,7 @@ const Loader = ({ onComplete, colors }) => {
         const timeline = new gsap.timeline({
             paused: true,
             onComplete: () => onComplete(true),
+            immediateRender: true
         });
 
         timeline.to(

@@ -43,7 +43,7 @@ const LayoutImage = ({ data }) => {
                                 <GatsbyImage
                                     style={{ verticalAlign: 'middle' }}
                                     image={image}
-                                    alt={image.altText}
+                                    alt={image.altText || ''}
                                 />
                             </Content>
                         )}
