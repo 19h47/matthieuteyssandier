@@ -24,7 +24,7 @@ const MenuItem = ({ caseStudy }) => {
         tl.current.fromTo(
             [
                 containerRef.current.querySelector('.js-title'),
-                // containerRef.current.querySelectorAll('.gatsby-image-wrapper'),
+                containerRef.current.querySelectorAll('.js-image'),
                 columns.current.querySelectorAll('p'),
             ],
             { clipPath: 'inset(0 0 100% 0)' },
@@ -32,7 +32,7 @@ const MenuItem = ({ caseStudy }) => {
                 clipPath: 'inset(0 0 0% 0)',
                 duration: 1.5,
                 ease: 'power4.inOut',
-                stagger: 0.05,
+                stagger: 0.1,
             },
         );
     }, []);
@@ -47,7 +47,7 @@ const MenuItem = ({ caseStudy }) => {
         }
 
         if (null === color) {
-            tl.current.timeScale(2).reverse();
+            tl.current.timeScale(2.5).reverse();
         }
     }, [color]);
 
@@ -75,6 +75,7 @@ const MenuItem = ({ caseStudy }) => {
                         minWidth: '453px',
                         height: '246px',
                     }}
+                    className="js-image"
                 />,
             );
         }
@@ -84,52 +85,55 @@ const MenuItem = ({ caseStudy }) => {
 
     return (
         <Container ref={containerRef}>
-            <div className="row">
-                <div className="col-10">
-                    <AniLink
-                        className="h0 js-title"
-                        style={{
-                            textTransform: 'uppercase',
-                            textAlign: 'center',
-                            height: '280px',
-                            marginTop: '0',
-                            marginBottom: '-50px',
-                        }}
-                        fade
-
-                        to={caseStudy.link}
-                        onClick={() => {
-                            setMenu(false);
-                            setColor(null);
-                        }}>
-                        {caseStudy.title}
-                    </AniLink>
+            <div className="Site-container">
+                <div className="row">
+                    <div className="col-10 d-flex justify-content-center">
+                        <AniLink
+                            className="h0 js-title"
+                            style={{
+                                textTransform: 'uppercase',
+                                textAlign: 'center',
+                                height: '280px',
+                                marginTop: '0',
+                                marginBottom: '-50px',
+                                position: 'relative',
+                                zIndex: '1'
+                            }}
+                            fade
+                            to={caseStudy.link}
+                            onClick={() => {
+                                setMenu(false);
+                                setColor(null);
+                            }}>
+                            {caseStudy.title}
+                        </AniLink>
+                    </div>
+                    <Images className="col-10 d-flex justify-content-center flex-nowrap">
+                        {createImages()}
+                    </Images>
                 </div>
-                {/* <Images
-                    className="col-10 d-flex justify-content-center flex-nowrap"
-                    ref={container}>
-                    {createImages()}
-                </Images> */}
             </div>
             <Footer ref={columns}>
-                <div className="row">
-                    <Column className="col-3 offset-7">
-                        <p>{caseStudy.categories?.nodes[0]?.name}</p>
-                        <p>{caseStudy.categories?.nodes[0]?.name}</p>
-                        <p>{caseStudy.categories?.nodes[0]?.name}</p>
-                    </Column>
-                </div>
-                <div className="row">
-                    <Column className="col-5">
-                        <p>{caseStudy.customFields.date}</p>
-                        <p>{caseStudy.customFields.date}</p>
-                        <p>{caseStudy.customFields.date}</p>
-                    </Column>
-                    <Column className="col-5">
-                        <p>{caseStudy.categories?.nodes[1]?.name}</p>
-                        <p>{caseStudy.categories?.nodes[1]?.name}</p>
-                        <p>{caseStudy.categories?.nodes[1]?.name}</p>
-                    </Column>
+                <div className="Site-container">
+                    <div className="row">
+                        <Column className="col-3 offset-7">
+                            <p>{caseStudy.categories?.nodes[0]?.name}</p>
+                            <p>{caseStudy.categories?.nodes[0]?.name}</p>
+                            <p>{caseStudy.categories?.nodes[0]?.name}</p>
+                        </Column>
+                    </div>
+                    <div className="row">
+                        <Column className="col-5">
+                            <p>{caseStudy.customFields.date}</p>
+                            <p>{caseStudy.customFields.date}</p>
+                            <p>{caseStudy.customFields.date}</p>
+                        </Column>
+                        <Column className="col-5">
+                            <p>{caseStudy.categories?.nodes[1]?.name}</p>
+                            <p>{caseStudy.categories?.nodes[1]?.name}</p>
+                            <p>{caseStudy.categories?.nodes[1]?.name}</p>
+                        </Column>
+                    </div>
                 </div>
             </Footer>
         </Container>

@@ -77,8 +77,8 @@ const FrontPage = ({ location, data }) => {
 
     return (
         <>
-            <Loader ready={ready} onComplete={handleReady} colors={shuffle(colors)} />
-            <Layout color={color} location={location} colors={colors} ready={ready}>
+            {/* <Loader ready={ready} onComplete={handleReady} colors={shuffle(colors)} /> */}
+            <Layout color={color} location={location} colors={colors} ready={true}>
                 <Seo title="home" color={color} />
                 <div className="Site-container">
                     <div className="row">

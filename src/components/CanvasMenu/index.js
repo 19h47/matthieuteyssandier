@@ -68,7 +68,7 @@ const CanvasMenu = () => {
                 duration: 1,
                 ease: 'power4.out',
                 radius: 0,
-                delay: 0.5,
+                delay: 1,
                 onUpdate: () => {
                     contextRef.current.clearRect(
                         0,
