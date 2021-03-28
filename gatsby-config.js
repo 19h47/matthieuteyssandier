@@ -5,11 +5,9 @@
  * https://www.gatsbyjs.com/docs/gatsby-config/
  *
  */
-module.exports = {
-	flags: {
-		PRESERVE_WEBPACK_CACHE: true,
-	},
 
+module.exports = {
+	flags: { PRESERVE_WEBPACK_CACHE: true },
 	/**
 	 * Adding plugins to this array adds them to your Gatsby site.
 	 *
@@ -17,7 +15,6 @@ module.exports = {
 	 * If you need any more you can search here: https://www.gatsbyjs.com/plugins/
 	 */
 	plugins: [
-		'gatsby-plugin-layout',
 		`gatsby-plugin-styled-components`,
 		{
 			resolve: `gatsby-source-wordpress`,
@@ -25,6 +22,7 @@ module.exports = {
 				url: process.env.WPGRAPHQL_URL || 'https://wp.matthieuteyssandier.com/graphql',
 			},
 		},
+
 		/**
 		 * We need this plugin so that it adds the "File.publicURL" to our site
 		 * It will allow us to access static url's for assets like PDF's
@@ -42,19 +40,28 @@ module.exports = {
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
 		{
-			resolve: 'gatsby-plugin-manifest',
+			// See https://www.gatsbyjs.com/plugins/gatsby-plugin-manifest/?=gatsby-plugin-manifest
+			resolve: `gatsby-plugin-manifest`,
 			options: {
-				name: 'GatsbyJS',
-				short_name: 'GatsbyJS',
-				icon: 'src/images/icon.png',
-				start_url: '/',
-				background_color: '#f7f0eb',
-				theme_color: '#a2466c',
-				display: 'standalone',
+				name: `Matthieu Teyssandier`,
+				short_name: `MT©2021`,
+				start_url: `/`,
+				background_color: `#EAE9E8`,
+				theme_color: `#000000`,
+				display: `minimal-ui`,
+				icon: `content/assets/gatsby-icon.png`,
+				include_favicon: false,
 			},
 		},
+
+		// See https://www.gatsbyjs.com/plugins/gatsby-plugin-react-helmet/?=gatsby-plugin-react-helmet
 		`gatsby-plugin-react-helmet`,
-		'gatsby-plugin-offline',
+
+		/**
+		 * this (optional) plugin enables Progressive Web App + Offline functionality
+		 * To learn more, visit: https://gatsby.dev/offline
+		 */
+		`gatsby-plugin-offline`,
 		`gatsby-plugin-sass`,
 		{
 			resolve: `gatsby-plugin-react-svg`,

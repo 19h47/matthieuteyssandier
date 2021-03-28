@@ -28,7 +28,7 @@ export const query = graphql`
 					slug
 					customFields {
 						date
-						color
+                        color
 					}
 					featuredImage {
 						node {
@@ -60,6 +60,8 @@ const FrontPage = ({ location, data }) => {
     const handleReady = newReady => {
         setReady(newReady);
     };
+
+    console.log(data);
 
     const classNames = [
         'col-10 col-md-6',

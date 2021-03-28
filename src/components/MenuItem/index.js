@@ -39,7 +39,7 @@ const MenuItem = ({ caseStudy }) => {
 
     useEffect(() => {
         if (color && color === caseStudy.customFields.color) {
-            tl.current.delay(2).play();
+            tl.current.delay(1.8).play();
         }
 
         if (color && color !== caseStudy.customFields.color) {

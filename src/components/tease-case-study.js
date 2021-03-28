@@ -44,79 +44,79 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     });
 
     const drawRect = () => {
+        if (canvas.current) {
+            const { offsetWidth, offsetHeight } = canvas.current;
+            const { width, height } = canvasProps.current;
 
-        const { offsetWidth, offsetHeight } = canvas.current;
-        const { width, height } = canvasProps.current;
-
-        context.current.clearRect(offsetWidth, 0, -offsetWidth, offsetHeight);
-        context.current.fillStyle = caseStudy.customFields.color;
-        context.current.beginPath();
-        context.current.rect(width, 0, -width, height);
-        context.current.fill();
-
+            context.current.clearRect(offsetWidth, 0, -offsetWidth, offsetHeight);
+            context.current.fillStyle = caseStudy.customFields.color;
+            context.current.beginPath();
+            context.current.rect(width, 0, -width, height);
+            context.current.fill();
+        }
     };
 
     const drawEllipse = () => {
+        if (canvas.current) {
+            const { offsetWidth, offsetHeight } = canvas.current;
+            const { width, height, radiusX, radiusY } = canvasProps.current;
 
-        const { offsetWidth, offsetHeight } = canvas.current;
-        const { width, height, radiusX, radiusY } = canvasProps.current;
-
-        context.current.clearRect(offsetWidth, 0, -offsetWidth, offsetHeight);
-        context.current.fillStyle = caseStudy.customFields.color;
-        context.current.beginPath();
-        context.current.ellipse(
-            width / 2,
-            height / 2,
-            radiusX,
-            radiusY,
-            Math.PI,
-            0,
-            2 * Math.PI,
-        );
-        context.current.rect(offsetWidth, 0, -offsetWidth, offsetHeight);
-        context.current.fill();
-
+            context.current.clearRect(offsetWidth, 0, -offsetWidth, offsetHeight);
+            context.current.fillStyle = caseStudy.customFields.color;
+            context.current.beginPath();
+            context.current.ellipse(
+                width / 2,
+                height / 2,
+                radiusX,
+                radiusY,
+                Math.PI,
+                0,
+                2 * Math.PI,
+            );
+            context.current.rect(offsetWidth, 0, -offsetWidth, offsetHeight);
+            context.current.fill();
+        }
     };
 
     useLayoutEffect(() => {
+        if (canvas.current) {
+            const $image = ref.current.querySelector('.js-image');
+            const { offsetWidth: width, offsetHeight: height } = canvas.current;
 
-        const $image = ref.current.querySelector('.js-image');
-        const { offsetWidth: width, offsetHeight: height } = canvas.current;
+            canvas.current.width = width;
+            canvas.current.height = height;
 
-        canvas.current.width = width;
-        canvas.current.height = height;
+            canvasProps.current.width = width;
 
-        canvasProps.current.width = width;
+            context.current = canvas.current.getContext('2d');
 
-        context.current = canvas.current.getContext('2d');
+            tl.current = gsap.timeline({
+                paused: true,
+            });
 
-        tl.current = gsap.timeline({
-            paused: true,
-        });
+            tl.current.set($image, { opacity: 0 });
+            tl.current.set(ref.current, { pointerEvents: 'none' });
 
-        tl.current.set($image, { opacity: 0 });
-        tl.current.set(ref.current, { pointerEvents: 'none' });
+            tl.current.to(canvasProps.current, {
+                duration: 1,
+                ease: 'power4.inOut',
+                height,
+                onUpdate: drawRect,
+            });
 
-        tl.current.to(canvasProps.current, {
-            duration: 1,
-            ease: 'power4.inOut',
-            height,
-            onUpdate: drawRect,
-        });
+            tl.current.set($image, { opacity: 1 });
 
-        tl.current.set($image, { opacity: 1 });
+            tl.current.to(canvasProps.current, {
+                duration: 1,
+                ease: 'power4.inOut',
+                radiusX: width / Math.sqrt(2),
+                radiusY: height / Math.sqrt(2),
+                onUpdate: drawEllipse,
+            });
 
-        tl.current.to(canvasProps.current, {
-            duration: 1,
-            ease: 'power4.inOut',
-            radiusX: width / Math.sqrt(2),
-            radiusY: height / Math.sqrt(2),
-            onUpdate: drawEllipse,
-        });
-
-        tl.current.set(ref.current, { clearProps: 'all' });
-
-    }, []);
+            tl.current.set(ref.current, { clearProps: 'all' });
+        }
+    });
 
     return (
         <div

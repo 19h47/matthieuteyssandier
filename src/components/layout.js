@@ -50,14 +50,12 @@ const Layout = ({ children, ready }) => {
 	`);
 
 	return (
-		<>
+		<div className={`global-wrapper`}>
 			<Header color={color} />
-			<div className={`global-wrapper`}>
-				<Menu caseStudies={caseStudies} />
-				<main className={`Site-main`}>{children}</main>
-				<Footer />
-			</div>
-		</>
+			<Menu caseStudies={caseStudies} />
+			<main className={`Site-main`}>{children}</main>
+			<Footer />
+		</div>
 	);
 };
 

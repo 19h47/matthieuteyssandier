@@ -64,7 +64,7 @@ const ColorPicker = () => {
 		if (false === menu && tl.current) {
 			setActive(false);
 			tl.current.timeScale(1.25);
-			tl.current.reverse().delay(2);
+			tl.current.reverse().delay(1.8);
 		}
 	}, [menu]);
 
@@ -92,7 +92,7 @@ const ColorPicker = () => {
 				x: 0,
 				duration: 0.5,
 			},
-			`-= ${(children.length - 1) * 0.1} `,
+			`-=${(children.length - 1) * 0.1}`,
 		);
 	}, []);
 
