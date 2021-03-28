@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { Link } from 'gatsby';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import { getImage, GatsbyImage } from 'gatsby-plugin-image';
 import { gsap } from 'gsap';
 
@@ -10,7 +10,7 @@ const MenuItem = ({ caseStudy }) => {
     const { color, setColor, setMenu } = useContext(AppContext);
     const image = getImage(caseStudy.featuredImage.node.localFile);
     const alt = caseStudy.featuredImage?.node?.alt || caseStudy.title;
-    const container = useRef();
+    const containerRef = useRef();
     const title = useRef();
     const columns = useRef([]);
     const tl = useRef(
@@ -23,8 +23,8 @@ const MenuItem = ({ caseStudy }) => {
         // console.log('MenuItem');
         tl.current.fromTo(
             [
-                title.current,
-                container.current.querySelectorAll('.gatsby-image-wrapper'),
+                containerRef.current.querySelector('.js-title'),
+                // containerRef.current.querySelectorAll('.gatsby-image-wrapper'),
                 columns.current.querySelectorAll('p'),
             ],
             { clipPath: 'inset(0 0 100% 0)' },
@@ -39,7 +39,7 @@ const MenuItem = ({ caseStudy }) => {
 
     useEffect(() => {
         if (color && color === caseStudy.customFields.color) {
-            tl.current.delay(1.8).play();
+            gsap.delayedCall(1, () => tl.current.play());
         }
 
         if (color && color !== caseStudy.customFields.color) {
@@ -82,17 +82,12 @@ const MenuItem = ({ caseStudy }) => {
         return images;
     };
 
-    const handleClick = () => {
-        setMenu(false);
-        setColor(null);
-    }
-
     return (
-        <Container>
+        <Container ref={containerRef}>
             <div className="row">
                 <div className="col-10">
-                    <Link
-                        className="h0"
+                    <AniLink
+                        className="h0 js-title"
                         style={{
                             textTransform: 'uppercase',
                             textAlign: 'center',
@@ -100,17 +95,21 @@ const MenuItem = ({ caseStudy }) => {
                             marginTop: '0',
                             marginBottom: '-50px',
                         }}
-                        ref={title}
+                        fade
+
                         to={caseStudy.link}
-                        onClick={handleClick}>
+                        onClick={() => {
+                            setMenu(false);
+                            setColor(null);
+                        }}>
                         {caseStudy.title}
-                    </Link>
+                    </AniLink>
                 </div>
-                <Images
+                {/* <Images
                     className="col-10 d-flex justify-content-center flex-nowrap"
                     ref={container}>
                     {createImages()}
-                </Images>
+                </Images> */}
             </div>
             <Footer ref={columns}>
                 <div className="row">

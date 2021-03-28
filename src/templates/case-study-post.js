@@ -4,7 +4,7 @@ import { getImage } from 'gatsby-plugin-image';
 import parse from 'html-react-parser';
 
 import Layout from '../components/layout';
-import SEO from '../components/seo';
+import Seo from '../components/seo';
 import NextCaseStudy from '../components/next-case-study';
 import TextInView from '../components/text-in-view';
 
@@ -144,7 +144,7 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 
 	return (
 		<Layout location={location}>
-			<SEO title={caseStudy.title} /* description={caseStudy.excerpt} */ />
+			<Seo title={caseStudy.title} /* description={caseStudy.excerpt} */ />
 
 			<article className="Case-study" itemScope itemType="https://schema.org/CreativeWork">
 				<header>

@@ -64,7 +64,8 @@ const ColorPicker = () => {
 		if (false === menu && tl.current) {
 			setActive(false);
 			tl.current.timeScale(1.25);
-			tl.current.reverse().delay(1.8);
+
+			gsap.delayedCall(1, () => tl.current.reverse());
 		}
 	}, [menu]);
 

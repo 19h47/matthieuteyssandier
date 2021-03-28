@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 
 import Loader from '../components/loader';
 import Layout from '../components/layout';
-import SEO from '../components/seo';
+import Seo from '../components/seo';
 import TeaseCaseStudy from '../components/tease-case-study';
 import shuffle from '../utils/shuffle';
 
@@ -79,7 +79,7 @@ const FrontPage = ({ location, data }) => {
         <>
             <Loader ready={ready} onComplete={handleReady} colors={shuffle(colors)} />
             <Layout color={color} location={location} colors={colors} ready={ready}>
-                <SEO title="home" color={color} />
+                <Seo title="home" color={color} />
                 <div className="Site-container">
                     <div className="row">
                         {caseStudies.edges.map(({ node }, index) => {
