@@ -18,7 +18,9 @@ const NextCaseStudy = ({ title, link, image, alt, color }) => (
         aria-label={title}
         link={link}
         style={{ backgroundColor: color }}
-        title={title}>
+        title={title}
+        paintDrip
+        hex={color}>
         <GatsbyImage image={image} alt={alt} style={{ height: '100%' }} />
         <CanvasCaseStudy color={color} />
     </StyledLink>

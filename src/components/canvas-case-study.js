@@ -52,6 +52,7 @@ const CanvasCaseStudy = ({ color }) => {
         timeline.timeScale(1);
         timeline.play();
     };
+
     const handleMouseLeave = () => {
         timeline.timeScale(1.5);
         timeline.reverse();

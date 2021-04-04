@@ -5,12 +5,12 @@ import Header from '../components/header';
 import Menu from '../components/Menu';
 
 const Layout = ({ children }) => {
-    const {
-        wp: {
-            caseStudiesColors: { color },
-        },
-        allWpCaseStudy: { edges: caseStudies },
-    } = useStaticQuery(graphql`
+	const {
+		wp: {
+			caseStudiesColors: { color },
+		},
+		allWpCaseStudy: { edges: caseStudies },
+	} = useStaticQuery(graphql`
 		query colorAndCaseStudies {
 			wp {
 				caseStudiesColors {
@@ -45,13 +45,13 @@ const Layout = ({ children }) => {
 		}
 	`);
 
-    return (
-        <>
-            <Header color={color} />
-            <Menu caseStudies={caseStudies} />
-            {children}
-        </>
-    );
+	return (
+		<>
+			<Header color={color} />
+			<Menu caseStudies={caseStudies} />
+			{children}
+		</>
+	);
 };
 
 export default Layout;
