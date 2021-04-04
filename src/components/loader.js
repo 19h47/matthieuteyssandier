@@ -12,7 +12,7 @@ const Loader = ({ onComplete, colors }) => {
     const timeline = useMemo(() => gsap.timeline({
         paused: true, onComplete: () => onComplete(true),
         immediateRender: true,
-    }), []);
+    }), [onComplete]);
 
     const loaderRef = useRef();
     const countdownRef = useRef();
@@ -66,7 +66,7 @@ const Loader = ({ onComplete, colors }) => {
         timeline.to(loaderRef.current, { autoAlpha: 0 });
 
         timeline.play();
-    }, [onComplete]);
+    }, [onComplete, timeline]);
 
     return (
         <div className="Loader" ref={loaderRef}>

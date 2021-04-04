@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import { Link } from 'gatsby';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 
 import CanvasCaseStudy from './canvas-case-study';
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(AniLink)`
 	position: relative;
 	display: block;
 	height: 420px;

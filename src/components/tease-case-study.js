@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useMemo } from 'react';
-import { Link } from 'gatsby';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import { gsap } from 'gsap';
 import useInView from 'react-cool-inview';
 import { getImage, GatsbyImage } from 'gatsby-plugin-image';
@@ -44,42 +44,42 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
         },
     });
 
-    const drawRect = () => {
-        if (canvas.current) {
-            const { offsetWidth, offsetHeight } = canvas.current;
-            const { width, height } = canvasProps.current;
-
-            context.current.clearRect(offsetWidth, 0, -offsetWidth, offsetHeight);
-            context.current.fillStyle = caseStudy.customFields.color;
-            context.current.beginPath();
-            context.current.rect(width, 0, -width, height);
-            context.current.fill();
-        }
-    };
-
-    const drawEllipse = () => {
-        if (canvas.current) {
-            const { offsetWidth, offsetHeight } = canvas.current;
-            const { width, height, radiusX, radiusY } = canvasProps.current;
-
-            context.current.clearRect(offsetWidth, 0, -offsetWidth, offsetHeight);
-            context.current.fillStyle = caseStudy.customFields.color;
-            context.current.beginPath();
-            context.current.ellipse(
-                width / 2,
-                height / 2,
-                radiusX,
-                radiusY,
-                Math.PI,
-                0,
-                2 * Math.PI,
-            );
-            context.current.rect(offsetWidth, 0, -offsetWidth, offsetHeight);
-            context.current.fill();
-        }
-    };
-
     useEffect(() => {
+        const drawRect = () => {
+            if (canvas.current) {
+                const { offsetWidth, offsetHeight } = canvas.current;
+                const { width, height } = canvasProps.current;
+
+                context.current.clearRect(offsetWidth, 0, -offsetWidth, offsetHeight);
+                context.current.fillStyle = caseStudy.customFields.color;
+                context.current.beginPath();
+                context.current.rect(width, 0, -width, height);
+                context.current.fill();
+            }
+        };
+
+        const drawEllipse = () => {
+            if (canvas.current) {
+                const { offsetWidth, offsetHeight } = canvas.current;
+                const { width, height, radiusX, radiusY } = canvasProps.current;
+
+                context.current.clearRect(offsetWidth, 0, -offsetWidth, offsetHeight);
+                context.current.fillStyle = caseStudy.customFields.color;
+                context.current.beginPath();
+                context.current.ellipse(
+                    width / 2,
+                    height / 2,
+                    radiusX,
+                    radiusY,
+                    Math.PI,
+                    0,
+                    2 * Math.PI,
+                );
+                context.current.rect(offsetWidth, 0, -offsetWidth, offsetHeight);
+                context.current.fill();
+            }
+        };
+
         if (canvas.current) {
             const $image = ref.current.querySelector('.js-image');
             const { offsetWidth: width, offsetHeight: height } = canvas.current;
@@ -113,18 +113,18 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
 
             timeline.set(ref.current, { clearProps: 'all' });
         }
-    }, []);
+    }, [timeline, caseStudy.customFields.color]);
 
     return (
         <div
             className="Tease-case-study"
             key={caseStudy.slug}
-            ref={(el) => {
-                observe(el); // Set the target element for monitoring
-                ref.current = el; // Share the element for other purposes
+            ref={el => {
+                observe(el);
+                ref.current = el;
             }}
             style={{ pointerEvents: 'none' }}>
-            <Link className="Tease-case-study__image" to={caseStudy.link}>
+            <AniLink className="Tease-case-study__image" to={caseStudy.link} fade>
                 <GatsbyImage
                     image={image}
                     className="js-image"
@@ -133,9 +133,9 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
                 />
                 <CanvasCaseStudy color={caseStudy.customFields.color} />
                 <Canvas ref={canvas} />
-            </Link>
+            </AniLink>
 
-            <Link to={caseStudy.link} style={{ display: 'block' }}>
+            <AniLink to={caseStudy.link} style={{ display: 'block' }} fade>
                 <h2 className="Tease-case-study__title h1">
                     <TextInView>
                         {index + 1}&nbsp;&mdash;&nbsp;{length} <br />
@@ -147,7 +147,7 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
                         <ArrowRight />
                     </TextInView>
                 </h2>
-            </Link>
+            </AniLink>
         </div>
     );
 };

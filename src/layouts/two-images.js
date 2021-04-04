@@ -15,9 +15,9 @@ const Content = styled.div`
 		bottom: 0;
 		left: 0;
 		display: block;
-		background-color: ${props => props.color};
+		background-color: ${props => props.$color};
 		content: '';
-		opacity: ${props => (props.inview ? '0' : '1')};
+		opacity: ${props => (props.$inview ? '0' : '1')};
 		transition: opacity 1.5s cubic-bezier(0.42, 0, 0.58, 1);
 		will-change: opacity;
 	}
@@ -28,19 +28,18 @@ const TwoImages = ({ data }) => {
     const image0 = item0.image?.localFile ? getImage(item0.image.localFile) : false;
     const image1 = item1.image?.localFile ? getImage(item1.image.localFile) : false;
 
-    const { ref, inView } = useInView({
-        onEnter: ({ unobserve }) => {
-            unobserve();
-        },
+    const { observe, inView } = useInView({
+        unobserveOnEnter: true,
+        rootMargin: "-100px 0px",
     });
 
     return (
-        <div className="Layout Layout--two-images" ref={ref}>
+        <div className="Layout Layout--two-images" ref={observe}>
             <div className="Site-container">
                 <div className="row d-flex">
                     <div className="col-10 col-md-4 offset-md-2 margin-top-auto">
                         {image0 && (
-                            <Content color={image0.backgroundColor} inview={inView}>
+                            <Content $color={image0.backgroundColor} $inview={inView}>
                                 <GatsbyImage
                                     image={image0}
                                     alt={item0.image.altText}
@@ -56,7 +55,7 @@ const TwoImages = ({ data }) => {
                     </div>
                     <div className="col-10 col-md-4 margin-top-auto">
                         {image1 && (
-                            <Content color={image1.backgroundColor} inview={inView}>
+                            <Content $color={image1.backgroundColor} $inview={inView}>
                                 <GatsbyImage
                                     image={image1}
                                     alt={item1.image.altText}

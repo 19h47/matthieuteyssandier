@@ -10,7 +10,10 @@ const ColorPicker = () => {
 	const container = useRef();
 	const { setPosition, setColor, menu, setMenu } = useContext(AppContext);
 	const [active, setActive] = useState(false);
-	const timeline = useMemo(() => gsap.timeline({ paused: true, defaults: { ease: 'power4.inOut' } }), []);
+	const timeline = useMemo(
+		() => gsap.timeline({ paused: true, defaults: { ease: 'power4.inOut' } }),
+		[],
+	);
 
 	const {
 		wp: {
@@ -67,7 +70,7 @@ const ColorPicker = () => {
 
 			gsap.delayedCall(1.5, () => timeline.reverse());
 		}
-	}, [menu]);
+	}, [menu, timeline]);
 
 	useEffect(() => {
 		const { children } = container.current.firstChild;
@@ -93,7 +96,7 @@ const ColorPicker = () => {
 			},
 			`-=${(children.length - 1) * 0.1}`,
 		);
-	}, []);
+	}, [timeline]);
 
 	return (
 		<Container

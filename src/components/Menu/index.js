@@ -16,23 +16,23 @@ const Menu = ({ caseStudies }) => {
         setMenu(false);
     };
 
-    const close = () => {
-        timeline.to(container.current.querySelector('.js-button'), {
-            clipPath: 'inset(0 0 100% 0)',
-            duration: 1.5,
-            ease: 'power4.inOut',
-        });
-
-        timeline.set(container.current, { delay: 2, autoAlpha: 0 });
-
-        timeline.play();
-    };
-
     useEffect(() => {
+        const close = () => {
+            timeline.to(container.current.querySelector('.js-button'), {
+                clipPath: 'inset(0 0 100% 0)',
+                duration: 1.5,
+                ease: 'power4.inOut',
+            });
+
+            timeline.set(container.current, { delay: 2, autoAlpha: 0 });
+
+            timeline.play();
+        };
+
         if (!menu) {
             close();
         }
-    }, [menu]);
+    }, [menu, timeline]);
 
     useEffect(() => {
         if (color) {

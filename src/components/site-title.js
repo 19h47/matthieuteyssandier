@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import styled from 'styled-components';
 import parse from 'html-react-parser';
 // import PropTypes from 'prop-types';
@@ -30,9 +31,9 @@ const SiteTitle = ({ style }) => {
 	return (
 		<Container className="d-flex align-items-center font-family-title" style={style}>
 			<TextInView style={{ display: 'flex', alignItems: 'center' }}>
-				<Link to="/">{parse(title)}</Link>
+				<AniLink to="/" fade>{parse(title)}</AniLink>
 				<ColorPicker />
-				<Link to="/" style={{ marginLeft: '2px' }}>{new Date().getFullYear()}</Link>
+				<AniLink to="/" style={{ marginLeft: '2px' }} fade>{new Date().getFullYear()}</AniLink>
 			</TextInView>
 		</Container>
 	);

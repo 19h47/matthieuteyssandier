@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from 'react';
+import React, { useRef, useEffect, useCallback, useMemo } from 'react';
 import { gsap } from 'gsap';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -24,9 +24,7 @@ const CanvasCaseStudy = ({ color }) => {
         height: 0,
     });
 
-    const tl = useRef(null);
-
-    const draw = () => {
+    const draw = useCallback(() => {
         if (canvas.current) {
             const { width, height, radiusX, radiusY } = canvasProps.current;
 
@@ -46,18 +44,20 @@ const CanvasCaseStudy = ({ color }) => {
             context.current.rect(width, 0, -width, height);
             context.current.fill();
         }
-    };
+    }, [color]);
+
+    const timeline = useMemo(() => gsap.timeline({ paused: true, onUpdate: draw }), [draw]);
 
     const handleMouseEnter = () => {
-        tl.current.timeScale(1);
-        tl.current.play();
+        timeline.timeScale(1);
+        timeline.play();
     };
     const handleMouseLeave = () => {
-        tl.current.timeScale(1.5);
-        tl.current.reverse();
+        timeline.timeScale(1.5);
+        timeline.reverse();
     };
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const { offsetWidth: width, offsetHeight: height } = canvas.current;
 
         canvas.current.width = width;
@@ -70,18 +70,13 @@ const CanvasCaseStudy = ({ color }) => {
 
         context.current = canvas.current.getContext('2d');
 
-        tl.current = gsap.timeline({
-            paused: true,
-            onUpdate: draw,
-        });
-
-        tl.current.to(canvasProps.current, {
+        timeline.to(canvasProps.current, {
             duration: 1.5,
             ease: 'power4.inOut',
             radiusX: width / 2,
             radiusY: height / 2,
         });
-    }, []);
+    }, [timeline]);
 
     return <Canvas ref={canvas} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />;
 };

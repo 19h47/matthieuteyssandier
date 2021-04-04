@@ -15,9 +15,9 @@ const Content = styled.div`
 		bottom: 0;
 		left: 0;
 		display: block;
-		background-color: ${props => props.color};
+		background-color: ${props => props.$color};
 		content: '';
-		opacity: ${props => (props.inview ? '0' : '1')};
+		opacity: ${props => (props.$inview ? '0' : '1')};
 		transition: opacity 1.5s cubic-bezier(0.42, 0, 0.58, 1);
 		will-change: opacity;
 	}
@@ -27,18 +27,17 @@ const LargeImage = ({ data }) => {
     const { video, caption } = data;
     const image = data.image?.localFile ? getImage(data.image.localFile) : false;
 
-    const { ref, inView } = useInView({
-        onEnter: ({ unobserve }) => {
-            unobserve();
-        },
+    const { observe, inView } = useInView({
+        unobserveOnEnter: true,
+        rootMargin: "-100px 0px",
     });
 
     return (
-        <div className="Layout Layout--large-image" ref={ref}>
+        <div className="Layout Layout--large-image" ref={observe}>
             <div className="Site-container">
                 <div className="row">
                     <div className="col-10 col-md-8 offset-md-2">
-                        <Content color={image.backgroundColor} inview={inView}>
+                        <Content $color={image.backgroundColor} $inview={inView}>
                             {image && (
                                 <GatsbyImage
                                     image={image}

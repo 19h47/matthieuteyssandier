@@ -15,9 +15,9 @@ const Content = styled.div`
 		bottom: 0;
 		left: 0;
 		display: block;
-		background-color: ${props => props.color};
+		background-color: ${props => props.$color};
 		content: '';
-		opacity: ${props => (props.inview ? '0' : '1')};
+		opacity: ${props => (props.$inview ? '0' : '1')};
 		transition: opacity 1.5s cubic-bezier(0.42, 0, 0.58, 1);
 		will-change: opacity;
 	}
@@ -27,19 +27,18 @@ const LayoutImage = ({ data }) => {
     const { caption } = data;
     const image = getImage(data.image.localFile);
 
-    const { ref, inView } = useInView({
-        onEnter: ({ unobserve }) => {
-            unobserve();
-        },
+    const { observe, inView } = useInView({
+        unobserveOnEnter: true,
+        rootMargin: "-100px 0px",
     });
 
     return (
-        <div className="Layout Layout--image" ref={ref}>
+        <div className="Layout Layout--image" ref={observe}>
             <div className="Site-container">
                 <div className="row">
                     <div className="col-10 col-md-4 offset-md-6">
                         {image && (
-                            <Content color={image.backgroundColor} inview={inView}>
+                            <Content $color={image.backgroundColor} $inview={inView}>
                                 <GatsbyImage
                                     style={{ verticalAlign: 'middle' }}
                                     image={image}

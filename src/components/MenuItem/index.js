@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useMemo } from 'react';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import { getImage, GatsbyImage } from 'gatsby-plugin-image';
 import { gsap } from 'gsap';
@@ -11,17 +11,12 @@ const MenuItem = ({ caseStudy }) => {
     const image = getImage(caseStudy.featuredImage.node.localFile);
     const alt = caseStudy.featuredImage?.node?.alt || caseStudy.title;
     const containerRef = useRef();
-    const title = useRef();
     const columns = useRef([]);
-    const tl = useRef(
-        gsap.timeline({
-            paused: true,
-        }),
-    );
+    const timeline = useMemo(() => gsap.timeline({ paused: true }), []);
 
     useEffect(() => {
         // console.log('MenuItem');
-        tl.current.fromTo(
+        timeline.fromTo(
             [
                 containerRef.current.querySelector('.js-title'),
                 containerRef.current.querySelectorAll('.js-image'),
@@ -35,21 +30,21 @@ const MenuItem = ({ caseStudy }) => {
                 stagger: 0.1,
             },
         );
-    }, []);
+    }, [timeline]);
 
     useEffect(() => {
         if (color && color === caseStudy.customFields.color) {
-            gsap.delayedCall(1, () => tl.current.play());
+            gsap.delayedCall(1, () => timeline.play());
         }
 
         if (color && color !== caseStudy.customFields.color) {
-            tl.current.reverse();
+            timeline.reverse();
         }
 
         if (null === color) {
-            tl.current.timeScale(2.5).reverse();
+            timeline.timeScale(2.5).reverse();
         }
-    }, [color]);
+    }, [color, caseStudy.customFields.color, timeline]);
 
     const createImages = () => {
         console.log('createImages');

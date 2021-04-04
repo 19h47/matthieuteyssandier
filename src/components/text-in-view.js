@@ -20,7 +20,7 @@ const TextInView = ({ children, className, style }) => {
 			{ clipPath: 'inset(0 0 100% 0)' },
 			{ clipPath: 'inset(0 0 0% 0)', duration: 1.5, ease: 'power4.inOut' },
 		);
-	}, []);
+	}, [timeline]);
 
 	return (
 		<div
