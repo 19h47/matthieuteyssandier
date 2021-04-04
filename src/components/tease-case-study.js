@@ -124,7 +124,7 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
                 ref.current = el;
             }}
             style={{ pointerEvents: 'none' }}>
-            <AniLink className="Tease-case-study__image" to={caseStudy.link} fade>
+            <AniLink className="Tease-case-study__image" to={caseStudy.link} paintDrip hex={caseStudy.customFields.color} >
                 <GatsbyImage
                     image={image}
                     className="js-image"
@@ -135,7 +135,7 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
                 <Canvas ref={canvas} />
             </AniLink>
 
-            <AniLink to={caseStudy.link} style={{ display: 'block' }} fade>
+            <AniLink to={caseStudy.link} style={{ display: 'block' }} paintDrip hex={caseStudy.customFields.color} >
                 <h2 className="Tease-case-study__title h1">
                     <TextInView>
                         {index + 1}&nbsp;&mdash;&nbsp;{length} <br />
