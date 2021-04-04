@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect } from 'react';
+import React, { useRef, useContext, useEffect, useMemo } from 'react';
 import { gsap } from 'gsap';
 
 import { Container, TextInView, Ul } from './style';
@@ -9,6 +9,7 @@ import CanvasMenu from '../CanvasMenu';
 const Menu = ({ caseStudies }) => {
     const container = useRef();
     const { color, setColor, menu, setMenu } = useContext(AppContext);
+    const timeline = useMemo(() => gsap.timeline({ paused: true, immediateRender: true }), []);
 
     const handleClick = () => {
         setColor(null);
@@ -16,17 +17,15 @@ const Menu = ({ caseStudies }) => {
     };
 
     const close = () => {
-        const tl = gsap.timeline({ paused: true, immediateRender: true });
-
-        tl.to(container.current.querySelector('.js-button'), {
+        timeline.to(container.current.querySelector('.js-button'), {
             clipPath: 'inset(0 0 100% 0)',
             duration: 1.5,
             ease: 'power4.inOut',
         });
 
-        tl.set(container.current, { delay: 2, autoAlpha: 0 });
+        timeline.set(container.current, { delay: 2, autoAlpha: 0 });
 
-        tl.play();
+        timeline.play();
     };
 
     useEffect(() => {

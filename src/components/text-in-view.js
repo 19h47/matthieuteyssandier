@@ -1,32 +1,35 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 import useInView from 'react-cool-inview';
 import PropTypes from 'prop-types';
 import gsap from 'gsap';
 
-const TextInView = ({ children, className }) => {
-	const tl = useRef();
+const TextInView = ({ children, className, style }) => {
+	const ref = useRef(0);
+	const timeline = useMemo(() => gsap.timeline({ paused: true }), []);
 
-	const { ref } = useInView({
+	const { observe } = useInView({
 		onEnter: ({ unobserve }) => {
-			tl.current.play();
+			timeline.play();
 			unobserve();
 		},
 	});
 
 	useEffect(() => {
-		tl.current = gsap.timeline({
-			paused: true,
-		});
-
-		tl.current.fromTo(
+		timeline.fromTo(
 			ref.current,
 			{ clipPath: 'inset(0 0 100% 0)' },
 			{ clipPath: 'inset(0 0 0% 0)', duration: 1.5, ease: 'power4.inOut' },
 		);
-	}, [ref]);
+	}, []);
 
 	return (
-		<div className={`Text-in-view${className ? ` ${className}` : ''}`} ref={ref}>
+		<div
+			className={`Text-in-view${className ? ` ${className}` : ''}`}
+			style={style}
+			ref={el => {
+				observe(el);
+				ref.current = el;
+			}}>
 			{children}
 		</div>
 	);
@@ -34,6 +37,7 @@ const TextInView = ({ children, className }) => {
 
 TextInView.defaultProps = {
 	className: '',
+	style: {}
 };
 
 TextInView.propTypes = {

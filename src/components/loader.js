@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import { gsap } from 'gsap';
 
 import TextInView from './text-in-view';
@@ -9,17 +9,17 @@ const Loader = ({ onComplete, colors }) => {
     // const [counterWidth, setcounterWidth] = useState(0);
     // const [counterChildWidth, setcounterChildWidth] = useState(0);
 
+    const timeline = useMemo(() => gsap.timeline({
+        paused: true, onComplete: () => onComplete(true),
+        immediateRender: true,
+    }), []);
+
     const loaderRef = useRef();
     const countdownRef = useRef();
     const colorsRef = useRef([]);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const countdown = { progress: 0 };
-        const timeline = new gsap.timeline({
-            paused: true,
-            onComplete: () => onComplete(true),
-            immediateRender: true,
-        });
 
         timeline.to(
             countdown,

@@ -61,8 +61,6 @@ const FrontPage = ({ location, data }) => {
         setReady(newReady);
     };
 
-    console.log(data);
-
     const classNames = [
         'col-10 col-md-6',
         'col-10 col-md-4',
@@ -77,8 +75,8 @@ const FrontPage = ({ location, data }) => {
 
     return (
         <>
-            {/* <Loader ready={ready} onComplete={handleReady} colors={shuffle(colors)} /> */}
             <Layout color={color} location={location} colors={colors} ready={true}>
+                {/* <Loader ready={ready} onComplete={handleReady} colors={shuffle(colors)} /> */}
                 <Seo title="home" color={color} />
                 <div className="Site-container">
                     <div className="row">

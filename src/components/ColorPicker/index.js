@@ -1,5 +1,5 @@
 import { useStaticQuery, graphql } from 'gatsby';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import parse from 'html-react-parser';
 import { gsap } from 'gsap';
 
@@ -10,7 +10,7 @@ const ColorPicker = () => {
 	const container = useRef();
 	const { setPosition, setColor, menu, setMenu } = useContext(AppContext);
 	const [active, setActive] = useState(false);
-	const tl = useRef(null);
+	const timeline = useMemo(() => gsap.timeline({ paused: true, defaults: { ease: 'power4.inOut' } }), []);
 
 	const {
 		wp: {
@@ -48,24 +48,24 @@ const ColorPicker = () => {
 
 	const handleMouseEnter = () => {
 		setActive(true);
-		tl.current.timeScale(1);
-		tl.current.play();
+		timeline.timeScale(1);
+		timeline.play();
 	};
 
 	const handleMouseLeave = () => {
 		if (false === menu) {
 			setActive(false);
-			tl.current.timeScale(1.25);
-			tl.current.reverse();
+			timeline.timeScale(1.25);
+			timeline.reverse();
 		}
 	};
 
 	useEffect(() => {
-		if (false === menu && tl.current) {
+		if (false === menu && timeline) {
 			setActive(false);
-			tl.current.timeScale(1.25);
+			timeline.timeScale(1.25);
 
-			gsap.delayedCall(1, () => tl.current.reverse());
+			gsap.delayedCall(1.5, () => timeline.reverse());
 		}
 	}, [menu]);
 
@@ -73,9 +73,7 @@ const ColorPicker = () => {
 		const { children } = container.current.firstChild;
 		const width = children.length * 20 + (children.length - 1) * 2;
 
-		tl.current = gsap.timeline({ paused: true, defaults: { ease: 'power4.inOut' } });
-
-		tl.current.fromTo(
+		timeline.fromTo(
 			container.current,
 			{ width: '20px' },
 			{
@@ -83,7 +81,7 @@ const ColorPicker = () => {
 				width,
 			},
 		);
-		tl.current.fromTo(
+		timeline.fromTo(
 			children,
 			{
 				x: index => (20 * index + 2 * index) * -1, // widths + margins

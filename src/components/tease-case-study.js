@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import { Link } from 'gatsby';
 import { gsap } from 'gsap';
 import useInView from 'react-cool-inview';
@@ -24,6 +24,7 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     const image = getImage(caseStudy.featuredImage.node.localFile);
     const alt = caseStudy.featuredImage?.node?.alt || caseStudy.title;
 
+    const ref = useRef(0);
     const context = useRef(null);
     const canvas = useRef(null);
     const canvasProps = useRef({
@@ -33,12 +34,12 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
         radiusY: 0,
     });
 
-    const tl = useRef(null);
+    const timeline = useMemo(() => gsap.timeline({ paused: true }), []);
 
-    const { ref } = useInView({
+    const { observe } = useInView({
         rootMargin: '-100px 0px',
         onEnter: ({ unobserve }) => {
-            tl.current.play();
+            timeline.play();
             unobserve();
         },
     });
@@ -78,7 +79,7 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
         }
     };
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (canvas.current) {
             const $image = ref.current.querySelector('.js-image');
             const { offsetWidth: width, offsetHeight: height } = canvas.current;
@@ -90,23 +91,19 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
 
             context.current = canvas.current.getContext('2d');
 
-            tl.current = gsap.timeline({
-                paused: true,
-            });
+            timeline.set($image, { opacity: 0 });
+            timeline.set(ref.current, { pointerEvents: 'none' });
 
-            tl.current.set($image, { opacity: 0 });
-            tl.current.set(ref.current, { pointerEvents: 'none' });
-
-            tl.current.to(canvasProps.current, {
+            timeline.to(canvasProps.current, {
                 duration: 1,
                 ease: 'power4.inOut',
                 height,
                 onUpdate: drawRect,
             });
 
-            tl.current.set($image, { opacity: 1 });
+            timeline.set($image, { opacity: 1 });
 
-            tl.current.to(canvasProps.current, {
+            timeline.to(canvasProps.current, {
                 duration: 1,
                 ease: 'power4.inOut',
                 radiusX: width / Math.sqrt(2),
@@ -114,15 +111,18 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
                 onUpdate: drawEllipse,
             });
 
-            tl.current.set(ref.current, { clearProps: 'all' });
+            timeline.set(ref.current, { clearProps: 'all' });
         }
-    });
+    }, []);
 
     return (
         <div
             className="Tease-case-study"
             key={caseStudy.slug}
-            ref={ref}
+            ref={(el) => {
+                observe(el); // Set the target element for monitoring
+                ref.current = el; // Share the element for other purposes
+            }}
             style={{ pointerEvents: 'none' }}>
             <Link className="Tease-case-study__image" to={caseStudy.link}>
                 <GatsbyImage

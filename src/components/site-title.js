@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import parse from 'html-react-parser';
 // import PropTypes from 'prop-types';
 
+import TextInView from './text-in-view';
 import ColorPicker from './ColorPicker';
 
 const Container = styled.div`
@@ -28,9 +29,11 @@ const SiteTitle = ({ style }) => {
 
 	return (
 		<Container className="d-flex align-items-center font-family-title" style={style}>
-			<Link to="/">{parse(title)}</Link>
-			<ColorPicker />
-			<Link to="/" style={{ marginLeft: '2px' }}>{new Date().getFullYear()}</Link>
+			<TextInView style={{ display: 'flex', alignItems: 'center' }}>
+				<Link to="/">{parse(title)}</Link>
+				<ColorPicker />
+				<Link to="/" style={{ marginLeft: '2px' }}>{new Date().getFullYear()}</Link>
+			</TextInView>
 		</Container>
 	);
 };
