@@ -2,25 +2,45 @@ import React, { useContext, useEffect, useRef, useMemo } from 'react';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import { getImage, GatsbyImage } from 'gatsby-plugin-image';
 import { gsap } from 'gsap';
+import styled from 'styled-components';
 
 import { AppContext } from '../../provider';
-import { Container, Images, Column, Footer } from './style';
+import { Container } from './style';
+
+const StyledAniLink = styled(props => <AniLink {...props} />)`
+	will-change: border-radius;
+	transition: border-radius 1.5s var(--ease-out-expo);
+
+	&:hover {
+		border-radius: 50%;
+	}
+`;
 
 const MenuItem = ({ caseStudy }) => {
     const { color, setColor, setMenu } = useContext(AppContext);
     const image = getImage(caseStudy.featuredImage.node.localFile);
     const alt = caseStudy.featuredImage?.node?.alt || caseStudy.title;
     const containerRef = useRef();
-    const columns = useRef([]);
-    const timeline = useMemo(() => gsap.timeline({ paused: true }), []);
+
+    const timeline = useMemo(
+        () =>
+            gsap.timeline({
+                paused: true,
+                onStart: () => {
+                    containerRef.current.style.setProperty(
+                        'pointer-events',
+                        timeline.reversed() ? 'none' : 'auto',
+                    );
+                },
+            }),
+        [],
+    );
 
     useEffect(() => {
-        // console.log('MenuItem');
         timeline.fromTo(
             [
                 containerRef.current.querySelector('.js-title'),
                 containerRef.current.querySelectorAll('.js-image'),
-                columns.current.querySelectorAll('p'),
             ],
             { clipPath: 'inset(0 0 100% 0)' },
             {
@@ -47,31 +67,39 @@ const MenuItem = ({ caseStudy }) => {
     }, [color, caseStudy.customFields.color, timeline]);
 
     const createImages = () => {
-        console.log('createImages');
+        console.log('🏙 createImages');
         const images = [];
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 3; i++) {
             images.push(
-                <GatsbyImage
+                <StyledAniLink
                     key={i}
-                    image={image}
-                    alt={alt}
-                    objectFit="cover"
-                    objectPosition="center"
-                    layout="fixed"
+                    to={caseStudy.link}
                     style={{
-                        width: '453px',
-                        height: '246px',
+                        mixBlendMode: 'multiply',
+                        filter: 'grayscale(100%)',
+                        maxWidth: `${(6 / 12) * 100}%`,
+                        flex: `0 0 ${(6 / 12) * 100}%`,
                         margin: '0 10px',
-                        flex: '0 0 453px',
-                    }}
-                    imgStyle={{
-                        width: '453px',
-                        minWidth: '453px',
-                        height: '246px',
-                    }}
-                    className="js-image"
-                />,
+                        overflow: 'hidden',
+                    }}>
+                    <GatsbyImage
+                        image={image}
+                        alt={alt}
+                        objectFit="cover"
+                        objectPosition="center"
+                        layout="fixed"
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                        }}
+                        imgStyle={{
+                            width: '100%',
+                            height: '100%',
+                        }}
+                        className="js-image"
+                    />
+                </StyledAniLink>,
             );
         }
 
@@ -79,20 +107,19 @@ const MenuItem = ({ caseStudy }) => {
     };
 
     return (
-        <Container ref={containerRef}>
-            <div className="Site-container">
-                <div className="row">
-                    <div className="col-10 d-flex justify-content-center">
+        <Container ref={containerRef} style={{ pointerEvents: 'none' }}>
+            <div className="Site-container h-100">
+                <div className="row h-100">
+                    <div className="col-10 d-flex justify-content-center align-items-center">
                         <AniLink
                             className="h0 js-title"
                             style={{
                                 textTransform: 'uppercase',
                                 textAlign: 'center',
-                                height: '280px',
                                 marginTop: '0',
-                                marginBottom: '-50px',
                                 position: 'relative',
-                                zIndex: '1'
+                                zIndex: '1',
+
                             }}
                             fade
                             to={caseStudy.link}
@@ -103,12 +130,12 @@ const MenuItem = ({ caseStudy }) => {
                             {caseStudy.title}
                         </AniLink>
                     </div>
-                    <Images className="col-10 d-flex justify-content-center flex-nowrap">
+                    <div className="col-10 d-flex justify-content-center flex-nowrap" style={{ marginTop: `${(-80 / 1080) * 100}vh` }}>
                         {createImages()}
-                    </Images>
+                    </div>
                 </div>
             </div>
-            <Footer ref={columns}>
+            {/* <Footer ref={columns}>
                 <div className="Site-container">
                     <div className="row">
                         <Column className="col-3 offset-7">
@@ -130,7 +157,7 @@ const MenuItem = ({ caseStudy }) => {
                         </Column>
                     </div>
                 </div>
-            </Footer>
+            </Footer> */}
         </Container>
     );
 };

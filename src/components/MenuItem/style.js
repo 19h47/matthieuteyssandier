@@ -6,24 +6,9 @@ const Container = styled.li`
 	right: 0;
 	left: 0;
 	bottom: 0;
+	height: 100%;
+	padding-top: ${(206 * 100) / 1080}vh;
+	padding-bottom: ${(78 * 100) / 1080}vh;
 `;
 
-const Images = styled.div`
-	mix-blend-mode: multiply;
-	filter: grayscale(100%);
-`;
-
-const Column = styled.div`
-	font-size: 35px;
-	line-height: 100%;
-
-	p {
-		margin: 0;
-	}
-`;
-
-const Footer = styled.footer`
-	margin-top: 50px;
-`;
-
-export { Container, Images, Column, Footer };
+export { Container };

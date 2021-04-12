@@ -58,6 +58,10 @@ const CanvasCaseStudy = ({ color }) => {
         timeline.reverse();
     };
 
+    const handleClick = () => {
+
+    }
+
     useEffect(() => {
         const { offsetWidth: width, offsetHeight: height } = canvas.current;
 

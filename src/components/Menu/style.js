@@ -27,10 +27,12 @@ const TextInView = styled.div`
 `;
 
 const Ul = styled.ul`
-	margin-top: 150px;
-	position: relative;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 	list-style-type: none;
-	height: 100%;
 `;
 
 export { Container, Canvas, TextInView, Ul };

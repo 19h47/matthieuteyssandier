@@ -48,7 +48,7 @@ const Menu = ({ caseStudies }) => {
     return (
         <Container $active={menu} ref={container}>
             <CanvasMenu />
-            <div className="Site-container">
+            <div className="Site-container" style={{ pointerEvents: 'none', zIndex: 20, position: 'relative' }}>
                 <div className="row">
                     <div className="col-2">
                         <TextInView className="js-button">
@@ -56,6 +56,7 @@ const Menu = ({ caseStudies }) => {
                                 type="button"
                                 onClick={handleClick}
                                 style={{
+                                    pointerEvents: 'auto',
                                     textTransform: 'uppercase',
                                 }}>
                                 Quitter le menu
