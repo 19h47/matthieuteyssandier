@@ -1,6 +1,6 @@
 import React from 'react';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import useInView from 'react-cool-inview';
+import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 
 import TextInView from '../components/text-in-view';
@@ -27,13 +27,10 @@ const LargeImage = ({ data }) => {
     const { video, caption } = data;
     const image = data.image?.localFile ? getImage(data.image.localFile) : false;
 
-    const { observe, inView } = useInView({
-        unobserveOnEnter: true,
-        rootMargin: "-100px 0px",
-    });
+    const [ref, inView] = useInView({ triggerOnce: true, rootMargin: '-100px 0px' });
 
     return (
-        <div className="Layout Layout--large-image" ref={observe}>
+        <div className="Layout Layout--large-image" ref={ref}>
             <div className="Site-container">
                 <div className="row">
                     <div className="col-10 col-md-8 offset-md-2">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import useInView from 'react-cool-inview';
+import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 
 import TextInView from '../components/text-in-view';
@@ -27,13 +27,10 @@ const LayoutText = ({ data }) => {
     const { video, caption, content } = data;
     const image = getImage(data.image.localFile);
 
-    const { observe, inView } = useInView({
-        unobserveOnEnter: true,
-        rootMargin: "-100px 0px",
-    });
+    const [ref, inView] = useInView({ triggerOnce: true, rootMargin: '-100px 0px' });
 
     return (
-        <div className="Layout Layout--image-text" ref={observe}>
+        <div className="Layout Layout--image-text" ref={ref}>
             <div className="Site-container">
                 <div className="row">
                     <div className="col-10 col-md-4 offset-md-2">
@@ -54,7 +51,11 @@ const LayoutText = ({ data }) => {
                                     src={video.localFile.url}></video>
                             )}
                         </Content>
-                        {caption && <TextInView><p className="Layout__caption">{caption}</p></TextInView>}
+                        {caption && (
+                            <TextInView>
+                                <p className="Layout__caption">{caption}</p>
+                            </TextInView>
+                        )}
                     </div>
                     <div className="col-10 col-md-4">
                         {content?.french && (

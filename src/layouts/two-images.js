@@ -1,6 +1,6 @@
 import React from 'react';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import useInView from 'react-cool-inview';
+import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 
 import TextInView from '../components/text-in-view';
@@ -28,13 +28,10 @@ const TwoImages = ({ data }) => {
     const image0 = item0.image?.localFile ? getImage(item0.image.localFile) : false;
     const image1 = item1.image?.localFile ? getImage(item1.image.localFile) : false;
 
-    const { observe, inView } = useInView({
-        unobserveOnEnter: true,
-        rootMargin: "-100px 0px",
-    });
+    const [ref, inView] = useInView({ triggerOnce: true, rootMargin: '-100px 0px' });
 
     return (
-        <div className="Layout Layout--two-images" ref={observe}>
+        <div className="Layout Layout--two-images" ref={ref}>
             <div className="Site-container">
                 <div className="row d-flex">
                     <div className="col-10 col-md-4 offset-md-2 margin-top-auto">
