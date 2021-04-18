@@ -28,6 +28,7 @@ const Loader = ({ colors }) => {
         const countdown = { progress: 0 };
 
         if (countdownRef.current) {
+            timeline.set(colorsRef.current, { opacity: 1 });
             timeline.to(
                 countdown,
                 {
