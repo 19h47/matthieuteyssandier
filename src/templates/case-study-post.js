@@ -2,7 +2,8 @@ import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
 import { getImage } from 'gatsby-plugin-image';
 import parse from 'html-react-parser';
-import AniLink from 'gatsby-plugin-transition-link/AniLink';
+
+import PaintDripTransitionLink from '../components/PaintDripTransitionLink';
 
 import Layout from '../components/layout';
 import Seo from '../components/seo';
@@ -201,11 +202,11 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 			<div className="Site-container">
 				<div className="row">
 					<div className="col-10 col-md-2">
-						<AniLink to={nextCaseStudy.link} rel="next" className="h1 margin-0" paintDrip hex={nextCaseStudy.color}>
+						<PaintDripTransitionLink to={nextCaseStudy.link} rel="next" className="h1 margin-0" hex={nextCaseStudy.color}>
 							Next
 							<br />
 							<span className="color-yellow-dark-grayish">Suivant</span>
-						</AniLink>
+						</PaintDripTransitionLink>
 					</div>
 					<div className="col-10 col-md-8">
 						<NextCaseStudy {...nextCaseStudy} />

@@ -25,6 +25,7 @@ const MenuItem = ({ caseStudy }) => {
     const timeline = useMemo(
         () =>
             gsap.timeline({
+                delay: 1,
                 paused: true,
                 onStart: () => {
                     containerRef.current.style.setProperty(
@@ -54,7 +55,7 @@ const MenuItem = ({ caseStudy }) => {
 
     useEffect(() => {
         if (color && color === caseStudy.customFields.color) {
-            gsap.delayedCall(1, () => timeline.play());
+            timeline.play();
         }
 
         if (color && color !== caseStudy.customFields.color) {
