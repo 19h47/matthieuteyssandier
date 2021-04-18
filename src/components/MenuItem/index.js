@@ -67,45 +67,45 @@ const MenuItem = ({ caseStudy }) => {
         }
     }, [color, caseStudy.customFields.color, timeline]);
 
-    const createImages = () => {
-        console.log('🏙 createImages');
-        const images = [];
+    // const createImages = () => {
+    //     console.log('🏙 createImages');
+    //     const images = [];
 
-        for (let i = 0; i < 3; i++) {
-            images.push(
-                <StyledAniLink
-                    key={i}
-                    to={caseStudy.link}
-                    style={{
-                        mixBlendMode: 'multiply',
-                        filter: 'grayscale(100%)',
-                        maxWidth: `${(6 / 12) * 100}%`,
-                        flex: `0 0 ${(6 / 12) * 100}%`,
-                        margin: '0 10px',
-                        overflow: 'hidden',
-                    }}>
-                    <GatsbyImage
-                        image={image}
-                        alt={alt}
-                        objectFit="cover"
-                        objectPosition="center"
-                        layout="fixed"
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                        }}
-                        imgStyle={{
-                            width: '100%',
-                            height: '100%',
-                        }}
-                        className="js-image"
-                    />
-                </StyledAniLink>,
-            );
-        }
+    //     for (let i = 0; i < 3; i++) {
+    //         images.push(
+    //             <StyledAniLink
+    //                 key={i}
+    //                 to={caseStudy.link}
+    //                 style={{
+    //                     mixBlendMode: 'multiply',
+    //                     filter: 'grayscale(100%)',
+    //                     maxWidth: `${(6 / 12) * 100}%`,
+    //                     flex: `0 0 ${(6 / 12) * 100}%`,
+    //                     margin: '0 10px',
+    //                     overflow: 'hidden',
+    //                 }}>
+    //                 <GatsbyImage
+    //                     image={image}
+    //                     alt={alt}
+    //                     objectFit="cover"
+    //                     objectPosition="center"
+    //                     layout="fixed"
+    //                     style={{
+    //                         width: '100%',
+    //                         height: '100%',
+    //                     }}
+    //                     imgStyle={{
+    //                         width: '100%',
+    //                         height: '100%',
+    //                     }}
+    //                     className="js-image"
+    //                 />
+    //             </StyledAniLink>,
+    //         );
+    //     }
 
-        return images;
-    };
+    //     return images;
+    // };
 
     return (
         <Container ref={containerRef} style={{ pointerEvents: 'none' }}>
@@ -132,7 +132,90 @@ const MenuItem = ({ caseStudy }) => {
                         </AniLink>
                     </div>
                     <div className="col-10 d-flex justify-content-center flex-nowrap" style={{ marginTop: `${(-80 / 1080) * 100}vh` }}>
-                        {createImages()}
+                        <StyledAniLink
+                            key="0"
+                            to={caseStudy.link}
+                            style={{
+                                mixBlendMode: 'multiply',
+                                filter: 'grayscale(100%)',
+                                maxWidth: `${(6 / 12) * 100}%`,
+                                flex: `0 0 ${(6 / 12) * 100}%`,
+                                margin: '0 10px',
+                                overflow: 'hidden',
+                            }}>
+                            <GatsbyImage
+                                image={image}
+                                alt={alt}
+                                objectFit="cover"
+                                objectPosition="center"
+                                layout="fixed"
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                }}
+                                imgStyle={{
+                                    width: '100%',
+                                    height: '100%',
+                                }}
+                                className="js-image"
+                            />
+                        </StyledAniLink>
+                        <StyledAniLink
+                            key="1"
+                            to={caseStudy.link}
+                            style={{
+                                mixBlendMode: 'multiply',
+                                filter: 'grayscale(100%)',
+                                maxWidth: `${(6 / 12) * 100}%`,
+                                flex: `0 0 ${(6 / 12) * 100}%`,
+                                margin: '0 10px',
+                                overflow: 'hidden',
+                            }}>
+                            <GatsbyImage
+                                image={image}
+                                alt={alt}
+                                objectFit="cover"
+                                objectPosition="center"
+                                layout="fixed"
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                }}
+                                imgStyle={{
+                                    width: '100%',
+                                    height: '100%',
+                                }}
+                                className="js-image"
+                            />
+                        </StyledAniLink>
+                        <StyledAniLink
+                            key="2"
+                            to={caseStudy.link}
+                            style={{
+                                mixBlendMode: 'multiply',
+                                filter: 'grayscale(100%)',
+                                maxWidth: `${(6 / 12) * 100}%`,
+                                flex: `0 0 ${(6 / 12) * 100}%`,
+                                margin: '0 10px',
+                                overflow: 'hidden',
+                            }}>
+                            <GatsbyImage
+                                image={image}
+                                alt={alt}
+                                objectFit="cover"
+                                objectPosition="center"
+                                layout="fixed"
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                }}
+                                imgStyle={{
+                                    width: '100%',
+                                    height: '100%',
+                                }}
+                                className="js-image"
+                            />
+                        </StyledAniLink>
                     </div>
                 </div>
             </div>

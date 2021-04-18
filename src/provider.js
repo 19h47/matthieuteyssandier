@@ -10,7 +10,7 @@ const AppContext = createContext(initialState);
 const AppProvider = ({ children }) => {
     const [menu, setMenu] = useState(false);
     const [color, setColor] = useState(null);
-
+    const [ready, setReady] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
     return (
@@ -22,6 +22,8 @@ const AppProvider = ({ children }) => {
                 setColor,
                 position,
                 setPosition,
+                ready,
+                setReady
 
             }}>
             {children}

@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import Header from '../components/header';
 import Menu from '../components/Menu';
+import Loader from '../components/loader';
+
+import shuffle from '../utils/shuffle';
 
 const Layout = ({ children }) => {
+
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
+
 	const {
 		wp: {
-			caseStudiesColors: { color },
+			caseStudiesColors: { color, colors },
 		},
 		allWpCaseStudy: { edges: caseStudies },
 	} = useStaticQuery(graphql`
@@ -15,6 +23,7 @@ const Layout = ({ children }) => {
 			wp {
 				caseStudiesColors {
 					color
+					colors
 				}
 			}
             allWpCaseStudy {
@@ -48,6 +57,7 @@ const Layout = ({ children }) => {
 	return (
 		<>
 			<Header color={color} />
+			<Loader colors={shuffle(colors)} />
 			<Menu caseStudies={caseStudies} />
 			{children}
 		</>

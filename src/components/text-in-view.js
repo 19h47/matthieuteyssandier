@@ -1,43 +1,57 @@
-import React, { useRef, useEffect, useMemo } from 'react';
-import useInView from 'react-cool-inview';
+import React, { useContext, useRef, useEffect, useMemo, useCallback } from 'react';
+import { useInView } from 'react-intersection-observer';
 import PropTypes from 'prop-types';
 import gsap from 'gsap';
+import styled from 'styled-components';
+
+import { AppContext } from '../provider';
+
+const Container = styled.div`
+	will-change: clip-path;
+	clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+`;
 
 const TextInView = ({ children, className, style }) => {
-	const ref = useRef(0);
+	const { ready } = useContext(AppContext);
+	const ref = useRef();
 	const timeline = useMemo(() => gsap.timeline({ paused: true }), []);
+	const [inViewRef, inView] = useInView({ triggerOnce: true });
 
-	const { observe } = useInView({
-		onEnter: ({ unobserve }) => {
-			timeline.play();
-			unobserve();
+	const setRefs = useCallback(
+		node => {
+			ref.current = node;
+			inViewRef(node);
 		},
-	});
+		[inViewRef],
+	);
 
 	useEffect(() => {
-		timeline.fromTo(
-			ref.current,
-			{ clipPath: 'inset(0 0 100% 0)' },
-			{ clipPath: 'inset(0 0 0% 0)', duration: 1.5, ease: 'power4.inOut' },
-		);
-	}, [timeline]);
+		timeline.to(ref.current, {
+			clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)',
+			duration: 1.5,
+			ease: 'power4.inOut',
+		});
+	}, [timeline, ref]);
+
+	useEffect(() => {
+		if (inView && ready) {
+			timeline.play();
+		}
+	}, [inView, timeline, ready]);
 
 	return (
-		<div
+		<Container
 			className={`Text-in-view${className ? ` ${className}` : ''}`}
 			style={style}
-			ref={el => {
-				observe(el);
-				ref.current = el;
-			}}>
+			ref={setRefs}>
 			{children}
-		</div>
+		</Container>
 	);
 };
 
 TextInView.defaultProps = {
 	className: '',
-	style: {}
+	style: {},
 };
 
 TextInView.propTypes = {

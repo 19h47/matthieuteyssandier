@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useContext, useEffect, useRef, useMemo, useCallback } from 'react';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import { gsap } from 'gsap';
-import useInView from 'react-cool-inview';
+import { useInView } from 'react-intersection-observer';
 import { getImage, GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
+
+import { AppContext } from '../provider';
 
 import TextInView from './text-in-view';
 import ArrowRight from '../assets/arrow-right.inline.svg';
@@ -24,6 +26,7 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     const image = getImage(caseStudy.featuredImage.node.localFile);
     const alt = caseStudy.featuredImage?.node?.alt || caseStudy.title;
 
+    const { ready } = useContext(AppContext);
     const ref = useRef(0);
     const context = useRef(null);
     const canvas = useRef(null);
@@ -35,14 +38,15 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
     });
 
     const timeline = useMemo(() => gsap.timeline({ paused: true }), []);
+    const [inViewRef, inView] = useInView({ rootMargin: '-100px 0px', triggerOnce: true });
 
-    const { observe } = useInView({
-        rootMargin: '-100px 0px',
-        onEnter: ({ unobserve }) => {
-            timeline.play();
-            unobserve();
+    const setRefs = useCallback(
+        node => {
+            ref.current = node;
+            inViewRef(node);
         },
-    });
+        [inViewRef],
+    );
 
     useEffect(() => {
         const drawRect = () => {
@@ -115,14 +119,17 @@ const TeaseCaseStudy = ({ caseStudy, index, length }) => {
         }
     }, [timeline, caseStudy.customFields.color]);
 
+    useEffect(() => {
+        if (inView && ready) {
+            timeline.play();
+        }
+    }, [inView, timeline, ready]);
+
     return (
         <div
             className="Tease-case-study"
             key={caseStudy.slug}
-            ref={el => {
-                observe(el);
-                ref.current = el;
-            }}
+            ref={setRefs}
             style={{ pointerEvents: 'none' }}>
             <AniLink className="Tease-case-study__image" to={caseStudy.link} paintDrip hex={caseStudy.customFields.color} >
                 <GatsbyImage
