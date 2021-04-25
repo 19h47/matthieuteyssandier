@@ -25,14 +25,8 @@ const MenuItem = ({ caseStudy }) => {
     const timeline = useMemo(
         () =>
             gsap.timeline({
-                delay: 1,
+                // delay: 2,
                 paused: true,
-                onStart: () => {
-                    containerRef.current.style.setProperty(
-                        'pointer-events',
-                        timeline.reversed() ? 'none' : 'auto',
-                    );
-                },
             }),
         [],
     );
@@ -49,22 +43,31 @@ const MenuItem = ({ caseStudy }) => {
                 duration: 1.5,
                 ease: 'power4.inOut',
                 stagger: 0.1,
+                delay: 1,
             },
         );
     }, [timeline]);
 
     useEffect(() => {
+        // if (color && color === caseStudy.customFields.color) {
+        //     return timeline
+
+        //         .play()
+        //         .then(() => containerRef.current.style.setProperty('pointer-events', 'auto'));
+        // }
+
+        // if (color && color !== caseStudy.customFields.color && timeline.reversed()) {
+        //     containerRef.current.style.setProperty('pointer-events', 'none');
+        //     console.log(`Reverse: ${caseStudy.title}`);
+        //     return timeline.reverse();
+        // }
+
         if (color && color === caseStudy.customFields.color) {
-            timeline.play();
+            return timeline.play().then(() => containerRef.current.style.setProperty('pointer-events', 'auto'));
         }
 
-        if (color && color !== caseStudy.customFields.color) {
-            timeline.reverse();
-        }
+        timeline.reverse();
 
-        if (null === color) {
-            timeline.timeScale(2.5).reverse();
-        }
     }, [color, caseStudy.customFields.color, timeline]);
 
     // const createImages = () => {
@@ -120,7 +123,6 @@ const MenuItem = ({ caseStudy }) => {
                                 marginTop: '0',
                                 position: 'relative',
                                 zIndex: '1',
-
                             }}
                             fade
                             to={caseStudy.link}
@@ -131,10 +133,16 @@ const MenuItem = ({ caseStudy }) => {
                             {caseStudy.title}
                         </AniLink>
                     </div>
-                    <div className="col-10 d-flex justify-content-center flex-nowrap" style={{ marginTop: `${(-80 / 1080) * 100}vh` }}>
+                    <div
+                        className="col-10 d-flex justify-content-center flex-nowrap"
+                        style={{ marginTop: `${(-80 / 1080) * 100}vh` }}>
                         <StyledAniLink
                             key="0"
                             to={caseStudy.link}
+                            onClick={() => {
+                                setMenu(false);
+                                setColor(null);
+                            }}
                             style={{
                                 mixBlendMode: 'multiply',
                                 filter: 'grayscale(100%)',
@@ -163,6 +171,10 @@ const MenuItem = ({ caseStudy }) => {
                         <StyledAniLink
                             key="1"
                             to={caseStudy.link}
+                            onClick={() => {
+                                setMenu(false);
+                                setColor(null);
+                            }}
                             style={{
                                 mixBlendMode: 'multiply',
                                 filter: 'grayscale(100%)',
@@ -191,6 +203,10 @@ const MenuItem = ({ caseStudy }) => {
                         <StyledAniLink
                             key="2"
                             to={caseStudy.link}
+                            onClick={() => {
+                                setMenu(false);
+                                setColor(null);
+                            }}
                             style={{
                                 mixBlendMode: 'multiply',
                                 filter: 'grayscale(100%)',

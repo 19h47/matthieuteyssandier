@@ -25,7 +25,6 @@ const Menu = ({ caseStudies }) => {
             });
 
             timeline.set(container.current, { delay: 2, autoAlpha: 0 });
-
             timeline.play();
         };
 
