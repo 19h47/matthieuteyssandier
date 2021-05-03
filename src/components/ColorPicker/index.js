@@ -83,6 +83,7 @@ const ColorPicker = () => {
 				duration: children.length * 0.1,
 				width,
 			},
+
 		);
 		timeline.fromTo(
 			children,
@@ -94,7 +95,20 @@ const ColorPicker = () => {
 				x: 0,
 				duration: 0.5,
 			},
-			`-=${(children.length - 1) * 0.1}`,
+			`start-=${(children.length - 1) * 0.1}`,
+		);
+		timeline.fromTo(
+			children,
+			{
+
+				opacity: index => 0 === index ? 1 : 0,
+			},
+			{
+				stagger: index => (children.length - index) * 0.1,
+				opacity: 1,
+				duration: 0.1,
+			},
+			`start-=${(children.length - 1) * 0.1}`,
 		);
 	}, [timeline]);
 
