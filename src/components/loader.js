@@ -103,12 +103,12 @@ const Loader = ({ colors }) => {
                     <div className="Loader__counter">
                         <div className="Site-container" style={{ height: '100%' }}>
                             <div className="row h-100 align-content-center">
-                                <div className="col-6 col-md-2 padding-0" style={{ overflow: 'hidden' }}>
+                                <div className="col-5 col-md-2 padding-0" style={{ overflow: 'hidden' }}>
                                     <TextInView className="js-text-in-view d-inline-block js-counter">
                                         100 — <span ref={countdownRef}>0</span>
                                     </TextInView>
                                 </div>
-                                <div className="col-6 col-md-1 padding-0">
+                                <div className="col-5 col-md-1 padding-0">
                                     <TextInView className="js-text-in-view d-inline-block">
                                         MT©2020
 									</TextInView>

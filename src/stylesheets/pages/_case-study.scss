@@ -13,15 +13,44 @@
 	}
 
 	&__categories {
-		@extend %list-style-type-none, %margin-0, %text-align-right;
+		@extend %list-style-type-none, %margin-bottom-6, %margin-bottom-md-0, %text-align-md-right;
+		@extend .d-flex, .d-md-block;
 
 		line-height: (24/16);
-		writing-mode: vertical-rl;
-		transform: rotate(180deg);
+		color: the_color(yellow, dark-grayish);
+
+		@include media-breakpoint-up(md) {
+			transform: rotate(180deg);
+			writing-mode: vertical-rl;
+			color: the_color(black);
+		}
+
+		li {
+			&::after {
+				@extend .d-inline, .d-md-none;
+
+				content: '\00a0/\00a0';
+			}
+
+			&:last-child {
+				&::after {
+					content: none;
+				}
+			}
+
+			@include media-breakpoint-up(md) {
+				&::after {
+					content: none;
+				}
+			}
+		}
 	}
 
 	&__title {
-		@extend %margin-top-0;
-		@include margin(bottom 198px);
+		@extend %margin-top-0, %margin-bottom-6;
+
+		@include media-breakpoint-up(md) {
+			@include margin(bottom 198px);
+		}
 	}
 }

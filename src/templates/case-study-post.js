@@ -156,7 +156,7 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 								{categories.length && (
 									<ul className="Case-study__categories">
 										{categories.map(category => (
-											<li key={category.id}><TextInView><span>{category.name}</span></TextInView></li>
+											<li key={category.id}><TextInView className={'d-inline d-md-block'}><span>{category.name}</span></TextInView></li>
 										))}
 									</ul>
 								)}

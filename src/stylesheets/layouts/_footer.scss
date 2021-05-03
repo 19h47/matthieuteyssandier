@@ -9,6 +9,7 @@
 	$this: &;
 
 	@include margin(top 20px bottom 112px);
+	@extend %text-align-center, %text-align-md-left;
 
 	&__copyright {
 		@extend %text-transform-uppercase;
