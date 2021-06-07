@@ -49,6 +49,7 @@ export const query = graphql`
 								url
 							}
 						}
+						caption
 					}
 					... on WpCaseStudy_Customfields_Layouts_TwoImages {
 						fieldGroupName
@@ -143,6 +144,8 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 		title: next.title,
 	};
 
+	console.log(layouts);
+
 	return (
 		<Layout location={location}>
 			<Seo title={caseStudy.title} /* description={caseStudy.excerpt} */ />
@@ -178,17 +181,17 @@ const CaseStudyPostTemplate = ({ location, data: { next, caseStudy } }) => {
 					{layouts.map((layout, index) => {
 						return (
 							<Fragment key={`${layout.fieldGroupName}-${index}`}>
-								{'caseStudy_Customfields_Layouts_TwoImages' ===
+								{'CaseStudy_Customfields_Layouts_TwoImages' ===
 									layout.fieldGroupName && <LayoutTwoImages data={layout} />}
-								{'caseStudy_Customfields_Layouts_Image' ===
+								{'CaseStudy_Customfields_Layouts_Image' ===
 									layout.fieldGroupName && <LayoutImage data={layout} />}
-								{'caseStudy_Customfields_Layouts_LargeImage' ===
+								{'CaseStudy_Customfields_Layouts_LargeImage' ===
 									layout.fieldGroupName && <LayoutLargeImage data={layout} />}
-								{'caseStudy_Customfields_Layouts_ImageFull' ===
+								{'CaseStudy_Customfields_Layouts_ImageFull' ===
 									layout.fieldGroupName && <LayoutImageFull data={layout} />}
-								{'caseStudy_Customfields_Layouts_ImageText' ===
+								{'CaseStudy_Customfields_Layouts_ImageText' ===
 									layout.fieldGroupName && <LayoutImageText data={layout} />}
-								{'caseStudy_Customfields_Layouts_Video' ===
+								{'CaseStudy_Customfields_Layouts_Video' ===
 									layout.fieldGroupName && (
 										<LayoutVideo data={layout} color={color} />
 									)}

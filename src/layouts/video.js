@@ -4,7 +4,7 @@ import TextInView from '../components/text-in-view';
 import Play from '../assets/play.inline.svg';
 
 const LayoutVideo = ({ data, color }) => {
-    const { video } = data;
+    const { video, caption } = data;
     const videoRef = useRef(null);
     const [play, setPlay] = useState(false);
 
@@ -46,6 +46,11 @@ const LayoutVideo = ({ data, color }) => {
                                         onPause={() => handlePlay(false)}
                                     />
                                 </div>
+                                {caption && (
+                                    <TextInView>
+                                        <p className="Layout__caption">{caption}</p>
+                                    </TextInView>
+                                )}
                             </div>
                         </div>
                     </div>
