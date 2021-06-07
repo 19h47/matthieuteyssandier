@@ -10,10 +10,10 @@
 	font-size: 70px;
 	line-height: (140/140);
 
-	@include media-breakpoint-up(md) {
+	@include media-breakpoint-up(375) {
 		font-size: calc(70px + (140 - 70) * ((100vw - 335px) / (1920 - 335)));
 	}
-	@include media-breakpoint-up(xxl) {
+	@include media-breakpoint-up(1920) {
 		font-size: 140px;
 	}
 }
@@ -26,7 +26,7 @@ h1,
 	font-size: 40px;
 	line-height: (48/40);
 
-	@include media-breakpoint-up(md) {
+	@include media-breakpoint-up(375) {
 		font-size: calc(40px + (80 - 40) * ((100vw - 335px) / (1920 - 335)));
 	}
 	@include media-breakpoint-up(xxl) {
@@ -43,7 +43,7 @@ h2,
 	font-size: 23px;
 	line-height: (31/23);
 
-	@include media-breakpoint-up(md) {
+	@include media-breakpoint-up(375) {
 		font-size: 50px;
 		line-height: (55/50);
 	}
@@ -58,7 +58,7 @@ h3,
 	font-size: 30px;
 	line-height: (38/30);
 
-	@include media-breakpoint-up(md) {
+	@include media-breakpoint-up(375) {
 		@include margin(bottom #{(10/48)}em);
 		font-size: 48px;
 		line-height: (54/48);
@@ -73,7 +73,7 @@ h4,
 	font-size: 18px;
 	line-height: (22/18);
 
-	@include media-breakpoint-up(md) {
+	@include media-breakpoint-up(375) {
 		@include margin(top #{(60/24)}em bottom #{(30/24)}em);
 
 		font-size: 24px;

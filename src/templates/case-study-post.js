@@ -44,7 +44,6 @@ export const query = graphql`
 				layouts {
 					... on WpCaseStudy_Customfields_Layouts_Video {
 						fieldGroupName
-						caption
 						video {
 							localFile {
 								url

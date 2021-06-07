@@ -156,8 +156,8 @@ $prototype-height: $prototype-height-unitless * 1px;
  */
 $spacers: (
 	0: 0,
-	1: $scale-factor / 4,
-	2: $scale-factor / 2,
+	1: divide($scale-factor, 4),
+	2: divide($scale-factor, 2),
 	3: $scale-factor,
 	4: $scale-factor * 1.5,
 	5: $scale-factor * 3,

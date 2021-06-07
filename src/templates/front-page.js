@@ -11,6 +11,7 @@ export const query = graphql`
 			content
 			customFields {
 				biography
+				biographyMobile
 				awards {
 					title
 					value
