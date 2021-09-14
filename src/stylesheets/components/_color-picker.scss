@@ -1,0 +1,33 @@
+/**
+ * Color picker
+ *
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
+ */
+.Color-picker {
+	position: relative;
+	height: 20px;
+	overflow: hidden;
+
+	will-change: width;
+
+	ul {
+		list-style-type: none;
+		display: flex;
+	}
+
+	li {
+		margin-right: 2px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	button {
+		display: block;
+		width: 20px;
+		height: 20px;
+		border-radius: 10px;
+	}
+}

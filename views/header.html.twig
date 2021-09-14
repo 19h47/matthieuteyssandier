@@ -6,4 +6,24 @@
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 
-HEADER
+<div class="Site-header">
+	<div class="Site-container">
+		<div class="row">
+			<div class="col-md-4 offset-md-4">
+				<div class="d-flex align-items-center">
+					<a href="{{ site.link }}">{{- site.title -}}</a>
+					<div class="Color-picker" data-module-color-picker style="width: 20px;">
+						<ul>
+							{% for case in case_studies %}
+								<li style="z-index: {{ ( case_studies | length ) - loop.index }};">
+									<button type="button" aria-label="{{ case.title }}" style="background-color: {{ case.meta( 'color' ) }};"></button>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<a style="margin-left: 2px;" href="{{ site.link }}">{{- 'now' | date( 'Y' ) -}}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -30,6 +30,12 @@
 
 	<body data-module-load="main">
 
+		<div class="Loader js-loader"></div>
+
+		{% block header %}
+			{{- include( 'header.html.twig', { classes: [] } ) -}}
+		{% endblock %}
+
 		<div
 			class="Site-wrapper"
 			data-load-container
@@ -41,9 +47,6 @@
 				data-module-scroll="main"
 			>
 
-				{% block header %}
-					{{- include( 'header.html.twig', { classes: [] } ) -}}
-				{% endblock %}
 
 				{% block content %}
 					{% block blocks %}
@@ -67,13 +70,14 @@
 					{% endblock %}
 				{% endblock %}
 
-				{% block footer %}
-					{{- include( 'footer.html.twig' ) -}}
-				{% endblock %}
 
 			</div>
 
 		</div>
+
+		{% block footer %}
+			{{- include( 'footer.html.twig' ) -}}
+		{% endblock %}
 
 		{{ function( 'wp_footer' ) }}
 

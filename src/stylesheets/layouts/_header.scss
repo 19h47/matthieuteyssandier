@@ -6,8 +6,5 @@
  * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  */
 .Site-header {
-	@include fixed(top 0 right 0 left 0);
-	@include padding(top em($scale-factor * 5) bottom em($scale-factor * 5));
-
-	z-index: 15;
+	@include padding(top em($scale-factor * 4) bottom em($scale-factor * 16));
 }

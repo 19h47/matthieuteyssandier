@@ -1,6 +1,7 @@
 /* global imagesLoaded */
 import modular from 'modujs';
-import * as modules from './modules';
+import * as modules from 'modules';
+import Loader from 'vendors/Loader';
 import globals from './globals';
 import { html } from './utils/environment';
 
@@ -23,8 +24,13 @@ function init() {
 window.onload = () => {
 	const $style = document.getElementById('matthieuteyssandier-main-css');
 
+	const loader = new Loader();
+	loader.init();
+
 
 	imagesLoaded(document.querySelector('.page-content'), async () => {
+		await loader.timeline.play();
+
 		if ($style) {
 			if ($style.isLoaded) {
 				init();
