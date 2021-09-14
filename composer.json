@@ -1,0 +1,22 @@
+{
+	"name": "19h47/matthieuteyssandier",
+	"description": "WP theme for Matthieu Teyssandier",
+	"type": "wordress-theme",
+	"authors": [
+		{
+			"name": "19h47",
+			"email": "jeremylevron@19h47.fr"
+		}
+	],
+	"require": {
+		"timber/timber": "2.0.0-alpha.2"
+	},
+	"autoload": {
+		"psr-4": {
+			"MT\\": "./inc"
+		},
+		"files": [
+			"./inc/helpers.php"
+		]
+	}
+}
