@@ -1,0 +1,26 @@
+/**
+ * Site
+ *
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ */
+.Site {
+	/**
+	 * Site container
+	 *
+	 * The fluid container of the grid
+	 *
+	 * @uses .Site-container
+	 */
+	&-container {
+		// max-width: $container-width;
+		width: 100%;
+
+		@extend %position-relative;
+
+		@include margin(top 0 right auto bottom 0 left auto);
+
+		@include padding(right $grid-gutter-width left $grid-gutter-width);
+	}
+}

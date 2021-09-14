@@ -2,11 +2,11 @@
 /**
  * Mostly involved with cleaning up default WordPress cruft.
  *
- * @package ledermannfilms
- * @subpackage LF/Setup/WordPress
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
  */
 
-namespace LF\Setup;
+namespace MatthieuTeyssandier\Setup;
 
 /**
  * WordPress

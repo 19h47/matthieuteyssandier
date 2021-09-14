@@ -2,11 +2,11 @@
 /**
  * Class Case Study
  *
- * @package MT
- * @subpackage MT/Core
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
  */
 
-namespace MT\Core;
+namespace MatthieuTeyssandier\Post;
 
 use WP_Post;
 

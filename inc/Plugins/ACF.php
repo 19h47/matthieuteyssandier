@@ -2,11 +2,11 @@
 /**
  * ACF
  *
- * @package MT
- * @subpackage MT/Plugins/WooCommerce
+ * @package MatthieuTeyssandier
+ * @subpackage MatthieuTeyssandier/Plugins/ACF
  */
 
-namespace LF\Plugins;
+namespace MatthieuTeyssandier\Plugins;
 
 /**
  * WordPress

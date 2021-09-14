@@ -1,0 +1,101 @@
+/**
+ * Base
+ *
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ */
+
+html {
+	@extend .background-color-orange-light-grayish;
+
+	// scroll-behavior: smooth;
+	min-height: 100%;
+
+	&.is-loading {
+		@extend %cursor-wait;
+	}
+}
+
+body {
+	@extend .background-color-orange-light-grayish;
+	@extend %font-family-body, %font-weight-book;
+
+	-webkit-text-size-adjust: none;
+	-webkit-font-smoothing: subpixel-antialiased;
+	-webkit-font-smoothing: antialiased;
+
+	text-rendering: optimizeLegibility;
+
+	font-size: 24px;
+	line-height: (30.4/24);
+
+	color: the_color(red, very-dark);
+
+	@include media-breakpoint-up(md) {
+		font-size: #{$base-font-size}px;
+		line-height: $base-line-height / $base-font-size;
+	}
+
+	// @include media-breakpoint-up(xl) {
+	// 	font-size: unquote(
+	// 		'min(max( #{$base-font-size}px, #{($base-font-size * 100) / 1440}vw), #{$base-font-size-max}px)'
+	// 	);
+	// }
+
+	@include margin(bottom unquote('env(safe-area-inset-bottom)'));
+}
+
+a,
+button {
+	cursor: pointer;
+	outline: none;
+}
+
+a {
+	color: currentColor;
+	text-decoration: none;
+}
+
+p {
+	@include margin(top 0 bottom 1em);
+}
+
+strong,
+b {
+	font-weight: get_font_weight(bold);
+}
+
+small {
+}
+
+hr {
+	@extend .d-block;
+	@include size(100%, em(1));
+
+	border: none;
+	background-color: var(--gray-very-dark-02);
+}
+
+input[type='text'],
+input[type='email'] {
+	@include reset-placeholder(the_color(blue, dark-grayish));
+
+	@include padding(
+		top #{$scale-factor * 2}px right #{$scale-factor * 2}px bottom #{$scale-factor * 2}px left #{$scale-factor *
+			2}px
+	);
+	@extend .w-100;
+
+	border: 1px solid the_color(red, very-dark);
+}
+
+textarea {
+	@extend .w-100;
+
+	border: 1px solid the_color(red, very-dark);
+}
+
+input[type='submit'] {
+	@extend .Button;
+}

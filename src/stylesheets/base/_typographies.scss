@@ -1,0 +1,108 @@
+/**
+ * Basic typography style for copy text
+ */
+
+h1,
+.h1 {
+	@extend %font-family-title, %font-weight-demi;
+	@include margin(top 0.5em bottom 0.5em);
+	@include letter-spacing(92);
+
+	font-size: em(45);
+	font-size: (43/45);
+
+	@include media-breakpoint-up(md) {
+		font-size: em(115);
+		line-height: (114/115);
+	}
+}
+
+h2,
+.h2 {
+	@extend %font-family-title, %font-weight-demi;
+	@include letter-spacing(80);
+	@include margin(top 1em bottom 1em);
+
+	font-size: em(36);
+	line-height: (38/36);
+
+	@include media-breakpoint-up(md) {
+		font-size: em(94);
+		line-height: (76/94);
+	}
+}
+
+h3,
+.h3 {
+	@extend %font-family-title, %font-weight-demi;
+	@include letter-spacing(80);
+	@include margin(top 1em bottom 1em);
+
+	font-size: em(26);
+	line-height: (33/26);
+
+	@include media-breakpoint-up(md) {
+		font-size: em(62);
+		line-height: (76/60);
+	}
+}
+
+h4,
+.h4 {
+	@extend %font-family-title, %font-weight-book;
+	@include margin(top em($scale-factor * 4, 21) bottom em($scale-factor * 3, 21));
+
+	// font-size: em(21);
+	// line-height: (26/21);
+
+	@include media-breakpoint-up(md) {
+		@include margin(top em($scale-factor * 4, 50) bottom em($scale-factor * 3, 50));
+
+		font-size: em(50);
+		line-height: (62/50);
+	}
+}
+
+h5,
+.h5 {
+	@extend %font-family-title;
+	// @include letter-spacing(80);
+	@include margin(top 1em bottom 0.5em);
+
+	font-size: 28px;
+	line-height: (27.9/28);
+
+	@include media-breakpoint-up(md) {
+		font-size: 35px;
+		line-height: (34.875/35);
+	}
+}
+
+h6,
+.h6 {
+	@extend %font-family-title;
+	@include margin(top 1em);
+
+	font-size: 20px;
+	line-height: (26/20);
+}
+
+// h6,
+// .h6 {
+// }
+
+// @see https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
+.break {
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-all;
+	word-break: break-word;
+	hyphens: auto;
+}
+
+.horizontal-rule {
+	@extend .d-block;
+	@include size(100%, em($scale-factor));
+
+	fill: currentColor;
+}

@@ -2,10 +2,11 @@
 /**
  * Supports
  *
- * @package MT
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
  */
 
-namespace MT\Setup;
+namespace MatthieuTeyssandier\Setup;
 
 /**
  * Supports

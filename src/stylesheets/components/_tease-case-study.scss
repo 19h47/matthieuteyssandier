@@ -1,0 +1,40 @@
+/**
+ * Tease: Case study
+ *
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
+ */
+.Tease-case-study {
+	@extend %position-relative;
+
+	&__link {
+		@extend .d-block;
+		@include absolute(top 0 right 0 bottom 0 left 0);
+
+		z-index: 2;
+	}
+
+	&__body {
+		@include padding(bottom 100%);
+		@extend %position-relative;
+
+		z-index: 1;
+
+		img {
+			@include absolute(top 0 right 0 bottom 0 left 0);
+			@include size(100%);
+
+			object-fit: cover;
+			object-position: center;
+
+			z-index: 1;
+		}
+
+		canvas {
+			@include absolute(top 0 right 0 bottom 0 left 0);
+			@include size(100%);
+
+			z-index: 2;
+		}
+	}
+}

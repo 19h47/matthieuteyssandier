@@ -1,0 +1,12 @@
+/**
+ * Block
+ *
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
+ */
+
+.Block {
+	$this: &;
+
+	@extend %position-relative;
+}

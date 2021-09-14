@@ -1,0 +1,20 @@
+{#
+ # Front page
+ #
+ # @package WordPress
+ # @subpackage MatthieuTeyssandier
+ #}
+
+{% extends 'index.html.twig' %}
+
+{% block content %}
+	<div class="Site-container">
+		<div class="row">
+			{% for case in case_studies %}
+				<div class="col-4">
+					{{- include( 'components/tease-case-study.html.twig', { case: case } ) -}}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

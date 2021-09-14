@@ -6,7 +6,7 @@
  * @subpackage MatthieuTeyssandier
  */
 
-namespace MT\Setup;
+namespace MatthieuTeyssandier\Setup;
 
 /**
  * Supports

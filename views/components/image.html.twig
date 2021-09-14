@@ -1,0 +1,35 @@
+{#
+ # Image
+ #
+ # @param array classes
+ # @param string loading
+ # @param array image
+ # @param object attributes
+ # @param string size
+ #
+ # @package WordPress
+ # @subpackage MatthieuTeyssandier
+ #}
+{% if image %}
+
+	{% set image = get_image( image ) %}
+
+	<picture>
+
+		<source type="image/webp" srcset="{{ image.src( size | default( 'full' ) ) | towebp }}">
+
+		<img
+			class="{{ classes ? classes | join( ' ' ) }}"
+			loading="{{ loading | default( 'lazy' ) }}"
+			src="{{ image.src( size | default( 'full' ) ) }}"
+			alt="{{ image.alt }}"
+			width="{{ image.sizes[ size ].width | default( image.width ) }}"
+			height="{{ image.sizes[ size ].height | default( image.height ) }}"
+			srcset="{{ image.srcset }}"
+			sizes="{{ image.img_sizes }}"
+			{{ attributes ? attributes | map( ( value, key ) => "#{key}=\"#{value}\"" ) | join( ' ' ) | raw }}
+		>
+
+	</picture>
+{% endif %}
+

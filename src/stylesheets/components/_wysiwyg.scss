@@ -1,0 +1,235 @@
+/**
+ * WYSIWYG
+ *
+ * @package WordPress
+ * @subpackage CaptainWild
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ */
+.Wysiwyg {
+	$this: &;
+
+	p {
+		max-width: 90ch;
+	}
+
+	p:empty {
+		@extend .d-none;
+	}
+
+	& > *:first-child {
+		margin-top: 0 !important;
+	}
+	& > *:last-child {
+		margin-bottom: 0 !important;
+
+		& > .size-full,
+		& > .size-large {
+			@extend %margin-bottom-0;
+		}
+	}
+
+	table {
+		@extend %overflow-hidden;
+
+		width: 100%;
+		border-collapse: collapse;
+		// font-size: 35px;
+		// line-height: (35/35);
+	}
+
+	tbody {
+		tr {
+			&:nth-child(even) {
+			}
+			&:nth-child(odd) {
+			}
+		}
+	}
+
+	th,
+	td {
+		@include padding(top em($scale-factor));
+		@extend %vertical-align-top;
+
+		border-top: em(1) solid the_color(red, very-dark);
+		border-bottom: em(1) solid the_color(red, very-dark);
+	}
+
+	hr {
+	}
+
+	a {
+		@extend %text-decoration-underline;
+	}
+
+	i {
+		@extend %font-weight-book;
+	}
+
+	p > .size-full,
+	p > .size-large {
+	}
+
+	figure {
+		max-width: 100%;
+	}
+
+	figcaption {
+		@include letter-spacing(50);
+
+		font-size: 12px;
+		line-height: (16/12);
+	}
+
+	img {
+		@extend .d-inline-block;
+		@extend %vertical-align-middle;
+
+		border-radius: #{$scale-factor}px;
+		max-width: 100%;
+		height: auto;
+	}
+
+	.Button {
+		@extend %text-decoration-none;
+	}
+
+	.Carousel {
+		// @extend %overflow-visible;
+
+		@include margin(
+			top #{$scale-factor * 12}px right calc(#{percentage(-1/6)} - #{$scale-factor * 0.75}px)
+				left calc(#{percentage(-1/6)} - #{$scale-factor * 0.75}px)
+		);
+
+		.Block__body,
+		.Block__header {
+		}
+
+		.Block__header {
+		}
+
+		.Block__body {
+		}
+
+		.flickity-viewport {
+			@include margin(top #{$scale-factor * 5}px bottom #{$scale-factor * 5}px);
+		}
+
+		.Tease-product {
+			@extend %overflow-visible;
+
+			box-shadow: 0px 1px #{$scale-factor * 5}px rgba(the_color(black), 0.15);
+		}
+	}
+
+	.wp-caption .wp-caption-text,
+	.size-full,
+	.size-large {
+		@include media-breakpoint-up(md) {
+			@include margin(
+				right calc(#{percentage(-1/6)} - #{$scale-factor * 0.75}px) left
+					calc(#{percentage(-1/6)} - #{$scale-factor * 0.75}px)
+			);
+
+			width: calc(#{percentage(8/6)} + #{$scale-factor * 1.5}px) !important;
+			max-width: none;
+		}
+	}
+
+	.gallery {
+		@extend %margin-y-8;
+		@extend .row;
+
+		@include media-breakpoint-up(md) {
+			@include margin(
+				right calc(#{percentage(-1/6)} - #{$scale-factor * 2.75}px) left
+					calc(#{percentage(-1/6)} - #{$scale-factor * 2.75}px)
+			);
+		}
+
+		.gallery-item {
+			@extend %margin-y-0;
+			@extend .h-100;
+		}
+
+		&.gallery-columns-2 {
+			.gallery-item {
+				@extend .col-6;
+			}
+		}
+
+		&.gallery-columns-3 {
+			.gallery-item {
+				@extend .col-4;
+			}
+		}
+
+		&-icon {
+			@extend %overflow-hidden;
+			border-radius: #{$scale-factor}px;
+			height: 100%;
+		}
+
+		img {
+			@extend .d-block;
+			@include size(100%);
+
+			object-fit: cover;
+			object-position: center;
+		}
+	}
+
+	ol {
+		li {
+			&:first-child {
+				@extend %margin-top-0;
+			}
+
+			&:last-child {
+				@extend %margin-bottom-0;
+			}
+		}
+	}
+
+	ul {
+		@extend %list-style-type-none;
+
+		li {
+			@extend %position-relative;
+
+			&::before {
+				@include absolute(top 0 left #{-$scale-factor * 4}px);
+				@include size(#{$scale-factor}px);
+				@extend .d-block;
+
+				border-radius: #{$scale-factor / 2}px;
+				content: '';
+			}
+
+			&:first-child {
+				@extend %margin-top-0;
+			}
+
+			&:last-child {
+				@extend %margin-bottom-0;
+			}
+		}
+	}
+
+	blockquote {
+		@include letter-spacing(50);
+		@include padding(left #{$scale-factor * 5}px);
+		@extend %font-weight-bold,
+			%font-style-italic,
+			%text-transform-uppercase,
+			%font-family-title;
+
+		font-size: 20px;
+		line-height: (25/20);
+
+		p {
+			@extend %margin-0;
+		}
+	}
+}

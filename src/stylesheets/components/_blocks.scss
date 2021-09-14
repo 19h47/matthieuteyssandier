@@ -1,0 +1,17 @@
+/**
+ * Blocks
+ *
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
+ */
+.Blocks {
+	@include padding(top em($scale-factor * 10) bottom em($scale-factor * 10));
+
+	& > *:first-child {
+		@extend %margin-top-0;
+	}
+
+	& > *:last-child {
+		@extend %margin-bottom-0;
+	}
+}

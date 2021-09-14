@@ -5,10 +5,10 @@
  * PHP version 7.3.8
  *
  * @author  Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
- * @package MT
+ * @package MatthieuTeyssandier
  */
 
-namespace MT\Core;
+namespace MatthieuTeyssandier\Taxonomy;
 
 /**
  * Case Study Cat class

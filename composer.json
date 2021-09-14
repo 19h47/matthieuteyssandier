@@ -13,7 +13,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"MT\\": "./inc"
+			"MatthieuTeyssandier\\": "./inc"
 		},
 		"files": [
 			"./inc/helpers.php"

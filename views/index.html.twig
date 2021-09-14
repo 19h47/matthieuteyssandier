@@ -1,0 +1,84 @@
+{#
+ # Index
+ #
+ # @package WordPress
+ # @subpackage MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html {{ html_class( 'ie9 no-js no-touch is-ontop is-loading' ) }} {{ site.language_attributes }}>
+<![endif]-->
+<!--[if !(IE 9)]><!-->
+<html {{ site.language_attributes }} {{ html_class( 'no-js no-touch is-ontop is-loading' ) }}>
+<!--<![endif]-->
+
+	<head>
+
+		<meta charset="{{ site.charset }}">
+		<link rel="profile" href="http://gmpg.org/xfn/11">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+		<meta name="format-detection" content="telephone=no">
+
+		<link rel="stylesheet" href="https://use.typekit.net/waj2avu.css">
+
+		{{ function( 'wp_head' ) }}
+
+	</head>
+
+	<body data-module-load="main">
+
+		<div
+			class="Site-wrapper"
+			data-load-container
+			data-load="container"
+		>
+			<div
+				id="{{ post.id ? "page-#{post.id}" : 'page' }}"
+				{{ body_class( 'page-content' ) }}
+				data-module-scroll="main"
+			>
+
+				{% block header %}
+					{{- include( 'header.html.twig', { classes: [] } ) -}}
+				{% endblock %}
+
+				{% block content %}
+					{% block blocks %}
+
+						<div class="Blocks">
+							{% for block in post.meta( 'blocks' ) %}
+								{{-
+									include(
+										"blocks/#{ block.acf_fc_layout | lower | replace( { '_' : '-' } ) }.html.twig",
+										{
+											block: block,
+											index: loop.index,
+											classes: [ loop.first ? 'is-first' : '', loop.last ? 'is-last' : '' ],
+										},
+										ignore_missing = true
+									)
+								-}}
+							{% endfor %}
+						</div>
+
+					{% endblock %}
+				{% endblock %}
+
+				{% block footer %}
+					{{- include( 'footer.html.twig' ) -}}
+				{% endblock %}
+
+			</div>
+
+		</div>
+
+		{{ function( 'wp_footer' ) }}
+
+		<div id="svg-sprite" class="d-none">{{- include( 'icons.svg' ) -}}</div>
+
+	</body>
+
+</html>

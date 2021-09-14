@@ -1,8 +1,8 @@
 <?php // phpcs:ignore
 /**
- * UNI helpers function
+ * MatthieuTeyssandier helpers function
  *
- * @package uni
+ * @package MatthieuTeyssandier
  */
 
 /**
@@ -14,6 +14,18 @@ function get_theme_manifest() {
 	$file = get_template_directory() . '/dist/manifest.json';
 
 	return json_decode( file_get_contents( $file ), true ); // phpcs:ignore
+}
+
+
+/**
+ * Retrieve the text domain.
+ *
+ * @since  1.0.0
+ * @return string The text domain.
+ * @see https://developer.wordpress.org/reference/functions/wp_get_theme/
+ */
+function get_theme_text_domain() : string {
+	return wp_get_theme()->get( 'TextDomain' );
 }
 
 

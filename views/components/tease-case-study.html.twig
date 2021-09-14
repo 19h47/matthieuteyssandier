@@ -1,0 +1,26 @@
+{#
+ # Tease: Case study
+ #
+ # @package WordPress
+ # @subpackage MatthieuTeyssandier
+ #}
+
+<div
+	id="case-study-{{ case.id }}"
+	class="Tease-case-study"
+	data-module-hover
+	data-hover-color="{{ case.meta( 'color' ) }}"
+	data-reveal-color="{{ case.meta( 'color' ) }}"
+	data-scroll
+	data-scroll-call="play,Reveal"
+	data-scroll-id="case-study-{{ case.id }}"
+	data-module-reveal="case-study-{{ case.id }}"
+>
+	<a class="Tease-case-study__link" href="{{ case.link }}" aria-label="{{ case.title }}"></a>
+	<div class="Tease-case-study__body">
+		<canvas data-hover="canvas" style="z-index: 4;"></canvas>
+		<canvas data-reveal="canvas"></canvas>
+		{{- include( 'components/image.html.twig', { attributes: { style: 'opacity: 0; visibility: hidden;', 'data-reveal': 'image' }, image: case.thumbnail, size: 'large' } ) -}}
+	</div>
+	{{ case.title }}
+</div>

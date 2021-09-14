@@ -3,12 +3,12 @@
  * Bootstraps WordPress theme related functions, most importantly enqueuing javascript and styles.
  *
  * @package WordPress
- * @subpackage MT
+ * @subpackage MatthieuTeyssandier
  */
 
-namespace MT;
+namespace MatthieuTeyssandier;
 
-use MT\{ Setup, Core, Plugins, Api };
+use MatthieuTeyssandier\{ Setup, Core, Plugins, Api };
 
 /**
  * Init
@@ -22,20 +22,13 @@ class Init {
 	 */
 	public static function get_services() : array {
 		return array(
-			// Setup\Theme::class,
-			// Setup\Enqueue::class,
-			// Setup\WordPress::class,
-			// Setup\Menus::class,
+			Setup\Theme::class,
+			Setup\Enqueue::class,
+			Setup\WordPress::class,
 			Setup\Supports::class,
-			// Setup\Textdomain::class,
 			Setup\Settings::class,
-			// Setup\PostStates::class,
-			Core\CaseStudy::class,
-			Core\CaseStudyCat::class,
-			// Api\Customizer\Mailchimp::class,
-			// Api\Customizer\Contact::class,
-			// Plugins\ACF::class,
-			Plugins\WPGraphQL::class,
+			Post\CaseStudy::class,
+			Taxonomy\CaseStudyCat::class,
 		);
 	}
 
