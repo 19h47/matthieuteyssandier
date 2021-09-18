@@ -14,13 +14,7 @@ use Timber\{ Timber };
 
 $filenames = array( 'pages/front-page.html.twig' );
 
-$data                 = Timber::context();
-$data['post']         = Timber::get_post();
-$data['case_studies'] = Timber::get_posts(
-	array(
-		'post_type'      => 'case_study',
-		'posts_per_page' => -1,
-	)
-);
+$data         = Timber::context();
+$data['post'] = Timber::get_post();
 
 Timber::render( $filenames, $data );

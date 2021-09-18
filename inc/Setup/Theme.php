@@ -234,26 +234,17 @@ class Theme {
 	 * @since  1.0.0
 	 */
 	public function add_to_context( array $context ) : array {
-		global $wp, $post;
+		global $wp;
 
-		$context['phone_number'] = get_option( 'phone_number' );
-		$context['public_email'] = get_option( 'public_email' );
-		$context['copyright']    = get_option( 'copyright' );
+		$context['current_url'] = home_url( add_query_arg( array(), $wp->request ) );
 
-		$context['current_url']  = home_url( add_query_arg( array(), $wp->request ) );
-		$context['posts_url']    = get_permalink( get_option( 'page_for_posts' ) );
-		$context['products_url'] = get_post_type_archive_link( 'product' );
-		$context['recipes_url']  = get_post_type_archive_link( 'recipe' );
-		$context['leaves_url']   = get_post_type_archive_link( 'leaf' );
-
-		$context['archive_recipe']  = get_field( 'archives', 'option' )['recipe'];
-		$context['archive_product'] = get_field( 'archives', 'option' )['product'];
-		$context['archive_post']    = get_field( 'archives', 'option' )['post'];
-		$context['archive_leaf']    = get_field( 'archives', 'option' )['leaf'];
-		$context['video']           = get_field( 'video', 'option' );
-		$context['menu']            = get_field( 'menu', 'option' );
-
-		$context['search_form'] = get_search_form( array( 'echo' => false ) );
+		$context['search_form']  = get_search_form( array( 'echo' => false ) );
+		$context['case_studies'] = Timber::get_posts(
+			array(
+				'post_type'      => 'case_study',
+				'posts_per_page' => -1,
+			)
+		);
 
 		return $context;
 	}

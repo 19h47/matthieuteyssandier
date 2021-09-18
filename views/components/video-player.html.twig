@@ -1,0 +1,28 @@
+{#
+ # Video player
+ #
+ # @package WordPress
+ # @subpackage MatthieuTeyssandier
+ #}
+
+{% if video.url %}
+	<div class="Video-player" data-module-video-player>
+		<button
+			class="Video-player__overlay"
+			style="background-color: {{ color }};"
+			data-video-player="button"
+		>
+			<span>
+				{{- __( 'Lecture', 'matthieuteyssandier' ) -}}
+				{{- include( 'svg/use.html.twig', { icon: 'play' } ) -}}
+			</span>
+		</button>
+		<video
+			data-video-player="video"
+			controls
+			muted
+			playsInline
+			src="{{ video.url }}"
+		/>
+	</div>
+{% endif %}

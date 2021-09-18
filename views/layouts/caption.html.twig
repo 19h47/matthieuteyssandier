@@ -1,0 +1,19 @@
+{#
+ # Caption
+ #
+ # @package WordPress
+ # @subpackage MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+
+{% if caption %}
+	<div class="Site-container">
+		<div class="row">
+			<div class="col-10 offset-md-2">
+				<TextInView>
+					<p class="Layout__caption">{{- layout.caption -}}</p>
+				</TextInView>
+			</div>
+		</div>
+	</div>
+{% endif %}

@@ -6,7 +6,7 @@
             "key": "field_603348bdf9b3c",
             "label": "Biography",
             "name": "biography",
-            "type": "wysiwyg",
+            "type": "group",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -15,31 +15,47 @@
                 "class": "",
                 "id": ""
             },
-            "show_in_graphql": 1,
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 0
-        },
-        {
-            "key": "field_609fcabc516aa",
-            "label": "Biography mobile",
-            "name": "biography_mobile",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 0
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_6145eb32e3c72",
+                    "label": "French",
+                    "name": "french",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "French biography",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_6145eb46e3c73",
+                    "label": "English",
+                    "name": "english",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "English biography",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": ""
+                }
+            ]
         },
         {
             "key": "field_60334a0724b36",
@@ -123,11 +139,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_graphql": 1,
-    "graphql_field_name": "customFields",
-    "map_graphql_types_from_location_rules": 1,
-    "graphql_types": [
-        "Page"
-    ],
-    "modified": 1623049920
+    "modified": 1631972178
 }

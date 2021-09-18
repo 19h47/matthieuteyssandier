@@ -1,0 +1,29 @@
+{#
+ # Layouts: Large image
+ #}
+<div class="Layout Layout-two-images">
+	<div class="Site-container">
+		<div class="row">
+
+			{% if layout.content.french or layout.content.english %}
+				<div class="col-md-2">
+					{{- include( 'layouts/content.html.twig', { french: layout.content.french, english: layout.content.english } ) -}}
+				</div>
+			{% endif %}
+
+
+			<div class="col-md-10{{ layout.content.french or layout.content.english ? '' : ' offset-md-2' }}">
+				<div class="row align-items-md-end">
+					<div class="col-md-6">
+						{{- include( 'components/image.html.twig', { image: layout.item_0.image, size: 'full' } ) -}}
+	 					<p class="Layout__caption">{{- layout.item_0.caption -}}</p>
+				 	</div>
+					<div class="col-md-6">
+						{{- include( 'components/image.html.twig', { image: layout.item_1.image, size: 'full' } ) -}}
+						<p class="Layout__caption">{{- layout.item_1.caption -}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -51,15 +51,16 @@
 				{% block content %}
 					{% block blocks %}
 
-						<div class="Blocks">
-							{% for block in post.meta( 'blocks' ) %}
+						<div class="Layouts">
+							{% for layout in post.meta( 'layouts' ) %}
 								{{-
 									include(
-										"blocks/#{ block.acf_fc_layout | lower | replace( { '_' : '-' } ) }.html.twig",
+										"layouts/#{ layout.acf_fc_layout | lower | replace( { '_' : '-' } ) }.html.twig",
 										{
-											block: block,
+											layout: layout,
 											index: loop.index,
 											classes: [ loop.first ? 'is-first' : '', loop.last ? 'is-last' : '' ],
+											color: post.meta( 'color' ),
 										},
 										ignore_missing = true
 									)

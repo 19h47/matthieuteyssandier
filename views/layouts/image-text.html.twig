@@ -1,0 +1,27 @@
+{#
+ # Layouts: Image text
+ #
+ # @package WordPress
+ # @subpackage MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+
+<div class="Layout Layout-image-text">
+	<div class="Site-container">
+		<div class="row">
+			<div class="col-md-5 offset-md-2">
+				{{- include( 'components/image.html.twig', { image: layout.image, size: 'full' } ) -}}
+				{{- include( 'components/video-player.html.twig', { video: layout.video } ) -}}
+
+				<p class="Layout__caption">{{ layout.caption }}</p>
+			</div>
+
+			{% if layout.content.french or layout.content.english %}
+				<div class="col-md-5">
+					{{- include( 'layouts/content.html.twig', { french: layout.content.french, english: layout.content.english } ) -}}
+				</div>
+			{% endif %}
+
+		</div>
+	</div>
+</div>

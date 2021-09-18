@@ -4,7 +4,7 @@
 
 h1,
 .h1 {
-	@extend %font-family-title, %font-weight-demi;
+	@extend %font-family-title, %font-weight-regular;
 	@include margin(top 0.5em bottom 0.5em);
 	@include letter-spacing(92);
 

@@ -1,0 +1,46 @@
+{#
+ # Single: Case study
+ #
+ # @package WordPress
+ # @subpackage MatthieuTeyssandier
+ #}
+
+{% extends 'index.html.twig' %}
+
+{% block content %}
+
+	<div class="Site-container">
+		<div class="row">
+			<div>
+				<h1 class="text-align-center">{{- post.title -}}</h1>
+			</div>
+		</div>
+	</div>
+
+	{{ parent() }}
+
+	{% if post.prev %}
+		<div class="Site-container">
+			<div class="row">
+				<div class="col-md-3 d-md-flex flex-md-column justify-content-md-between">
+					<span>Next</span>
+					<span>Suivant</span>
+				</div>
+				<div class="col-md-9">
+					{{-
+						include(
+							'components/tease-case-study.html.twig',
+							{
+								case: {
+									id: post.prev.id,
+									thumbnail: post.prev.thumbnail, color: post.prev.meta( 'color' ),
+									title: post.prev.title,
+									link: post.prev.link
+								}
+							}
+						)
+					-}}
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

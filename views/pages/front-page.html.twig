@@ -9,11 +9,47 @@
 
 {% block content %}
 	<div class="Site-container">
-		<div class="row">
+		<div class="row gy-5">
+			<div class="col-md-4">
+				<h1 class="Site-description">{{- site.description -}}</h1>
+				{{- post.content -}}
+			</div>
 			{% for case in case_studies %}
-				<div class="col-4">
-					{{- include( 'components/tease-case-study.html.twig', { case: case } ) -}}
+				<div class="{{ loop.first ? 'col-md-8' : 'col-md-4 margin-top-md-80' }}">
+					{{-
+						include(
+							'components/tease-case-study.html.twig',
+							{
+								classes: [ loop.first ? 'is-first' : null ],
+								case: {
+									id: case.id,
+									title: case.title,
+									color: case.meta( 'color' ),
+									link: case.link,
+									thumbnail: case.thumbnail,
+								}
+							}
+						)
+					-}}
 				</div>
+
+				{% if 9 == loop.index %}
+					<div class="col-md-4 margin-top-md-80">
+						<p>{{- post.meta( 'biography' ).english | nl2br -}}</p>
+						<p>{{- post.meta( 'biography' ).french | nl2br -}}</p>
+					</div>
+				{% endif %}
+
+				{% if 10 == loop.index %}
+					<div class="col-md-4 margin-top-md-80">
+						<ul>
+						{% for award in post.meta( 'awards' ) %}
+							<li>{{ award.title }} {{ award.value }}</li>
+						{% endfor %}
+						</ul>
+					</div>
+				{% endif %}
+
 			{% endfor %}
 		</div>
 	</div>

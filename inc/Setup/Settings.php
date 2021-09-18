@@ -45,18 +45,6 @@ class Settings {
 		);
 
 		add_settings_field(
-			'instagram',
-			__( 'Instagram', 'matthieuteyssandier' ),
-			array( $this, 'text_callback_function' ),
-			'general',
-			'socials',
-			array(
-				'name'  => 'instagram',
-				'label' => 'Instagram URL',
-			)
-		);
-
-		add_settings_field(
 			'twitter',
 			__( 'Twitter', 'matthieuteyssandier' ),
 			array( $this, 'text_callback_function' ),
@@ -64,7 +52,43 @@ class Settings {
 			'socials',
 			array(
 				'name'  => 'twitter',
-				'label' => 'Twitter URL',
+				'label' => __( 'Twitter URL', 'matthieuteyssandier' ),
+			)
+		);
+
+		add_settings_field(
+			'instagram',
+			__( 'Instagram', 'matthieuteyssandier' ),
+			array( $this, 'text_callback_function' ),
+			'general',
+			'socials',
+			array(
+				'name'  => 'instagram',
+				'label' => __( 'Instagram URL', 'matthieuteyssandier' ),
+			)
+		);
+
+		add_settings_field(
+			'instagram',
+			__( 'Instagram', 'matthieuteyssandier' ),
+			array( $this, 'text_callback_function' ),
+			'general',
+			'socials',
+			array(
+				'name'  => 'instagram',
+				'label' => __( 'Instagram URL', 'matthieuteyssandier' ),
+			)
+		);
+
+		add_settings_field(
+			'linkedin',
+			__( 'LinkedIn', 'matthieuteyssandier' ),
+			array( $this, 'text_callback_function' ),
+			'general',
+			'socials',
+			array(
+				'name'  => 'linkedin',
+				'label' => __( 'LinkedIn URL', 'matthieuteyssandier' ),
 			)
 		);
 
@@ -82,28 +106,40 @@ class Settings {
 	}
 
 	public function socials_callback_function() {
-		echo '<p>Socials urls</p>';
+		echo '<p>' . __( 'Socials urls', 'matthieuteyssandier' ) . '</p>';
 	}
 
 	public function contacts_callback_function() {
-		echo '<p>Contacts links</p>';
+		echo '<p>' . __( 'Contacts links', 'matthieuteyssandier' ) . '</p>';
 	}
 
 
 	public function text_callback_function( $args ) {
-		echo '<input name="' . esc_attr( $args['name'] ) . '" type="text" value="' . esc_attr( get_option( $args['name'] ) ) . '" class="regular-text code" placeholder="' . esc_attr( $args['label'] ) . '" />';
-		echo '<p class="description">' . esc_attr( $args['label'] ) . '</p>';
+		wp_form_controls_input(
+			array(
+				'name'        => $args['name'],
+				'value'       => get_option( $args['name'] ),
+				'placeholder' => $args['label'],
+				'description' => $args['label'],
+			),
+		);
 	}
 
 	public function email_callback_function( $args ) {
-		echo '<input name="' . esc_attr( $args['name'] ) . '" type="email" value="' . esc_attr( get_option( $args['name'] ) ) . '" class="regular-text ltr" placeholder="' . esc_attr( $args['label'] ) . '" />';
-		echo '<p class="description">' . esc_attr( $args['label'] ) . '</p>';
-	}
-
-	public function textarea_callback_function( $args ) {
-		echo '<textarea name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( get_option( $args['name'] ) ) . '" class="regular-text code" placeholder="' . esc_attr( $args['label'] ) . '" />';
-		echo esc_attr( get_option( $args['name'] ) ) . '</textarea>';
-		echo '<p class="description">' . esc_attr( $args['label'] ) . '</p>';
+		wp_form_controls_input(
+			array(
+				'type'        => 'email',
+				'name'        => $args['name'],
+				'value'       => get_option( $args['name'] ),
+				'placeholder' => $args['label'],
+				'description' => $args['label'],
+				'attributes'  => array(
+					'pattern'      => '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
+					'autocomplete' => 'email',
+					'aria-label'   => $args['label'],
+				),
+			)
+		);
 	}
 
 	public function register_settings() {
@@ -111,14 +147,10 @@ class Settings {
 			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_text_field',
 			'default'           => null,
-			// Extra argument for WPGraphQL.
-			'show_in_graphql'   => true,
-			'show_in_rest'      => true,
 		);
 
-		register_setting( 'general', 'instagram', $args );
-		register_setting( 'general', 'twitter', $args );
-		register_setting( 'general', 'public_email', $args );
-		register_setting( 'general', 'phone_number', $args );
+		foreach ( array( 'instagram', 'twitter', 'linkedin', 'public_email' ) as $setting ) {
+			register_setting( 'general', $setting, $args );
+		}
 	}
 }

@@ -8,7 +8,7 @@
 
 namespace MatthieuTeyssandier;
 
-use MatthieuTeyssandier\{ Setup, Core, Plugins, Api };
+use MatthieuTeyssandier\{ Setup, Post, PostTemplate };
 
 /**
  * Init
@@ -29,6 +29,8 @@ class Init {
 			Setup\Settings::class,
 			Post\CaseStudy::class,
 			Taxonomy\CaseStudyCat::class,
+			PostTemplate\BodyClass::class,
+			WPImageEditor::class,
 		);
 	}
 

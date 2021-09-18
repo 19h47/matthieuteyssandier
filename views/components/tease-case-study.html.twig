@@ -7,20 +7,23 @@
 
 <div
 	id="case-study-{{ case.id }}"
-	class="Tease-case-study"
+	class="Tease-case-study{{ classes ? ' ' ~ classes | join( ' ' ) : '' }}"
 	data-module-hover
-	data-hover-color="{{ case.meta( 'color' ) }}"
-	data-reveal-color="{{ case.meta( 'color' ) }}"
+	data-hover-color="{{ case.color }}"
+	data-reveal-color="{{ case.color }}"
 	data-scroll
 	data-scroll-call="play,Reveal"
 	data-scroll-id="case-study-{{ case.id }}"
 	data-module-reveal="case-study-{{ case.id }}"
 >
-	<a class="Tease-case-study__link" href="{{ case.link }}" aria-label="{{ case.title }}"></a>
+	<a class="Tease-case-study__link" href="{{ case.link }}"{{ case.title ? " aria-label=\"#{ case.title }\"" : '' }}></a>
 	<div class="Tease-case-study__body">
 		<canvas data-hover="canvas" style="z-index: 4;"></canvas>
 		<canvas data-reveal="canvas"></canvas>
-		{{- include( 'components/image.html.twig', { attributes: { style: 'opacity: 0; visibility: hidden;', 'data-reveal': 'image' }, image: case.thumbnail, size: 'large' } ) -}}
+		{{- include( 'components/image.html.twig', { attributes: { style: 'opacity: 0; visibility: hidden;', 'data-reveal': 'image' }, image: case.thumbnail, size: size | default( 'large' ) } ) -}}
 	</div>
-	{{ case.title }}
+	<span class="Tease-case-study__title">
+		{{- case.title -}}
+		{{- include( 'svg/use.html.twig', { icon: 'arrow-right' } ) -}}
+	</span>
 </div>

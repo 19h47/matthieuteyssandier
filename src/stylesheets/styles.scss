@@ -29,9 +29,8 @@
 
 @import '~@19h47/architecture/src/stylesheets/abstracts/placeholders';
 
-// @import 'vendors/flickity';
-
 // // Base stuff
+@import 'base/fonts';
 @import 'base/base';
 @import 'base/typographies';
 
@@ -45,19 +44,21 @@
 // // Pages
 // @import 'pages/error404';
 @import 'pages/front-page';
+@import 'pages/single-case-study';
 
 // // Components
 @import 'components/guid';
 @import 'components/logo';
 @import 'components/menu';
-@import 'components/block';
-@import 'components/blocks';
+@import 'components/layout';
+@import 'components/layouts';
 @import 'components/button';
 @import 'components/socials';
 @import 'components/wysiwyg';
 @import 'components/tease-case-study';
 @import 'components/loader';
 @import 'components/color-picker';
+@import 'components/video-player';
 
 // // Utilities.
 @import '~@19h47/architecture/src/stylesheets/utilities/colors';

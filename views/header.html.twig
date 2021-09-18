@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-md-4 offset-md-4">
 				<div class="d-flex align-items-center">
-					<a href="{{ site.link }}">{{- site.title -}}</a>
+					<a class="Site-title margin-right-4" href="{{ site.link }}">{{- site.title -}}</a>
 					<div class="Color-picker" data-module-color-picker style="width: 20px;">
 						<ul>
 							{% for case in case_studies %}
@@ -21,8 +21,16 @@
 							{% endfor %}
 						</ul>
 					</div>
-					<a style="margin-left: 2px;" href="{{ site.link }}">{{- 'now' | date( 'Y' ) -}}</a>
+					<a class="Site-title margin-left-4" href="{{ site.link }}">{{- 'now' | date( 'Y' ) -}}</a>
 				</div>
+			</div>
+
+			<div class="col-md-4">
+				<ul class="text-transform-uppercase">
+					{% for social in socials %}
+						<li><a href="{{ social.url }}">{{- social.title -}}</a></li>
+					{% endfor %}
+				</ul>
 			</div>
 		</div>
 	</div>

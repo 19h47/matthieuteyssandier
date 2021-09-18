@@ -1,0 +1,15 @@
+{#
+ # Layouts: Image full
+ #}
+<div class="Layout Layout-image-full">
+
+	<div class="row g-0">
+		<div>
+			{{- include( 'components/image.html.twig', { image: layout.image, size: 'full' } ) -}}
+			{{- include( 'components/video-player.html.twig', { video: layout.video } ) -}}
+		</div>
+	</div>
+
+	{{- include( 'layouts/caption.html.twig', { caption: layout.caption } ) -}}
+
+</div>

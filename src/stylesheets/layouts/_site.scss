@@ -23,4 +23,19 @@
 
 		@include padding(right $grid-gutter-width left $grid-gutter-width);
 	}
+
+	&-title {
+		@extend %font-family-title;
+
+		font-size: 25.8064px;
+		line-height: (31/25.8064);
+	}
+
+	&-description {
+		@include letter-spacing(-20);
+		@extend %font-family-title, %margin-top-0;
+
+		font-size: 56px;
+		line-height: (67/56);
+	}
 }

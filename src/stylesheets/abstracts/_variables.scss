@@ -26,6 +26,9 @@ $color-variations: (
 	orange: (
 		light-grayish: #eae9e8,
 	),
+	yellow: (
+		dark-grayish: #7a7a78,
+	),
 	socials: (
 		facebook: #3b5998,
 		twitter: #1da1f2,
@@ -54,10 +57,10 @@ $font: (
 		families:
 		(
 			body: (
-				'"alternate-gothic-atf", sans-serif',
+				'"Neue Montreal", sans-serif',
 			),
 			title: (
-				'"alternate-gothic-atf", sans-serif',
+				'"Rotonto", sans-serif',
 			),
 		),
 	/**
@@ -109,9 +112,9 @@ $font: (
 /**
  * Base
  */
-$base-font-size: 30;
+$base-font-size: 16;
 $base-font-size-px: $base-font-size * 1px;
-$base-line-height: 38;
+$base-line-height: 22;
 $base-line-height-px: $base-line-height * 1px;
 $scale-factor: 8;
 $base-unit: rem;
