@@ -31,6 +31,9 @@ module.exports = {
 	mode: 'production',
 	devtool: false,
 	watch: false,
+	output: {
+		filename: 'js/[name].[chunkhash:8].js',
+	},
 	module: {
 		rules: [
 			{

@@ -19,7 +19,7 @@ html {
 
 body {
 	@extend .background-color-orange-light-grayish;
-	@extend %font-family-body, %font-weight-book;
+	@extend %font-family-body, %font-weight-regular;
 
 	-webkit-text-size-adjust: none;
 	-webkit-font-smoothing: subpixel-antialiased;

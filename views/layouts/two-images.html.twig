@@ -16,11 +16,19 @@
 				<div class="row align-items-md-end">
 					<div class="col-md-6">
 						{{- include( 'components/image.html.twig', { image: layout.item_0.image, size: 'full' } ) -}}
-	 					<p class="Layout__caption">{{- layout.item_0.caption -}}</p>
+	 					{% embed 'components/text-in-view.html.twig' %}
+						 	{% block content %}
+							 	<p class="Layout__caption">{{- layout.item_0.caption -}}</p>
+							{% endblock %}
+						{% endembed %}
 				 	</div>
 					<div class="col-md-6">
 						{{- include( 'components/image.html.twig', { image: layout.item_1.image, size: 'full' } ) -}}
-						<p class="Layout__caption">{{- layout.item_1.caption -}}</p>
+						{% embed 'components/text-in-view.html.twig' %}
+							{% block content %}
+								<p class="Layout__caption">{{- layout.item_1.caption -}}</p>
+							{% endblock %}
+						{% endembed %}
 					</div>
 				</div>
 			</div>

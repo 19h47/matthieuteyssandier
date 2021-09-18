@@ -7,13 +7,17 @@
  #}
 
 {% if caption %}
-	<div class="Site-container">
-		<div class="row">
-			<div class="col-10 offset-md-2">
-				<TextInView>
-					<p class="Layout__caption">{{- layout.caption -}}</p>
-				</TextInView>
+	{% embed 'components/text-in-view.html.twig' %}
+		{% block content %}
+			<div class="Site-container">
+				<div class="row">
+					<div class="col-10 offset-md-2">
+						<TextInView>
+							<p class="Layout__caption">{{- layout.caption -}}</p>
+						</TextInView>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
+		{% endblock %}
+	{% endembed %}
 {% endif %}

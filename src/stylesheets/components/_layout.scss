@@ -19,7 +19,10 @@
 	}
 
 	&__caption {
-		@include margin(top 13px bottom 0);
+		@include margin(top #{$scale-factor * 1.5}px bottom 0);
+		@extend %font-family-title;
+
+		line-height: (28/16);
 	}
 
 	// .Layout.Layout-image

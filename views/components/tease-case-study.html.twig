@@ -22,8 +22,13 @@
 		<canvas data-reveal="canvas"></canvas>
 		{{- include( 'components/image.html.twig', { attributes: { style: 'opacity: 0; visibility: hidden;', 'data-reveal': 'image' }, image: case.thumbnail, size: size | default( 'large' ) } ) -}}
 	</div>
-	<span class="Tease-case-study__title">
-		{{- case.title -}}
-		{{- include( 'svg/use.html.twig', { icon: 'arrow-right' } ) -}}
-	</span>
+
+	{% embed 'components/text-in-view.html.twig' %}
+		{% block content %}
+			<span class="Tease-case-study__title">
+				{{- case.title -}}
+				{{- include( 'svg/use.html.twig', { icon: 'arrow-right' } ) -}}
+			</span>
+		{% endblock %}
+	{% endembed %}
 </div>

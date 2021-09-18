@@ -1,0 +1,19 @@
+{#
+ # Text in view
+ #
+ # @package WordPress
+ # @subpackage MatthieuTeyssandier
+ #}
+
+{% set id = 'text-in-view-' ~ id | default( uniqid() ) %}
+
+ <div
+ 	id="{{ id }}"
+	class="Text-in-view"
+	data-scroll
+	data-scroll-call="play,TextInView"
+	data-scroll-id="{{ id }}"
+	data-module-text-in-view="{{ id }}"
+>
+	{% block content %}{% endblock %}
+</div>
