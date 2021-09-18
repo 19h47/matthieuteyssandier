@@ -21,7 +21,7 @@
 
 		@include margin(top 0 right auto bottom 0 left auto);
 
-		@include padding(right $grid-gutter-width left $grid-gutter-width);
+		@include padding(right var(--bs-gutter-x) left var(--bs-gutter-x));
 	}
 
 	&-title {
@@ -63,5 +63,14 @@
 				clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 			}
 		}
+	}
+}
+
+.row,
+.Site-container {
+	--bs-gutter-x: 20px;
+
+	@include media-breakpoint-up(md) {
+		--bs-gutter-x: #{$grid-gutter-width};
 	}
 }

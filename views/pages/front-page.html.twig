@@ -34,14 +34,14 @@
 				</div>
 
 				{% if 9 == loop.index %}
-					<div class="col-md-4 margin-top-md-80">
+					<div class="col-md-4 margin-top-80">
 						<p>{{- post.meta( 'biography' ).english | nl2br -}}</p>
 						<p>{{- post.meta( 'biography' ).french | nl2br -}}</p>
 					</div>
 				{% endif %}
 
 				{% if 10 == loop.index %}
-					<div class="col-md-4 margin-top-md-80">
+					<div class="col-md-4 margin-top-80">
 						<ul>
 						{% for award in post.meta( 'awards' ) %}
 							<li>{{ award.title }} {{ award.value }}</li>
