@@ -1,26 +1,6 @@
 import { module as M } from 'modujs';
 import gsap from 'gsap';
-
-const drawRect = (props, context) => {
-	const { width, height, color } = props;
-
-	context.clearRect(width, 0, -width, height);
-	context.fillStyle = color;
-	context.beginPath();
-	context.rect(width, 0, -width, height);
-	context.fill();
-};
-
-const drawEllipse = (props, context) => {
-	const { width, height, radiusX, radiusY, color } = props;
-
-	context.clearRect(width, 0, -width, height);
-	context.fillStyle = color;
-	context.beginPath();
-	context.ellipse(width / 2, height / 2, radiusX, radiusY, Math.PI, 0, 2 * Math.PI);
-	context.rect(width, 0, -width, height);
-	context.fill();
-};
+import { rect as drawRect, ellipse as drawEllipse } from 'utils/draw';
 
 class Reveal extends M {
 	constructor(m) {
@@ -36,12 +16,17 @@ class Reveal extends M {
 			radiusY: 0,
 			width,
 			height: 0,
-			color: this.getData('color') || 'rgba(255, 255, 255, 0)',
 		};
 
 		this.context = this.$('canvas')[0].getContext('2d');
+		this.context.fillStyle = this.getData('color');
 
-		this.timeline = gsap.timeline({ paused: true, immediateRender: true });
+		this.timeline = gsap.timeline({
+			paused: true,
+			onComplete: () => {
+				gsap.set(this.el, { clearProps: 'all' });
+			},
+		});
 		this.timeline.set(this.el, { pointerEvents: 'none' });
 
 		this.timeline.to(this.props, {
@@ -60,8 +45,6 @@ class Reveal extends M {
 			radiusY: height / Math.sqrt(2),
 			onUpdate: () => drawEllipse(this.props, this.context),
 		});
-
-		this.timeline.set(this.el, { clearProps: 'all' });
 	}
 
 	play() {

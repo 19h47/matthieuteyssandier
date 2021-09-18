@@ -1,16 +1,6 @@
 import { module as M } from 'modujs';
 import gsap from 'gsap';
-
-const draw = (props, context) => {
-	const { width, height, radiusX, radiusY } = props;
-
-	context.clearRect(width, 0, -width, height);
-	context.beginPath();
-	context.ellipse(width / 2, height / 2, radiusX, radiusY, Math.PI, 0, 2 * Math.PI);
-
-	context.rect(width, 0, -width, height);
-	context.fill();
-};
+import { ellipse as drawEllipse } from 'utils/draw';
 
 class Hover extends M {
 	constructor(m) {
@@ -37,15 +27,17 @@ class Hover extends M {
 		this.$('canvas')[0].width = width;
 		this.$('canvas')[0].height = height;
 
-		this.props.radiusX = width / Math.sqrt(2);
-		this.props.radiusY = height / Math.sqrt(2);
-		this.props.width = width;
-		this.props.height = height;
+		this.props = {
+			radiusX: width / Math.sqrt(2),
+			radiusY: height / Math.sqrt(2),
+			width,
+			height,
+		};
 
 		this.context = this.$('canvas')[0].getContext('2d');
 		this.context.fillStyle = this.getData('color');
 
-		this.timeline = gsap.timeline({ paused: true, onUpdate: () => draw(this.props, this.context) });
+		this.timeline = gsap.timeline({ paused: true, onUpdate: () => drawEllipse(this.props, this.context) });
 
 		this.timeline.to(this.props, {
 			duration: 1.5,
