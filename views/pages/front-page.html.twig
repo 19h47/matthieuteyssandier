@@ -9,13 +9,13 @@
 
 {% block content %}
 	<div class="Site-container">
-		<div class="row gy-5">
+		<div class="row">
 			<div class="col-md-4">
 				<h1 class="Site-description">{{- site.description -}}</h1>
 				{{- post.content -}}
 			</div>
 			{% for case in case_studies %}
-				<div class="{{ loop.first ? 'col-md-8' : 'col-md-4 margin-top-md-80' }}">
+				<div class="{{ loop.first ? 'col-md-8' : 'col-md-4 margin-top-80' }}">
 					{{-
 						include(
 							'components/tease-case-study.html.twig',

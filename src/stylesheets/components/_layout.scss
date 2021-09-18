@@ -25,6 +25,22 @@
 		line-height: (28/16);
 	}
 
+	&[data-scroll] {
+		.Video-player,
+		img {
+			opacity: 0;
+			transition: 1.5s opacity map-get($easings, ease-out-expo);
+			will-change: opacity;
+		}
+	}
+
+	&[data-scroll].is-inview {
+		.Video-player,
+		img {
+			opacity: 1;
+		}
+	}
+
 	// .Layout.Layout-image
 	&#{&}-image {
 		img {

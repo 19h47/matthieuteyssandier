@@ -5,30 +5,25 @@
  * @subpackage MatthieuTeyssandier
  */
 .Socials {
+	@extend %text-transform-uppercase;
+
+	line-height: (18/16);
+	color: the_color(yellow, dark-grayish);
+
 	ul {
 		@extend %list-style-type-none;
-		@extend .d-flex;
+	}
 
-		column-gap: em($scale-factor * 2.75);
+	li {
+		will-change: clip-path;
+		clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+		transition: 1.5s clip-path map-get($easings, ease-out-expo);
 
-		@include media-breakpoint-up(md) {
-			column-gap: em($scale-factor * 4);
+		@at-root .is-first-hit & {
+			clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 		}
 	}
+
 	a {
-		@extend .d-block;
-		@include size(em($scale-factor * 3.25));
-
-		svg {
-			@include size(100%);
-		}
-
-		@include media-breakpoint-up(md) {
-			@include size(em($scale-factor * 5));
-		}
-	}
-
-	@at-root .Nav & ul {
-		@extend .justify-content-center;
 	}
 }

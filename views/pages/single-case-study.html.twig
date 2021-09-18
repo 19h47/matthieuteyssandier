@@ -12,7 +12,11 @@
 	<div class="Site-container">
 		<div class="row">
 			<div>
-				<h1 class="text-align-center">{{- post.title -}}</h1>
+				{% embed 'components/text-in-view.html.twig' %}
+					{% block content %}
+						<h1 class="text-align-center text-transform-uppercase">{{- post.title -}}</h1>
+					{% endblock %}
+				{% endembed %}
 			</div>
 		</div>
 	</div>
@@ -23,8 +27,8 @@
 		<div class="Site-container">
 			<div class="row">
 				<div class="col-md-3 d-md-flex flex-md-column justify-content-md-between">
-					<span>Next</span>
-					<span>Suivant</span>
+					<a href="{{ post.prev.link }}">Next</a>
+					<a href="{{ post.prev.link }}">Suivant</a>
 				</div>
 				<div class="col-md-9">
 					{{-
@@ -40,6 +44,7 @@
 							}
 						)
 					-}}
+				</div>
 			</div>
 		</div>
 	{% endif %}

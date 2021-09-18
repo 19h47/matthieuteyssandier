@@ -15,7 +15,9 @@
 	}
 
 	@at-root .Front-page &.is-first &__body {
-		@include padding(bottom percentage(611/1230));
+		@include media-breakpoint-up(md) {
+			@include padding(bottom percentage(611/1230));
+		}
 	}
 
 	@at-root .Single-case-study & &__body {

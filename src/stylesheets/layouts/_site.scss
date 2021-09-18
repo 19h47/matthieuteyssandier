@@ -26,9 +26,18 @@
 
 	&-title {
 		@extend %font-family-title;
+		@extend .d-flex, .align-items-center;
 
 		font-size: 25.8064px;
 		line-height: (31/25.8064);
+
+		will-change: clip-path;
+		clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+		transition: 1.5s clip-path map-get($easings, ease-out-expo);
+
+		@at-root .is-first-hit & {
+			clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+		}
 	}
 
 	&-description {
@@ -37,5 +46,22 @@
 
 		font-size: 56px;
 		line-height: (67/56);
+	}
+
+	&-introduction {
+		@extend %text-transform-uppercase;
+
+		line-height: (18/16);
+		color: the_color(yellow, dark-grayish);
+
+		& > div {
+			will-change: clip-path;
+			clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+			transition: 1.5s clip-path map-get($easings, ease-out-expo);
+
+			@at-root .is-first-hit & {
+				clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+			}
+		}
 	}
 }

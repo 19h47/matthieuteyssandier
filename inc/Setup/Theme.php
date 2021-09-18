@@ -246,6 +246,8 @@ class Theme {
 			)
 		);
 
+		$context['public_email'] = get_option( 'public_email' );
+
 		return $context;
 	}
 

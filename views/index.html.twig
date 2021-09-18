@@ -36,22 +36,14 @@
 			{{- include( 'header.html.twig', { classes: [] } ) -}}
 		{% endblock %}
 
-		<div
-			class="Site-wrapper"
-			data-load-container
-			data-load="container"
-		>
-			<div
-				id="{{ post.id ? "page-#{post.id}" : 'page' }}"
-				{{ body_class( 'page-content' ) }}
-				data-module-scroll="main"
-			>
+		<div class="Site-wrapper" data-load-container data-load="container">
+			<div id="{{ post.id ? "page-#{post.id}" : 'page' }}" {{ body_class( 'page-content' ) }} data-module-scroll="main">
 
 
 				{% block content %}
 					{% block blocks %}
 
-						<div class="Layouts">
+						<div class="Layouts" data-scroll-section>
 							{% for layout in post.meta( 'layouts' ) %}
 								{{-
 									include(
