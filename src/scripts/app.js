@@ -1,9 +1,14 @@
-/* global imagesLoaded */
+/* global imagesLoaded, matthieuteyssandier */
 import modular from 'modujs';
 import * as modules from 'modules';
 import Loader from 'vendors/Loader';
+import { html } from 'utils/environment';
+import favicon from 'utils/favicon';
 import globals from './globals';
-import { html } from './utils/environment';
+
+const { colors } = matthieuteyssandier;
+
+favicon(colors[Math.floor(Math.random() * colors.length)]);
 
 // eslint-disable-next-line new-cap
 const app = new modular({
@@ -23,7 +28,6 @@ function init() {
 
 window.onload = () => {
 	const $style = document.getElementById('matthieuteyssandier-main-css');
-
 	const loader = new Loader();
 	loader.init();
 

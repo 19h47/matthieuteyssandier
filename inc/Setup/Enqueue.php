@@ -50,6 +50,13 @@ class Enqueue {
 			true
 		);
 
+		$case_studies = get_posts(
+			array(
+				'post_type'      => 'case_study',
+				'posts_per_page' => -1,
+			)
+		);
+
 		$args = array(
 			'template_directory_uri' => get_template_directory_uri(),
 			'base_url'               => site_url(),
@@ -58,6 +65,10 @@ class Enqueue {
 			'api_url'                => home_url( 'wp-json' ),
 			'current_url'            => get_permalink(),
 			'nonce'                  => wp_create_nonce( 'security' ),
+			'colors'                 => array_map(
+				fn( $case_study ) => get_field( 'color', $case_study->ID ),
+				$case_studies,
+			),
 		);
 
 		wp_localize_script(

@@ -1,9 +1,10 @@
 import { module as M } from 'modujs';
 import gsap from 'gsap';
 
+const WIDTH = 20;
+
 class ColorPicker extends M {
 	init() {
-		const WIDTH = 20;
 
 		this.handleMouseenter = this.handleMouseenter.bind(this);
 		this.handleMouseleave = this.handleMouseleave.bind(this);
