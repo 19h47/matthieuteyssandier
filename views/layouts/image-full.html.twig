@@ -5,10 +5,10 @@
  # @subpackage MatthieuTeyssandier
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
-<div class="Layout Layout-image-full" data-scroll>
+<div class="Layout Layout-image-full">
 
 	<div class="row g-0">
-		<div>
+		<div data-scroll data-module-expand="{{ uniqid() }}">
 			{{- include( 'components/image.html.twig', { image: layout.image, size: 'full' } ) -}}
 			{{- include( 'components/video-player.html.twig', { video: layout.video } ) -}}
 		</div>

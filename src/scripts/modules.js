@@ -1,4 +1,5 @@
 export { default as ColorPicker } from 'modules/ColorPicker';
+export { default as Expand } from 'modules/Expand';
 export { default as Hover } from 'modules/Hover';
 export { default as Load } from 'modules/Load';
 export { default as Nav } from 'modules/Nav';

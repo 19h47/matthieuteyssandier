@@ -22,7 +22,6 @@ const rect = (props, context) => {
  * @param {object} context
  */
 const ellipse = (props, context, clear = true, negative = false) => {
-	console.log(props);
 	const { width, height, x = width, y = height, radiusX, radiusY = radiusX, color = null } = props;
 
 	if (clear) {

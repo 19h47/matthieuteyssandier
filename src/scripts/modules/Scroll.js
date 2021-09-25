@@ -25,11 +25,19 @@ class Scroll extends M {
 
 		this.direction = 'down';
 
-		this.scroll.on('scroll', ({ direction }) => {
+		this.scroll.on('scroll', ({ direction, currentElements }) => {
 			html.setAttribute('data-direction', direction || 'down');
 			this.direction = direction;
 
 			isOntop();
+
+			Object.values(currentElements).forEach(item => {
+				if (null !== item.el.getAttribute('data-module-expand')) {
+					const { progress } = item;
+
+					this.call('progress', progress, 'Expand', item.el.id);
+				}
+			});
 		});
 
 		isOntop();

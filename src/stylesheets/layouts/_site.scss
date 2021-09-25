@@ -73,4 +73,9 @@
 	@include media-breakpoint-up(md) {
 		--bs-gutter-x: #{$grid-gutter-width};
 	}
+
+	&.g-0 {
+		--bs-gutter-x: 0;
+		--bs-gutter-y: 0;
+	}
 }

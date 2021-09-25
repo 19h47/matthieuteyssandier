@@ -20,8 +20,7 @@
 >
 	<a class="Tease-case-study__link" href="{{ case.link }}"{{ case.title ? " aria-label=\"#{ case.title }\"" : '' }}></a>
 	<div class="Tease-case-study__body">
-		<canvas data-hover="canvas" style="z-index: 4;"></canvas>
-		<canvas data-reveal="canvas"></canvas>
+		<canvas data-hover="canvas" data-reveal="canvas"></canvas>
 		{{- include( 'components/image.html.twig', { attributes: { style: 'opacity: 0; visibility: hidden;', 'data-reveal': 'image' }, image: case.thumbnail, size: size | default( 'large' ) } ) -}}
 	</div>
 
