@@ -32,12 +32,17 @@ class Hover extends M {
 			radiusY: height / Math.sqrt(2),
 			width,
 			height,
+			x: width / 2,
+			y: height / 2,
 		};
 
 		this.context = this.$('canvas')[0].getContext('2d');
 		this.context.fillStyle = this.getData('color');
 
-		this.timeline = gsap.timeline({ paused: true, onUpdate: () => drawEllipse(this.props, this.context) });
+		this.timeline = gsap.timeline({
+			paused: true,
+			onUpdate: () => drawEllipse(this.props, this.context, true, true),
+		});
 
 		this.timeline.to(this.props, {
 			duration: 1.5,

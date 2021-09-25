@@ -21,15 +21,25 @@ const rect = (props, context) => {
  * @param {object} props
  * @param {object} context
  */
-const ellipse = (props, context) => {
-	const { width, height, radiusX, radiusY } = props;
+const ellipse = (props, context, clear = true, negative = false) => {
+	console.log(props);
+	const { width, height, x = width, y = height, radiusX, radiusY = radiusX, color = null } = props;
 
-	context.clearRect(width, 0, -width, height);
+	if (clear) {
+		context.clearRect(width, 0, -width, height);
+	}
+
+	if (color) {
+		context.fillStyle = color;
+	}
 
 	context.beginPath();
-	context.ellipse(width / 2, height / 2, radiusX, radiusY, Math.PI, 0, 2 * Math.PI, true);
+	context.ellipse(x, y, radiusX, radiusY, Math.PI, 0, 2 * Math.PI, true);
 
-	context.rect(0, 0, width, height);
+	if (negative) {
+		context.rect(0, 0, width, height);
+	}
+
 	context.fill();
 };
 

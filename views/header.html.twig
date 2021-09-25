@@ -10,7 +10,7 @@
 	<div class="Site-container">
 		<div class="row">
 			<div class="col-md-4 offset-md-2">
-				<div class="Site-title">
+				<div class="Site-title Pointer-events-auto">
 
 					<a class="margin-right-4" href="{{ site.link }}">{{- site.title -}}</a>
 
@@ -18,7 +18,14 @@
 						<ul>
 							{% for case in case_studies %}
 								<li style="z-index: {{ ( case_studies | length ) - loop.index }};">
-									<button type="button" aria-label="{{ case.title }}" style="background-color: {{ case.meta( 'color' ) }};"></button>
+									<button
+										type="button"
+										aria-label="{{ case.title }}"
+										style="background-color: {{ case.meta( 'color' ) }};"
+										data-module-nav-button
+										data-nav-button-color="{{ case.meta( 'color' ) }}"
+										data-nav-button-function="open"
+									></button>
 								</li>
 							{% endfor %}
 						</ul>
@@ -40,7 +47,7 @@
 			</div>
 
 			<div class="col-md-2">
-				<div class="Site-introduction">
+				<div class="Site-introduction Pointer-events-auto">
 					<div>{{- __( 'Drop me a line for freelance work', 'matthieuteyssandier' ) -}}</div>
 					<div class="break"><a href="mail:{{ public_email }}">{{- public_email -}}</a></div>
 					<div>{{- __( 'Available in Freelance', 'matthieuteyssandier' ) -}}</div>
@@ -49,3 +56,18 @@
 		</div>
 	</div>
 </div>
+
+<nav class="Nav" data-module-nav>
+	<div class="Site-container">
+		<div class="row">
+			<div>
+				<header class="Nav__header">
+					<button class="text-transform-uppercase" type="button" data-module-nav-button data-nav-button-function="close">
+						{{- __( 'Quitter le menu', 'matthieuteyssandier' ) -}}
+					</button>
+				</header>
+			</div>
+		</div>
+	</div>
+</nav>
+<canvas class="Nav-backdrop" data-module-nav-backdrop></canvas>

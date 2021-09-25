@@ -1,4 +1,5 @@
 import { module as M } from 'modujs';
+import { html } from 'utils/environment';
 import gsap from 'gsap';
 
 const WIDTH = 20;
@@ -58,9 +59,16 @@ class ColorPicker extends M {
 	};
 
 	handleMouseleave = () => {
+		if (!html.classList.contains('has-nav-open')) {
+			this.close();
+		}
+	};
+
+	close() {
 		this.timeline.timeScale(1.25);
 		this.timeline.reverse();
-	};
+
+	}
 }
 
 export default ColorPicker;

@@ -16,6 +16,8 @@ class Reveal extends M {
 			radiusY: 0,
 			width,
 			height: 0,
+			x: width / 2,
+			y: height / 2,
 		};
 
 		this.context = this.$('canvas')[0].getContext('2d');
@@ -43,7 +45,7 @@ class Reveal extends M {
 			ease: 'power4.inOut',
 			radiusX: width / Math.sqrt(2),
 			radiusY: height / Math.sqrt(2),
-			onUpdate: () => drawEllipse(this.props, this.context),
+			onUpdate: () => drawEllipse(this.props, this.context, true, true),
 		});
 	}
 

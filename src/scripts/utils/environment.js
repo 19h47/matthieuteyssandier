@@ -3,8 +3,8 @@ const { body } = document;
 const isDebug = html.hasAttribute('data-debug');
 
 const scroll = {
-	left: 0,
-	top: 0,
+	y: 0,
+	x: 0,
 };
 
 const breakpoints = {

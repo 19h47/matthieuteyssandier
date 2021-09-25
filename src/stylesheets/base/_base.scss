@@ -99,3 +99,17 @@ textarea {
 input[type='submit'] {
 	@extend .Button;
 }
+
+.Fade-inview {
+	&[data-scroll] {
+		@include autoAlpha(0);
+
+		transition: opacity 1.5s map-get($easings, ease-out-expo),
+			visibility 1.5s map-get($easings, ease-out-expo);
+		will-change: opacity, visibility;
+	}
+
+	&[data-scroll].is-inview {
+		@include autoAlpha(1);
+	}
+}

@@ -33,7 +33,7 @@
 
 		will-change: clip-path;
 		clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-		transition: 1.5s clip-path map-get($easings, ease-out-expo);
+		transition: clip-path 1.5s map-get($easings, ease-out-expo);
 
 		@at-root .is-first-hit & {
 			clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
