@@ -16,11 +16,11 @@ class VideoPlayer extends M {
 	init() {
 		this.initEvents();
 
-		console.log(this.$('button')[0]);
+		// console.log(this.$('button')[0]);
 	}
 
 	handleClick() {
-		console.log(this.play);
+		// console.log(this.play);
 		this.handlePlay('play')
 	}
 

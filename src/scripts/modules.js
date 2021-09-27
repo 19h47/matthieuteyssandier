@@ -9,5 +9,6 @@ export { default as Reveal } from 'modules/Reveal';
 export { default as Scroll } from 'modules/Scroll';
 export { default as ScrollTo } from 'modules/ScrollTo';
 export { default as TextInView } from 'modules/TextInView';
+export { default as Transition } from 'modules/Transition';
 export { default as VideoPlayer } from 'modules/VideoPlayer';
 

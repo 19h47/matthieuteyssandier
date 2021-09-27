@@ -2,7 +2,7 @@
 import modular from 'modujs';
 import * as modules from 'modules';
 import Loader from 'vendors/Loader';
-import { html } from 'utils/environment';
+import { html, scroll } from 'utils/environment';
 import favicon from 'utils/favicon';
 import globals from './globals';
 
@@ -24,6 +24,11 @@ function init() {
 	html.classList.add('is-ready');
 	html.classList.add('is-first-hit');
 	html.classList.remove('is-loading');
+
+	window.addEventListener('mousemove', ({ clientX, clientY }) => {
+		scroll.x = clientX;
+		scroll.y = clientY;
+	});
 }
 
 window.onload = () => {
