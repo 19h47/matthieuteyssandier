@@ -6,15 +6,15 @@
  #}
 
 {% if video.url %}
-	<div class="Video-player" data-module-video-player>
+	<div class="Video-player position-relative" data-module-video-player>
 		<button
-			class="Video-player__overlay"
+			class="top-0 bottom-0 Video-player__overlay d-flex align-items-center justify-content-center position-absolute end-0 start-0 h-100 w-100"
 			style="background-color: {{ color }};"
 			data-video-player="button"
 		>
-			<span>
+			<span class="pt-56 pb-56 d-inline-block text-uppercase pe-100 ps-100">
 				{{- __( 'Lecture', 'matthieuteyssandier' ) -}}
-				{{- include( 'svg/use.html.twig', { icon: 'play' } ) -}}
+				{{- include( 'svg/use.html.twig', { classes: [ 'ms-8' ], icon: 'play' } ) -}}
 			</span>
 		</button>
 		<video

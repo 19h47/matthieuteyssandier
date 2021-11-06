@@ -11,16 +11,17 @@
 	<div class="Site-container">
 		<div class="row">
 			<div class="col-md-4 Fade-inview" data-scroll>
-				<h1 class="Site-description">{{- site.description -}}</h1>
+				<h1 class="mt-0 Site-description font-family-title">{{- site.description -}}</h1>
 				{{- post.content -}}
 			</div>
 			{% for case in case_studies %}
-				<div class="{{ loop.first ? 'col-md-8' : 'col-md-4 margin-top-80' }}">
+				<div class="{{ loop.first ? 'col-md-8' : 'col-md-4 mt-80' }}">
 					{{-
 						include(
 							'components/tease-case-study.html.twig',
 							{
 								classes: [ loop.first ? 'is-first' : null ],
+								size: loop.first ? 'size-8' : 'size-4',
 								case: {
 									id: case.id,
 									title: case.title,
@@ -34,17 +35,17 @@
 				</div>
 
 				{% if 9 == loop.index %}
-					<div class="col-md-4 margin-top-80">
+					<div class="col-md-4 mt-80">
 						<p>{{- post.meta( 'biography' ).english | nl2br -}}</p>
 						<p>{{- post.meta( 'biography' ).french | nl2br -}}</p>
 					</div>
 				{% endif %}
 
 				{% if 10 == loop.index %}
-					<div class="col-md-4 margin-top-80">
+					<div class="col-md-4 mt-80">
 						<ul>
 						{% for award in post.meta( 'awards' ) %}
-							<li>{{ award.title }} {{ award.value }}</li>
+							<li>{{- award.title }} {{ award.value -}}</li>
 						{% endfor %}
 						</ul>
 					</div>

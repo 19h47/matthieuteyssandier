@@ -4,17 +4,11 @@
  * @package WordPress
  * @subpackage MatthieuTeyssandier
  */
+
 .Color-picker {
-	position: relative;
 	height: 20px;
-	overflow: hidden;
 
 	will-change: width;
-
-	ul {
-		list-style-type: none;
-		display: flex;
-	}
 
 	li {
 		margin-right: 2px;
@@ -25,7 +19,6 @@
 	}
 
 	button {
-		@extend .d-block;
 		@include size(20px);
 
 		border-radius: 10px;

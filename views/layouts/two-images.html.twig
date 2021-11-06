@@ -1,37 +1,30 @@
 {#
  # Layouts: Large image
  #}
-<div class="Layout Layout-two-images" data-scroll>
+
+<div class="Layout mt-80 mb-80 position-relative Layout-two-images" data-scroll>
 	<div class="Site-container">
 		<div class="row">
 
-			{% if layout.content.french or layout.content.english %}
-				<div class="col-md-2">
-					{{- include( 'layouts/content.html.twig', { french: layout.content.french, english: layout.content.english } ) -}}
+			<div class="row{{ 'start' == layout.alignment ? ' align-items-lg-start' : ' align-items-lg-end' }}">
+				<div class="col-lg-6">
+					{{- include( 'components/image.html.twig', { classes: [ 'd-block', 'w-100', 'h-auto' ], image: layout.item_0.image, size: 'size-6' } ) -}}
+					{% embed 'components/text-in-view.html.twig' %}
+						{% block content %}
+							<p class="mt-12 mb-0 Layout__caption font-family-title">{{- layout.item_0.caption -}}</p>
+						{% endblock %}
+					{% endembed %}
 				</div>
-			{% endif %}
-
-
-			<div class="col-md-10{{ layout.content.french or layout.content.english ? '' : ' offset-md-2' }}">
-				<div class="row align-items-md-end">
-					<div class="col-md-6">
-						{{- include( 'components/image.html.twig', { image: layout.item_0.image, size: 'full' } ) -}}
-	 					{% embed 'components/text-in-view.html.twig' %}
-						 	{% block content %}
-							 	<p class="Layout__caption">{{- layout.item_0.caption -}}</p>
-							{% endblock %}
-						{% endembed %}
-				 	</div>
-					<div class="col-md-6">
-						{{- include( 'components/image.html.twig', { image: layout.item_1.image, size: 'full' } ) -}}
-						{% embed 'components/text-in-view.html.twig' %}
-							{% block content %}
-								<p class="Layout__caption">{{- layout.item_1.caption -}}</p>
-							{% endblock %}
-						{% endembed %}
-					</div>
+				<div class="col-lg-6">
+					{{- include( 'components/image.html.twig', { classes: [ 'd-block', 'w-100', 'h-auto' ], image: layout.item_1.image, size: 'size-6' } ) -}}
+					{% embed 'components/text-in-view.html.twig' %}
+						{% block content %}
+							<p class="mt-12 mb-0 Layout__caption font-family-title">{{- layout.item_1.caption -}}</p>
+						{% endblock %}
+					{% endembed %}
 				</div>
 			</div>
+
 		</div>
 	</div>
 </div>

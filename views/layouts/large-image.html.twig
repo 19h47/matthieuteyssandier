@@ -1,18 +1,28 @@
 {#
  # Layouts: Large image
  #}
-<div class="Layout Layout-large-image" data-scroll>
+
+<div class="Layout mt-80 mb-80 position-relative Layout-large-image" data-scroll>
 	<div class="Site-container">
 		<div class="row">
 
 			{% if layout.content.french or layout.content.english %}
-				<div class="col-md-2">
+				<div class="col-lg-2">
 					{{- include( 'layouts/content.html.twig', { french: layout.content.french, english: layout.content.english } ) -}}
 				</div>
 			{% endif %}
 
-			<div class="col-md-10{{ layout.content.french or layout.content.english ? '' : ' offset-md-2' }}">
-				{{- include( 'components/image.html.twig', { image: layout.image, size: 'full' } ) -}}
+			<div class="col-lg-10{{ layout.content.french or layout.content.english ? '' : ' offset-lg-2' }}">
+				{{-
+					include(
+						'components/image.html.twig',
+						{
+							size: 'size-10',
+							image: layout.image,
+							classes: [ 'd-block', 'w-100', 'h-auto' ],
+						}, with_context = false
+					)
+				-}}
 				{{- include( 'components/video-player.html.twig', { video: layout.video } ) -}}
 			</div>
 		</div>

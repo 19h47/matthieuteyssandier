@@ -1,0 +1,50 @@
+{#
+ # Layouts: Large image
+ #
+ # @package WordPress
+ # @subpackage MatthieuTeyssandier
+ #}
+
+{% if ayout.item_0.image or ayout.item_1.image or layout.content.french or layout.content.english %}
+	<div class="Layout mt-80 mb-80 position-relative Layout-two-images-content" data-scroll>
+		<div class="Site-container">
+			<div class="row align-items-md-end">
+
+				{% if layout.content.french or layout.content.english %}
+					<div class="col-md-2">
+						{{- include( 'layouts/content.html.twig', { french: layout.content.french, english: layout.content.english } ) -}}
+					</div>
+				{% endif %}
+
+				{% if layout.item_0.image %}
+					<div class="col-md-6">
+						{{- include( 'components/image.html.twig', { classes: [ 'd-block', 'w-100', 'h-auto' ], size: 'size-6', image: layout.item_0.image } ) -}}
+
+						{% if layout.item_0.caption %}
+							{% embed 'components/text-in-view.html.twig' %}
+								{% block content %}
+									<p class="mt-12 mb-0 Layout__caption font-family-title">{{- layout.item_0.caption -}}</p>
+								{% endblock %}
+							{% endembed %}
+						{% endif %}
+					</div>
+				{% endif %}
+
+				{% if layout.item_1.image %}
+					<div class="col-md-4">
+						{{- include( 'components/image.html.twig', { classes: [ 'd-block', 'w-100', 'h-auto' ], size: 'size-4', image: layout.item_1.image } ) -}}
+
+						{% if layout.item_1.caption %}
+							{% embed 'components/text-in-view.html.twig' %}
+								{% block content %}
+									<p class="mt-12 mb-0 Layout__caption font-family-title">{{- layout.item_1.caption -}}</p>
+								{% endblock %}
+							{% endembed %}
+						{% endif %}
+					</div>
+				{% endif %}
+
+			</div>
+		</div>
+	</div>
+{% endif %}

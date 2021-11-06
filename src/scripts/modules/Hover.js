@@ -13,15 +13,14 @@ class Hover extends M {
 			height: 0,
 			color: '#000000',
 		};
+
+		this.events = {
+			mouseenter: 'handleMouseenter',
+			mouseleave: 'handleMouseleave',
+		}
 	}
 
 	init() {
-		this.handleMouseenter = this.handleMouseenter.bind(this);
-		this.handleMouseleave = this.handleMouseleave.bind(this);
-
-		this.el.addEventListener('mouseenter', this.handleMouseenter);
-		this.el.addEventListener('mouseleave', this.handleMouseleave);
-
 		const { offsetWidth: width, offsetHeight: height } = this.$('canvas')[0];
 
 		this.$('canvas')[0].width = width;

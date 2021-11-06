@@ -1,14 +1,20 @@
-/* global imagesLoaded, matthieuteyssandier */
+/* global matthieuteyssandier */
 import modular from 'modujs';
+import Guid from 'vendors/Guid';
 import * as modules from 'modules';
 import Loader from 'vendors/Loader';
-import { html, scroll } from 'utils/environment';
+import { html, scroll, production } from 'utils/environment';
 import favicon from 'utils/favicon';
-import globals from './globals';
 
 const { colors } = matthieuteyssandier;
 
 favicon(colors[Math.floor(Math.random() * colors.length)]);
+
+if (false === production) {
+	const guid = new Guid(16);
+
+	guid.init();
+}
 
 // eslint-disable-next-line new-cap
 const app = new modular({
@@ -16,8 +22,6 @@ const app = new modular({
 });
 
 function init() {
-	globals();
-
 	app.init(app);
 
 	html.classList.add('is-loaded');
@@ -31,23 +35,21 @@ function init() {
 	});
 }
 
-window.onload = () => {
-	const $style = document.getElementById('matthieuteyssandier-main-css');
+window.onload = async () => {
+	const $style = document.getElementById(`${matthieuteyssandier.text_domain}-main-css`);
 	const loader = new Loader();
 	loader.init();
 
+	await loader.timeline.play();
 
-	imagesLoaded(document.querySelector('.page-content'), async () => {
-		await loader.timeline.play();
-
-		if ($style) {
-			if ($style.isLoaded) {
-				init();
-			} else {
-				$style.addEventListener('load', () => init());
-			}
+	if ($style) {
+		if ($style.isLoaded) {
+			init();
 		} else {
-			console.warn('The "main-css" stylesheet not found');
+			$style.addEventListener('load', () => init());
 		}
-	});
+	} else {
+		console.warn(`"${matthieuteyssandier.text_domain}-main-css" stylesheet not found`);
+	}
+
 };

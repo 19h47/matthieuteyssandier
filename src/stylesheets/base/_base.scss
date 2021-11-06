@@ -77,29 +77,6 @@ hr {
 	background-color: var(--gray-very-dark-02);
 }
 
-input[type='text'],
-input[type='email'] {
-	@include reset-placeholder(the_color(blue, dark-grayish));
-
-	@include padding(
-		top #{$scale-factor * 2}px right #{$scale-factor * 2}px bottom #{$scale-factor * 2}px left #{$scale-factor *
-			2}px
-	);
-	@extend .w-100;
-
-	border: 1px solid the_color(red, very-dark);
-}
-
-textarea {
-	@extend .w-100;
-
-	border: 1px solid the_color(red, very-dark);
-}
-
-input[type='submit'] {
-	@extend .Button;
-}
-
 .Fade-inview {
 	&[data-scroll] {
 		@include autoAlpha(0);

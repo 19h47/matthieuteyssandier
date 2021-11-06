@@ -6,15 +6,24 @@
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 
-<div class="Layout Layout-image" data-scroll>
+<div class="Layout mt-80 mb-80 position-relative Layout-image" data-scroll>
 	<div class="Site-container">
 		<div class="row">
-			<div class="col-md-5 offset-md-7">
-				{{- include( 'components/image.html.twig', { image: layout.image, size: 'full' } ) -}}
+			<div class="col-lg-4 offset-lg-8">
+				{{-
+					include(
+						'components/image.html.twig',
+						{
+							classes: [ 'd-block', 'w-100', 'h-auto' ],
+							image: layout.image,
+							size: 'size-4'
+						}
+					)
+				-}}
 				{%- if layout.caption -%}
 					{% embed 'components/text-in-view.html.twig' %}
 						{% block content %}
-							<p class="Layout__caption">{{- layout.caption }}</p>
+							<p class="mt-12 mb-0 Layout__caption">{{- layout.caption }}</p>
 						{% endblock %}
 					{% endembed %}
 				{% endif %}

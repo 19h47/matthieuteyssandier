@@ -5,15 +5,25 @@
  # @subpackage MatthieuTeyssandier
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
-<div class="Layout Layout-image-full">
 
-	<div class="row g-0">
-		<div data-scroll data-module-expand="{{ uniqid() }}">
-			{{- include( 'components/image.html.twig', { image: layout.image, size: 'full' } ) -}}
-			{{- include( 'components/video-player.html.twig', { video: layout.video } ) -}}
+<div class="Layout position-relative mt-80 mb-80 Layout-image-full">
+	<div class="Site-container">
+		<div class="row g-0">
+			<div data-scroll data-module-expand="{{ uniqid() }}">
+				{{-
+					include(
+						'components/image.html.twig',
+						{
+							classes: [ 'd-block', 'w-100', 'h-auto' ],
+							size: 'size-12',
+							image: layout.image
+						},
+						with_context = false
+					)
+				-}}
+				{{- include( 'components/video-player.html.twig', { video: layout.video } ) -}}
+			</div>
 		</div>
 	</div>
-
 	{{- include( 'layouts/caption.html.twig', { caption: layout.caption } ) -}}
-
 </div>

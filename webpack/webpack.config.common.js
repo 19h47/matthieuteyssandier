@@ -33,6 +33,13 @@ module.exports = {
 		jquery: 'jQuery',
 		$: 'jQuery',
 	},
+	optimization: {
+		splitChunks: {
+			// include all types of chunks
+			chunks: 'all',
+			name: 'vendors'
+		},
+	},
 	resolve: {
 		alias: {
 			'@': resolve('src'),

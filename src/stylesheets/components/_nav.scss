@@ -1,17 +1,17 @@
 /**
  * Nav
+ *
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
  */
+
 .Nav {
-	@include fixed(top 0 right 0 bottom 0 left 0);
-	@include size(100%);
 	@include autoAlpha(0);
 
 	transition: opacity 1.5s map-get($easings, ease-out-expo),
 		visibility 1.5s map-get($easings, ease-out-expo);
 	will-change: opacity, visibility;
 	transition-delay: 1.5s;
-
-	z-index: 10;
 
 	@at-root .has-nav-open & {
 		@include autoAlpha(1);
@@ -20,8 +20,6 @@
 	}
 
 	&__header {
-		@include margin(top 34px);
-
 		will-change: clip-path;
 		clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
 		transition: clip-path 1.5s map-get($easings, ease-out-expo);

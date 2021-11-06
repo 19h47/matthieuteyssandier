@@ -5,14 +5,14 @@
  # @subpackage MatthieuTeyssandier
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
-
 <!DOCTYPE html>
-<!--[if IE 9]>
-<html {{ html_class( 'ie9 no-js no-touch is-ontop is-loading' ) }} {{ site.language_attributes }}>
-<![endif]-->
-<!--[if !(IE 9)]><!-->
-<html {{ site.language_attributes }} {{ html_class( 'no-js no-touch is-ontop is-loading' ) }}>
-<!--<![endif]-->
+<html
+    itemscope
+    itemtype="http://schema.org/WebPage"
+    {{ html_class( 'no-js no-touch is-ontop is-loading' ) }}
+    {{ site.language_attributes }}
+    data-template="{{ template | default( 'index' ) }}"
+>
 
 	<head>
 
@@ -22,17 +22,11 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
 		<meta name="format-detection" content="telephone=no">
 
-		<link rel="stylesheet" href="https://use.typekit.net/waj2avu.css">
-
 		{{ function( 'wp_head' ) }}
 
 	</head>
 
 	<body data-module-load="main" data-theme-url="{{ current_url }}">
-
-		<canvas class="Transition" data-module-transition></canvas>
-
-		<div class="Loader js-loader"></div>
 
 		{% block header %}
 			{{- include( 'header.html.twig', { classes: [] } ) -}}
@@ -75,6 +69,26 @@
 		{% endblock %}
 
 		{{ function( 'wp_footer' ) }}
+
+		<canvas class="top-0 bottom-0 position-absolute end-0 start-0 h-100 w-100 pe-none z-index-5" data-module-nav-backdrop></canvas>
+
+		<nav class="top-0 bottom-0 Nav z-index-10 position-fixed end-0 start-0 h-100 w-100" data-module-nav>
+			<div class="Site-container">
+				<div class="row">
+					<div>
+						<header class="mt-32 Nav__header">
+							<button class="text-uppercase" type="button" data-module-nav-button data-nav-button-function="close">
+								{{- __( 'Quitter le menu', 'matthieuteyssandier' ) -}}
+							</button>
+						</header>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<div class="top-0 bottom-0 Loader position-fixed end-0 start-0 d-flex align-items-center justify-content-center background-color-orange-light-grayish z-index-100 js-loader"></div>
+
+		<canvas class="top-0 bottom-0 position-fixed end-0 start-0 h-100 w-100 pe-none z-index-200" data-module-transition></canvas>
 
 		<div id="svg-sprite" class="d-none">{{- include( 'icons.svg' ) -}}</div>
 

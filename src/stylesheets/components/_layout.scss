@@ -8,9 +8,6 @@
 .Layout {
 	$this: &;
 
-	@extend %position-relative;
-	@include margin(top #{$scale-factor * 10}px bottom #{$scale-factor * 10}px);
-
 	&__content {
 		@include letter-spacing(-20);
 
@@ -19,9 +16,6 @@
 	}
 
 	&__caption {
-		@include margin(top #{$scale-factor * 1.5}px bottom 0);
-		@extend %font-family-title;
-
 		line-height: (28/16);
 	}
 
@@ -38,51 +32,6 @@
 		.Video-player,
 		img {
 			opacity: 1;
-		}
-	}
-
-	// .Layout.Layout-image
-	&#{&}-image {
-		img {
-			@extend .d-block;
-			@include size(100%, auto);
-		}
-	}
-
-	// .Layout.Layout-large-image
-	&#{&}-large-image {
-		img {
-			@extend .d-block;
-			@include size(100%, auto);
-		}
-	}
-
-	// .Layout.Layout-two-images
-	&#{&}-two-images {
-		img {
-			@extend .d-block;
-			@include size(100%, auto);
-		}
-	}
-
-	// .Layout.Layout-image-full
-	&#{&}-image-full {
-		img {
-			@extend .d-block;
-			@include size(100%, auto);
-		}
-	}
-
-	// .Layout.Layout-image-text
-	&#{&}-image-text {
-		img {
-			@extend .d-block;
-			@include size(100%, auto);
-		}
-
-		.Layout__content {
-			font-size: 28px;
-			line-height: (39/28);
 		}
 	}
 }

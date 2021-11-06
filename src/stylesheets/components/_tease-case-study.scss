@@ -4,9 +4,9 @@
  * @package WordPress
  * @subpackage MatthieuTeyssandier
  */
-.Tease-case-study {
-	@extend %position-relative;
 
+/*!purgecss start ignore */
+.Tease-case-study {
 	&:hover,
 	&:focus {
 		img {
@@ -28,53 +28,28 @@
 		@extend .d-none;
 	}
 
-	&__link {
-		@extend .d-block;
-		@include absolute(top 0 right 0 bottom 0 left 0);
-
-		z-index: 2;
-	}
-
 	&__title {
-		@extend %font-family-title, %margin-top-16, %text-transform-uppercase;
-		@extend .d-flex;
-
 		font-size: 24px;
 		line-height: (29/24);
 
 		svg {
-			@extend %margin-left-auto;
-			@include margin(top 7px);
-
 			@include size(18.72px, 16.49px);
 		}
 	}
 
 	&__body {
 		@include padding(bottom percentage(611/600));
-		@extend %position-relative;
 
-		z-index: 1;
+		border-radius: 6px;
 
 		img {
-			@include absolute(top 0 right 0 bottom 0 left 0);
-			@include size(100%);
-
 			object-fit: cover;
 			object-position: center;
 
 			transition: filter 1.5s map-get($easings, ease-out-expo);
 			filter: grayscale(100%);
 			will-change: filter;
-
-			z-index: 1;
-		}
-
-		canvas {
-			@include absolute(top 0 right 0 bottom 0 left 0);
-			@include size(100%);
-
-			z-index: 2;
 		}
 	}
 }
+/*! purgecss end ignore */

@@ -19,8 +19,10 @@ class Enqueue {
 	 * @return void
 	 */
 	public function run() : void {
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_style' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'dequeue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'wp_head', array( $this, 'preload' ), 0 );
 		add_filter( 'style_loader_tag', array( $this, 'style_loader_tag' ), 10, 4 );
 	}
 
@@ -32,20 +34,23 @@ class Enqueue {
 	 * @since  1.0.0
 	 */
 	public function enqueue_scripts() : void {
+		$deps = array();
+
 		wp_deregister_script( 'wp-embed' );
 
-		wp_enqueue_script(
-			'imagesloaded',
-			'//unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js',
+		wp_enqueue_script( // phpcs:ignore
+			get_theme_text_domain() . '-vendors',
+			get_template_directory_uri() . '/' . get_theme_manifest()['vendors.js'],
 			array(),
 			null,
 			true
 		);
+		array_push( $deps, get_theme_text_domain() . '-vendors' );
 
 		wp_register_script( // phpcs:ignore
 			get_theme_text_domain() . '-main',
 			get_template_directory_uri() . '/' . get_theme_manifest()['main.js'],
-			array( 'feature', 'imagesloaded' ),
+			$deps,
 			null,
 			true
 		);
@@ -57,7 +62,7 @@ class Enqueue {
 			)
 		);
 
-		$args = array(
+		$data = array(
 			'template_directory_uri' => get_template_directory_uri(),
 			'base_url'               => site_url(),
 			'home_url'               => home_url( '/' ),
@@ -65,30 +70,25 @@ class Enqueue {
 			'api_url'                => home_url( 'wp-json' ),
 			'current_url'            => get_permalink(),
 			'nonce'                  => wp_create_nonce( 'security' ),
+			'text_domain'            => get_theme_text_domain(),
 			'colors'                 => array_map(
 				fn( $case_study ) => get_field( 'color', $case_study->ID ),
 				$case_studies,
 			),
 		);
 
-		wp_localize_script(
-			get_theme_text_domain() . '-main',
-			get_theme_text_domain(),
-			$args,
-		);
-
-		wp_enqueue_script( // phpcs:ignore
-			'feature',
-			'//cdnjs.cloudflare.com/ajax/libs/feature.js/1.1.0/feature.min.js',
-			array(),
-			null,
-			false
-		);
-
 		wp_add_inline_script(
-			'feature',
-			'document.documentElement.className=document.documentElement.className.replace("no-js","js"),feature.touch&&!navigator.userAgent.match(/Trident\/(6|7)\./)&&(document.documentElement.className=document.documentElement.className.replace("no-touch","touch"));'
+			get_theme_text_domain() . '-main',
+			'var matthieuteyssandier = ' . json_encode(
+				$data
+			),
+			'before',
 		);
+
+		wp_register_script( get_theme_text_domain() . '-feature', false );
+		wp_add_inline_script( get_theme_text_domain() . '-feature', 'window.isMobile=/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)||1<navigator.maxTouchPoints;!function(e,n,o){("ontouchstart"in e||e.DocumentTouch&&n instanceof DocumentTouch||o.MaxTouchPoints>0||o.msMaxTouchPoints>0)&&(n.documentElement.className=n.documentElement.className.replace(/\bno-touch\b/,"touch")),n.documentElement.className=n.documentElement.className.replace(/\bno-js\b/,"js")}' );
+
+		wp_enqueue_script( get_theme_text_domain() . '-feature' );
 
 		wp_enqueue_script( get_theme_text_domain() . '-main' );
 	}
@@ -101,7 +101,7 @@ class Enqueue {
 	 * @return void
 	 * @since  1.0.0
 	 */
-	public function enqueue_style() : void {
+	public function enqueue_styles() : void {
 
 		// Add custom fonts, used in the main stylesheet.
 		$webfonts = array();
@@ -109,10 +109,6 @@ class Enqueue {
 			wp_register_style( 'font-' . $name, $url, array(), '1.0.0' );
 			$webfonts[] = "font-$name";
 		}
-
-		wp_dequeue_style( 'wp-block-library' );
-		wp_dequeue_style( 'dashicons' );
-		wp_dequeue_style( 'searchwp-live-search' );
 
 		// Theme stylesheet.
 		wp_register_style( // phpcs:ignore
@@ -125,6 +121,13 @@ class Enqueue {
 		wp_enqueue_style( get_theme_text_domain() . '-main' );
 	}
 
+
+
+	public function dequeue_styles() {
+		wp_dequeue_style( 'wp-block-library' );
+		wp_dequeue_style( 'wp-block-library-theme' );
+		wp_dequeue_style( 'wc-block-style' );
+	}
 
 	/**
 	 * Style Loader Tag
@@ -142,5 +145,50 @@ class Enqueue {
 		}
 
 		return $html;
+	}
+
+
+	/**
+	 * Preload
+	 */
+	function preload() {
+		global $wp_scripts, $wp_styles;
+
+		// Scripts
+		foreach ( $wp_scripts->queue as $handle ) {
+			$script = $wp_scripts->registered[ $handle ];
+
+			if ( substr( $script->handle, 0, strlen( get_theme_text_domain() ) ) !== get_theme_text_domain() ) {
+				continue;
+			}
+
+			if ( isset( $script->extra['group'] ) && 1 === $script->extra['group'] ) {
+				$href = $script->src . ( $script->ver ? "?ver={$script->ver}" : '' );
+				echo '<link rel="preload" as="script" href="' . $href . '">';
+			}
+		}
+
+		// Styles
+		foreach ( $wp_styles->queue as $handle ) {
+			$style = $wp_styles->registered[ $handle ];
+
+			if ( substr( $style->handle, 0, strlen( get_theme_text_domain() ) ) !== get_theme_text_domain() ) {
+				continue;
+			}
+
+			$href = $style->src . ( $style->ver ? "?ver={$style->ver}" : '' );
+			echo '<link rel="preload" as="style" href="' . $href . '">';
+
+		}
+
+		// Fonts
+		foreach ( get_theme_manifest() as $key => $value ) {
+			if ( substr( $key, 0, 6 ) === 'fonts/' ) {
+				$extension = pathinfo( $key, PATHINFO_EXTENSION );
+				$href      = get_template_directory_uri() . '/' . $value;
+
+				echo '<link rel="preload" as="font" href="' . $href . '" type="font/' . $extension . '" crossorigin>';
+			}
+		}
 	}
 }

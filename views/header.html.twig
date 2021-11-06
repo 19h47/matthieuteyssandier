@@ -6,19 +6,20 @@
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 
-<div class="Site-header">
+<div class="pt-32 pe-none pb-84 z-index-15 position-relative">
 	<div class="Site-container">
 		<div class="row">
 			<div class="col-md-4 offset-md-2">
-				<div class="Site-title Pointer-events-auto">
+				<div class="Site-title pe-auto font-family-title d-flex align-items-center">
 
-					<a class="margin-right-4" href="{{ site.link }}">{{- site.title -}}</a>
+					<a class="me-4" href="{{ site.link }}">{{- site.title -}}</a>
 
-					<div class="Color-picker" data-module-color-picker style="width: 20px;">
-						<ul>
+					<div class="overflow-hidden Color-picker position-relative" data-module-color-picker style="width: 20px;">
+						<ul class="list-style-type-none d-flex">
 							{% for case in case_studies %}
 								<li style="z-index: {{ ( case_studies | length ) - loop.index }};">
 									<button
+										class="d-block"
 										type="button"
 										aria-label="{{ case.title }}"
 										style="background-color: {{ case.meta( 'color' ) }};"
@@ -31,14 +32,14 @@
 						</ul>
 					</div>
 
-					<a class="margin-left-4" href="{{ site.link }}">{{- 'now' | date( 'Y' ) -}}</a>
+					<a class="ms-4" href="{{ site.link }}">{{- 'now' | date( 'Y' ) -}}</a>
 
 				</div>
 			</div>
 
 			<div class="col-md-4">
-				<div class="Socials Pointer-events-auto">
-					<ul>
+				<div class="Socials color-yellow-dark-grayish text-uppercase pe-auto">
+					<ul class="list-style-type-none">
 						{% for social in socials %}
 							<li><a href="{{ social.url }}">{{- social.title -}}</a></li>
 						{% endfor %}
@@ -47,7 +48,7 @@
 			</div>
 
 			<div class="col-md-2">
-				<div class="Site-introduction Pointer-events-auto">
+				<div class="Site-introduction text-uppercase color-yellow-dark-grayish pe-auto">
 					<div>{{- __( 'Drop me a line for freelance work', 'matthieuteyssandier' ) -}}</div>
 					<div class="break"><a href="mail:{{ public_email }}">{{- public_email -}}</a></div>
 					<div>{{- __( 'Available in Freelance', 'matthieuteyssandier' ) -}}</div>
@@ -56,18 +57,3 @@
 		</div>
 	</div>
 </div>
-
-<nav class="Nav" data-module-nav>
-	<div class="Site-container">
-		<div class="row">
-			<div>
-				<header class="Nav__header">
-					<button class="text-transform-uppercase" type="button" data-module-nav-button data-nav-button-function="close">
-						{{- __( 'Quitter le menu', 'matthieuteyssandier' ) -}}
-					</button>
-				</header>
-			</div>
-		</div>
-	</div>
-</nav>
-<canvas class="Nav-backdrop" data-module-nav-backdrop></canvas>

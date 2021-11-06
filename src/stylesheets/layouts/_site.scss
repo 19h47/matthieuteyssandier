@@ -5,6 +5,7 @@
  * @subpackage MatthieuTeyssandier
  * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  */
+
 .Site {
 	/**
 	 * Site container
@@ -14,20 +15,14 @@
 	 * @uses .Site-container
 	 */
 	&-container {
+		@extend .position-relative, .my-0, .mx-auto;
+		@include padding(right var(--bs-gutter-x) left var(--bs-gutter-x));
+
 		// max-width: $container-width;
 		width: 100%;
-
-		@extend %position-relative;
-
-		@include margin(top 0 right auto bottom 0 left auto);
-
-		@include padding(right var(--bs-gutter-x) left var(--bs-gutter-x));
 	}
 
 	&-title {
-		@extend %font-family-title;
-		@extend .d-flex, .align-items-center;
-
 		font-size: 25.8064px;
 		line-height: (31/25.8064);
 
@@ -42,17 +37,13 @@
 
 	&-description {
 		@include letter-spacing(-20);
-		@extend %font-family-title, %margin-top-0;
 
 		font-size: 56px;
 		line-height: (67/56);
 	}
 
 	&-introduction {
-		@extend %text-transform-uppercase;
-
 		line-height: (18/16);
-		color: the_color(yellow, dark-grayish);
 
 		& > div {
 			will-change: clip-path;

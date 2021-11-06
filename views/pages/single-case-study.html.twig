@@ -14,7 +14,7 @@
 			<div>
 				{% embed 'components/text-in-view.html.twig' %}
 					{% block content %}
-						<h1 class="text-align-center text-transform-uppercase">{{- post.title -}}</h1>
+						<h1 class="m-0 text-center text-uppercase">{{- post.title -}}</h1>
 					{% endblock %}
 				{% endembed %}
 			</div>
@@ -35,6 +35,7 @@
 						include(
 							'components/tease-case-study.html.twig',
 							{
+								size: 'size-9',
 								case: {
 									id: post.prev.id,
 									thumbnail: post.prev.thumbnail, color: post.prev.meta( 'color' ),

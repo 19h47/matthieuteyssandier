@@ -9,7 +9,7 @@
 
 <div
 	id="{{ id }}"
-	class="Tease-case-study{{ classes ? ' ' ~ classes | join( ' ' ) : '' }}"
+	class="Tease-case-study position-relative{{ classes ? ' ' ~ classes | join( ' ' ) : '' }}"
 	data-module-hover
 	data-hover-color="{{ case.color }}"
 	data-reveal-color="{{ case.color }}"
@@ -18,17 +18,28 @@
 	data-scroll-id="{{ id }}"
 	data-module-reveal="{{ id }}"
 >
-	<a class="Tease-case-study__link" href="{{ case.link }}"{{ case.title ? " aria-label=\"#{ case.title }\"" : '' }} data-load="caseStudy"></a>
-	<div class="Tease-case-study__body">
-		<canvas data-hover="canvas" data-reveal="canvas"></canvas>
-		{{- include( 'components/image.html.twig', { attributes: { style: 'opacity: 0; visibility: hidden;', 'data-reveal': 'image' }, image: case.thumbnail, size: size | default( 'large' ) } ) -}}
+	<a class="top-0 bottom-0 d-block position-absolute end-0 start-0 z-index-2" href="{{ case.link }}"{{ case.title ? " aria-label=\"#{ case.title }\"" : '' }} data-load="caseStudy"></a>
+	<div class="overflow-hidden Tease-case-study__body position-relative z-index-1">
+		<canvas class="top-0 bottom-0 position-absolute end-0 start-0 h-100 w-100 z-index-2" data-hover="canvas" data-reveal="canvas"></canvas>
+		{{-
+			include(
+				'components/image.html.twig',
+				{
+					size: size | default( 'size-2' ),
+					attributes: { style: 'opacity: 0; visibility: hidden;', 'data-reveal': 'image' },
+					image: case.thumbnail, size: size | default( 'large' ),
+					classes: [ 'position-absolute', 'top-0', 'end-0', 'bottom-0', 'start-0', 'h-100', 'w-100', 'z-index-1' ],
+				},
+				with_context = false
+			)
+		-}}
 	</div>
 
 	{% embed 'components/text-in-view.html.twig' %}
 		{% block content %}
-			<span class="Tease-case-study__title">
+			<span class="mt-16 Tease-case-study__title font-family-title text-uppercase d-flex">
 				{{- case.title -}}
-				{{- include( 'svg/use.html.twig', { icon: 'arrow-right' }, with_context = false ) -}}
+				{{- include( 'svg/use.html.twig', { classes: [ 'mt-8', 'ms-auto' ], icon: 'arrow-right' }, with_context = false ) -}}
 			</span>
 		{% endblock %}
 	{% endembed %}

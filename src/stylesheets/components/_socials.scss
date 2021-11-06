@@ -4,15 +4,9 @@
  * @package WordPress
  * @subpackage MatthieuTeyssandier
  */
+
 .Socials {
-	@extend %text-transform-uppercase;
-
 	line-height: (18/16);
-	color: the_color(yellow, dark-grayish);
-
-	ul {
-		@extend %list-style-type-none;
-	}
 
 	li {
 		will-change: clip-path;
@@ -22,8 +16,5 @@
 		@at-root .is-first-hit & {
 			clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 		}
-	}
-
-	a {
 	}
 }

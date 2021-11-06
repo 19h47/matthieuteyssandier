@@ -31,6 +31,7 @@ class Init {
 			Taxonomy\CaseStudyCat::class,
 			PostTemplate\BodyClass::class,
 			WPImageEditor::class,
+			Media::class,
 		);
 	}
 

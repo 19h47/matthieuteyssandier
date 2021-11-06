@@ -7,7 +7,7 @@
  * @subpackage MatthieuTeyssandier
  */
 .Guid {
-	@extend %Pointer-events-none;
+	@extend.pe-none;
 
 	z-index: 10000;
 
