@@ -5,7 +5,6 @@ import diameter from 'utils/math';
 import gsap from 'gsap';
 
 class Transition extends M {
-
 	init() {
 		const { offsetWidth: width, offsetHeight: height } = this.el;
 
@@ -16,22 +15,24 @@ class Transition extends M {
 		this.color = '#000000';
 
 		this.context = this.el.getContext('2d');
+
+		this.mouse = {
+			x: 0,
+			y: 0,
+		};
 	}
 
 	enter() {
-		this.x = scroll.x;
-		this.y = scroll.y;
-		this.radius = diameter(this.el.width, this.el.height, this.x, this.y);
-		// this.color = color;
+		const { x, y } = scroll;
 
-		console.log(scroll);
+		this.radius = diameter(this.el.width, this.el.height, x, y);
 
 		const props = {
 			height: this.el.height,
 			width: this.el.width,
 			color: this.color,
-			x: this.x,
-			y: this.y,
+			x,
+			y,
 			radiusX: 0,
 		};
 
@@ -43,15 +44,11 @@ class Transition extends M {
 		});
 	}
 
-
-
 	exit() {
 		const props = {
 			height: this.el.height,
 			width: this.el.width,
 			color: this.color,
-			x: this.x,
-			y: this.y,
 			radiusX: this.radius,
 		};
 
@@ -59,8 +56,12 @@ class Transition extends M {
 			duration: 1,
 			ease: 'power4.out',
 			radiusX: 0,
-			onUpdate: () => drawEllipse(props, this.context, true),
+			onUpdate: () => drawEllipse({ ...props, ...{ x: scroll.x, y: scroll.y } }, this.context, true),
 		});
+	}
+
+	set({ color }) {
+		this.color = color;
 	}
 }
 

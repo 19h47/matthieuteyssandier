@@ -26,11 +26,19 @@
 	{% if post.prev %}
 		<div class="Site-container">
 			<div class="row">
-				<div class="col-md-3 d-md-flex flex-md-column justify-content-md-between">
-					<a href="{{ post.prev.link }}" data-load="caseStudy">Next</a>
-					<a href="{{ post.prev.link }}" data-load="caseStudy">Suivant</a>
+				<div class="col-lg-3 d-lg-flex flex-lg-column justify-content-lg-between mb-lg-40">
+					{% embed 'components/text-in-view.html.twig' %}
+						{% block content %}
+							<a class="Navigation-link text-uppercase" href="{{ post.prev.link }}" data-load="caseStudy" data-module-transition-button data-transition-button-color="{{ post.prev.meta( 'color' ) | default( '#000000' ) }}">Next</a>
+						{% endblock %}
+					{% endembed %}
+					{% embed 'components/text-in-view.html.twig' %}
+						{% block content %}
+							<a class="Navigation-link color-yellow-dark-grayish text-uppercase" href="{{ post.prev.link }}" data-load="caseStudy" data-module-transition-button data-transition-button-color="{{ post.prev.meta( 'color' ) | default( '#000000' ) }}">Suivant</a>
+						{% endblock %}
+					{% endembed %}
 				</div>
-				<div class="col-md-9">
+				<div class="mt-40 col-lg-9 mt-lg-0">
 					{{-
 						include(
 							'components/tease-case-study.html.twig',
@@ -38,7 +46,8 @@
 								size: 'size-9',
 								case: {
 									id: post.prev.id,
-									thumbnail: post.prev.thumbnail, color: post.prev.meta( 'color' ),
+									thumbnail: post.prev.thumbnail,
+									color: post.prev.meta( 'color' ),
 									title: post.prev.title,
 									link: post.prev.link
 								}

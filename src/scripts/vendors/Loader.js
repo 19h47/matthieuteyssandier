@@ -18,7 +18,7 @@ class Loader {
 
 		this.timeline.to(
 			this.el,
-			{ duration: 1.5, autoAlpha: 0 },
+			{ duration: 0.1, autoAlpha: 0 },
 		);
 	}
 }

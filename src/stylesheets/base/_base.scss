@@ -27,21 +27,13 @@ body {
 
 	text-rendering: optimizeLegibility;
 
-	font-size: 24px;
-	line-height: (30.4/24);
-
+	line-height: clamp(
+		(24/16),
+		(($base-line-height / $base-font-size) * 100) / 1920,
+		($base-line-height / $base-font-size)
+	);
+	font-size: clamp(16px, #{($base-font-size * 100) / 1920}vw, #{$base-font-size}px);
 	color: the_color(red, very-dark);
-
-	@include media-breakpoint-up(md) {
-		font-size: #{$base-font-size}px;
-		line-height: $base-line-height / $base-font-size;
-	}
-
-	// @include media-breakpoint-up(xl) {
-	// 	font-size: unquote(
-	// 		'min(max( #{$base-font-size}px, #{($base-font-size * 100) / 1440}vw), #{$base-font-size-max}px)'
-	// 	);
-	// }
 
 	@include margin(bottom unquote('env(safe-area-inset-bottom)'));
 }

@@ -26,7 +26,7 @@
 			</div>
 
 			{% if layout.content.french or layout.content.english %}
-				<div class="col-lg-4">
+				<div class="col-lg-4 mt-80 mt-lg-0">
 					{{- include( 'layouts/content.html.twig', { french: layout.content.french, english: layout.content.english } ) -}}
 				</div>
 			{% endif %}

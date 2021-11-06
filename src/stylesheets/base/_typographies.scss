@@ -8,13 +8,8 @@ h1,
 	@include margin(top 0.5em bottom 0.5em);
 	@include letter-spacing(92);
 
-	font-size: em(45);
-	font-size: (43/45);
-
-	@include media-breakpoint-up(md) {
-		font-size: em(115);
-		line-height: (114/115);
-	}
+	font-size: clamp(40px, #{(140 * 100) / 1920}vw, 140px);
+	line-height: 1;
 }
 
 h2,

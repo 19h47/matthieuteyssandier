@@ -32,7 +32,7 @@
 			{{- include( 'header.html.twig', { classes: [] } ) -}}
 		{% endblock %}
 
-		<div class="Site-wrapper" data-load-container data-load="container">
+		<div class="Site-wrapper" data-load-container data-load="container" data-color="{{ post.meta( 'color' ) | default( '#000000' ) }}">
 			<div id="{{ post.id ? "page-#{post.id}" : 'page' }}" {{ body_class( 'page-content' ) }} data-module-scroll="main">
 
 

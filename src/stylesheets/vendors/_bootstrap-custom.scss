@@ -6,19 +6,13 @@
 // 2. Include any default variable overrides here
 @import 'bootstrap-variables';
 
-$spacers: (
-	auto: auto,
-);
+// 3. Include remainder of required Bootstrap stylesheets
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
 
 @for $i from 0 to 33 {
 	$spacers: map-merge($spacers, (#{($i * (8 / 2))}: #{$i * (8 / 2)}px));
 }
-
-@warn $spacers;
-
-// 3. Include remainder of required Bootstrap stylesheets
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
 
 // 4. Include any optional Bootstrap components as you like
 @import '~bootstrap/scss/grid';

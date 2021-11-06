@@ -18,7 +18,7 @@
 	data-scroll-id="{{ id }}"
 	data-module-reveal="{{ id }}"
 >
-	<a class="top-0 bottom-0 d-block position-absolute end-0 start-0 z-index-2" href="{{ case.link }}"{{ case.title ? " aria-label=\"#{ case.title }\"" : '' }} data-load="caseStudy"></a>
+	<a class="top-0 bottom-0 d-block position-absolute end-0 start-0 z-index-2" href="{{ case.link }}"{{ case.title ? " aria-label=\"#{ case.title }\"" : '' }} data-load="caseStudy" data-module-transition-button data-transition-button-color="{{ case.color | default( '#000000' ) }}"></a>
 	<div class="overflow-hidden Tease-case-study__body position-relative z-index-1">
 		<canvas class="top-0 bottom-0 position-absolute end-0 start-0 h-100 w-100 z-index-2" data-hover="canvas" data-reveal="canvas"></canvas>
 		{{-

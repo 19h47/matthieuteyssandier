@@ -24,6 +24,12 @@ class Load extends M {
 
 			if ('caseStudy' === transition) {
 				this.call('enter', null, 'Transition');
+
+				setTimeout(() => {
+					window.scrollTo(0, 0);
+				}, 1500)
+
+				return;
 			}
 
 			gsap.to(oldContainer, {
@@ -43,18 +49,20 @@ class Load extends M {
 		});
 
 		load.on('ready', (transition, newContainer) => {
-			console.info('Load.ready!', transition);
+			console.info('Load.ready', transition);
+
+			this.call('update', newContainer, 'app');
 
 			if ('caseStudy' === transition) {
 				this.call('exit', null, 'Transition');
 			}
 
-			gsap.to(newContainer, {
-				delay: 'caseStudy' === transition ? 0.5 : 0,
-				duration: 0.5,
-				opacity: 1,
-				onStart: () => this.call('update', newContainer, 'app'),
-			});
+			gsap.to(newContainer, { duration: 0.5, opacity: 1 });
+		});
+
+		load.on('images', () => {
+			console.log('Load.images');
+			this.call('update', null, 'Scroll', 'main');
 		});
 	}
 }

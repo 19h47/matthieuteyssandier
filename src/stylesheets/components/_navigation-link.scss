@@ -1,0 +1,11 @@
+/**
+ * Navigation link
+ *
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
+ */
+
+.Navigation-link {
+	line-height: (80/80);
+	font-size: clamp(40px, #{(80 * 100) / 1920}vw, 80px);
+}

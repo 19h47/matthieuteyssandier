@@ -176,11 +176,3 @@ $directories: (
 	png: '../img/png/',
 	gif: '../img/gif/',
 );
-
-@mixin font-size-max($font-size) {
-	@include media-breakpoint-up(xl) {
-		font-size: unquote(
-			'clamp( #{$font-size}px, #{($font-size * 100) / 1440}vw, #{($font-size * $base-font-size-max)/$base-font-size}px )'
-		);
-	}
-}

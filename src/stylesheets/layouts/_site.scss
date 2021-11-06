@@ -23,12 +23,13 @@
 	}
 
 	&-title {
-		font-size: 25.8064px;
 		line-height: (31/25.8064);
 
 		will-change: clip-path;
 		clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
 		transition: clip-path 1.5s map-get($easings, ease-out-expo);
+
+		font-size: clamp(12.9032px, #{(25.8064 * 100) / 1920}vw, 25.8064px);
 
 		@at-root .is-first-hit & {
 			clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
@@ -38,8 +39,8 @@
 	&-description {
 		@include letter-spacing(-20);
 
-		font-size: 56px;
-		line-height: (67/56);
+		font-size: clamp(40px, #{(56 * 100) / 1920}vw, 56px);
+		line-height: (44/40);
 	}
 
 	&-introduction {
@@ -54,6 +55,13 @@
 				clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 			}
 		}
+	}
+
+	&-email {
+		font-family: get_font_family(title);
+		font-size: clamp(45px, #{(90 * 100) / 1920}vw, 90px);
+		line-height: (108/90);
+		word-wrap: break-word;
 	}
 }
 

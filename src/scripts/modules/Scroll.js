@@ -50,6 +50,7 @@ class Scroll extends M {
 	}
 
 	update() {
+		console.log('Scroll.update');
 		return this.scroll.update();
 	}
 
