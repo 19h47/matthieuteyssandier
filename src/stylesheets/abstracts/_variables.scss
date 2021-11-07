@@ -47,49 +47,6 @@ $color-variations: (
  */
 $font: (
 	/**
-	 * Font
-	 *
-	 * All fonts families found in the site are listed here
-	 *
-	 * @uses map-get( $font, $key ) to retrieve font value from map
-	 * @type map
-	 */
-		families:
-		(
-			body: (
-				'"Neue Montreal", sans-serif',
-			),
-			title: (
-				'"Rotonto", sans-serif',
-			),
-		),
-	/**
-	 * Font weights
-	 *
-	 * Each font weight used in the theme.
-	 *
-	 * @uses map-get( $font, weights ) to retrieve font weight value
-	 * @type map
-	 */
-		weights:
-		(
-			extralight: 100,
-			ultralight: 200,
-			fine: 250,
-			light: 300,
-			book: 350,
-			regular: 400,
-			medium: 500,
-			semibold: 600,
-			demi: 600,
-			demibold: 600,
-			bold: 700,
-			extrabold: 800,
-			extrablack: 900,
-			heavy: 900,
-			black: 900,
-		),
-	/**
 	 * Font styles
 	 *
 	 * Each font style used in the theme.

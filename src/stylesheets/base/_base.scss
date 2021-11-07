@@ -19,7 +19,7 @@ html {
 
 body {
 	@extend .background-color-orange-light-grayish;
-	@extend %font-family-body, %font-weight-regular;
+	@extend .font-weight-regular, .font-family-body;
 
 	-webkit-text-size-adjust: none;
 	-webkit-font-smoothing: subpixel-antialiased;
@@ -33,7 +33,6 @@ body {
 		($base-line-height / $base-font-size)
 	);
 	font-size: clamp(16px, #{($base-font-size * 100) / 1920}vw, #{$base-font-size}px);
-	color: the_color(red, very-dark);
 
 	@include margin(bottom unquote('env(safe-area-inset-bottom)'));
 }
@@ -55,7 +54,7 @@ p {
 
 strong,
 b {
-	font-weight: get_font_weight(bold);
+	@extend .font-weight-bold;
 }
 
 small {
@@ -67,18 +66,4 @@ hr {
 
 	border: none;
 	background-color: var(--gray-very-dark-02);
-}
-
-.Fade-inview {
-	&[data-scroll] {
-		@include autoAlpha(0);
-
-		transition: opacity 1.5s map-get($easings, ease-out-expo),
-			visibility 1.5s map-get($easings, ease-out-expo);
-		will-change: opacity, visibility;
-	}
-
-	&[data-scroll].is-inview {
-		@include autoAlpha(1);
-	}
 }

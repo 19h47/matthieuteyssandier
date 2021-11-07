@@ -238,7 +238,6 @@ class Theme {
 
 		$context['current_url'] = home_url( add_query_arg( array(), $wp->request ) );
 
-		$context['search_form']  = get_search_form( array( 'echo' => false ) );
 		$context['case_studies'] = Timber::get_posts(
 			array(
 				'post_type'      => 'case_study',

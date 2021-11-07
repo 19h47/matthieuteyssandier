@@ -35,10 +35,12 @@
 					-}}
 				</div>
 
-				{% if 9 == loop.index %}
+				{% if 9 == loop.index and ( post.meta( 'biography' ).english or post.meta( 'biography' ).french ) %}
 					<div class="col-lg-4 mt-80">
-						<p>{{- post.meta( 'biography' ).english | nl2br -}}</p>
-						<p class="mb-0">{{- post.meta( 'biography' ).french | nl2br -}}</p>
+						<div class="Wysiwyg">
+							{{- post.meta( 'biography' ).english ? "<p>#{ post.meta( 'biography' ).english | nl2br }</p>" : '' -}}
+							{{- post.meta( 'biography' ).french ? "<p class=\"color-yellow-dark-grayish\">#{ post.meta( 'biography' ).french | nl2br }</p>" : '' -}}
+						</div>
 					</div>
 				{% endif %}
 

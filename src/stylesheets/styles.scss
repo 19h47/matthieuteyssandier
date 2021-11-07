@@ -36,15 +36,10 @@
 
 // // Layout
 @import 'layouts/site';
-
-// // Pages
-// @import 'pages/error404';
-@import 'pages/front-page';
-@import 'pages/single-case-study';
+@import 'layouts/loader';
 
 // // Components
 @import 'components/guid';
-@import 'components/menu';
 @import 'components/layout';
 @import 'components/socials';
 @import 'components/wysiwyg';
@@ -52,7 +47,8 @@
 @import 'components/loader';
 @import 'components/color-picker';
 @import 'components/video-player';
-@import 'components/text-in-view';
+@import 'components/fade-inview';
+@import 'components/text-inview';
 @import 'components/nav';
 @import 'components/navigation-link';
 
@@ -61,7 +57,7 @@
 @import '~@19h47/architecture/src/stylesheets/utilities/cursors';
 // @import '~@19h47/architecture/src/stylesheets/utilities/displays';
 // // @import '~@19h47/architecture/src/stylesheets/utilities/floats';
-@import '~@19h47/architecture/src/stylesheets/utilities/fonts';
+// @import '~@19h47/architecture/src/stylesheets/utilities/fonts';
 // @import '~@19h47/architecture/src/stylesheets/utilities/margins';
 // @import '~@19h47/architecture/src/stylesheets/utilities/overflows';
 // @import '~@19h47/architecture/src/stylesheets/utilities/paddings';
@@ -73,4 +69,4 @@
 // @import '~@19h47/architecture/src/stylesheets/utilities/vertical-aligns';
 // // @import '~@19h47/architecture/src/stylesheets/utilities/visibilities';
 // @import '~@19h47/architecture/src/stylesheets/utilities/white-spaces';
-@import '~@19h47/architecture/src/stylesheets/utilities/lists';
+// @import '~@19h47/architecture/src/stylesheets/utilities/lists';

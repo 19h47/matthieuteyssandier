@@ -8,6 +8,10 @@
 
 .Wysiwyg {
 	p {
+		@include letter-spacing(-30);
+
+		font-size: 18px;
+		line-height: 1.5;
 		max-width: 90ch;
 	}
 

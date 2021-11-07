@@ -8,18 +8,18 @@
 {% if video.url %}
 	<div class="Video-player position-relative" data-module-video-player>
 		<button
-			class="top-0 bottom-0 Video-player__overlay d-flex align-items-center justify-content-center position-absolute end-0 start-0 h-100 w-100"
+			class="top-0 bottom-0 Video-player__overlay z-index-2 d-flex align-items-center justify-content-center position-absolute end-0 start-0 h-100 w-100"
 			style="background-color: {{ color }};"
 			data-video-player="button"
 		>
-			<span class="pt-56 pb-56 d-inline-block text-uppercase pe-100 ps-100">
+			<span class="py-24 px-44 py-lg-56 d-flex align-items-center text-uppercase px-lg-100">
 				{{- __( 'Lecture', 'matthieuteyssandier' ) -}}
 				{{- include( 'svg/use.html.twig', { classes: [ 'ms-8' ], icon: 'play' } ) -}}
 			</span>
 		</button>
 		<video
+		class="h-auto  d-block w-100 z-index-1"
 			data-video-player="video"
-			controls
 			muted
 			playsInline
 			src="{{ video.url }}"

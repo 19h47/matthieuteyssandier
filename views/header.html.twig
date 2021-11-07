@@ -26,6 +26,7 @@
 										data-module-nav-button
 										data-nav-button-color="{{ case.meta( 'color' ) }}"
 										data-nav-button-function="open"
+										data-nav-button-id="{{ case.id }}"
 									></button>
 								</li>
 							{% endfor %}
@@ -37,7 +38,7 @@
 				</div>
 			</div>
 
-			<div class="mt-40 col-lg-4 mt-lg-0">
+			<div class="mt-40 col-lg-3 mt-lg-0">
 				<div class="Socials color-yellow-dark-grayish text-uppercase pe-auto">
 					<ul class="list-style-type-none">
 						{% for social in socials %}
@@ -47,10 +48,14 @@
 				</div>
 			</div>
 
-			<div class="col-lg-2">
-				<div class="Site-introduction text-uppercase color-yellow-dark-grayish pe-auto">
+			<div class="col-lg-3">
+				<div class="Site-introduction text-uppercase text-lg-end color-yellow-dark-grayish pe-auto">
 					<div>{{- __( 'Drop me a line for freelance work', 'matthieuteyssandier' ) -}}</div>
-					<div class="break"><a href="mail:{{ public_email }}">{{- public_email -}}</a></div>
+					<div class="break">
+						<button class="text-uppercase" data-module-copy-to-clipboard data-clipboard-text="{{ public_email }}" type="button">
+							{{- public_email -}}
+						</button>
+					</div>
 					<div>{{- __( 'Available in Freelance', 'matthieuteyssandier' ) -}}</div>
 				</div>
 			</div>

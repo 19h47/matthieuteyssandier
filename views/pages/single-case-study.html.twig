@@ -12,7 +12,7 @@
 	<div class="Site-container">
 		<div class="row">
 			<div>
-				{% embed 'components/text-in-view.html.twig' %}
+				{% embed 'components/text-inview.html.twig' %}
 					{% block content %}
 						<h1 class="m-0 text-center text-uppercase">{{- post.title -}}</h1>
 					{% endblock %}
@@ -27,12 +27,12 @@
 		<div class="Site-container">
 			<div class="row">
 				<div class="col-lg-3 d-lg-flex flex-lg-column justify-content-lg-between mb-lg-40">
-					{% embed 'components/text-in-view.html.twig' %}
+					{% embed 'components/text-inview.html.twig' %}
 						{% block content %}
 							<a class="Navigation-link text-uppercase" href="{{ post.prev.link }}" data-load="caseStudy" data-module-transition-button data-transition-button-color="{{ post.prev.meta( 'color' ) | default( '#000000' ) }}">Next</a>
 						{% endblock %}
 					{% endembed %}
-					{% embed 'components/text-in-view.html.twig' %}
+					{% embed 'components/text-inview.html.twig' %}
 						{% block content %}
 							<a class="Navigation-link color-yellow-dark-grayish text-uppercase" href="{{ post.prev.link }}" data-load="caseStudy" data-module-transition-button data-transition-button-color="{{ post.prev.meta( 'color' ) | default( '#000000' ) }}">Suivant</a>
 						{% endblock %}

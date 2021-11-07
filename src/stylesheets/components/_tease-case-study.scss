@@ -24,8 +24,8 @@
 		@include padding(bottom percentage(720/1420));
 	}
 
-	@at-root .Single-case-study & &__title {
-		@extend .d-none;
+	@at-root .Nav & &__body {
+		@include padding(bottom percentage(954.46/1760));
 	}
 
 	&__title {

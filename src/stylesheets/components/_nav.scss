@@ -6,6 +6,7 @@
  */
 
 .Nav {
+	@extend .pe-none;
 	@include autoAlpha(0);
 
 	transition: opacity 1.5s map-get($easings, ease-out-expo),
@@ -15,6 +16,7 @@
 
 	@at-root .has-nav-open & {
 		@include autoAlpha(1);
+		@extend .pe-auto;
 
 		transition-delay: 0s;
 	}
@@ -26,6 +28,22 @@
 
 		@at-root .has-nav-open & {
 			clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+		}
+	}
+
+	&__body {
+		li {
+			@extend .pe-none;
+			@include autoAlpha(0);
+
+			transition: opacity 1.5s map-get($easings, ease-out-expo),
+				visibility 1.5s map-get($easings, ease-out-expo);
+			will-change: opacity, visibility;
+
+			&.is-active {
+				@include autoAlpha(1);
+				@extend .pe-auto;
+			}
 		}
 	}
 }

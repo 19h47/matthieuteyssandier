@@ -23,11 +23,11 @@ class Load extends M {
 			console.info('Load.loading', transition);
 
 			if ('caseStudy' === transition) {
-				this.call('enter', null, 'Transition');
+				this.call('enter', { delay: 0.25 }, 'Transition');
 
 				setTimeout(() => {
 					window.scrollTo(0, 0);
-				}, 1500)
+				}, 1525)
 
 				return;
 			}

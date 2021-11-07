@@ -28,6 +28,40 @@
 
 	<body data-module-load="main" data-theme-url="{{ current_url }}">
 
+		<div class="top-0 bottom-0 Loader position-fixed end-0 start-0 d-flex align-items-center justify-content-center background-color-orange-light-grayish z-index-100 js-loader">
+			<ul class="top-0 bottom-0 Loader__colors position-absolute end-0 start-0 list-style-type-none z-inde-1">
+				{% for case in case_studies %}
+					<li
+						class="Loader__color position-relative js-color"
+						style="color: {{ case.meta( 'color' ) }}; left: {{ ( random( 0, 101 ) ) | round }}%;"
+					>
+					</li>
+				{% endfor %}
+			</ul>
+
+			<div class="w-100 h-100">
+				<div class="Site-container h-100">
+					<div class="row h-100 align-content-center">
+						<div class="p-0 overflow-hidden col-5 col-lg-2 js-counter">
+							{% embed 'components/text-inview.html.twig' %}
+								{% block content %}
+									100 — <span class="js-countdown">0</span>
+								{% endblock %}
+							{% endembed %}
+						</div>
+						<div class="p-0 col-5 col-lg-1 offset-1">
+							{% embed 'components/text-inview.html.twig' %}
+								{% block content %}
+									MT©{{- 'now' | date( 'Y' ) -}}
+								{% endblock %}
+							{% endembed %}
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
 		{% block header %}
 			{{- include( 'header.html.twig', { classes: [] } ) -}}
 		{% endblock %}
@@ -59,34 +93,64 @@
 					{% endblock %}
 				{% endblock %}
 
+				{% block footer %}
+					{{- include( 'footer.html.twig' ) -}}
+				{% endblock %}
 
 			</div>
 
 		</div>
 
-		{% block footer %}
-			{{- include( 'footer.html.twig' ) -}}
-		{% endblock %}
 
 		{{ function( 'wp_footer' ) }}
 
 		<canvas class="top-0 bottom-0 position-absolute end-0 start-0 h-100 w-100 pe-none z-index-5" data-module-nav-backdrop></canvas>
 
 		<nav class="top-0 bottom-0 Nav z-index-10 position-fixed end-0 start-0 h-100 w-100" data-module-nav>
-			<div class="Site-container">
-				<div class="row">
-					<div>
-						<header class="mt-32 Nav__header">
-							<button class="text-uppercase" type="button" data-module-nav-button data-nav-button-function="close">
-								{{- __( 'Quitter le menu', 'matthieuteyssandier' ) -}}
-							</button>
-						</header>
+			<div class="Site-container h-100">
+				<div class="row h-100">
+					<div class="h-100">
+						<div class="d-flex h-100 flex-column">
+							<header class="mt-32 Nav__header">
+								<button class="text-uppercase" type="button" data-module-nav-button data-nav-button-function="close">
+									{{- __( 'Quitter le menu', 'matthieuteyssandier' ) -}}
+								</button>
+							</header>
+							<div class="Nav__body h-100">
+								<ul class="h-100 position-relative list-style-type-none">
+									{% for case in case_studies %}
+										<li class="position-absolute h-100 w-100" data-module-nav-body="{{ case.id }}" data-nav-body-id="{{ case.id }}">
+											{% embed 'components/text-inview.html.twig' with { id: 'nav-body-' ~ case.id } %}
+												{% block content %}
+													<p class="mb-40 text-center text-uppercase h1 mt-68">
+														<a href="{{ case.link }}">{{- case.title -}}</a>
+													</p>
+												{% endblock %}
+											{% endembed %}
+											{{-
+												include(
+													'components/tease-case-study.html.twig',
+													{
+
+														size:'size-12',
+														case: {
+															id: 'nav-body-' ~ case.id,
+															color: case.meta( 'color' ),
+															link: case.link,
+															thumbnail: case.thumbnail,
+														}
+													}
+												)
+											-}}
+										</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</nav>
-
-		<div class="top-0 bottom-0 Loader position-fixed end-0 start-0 d-flex align-items-center justify-content-center background-color-orange-light-grayish z-index-100 js-loader"></div>
 
 		<canvas class="top-0 bottom-0 position-fixed end-0 start-0 h-100 w-100 pe-none z-index-200" data-module-transition></canvas>
 

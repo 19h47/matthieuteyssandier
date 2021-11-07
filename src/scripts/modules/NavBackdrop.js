@@ -24,6 +24,8 @@ class NavBackdrop extends M {
 	}
 
 	open({ color, x, y }) {
+		console.log({ color, x, y });
+
 		this.x = x;
 		this.y = y;
 		this.radius = diameter(this.el.width, this.el.height, x, y);
@@ -72,8 +74,6 @@ class NavBackdrop extends M {
 
 		this.el.width = width;
 		this.el.height = height;
-
-		this.close(this.color);
 	}
 
 	destroy() {

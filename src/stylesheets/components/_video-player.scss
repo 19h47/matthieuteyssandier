@@ -4,13 +4,8 @@
  * @package WordPress
  * @subpackage MatthieuTeyssandier
  */
-.Video-player {
-	video {
-		@extend .d-block;
-		@include size(100%, auto);
-		z-index: 1;
-	}
 
+.Video-player {
 	button {
 		@include autoAlpha(1);
 
@@ -29,13 +24,14 @@
 		transition: opacity 0.5s map-get($easings, ease-out-expo),
 			visibility 0.5s map-get($easings, ease-out-expo);
 		will-change: opacity, visibility;
-		z-index: 2;
 
 		span {
 			border-radius: 50%;
-			border: 3px solid the_color(black);
-			font-size: 40px;
+			border-width: 3px;
+			border-style: solid;
+
 			line-height: (48/40);
+			font-size: clamp(20px, #{(40 * 100) / 1920}vw, 40px);
 
 			svg {
 				@include size(27px, 29px);

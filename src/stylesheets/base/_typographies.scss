@@ -4,7 +4,7 @@
 
 h1,
 .h1 {
-	@extend %font-family-title, %font-weight-regular;
+	@extend .font-weight-regular, .font-family-title;
 	@include margin(top 0.5em bottom 0.5em);
 	@include letter-spacing(92);
 
@@ -14,11 +14,12 @@ h1,
 
 h2,
 .h2 {
-	@extend %font-family-title, %font-weight-demi;
+	@extend .font-weight-demi, .font-family-title;
 	@include letter-spacing(80);
 	@include margin(top 1em bottom 1em);
 
 	font-size: em(36);
+
 	line-height: (38/36);
 
 	@include media-breakpoint-up(md) {
@@ -29,7 +30,7 @@ h2,
 
 h3,
 .h3 {
-	@extend %font-family-title, %font-weight-demi;
+	@extend .font-weight-demi, .font-family-title;
 	@include letter-spacing(80);
 	@include margin(top 1em bottom 1em);
 
@@ -44,7 +45,7 @@ h3,
 
 h4,
 .h4 {
-	@extend %font-family-title, %font-weight-book;
+	@extend .font-weight-book, .font-family-title;
 	@include margin(top em($scale-factor * 4, 21) bottom em($scale-factor * 3, 21));
 
 	// font-size: em(21);
@@ -60,9 +61,9 @@ h4,
 
 h5,
 .h5 {
-	@extend %font-family-title;
 	// @include letter-spacing(80);
 	@include margin(top 1em bottom 0.5em);
+	@extend .font-family-title;
 
 	font-size: 28px;
 	line-height: (27.9/28);
@@ -75,8 +76,8 @@ h5,
 
 h6,
 .h6 {
-	@extend %font-family-title;
 	@include margin(top 1em);
+	@extend .font-family-title;
 
 	font-size: 20px;
 	line-height: (26/20);

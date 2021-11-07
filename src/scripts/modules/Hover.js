@@ -15,20 +15,37 @@ class Hover extends M {
 		};
 
 		this.events = {
-			mouseenter: 'handleMouseenter',
-			mouseleave: 'handleMouseleave',
-		}
+			mouseenter: 'enter',
+			mouseleave: 'leave',
+			click: 'close',
+		};
+	}
+
+	close() {
+		this.mDestroy();
+
+		gsap.to(this.props, {
+			duration: 0.5,
+			ease: 'power4.inOut',
+			radiusX: 0,
+			radiusY: 0,
+			onUpdate: () => drawEllipse(this.props, this.context, true, true),
+		});
 	}
 
 	init() {
+		if (window.isMobile) {
+			return;
+		}
+
 		const { offsetWidth: width, offsetHeight: height } = this.$('canvas')[0];
 
 		this.$('canvas')[0].width = width;
 		this.$('canvas')[0].height = height;
 
 		this.props = {
-			radiusX: width / Math.sqrt(2),
-			radiusY: height / Math.sqrt(2),
+			radiusX: Math.round(width / Math.sqrt(2)),
+			radiusY: Math.round(height / Math.sqrt(2)),
 			width,
 			height,
 			x: width / 2,
@@ -51,12 +68,12 @@ class Hover extends M {
 		});
 	}
 
-	handleMouseenter() {
+	enter() {
 		this.timeline.timeScale(1);
 		this.timeline.play();
 	}
 
-	handleMouseleave() {
+	leave() {
 		this.timeline.timeScale(1.5);
 		this.timeline.reverse();
 	}

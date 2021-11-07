@@ -119,6 +119,42 @@ $utilities: map-merge(
 			class: text,
 			values: lowercase uppercase capitalize none,
 		),
+		'font-family': (
+			property: font-family,
+			class: font-family,
+			values: (
+				body: unquote('"Neue Montreal", sans-serif'),
+				title: unquote('"Rotonto", sans-serif'),
+			),
+		),
+		'font-weight': (
+			property: font-weight,
+			class: font-weight,
+			values: (
+				// extralight: 100,
+				// ultralight: 200,
+				// fine: 250,
+				// light: 300,
+				book: 350,
+				regular: 400,
+				// medium: 500,
+				// semibold: 600,
+				demi: 600,
+				// demibold: 600,
+				bold: 700,
+				// extrabold: 800,
+				// extrablack: 900,
+				// heavy: 900,
+				// black: 900,,,,,,,,,,
+			),
+		),
+		'text-align':
+			map-merge(
+				map-get($utilities, 'text-align'),
+				(
+					responsive: true,
+				)
+			),
 	)
 );
 

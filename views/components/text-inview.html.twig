@@ -5,15 +5,15 @@
  # @subpackage MatthieuTeyssandier
  #}
 
-{% set id = 'text-in-view-' ~ ( id | default( uniqid() ) ) %}
+{% set id = 'text-inview-' ~ ( id | default( uniqid() ) ) %}
 
  <div
  	id="{{ id }}"
-	class="Text-in-view"
+	class="Text-inview js-text-inview"
 	data-scroll
-	data-scroll-call="play,TextInView"
+	data-scroll-call="play,TextInview"
 	data-scroll-id="{{ id }}"
-	data-module-text-in-view="{{ id }}"
+	data-module-text-inview="{{ id }}"
 >
 	{% block content %}{% endblock %}
 </div>

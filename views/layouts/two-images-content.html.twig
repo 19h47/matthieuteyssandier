@@ -21,7 +21,7 @@
 						{{- include( 'components/image.html.twig', { classes: [ 'd-block', 'w-100', 'h-auto' ], size: 'size-6', image: layout.item_0.image } ) -}}
 
 						{% if layout.item_0.caption %}
-							{% embed 'components/text-in-view.html.twig' %}
+							{% embed 'components/text-inview.html.twig' %}
 								{% block content %}
 									<p class="mt-12 mb-0 Layout__caption font-family-title">{{- layout.item_0.caption -}}</p>
 								{% endblock %}
@@ -35,7 +35,7 @@
 						{{- include( 'components/image.html.twig', { classes: [ 'd-block', 'w-100', 'h-auto' ], size: 'size-4', image: layout.item_1.image } ) -}}
 
 						{% if layout.item_1.caption %}
-							{% embed 'components/text-in-view.html.twig' %}
+							{% embed 'components/text-inview.html.twig' %}
 								{% block content %}
 									<p class="mt-12 mb-0 Layout__caption font-family-title">{{- layout.item_1.caption -}}</p>
 								{% endblock %}

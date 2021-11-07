@@ -58,7 +58,8 @@
 	}
 
 	&-email {
-		font-family: get_font_family(title);
+		@extend .font-family-title;
+
 		font-size: clamp(45px, #{(90 * 100) / 1920}vw, 90px);
 		line-height: (108/90);
 		word-wrap: break-word;

@@ -1,7 +1,7 @@
 import { module as M } from 'modujs';
 import gsap from 'gsap';
 
-class TextInView extends M {
+class TextInview extends M {
 	constructor(m) {
 		super(m);
 
@@ -15,8 +15,16 @@ class TextInView extends M {
 	}
 
 	play() {
+		console.log('TextInview.play');
+
 		this.timeline.play();
+	}
+
+	reverse() {
+		console.log('TextInview.reverse');
+
+		this.timeline.reverse();
 	}
 }
 
-export default TextInView;
+export default TextInview;

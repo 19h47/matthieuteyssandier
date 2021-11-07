@@ -16,13 +16,12 @@ class Transition extends M {
 
 		this.context = this.el.getContext('2d');
 
-		this.mouse = {
-			x: 0,
-			y: 0,
-		};
+		this.x = 0;
+		this.y = 0;
+
 	}
 
-	enter() {
+	enter(delay = 0) {
 		const { x, y } = scroll;
 
 		this.radius = diameter(this.el.width, this.el.height, x, y);
@@ -37,6 +36,7 @@ class Transition extends M {
 		};
 
 		gsap.to(props, {
+			delay,
 			duration: 1.5,
 			ease: 'power4.inOut',
 			radiusX: this.radius,
@@ -60,8 +60,16 @@ class Transition extends M {
 		});
 	}
 
-	set({ color }) {
-		this.color = color;
+	setColor(value) {
+		this.color = value;
+	}
+
+	setX(value) {
+		this.x = value;
+	}
+
+	setY(value) {
+		this.y = value;
 	}
 }
 

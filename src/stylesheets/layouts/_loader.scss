@@ -1,0 +1,37 @@
+/**
+ * Loader
+ *
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
+ */
+
+.Loader {
+	// &__counter {
+	// 	@include size(100%);
+	// 	@extend %position-relative;
+
+	// 	z-index: 2;
+	// }
+
+	&__colors {
+		@include margin(
+			top 40px right #{(157 * 100) / 1280}vh bottom 40px left #{(157 * 100) / 1280}vh
+		);
+	}
+
+	&__color {
+		@include size(#{(157 * 100) / 1280}vh);
+
+		opacity: 0;
+
+		&::after {
+			@include absolute(top 0 right 0 bottom 0 left 0);
+			@extend .d-block;
+
+			background-color: currentColor;
+			clip-path: inset(0 0 0 0 round #{((157 * 100) / 1280) / 2}vh);
+			content: '';
+		}
+	}
+}

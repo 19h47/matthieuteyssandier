@@ -38,7 +38,7 @@ class Reveal extends M {
 			onUpdate: () => drawRect(this.props, this.context),
 		});
 
-		this.timeline.set(this.$('image')[0], { autoAlpha: 1 });
+		this.timeline.set(this.$('image')[0], { autoAlpha: 1 },);
 
 		this.timeline.to(this.props, {
 			duration: 1,
@@ -46,11 +46,19 @@ class Reveal extends M {
 			radiusX: width / Math.sqrt(2),
 			radiusY: height / Math.sqrt(2),
 			onUpdate: () => drawEllipse(this.props, this.context, true, true),
-		});
+		}, 'image');
+	}
+
+	tweenFromTo(fromPosition, toPosition = this.timeline.endTime()) {
+		this.timeline.tweenFromTo(fromPosition, toPosition)
 	}
 
 	play() {
 		this.timeline.play();
+	}
+
+	reverse() {
+		this.timeline.reverse();
 	}
 }
 
