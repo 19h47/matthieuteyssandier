@@ -6,7 +6,7 @@
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 
-<div class="Layout position-relative mt-80 mb-80 Layout-image-text" data-scroll>
+<div class="Layout position-relative mt-80 mb-80 Layout-image-text {{ classes | join( ' ' ) }}" data-scroll>
 	<div class="Site-container">
 		<div class="row">
 			<div class="col-lg-6 offset-lg-2">
@@ -24,12 +24,6 @@
 
 				<p class="mt-12 mb-0 Layout__caption font-family-title">{{ layout.caption }}</p>
 			</div>
-
-			{% if layout.content.french or layout.content.english %}
-				<div class="col-lg-4 mt-80 mt-lg-0">
-					{{- include( 'layouts/content.html.twig', { french: layout.content.french, english: layout.content.english } ) -}}
-				</div>
-			{% endif %}
 
 		</div>
 	</div>

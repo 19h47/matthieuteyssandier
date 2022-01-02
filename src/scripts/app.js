@@ -1,20 +1,14 @@
 /* global matthieuteyssandier */
 import modular from 'modujs';
-import Guid from 'vendors/Guid';
 import * as modules from 'modules';
-import Loader from 'vendors/Loader';
-import { html, scroll, production } from 'utils/environment';
+// import Loader from 'vendors/Loader';
+import { html, scroll } from 'utils/environment';
 import favicon from 'utils/favicon';
+import { gsap } from 'gsap';
 
 const { colors } = matthieuteyssandier;
 
-favicon(colors[Math.floor(Math.random() * colors.length)]);
-
-if (false === production) {
-	const guid = new Guid(16);
-
-	guid.init();
-}
+favicon(colors[gsap.utils.random(colors.length)]);
 
 // eslint-disable-next-line new-cap
 const app = new modular({
@@ -37,10 +31,10 @@ function init() {
 
 window.onload = async () => {
 	const $style = document.getElementById(`${matthieuteyssandier.text_domain}-main-css`);
-	const loader = new Loader();
-	loader.init();
+	// const loader = new Loader();
+	// loader.init();
 
-	await loader.timeline.play();
+	// await loader.timeline.play();
 
 	if ($style) {
 		if ($style.isLoaded) {

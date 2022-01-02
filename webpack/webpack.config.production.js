@@ -1,16 +1,14 @@
 /**
+ * Webpack config production
  *
  * @file webpack.production.js
- * @author Jérémy Levron <jeremylevron@19h47.fr> (http://19h47.fr)
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  */
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const PurgecssPlugin = require('purgecss-webpack-plugin');
-const purgecssWordpress = require('purgecss-with-wordpress');
 
-const glob = require('glob'); // eslint-disable-line import/no-extraneous-dependencies
 const resolve = require('./webpack.utils');
 
 module.exports = {
@@ -23,7 +21,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.scss$/,
+				test: /\.css$/,
 				exclude: /node_modules/,
 				use: [
 					{
@@ -44,15 +42,6 @@ module.exports = {
 							sourceMap: false,
 						},
 					},
-					{
-						loader: 'sass-loader',
-						options: {
-							sassOptions: {
-								sourceMap: false,
-								precision: 10,
-							},
-						},
-					},
 				],
 			},
 		],
@@ -63,11 +52,8 @@ module.exports = {
 		}),
 		new MiniCssExtractPlugin({
 			filename: 'css/main.[chunkhash:8].css',
+			chunkFilename: "css/[id].[chunkhash:8].css",
 		}),
 		new CompressionPlugin(),
-		new PurgecssPlugin({
-			paths: glob.sync(resolve('views/**/*'), { nodir: true }),
-			safelist: purgecssWordpress.safelist
-		}),
 	],
 };

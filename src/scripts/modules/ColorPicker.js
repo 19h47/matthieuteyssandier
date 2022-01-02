@@ -2,20 +2,25 @@ import { module as M } from 'modujs';
 import { html } from 'utils/environment';
 import gsap from 'gsap';
 
-const WIDTH = 20;
+const WIDTH = 48;
+const MARGIN = 6;
 
 class ColorPicker extends M {
+	constructor(m) {
+		super(m);
+
+		this.events = {
+			mouseenter: 'mouseenter',
+			mouseleave: 'mouseleave',
+		};
+
+		this.el.style.setProperty('width', `${WIDTH}px`);
+	}
+
 	init() {
-
-		this.handleMouseenter = this.handleMouseenter.bind(this);
-		this.handleMouseleave = this.handleMouseleave.bind(this);
-
-		this.el.addEventListener('mouseenter', this.handleMouseenter);
-		this.el.addEventListener('mouseleave', this.handleMouseleave);
-
 		const { children } = this.el.firstElementChild;
 
-		const width = children.length * WIDTH + (children.length - 1) * 2;
+		const width = children.length * WIDTH + (children.length - 1) * MARGIN;
 
 		this.timeline = gsap.timeline({ paused: true, defaults: { ease: 'power4.inOut' } });
 
@@ -30,7 +35,7 @@ class ColorPicker extends M {
 		this.timeline.fromTo(
 			children,
 			{
-				x: index => (WIDTH * index + 2 * index) * -1, // widths + margins
+				x: index => (WIDTH * index + MARGIN * index) * -1, // widths + margins
 			},
 			{
 				stagger: index => (children.length - index) * 0.1,
@@ -53,21 +58,20 @@ class ColorPicker extends M {
 		);
 	}
 
-	handleMouseenter = () => {
+	mouseenter() {
 		this.timeline.timeScale(1);
 		this.timeline.play();
-	};
+	}
 
-	handleMouseleave = () => {
+	mouseleave() {
 		if (!html.classList.contains('has-nav-open')) {
 			this.close();
 		}
-	};
+	}
 
 	close() {
 		this.timeline.timeScale(1.25);
 		this.timeline.reverse();
-
 	}
 }
 

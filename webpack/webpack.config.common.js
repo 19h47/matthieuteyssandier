@@ -29,10 +29,6 @@ module.exports = {
 		path: resolve('/dist'),
 		publicPath: process.env.PUBLIC_PATH,
 	},
-	externals: {
-		jquery: 'jQuery',
-		$: 'jQuery',
-	},
 	optimization: {
 		splitChunks: {
 			// include all types of chunks
@@ -77,6 +73,7 @@ module.exports = {
 				test: /\.js$/,
 				exclude: /node_modules/,
 				loader: 'babel-loader',
+				include: resolve('src'),
 			},
 			{
 				test: /\.(woff2?|eot|ttf|otf|woff|svg)?$/,

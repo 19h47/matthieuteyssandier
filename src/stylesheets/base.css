@@ -1,0 +1,13 @@
+/**
+ * Base
+ *
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ */
+
+@layer base {
+	body {
+		@apply text-black;
+	}
+}

@@ -8,9 +8,9 @@
 {% extends 'index.html.twig' %}
 
 {% block content %}
-	<div class="Site-container">
+	<div class="container">
 		<div class="row">
-			<div class="col-lg-4 Fade-inview mb-80 mb-lg-0" data-scroll>
+			<div class="lg:col-4/12 Fade-inview mb-80 mb-lg-0" data-scroll>
 				<h1 class="mt-0 Site-description font-family-title">{{- site.description -}}</h1>
 				<div class="Wysiwyg">{{- post.content -}}</div>
 			</div>
@@ -36,7 +36,7 @@
 				</div>
 
 				{% if 9 == loop.index and ( post.meta( 'biography' ).english or post.meta( 'biography' ).french ) %}
-					<div class="col-lg-4 mt-80">
+					<div class="lg:col-4/12 mt-80">
 						<div class="Wysiwyg">
 							{{- post.meta( 'biography' ).english ? "<p>#{ post.meta( 'biography' ).english | nl2br }</p>" : '' -}}
 							{{- post.meta( 'biography' ).french ? "<p class=\"color-yellow-dark-grayish\">#{ post.meta( 'biography' ).french | nl2br }</p>" : '' -}}
@@ -45,7 +45,7 @@
 				{% endif %}
 
 				{% if 10 == loop.index %}
-					<div class="col-lg-4 mt-80">
+					<div class="lg:col-4/12 mt-80">
 						<ul>
 						{% for award in post.meta( 'awards' ) %}
 							<li>{{- award.title }} {{ award.value -}}</li>

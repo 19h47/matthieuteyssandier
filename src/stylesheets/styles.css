@@ -1,0 +1,7 @@
+@import './components/button.css';
+@import './base.css';
+@import './utilities/grid.css';
+
+@tailwind components;
+@tailwind base;
+@tailwind utilities;

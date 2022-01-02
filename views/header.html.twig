@@ -6,20 +6,20 @@
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 
-<div class="pt-32 pe-none pb-84 z-index-15 position-relative">
-	<div class="Site-container">
-		<div class="row">
-			<div class="col-lg-4 offset-lg-2">
-				<div class="Site-title pe-auto font-family-title d-flex align-items-center">
+<div class="pt-11 pb-14">
+	<div class="container">
+		<div class="items-center row">
+			<div class="lg:col-8/12">
+				<div class="flex items-center Site-title pe-auto font-family-title">
 
-					<a class="me-4" href="{{ site.link }}">{{- site.title -}}</a>
+					<a class="mr-1.5 text-7xl" href="{{ site.link }}">{{- site.title -}}</a>
 
-					<div class="overflow-hidden Color-picker position-relative" data-module-color-picker style="width: 20px;">
-						<ul class="list-style-type-none d-flex">
+					<div class="overflow-hidden Color-picker position-relative" data-module-color-picker style="width: 48px;">
+						<ul class="flex">
 							{% for case in case_studies %}
-								<li style="z-index: {{ ( case_studies | length ) - loop.index }};">
+								<li class="mr-1.5 last:mr-0" style="z-index: {{ ( case_studies | length ) - loop.index }};">
 									<button
-										class="d-block"
+										class="block w-12 h-12 rounded-full"
 										type="button"
 										aria-label="{{ case.title }}"
 										style="background-color: {{ case.meta( 'color' ) }};"
@@ -33,32 +33,18 @@
 						</ul>
 					</div>
 
-					<a class="ms-4" href="{{ site.link }}">{{- 'now' | date( 'Y' ) -}}</a>
+					<a class="ml-1.5 text-7xl" href="{{ site.link }}">{{- 'now' | date( 'Y' ) -}}</a>
 
 				</div>
 			</div>
 
-			<div class="mt-40 col-lg-3 mt-lg-0">
-				<div class="Socials color-yellow-dark-grayish text-uppercase pe-auto">
-					<ul class="list-style-type-none">
-						{% for social in socials %}
-							<li><a href="{{ social.url }}">{{- social.title -}}</a></li>
-						{% endfor %}
-					</ul>
-				</div>
+			<div class="flex justify-end lg:col-4/12">
+				<button type="button" class="flex items-center button">
+					<span class="w-2.5 h-2.5 mr-1 bg-black rounded-full inline-block"></span>
+					Info
+				</button>
 			</div>
 
-			<div class="col-lg-3">
-				<div class="Site-introduction text-uppercase text-lg-end color-yellow-dark-grayish pe-auto">
-					<div>{{- __( 'Drop me a line for freelance work', 'matthieuteyssandier' ) -}}</div>
-					<div class="break">
-						<button class="text-uppercase" data-module-copy-to-clipboard data-clipboard-text="{{ public_email }}" type="button">
-							{{- public_email -}}
-						</button>
-					</div>
-					<div>{{- __( 'Available in Freelance', 'matthieuteyssandier' ) -}}</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>

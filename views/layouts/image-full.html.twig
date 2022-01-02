@@ -6,9 +6,9 @@
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 
-<div class="Layout position-relative mt-80 mb-80 Layout-image-full">
-	<div class="Site-container">
-		<div class="row g-0">
+<div class="Layout position-relative mt-80 mb-80 Layout-image-full {{ classes | join( ' ' ) }}">
+	<div class="container">
+		<div class="row">
 			<div data-scroll data-module-expand="{{ uniqid() }}">
 				{{-
 					include(
@@ -25,5 +25,4 @@
 			</div>
 		</div>
 	</div>
-	{{- include( 'layouts/caption.html.twig', { caption: layout.caption } ) -}}
 </div>

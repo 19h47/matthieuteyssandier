@@ -1,5 +1,5 @@
 require('scripts/app');
-require('stylesheets/styles.scss');
+require('stylesheets/styles.css');
 
 // require.context('svg/', true);
 require.context('icons/', true);

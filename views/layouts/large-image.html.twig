@@ -2,24 +2,18 @@
  # Layouts: Large image
  #}
 
-<div class="Layout mt-80 mb-80 position-relative Layout-large-image" data-scroll>
-	<div class="Site-container">
+<div class="mt-80 mb-80 relative {{ classes | join( ' ' ) }}" data-scroll>
+	<div class="container">
 		<div class="row">
 
-			{% if layout.content.french or layout.content.english %}
-				<div class="col-lg-2">
-					{{- include( 'layouts/content.html.twig', { french: layout.content.french, english: layout.content.english } ) -}}
-				</div>
-			{% endif %}
-
-			<div class="col-lg-10{{ layout.content.french or layout.content.english ? '' : ' offset-lg-2' }}">
+			<div class="lg:col-10/12 {{ layout.content.french or layout.content.english ? '' : ' offset-lg-2' }}">
 				{{-
 					include(
 						'components/image.html.twig',
 						{
 							size: 'size-10',
 							image: layout.image,
-							classes: [ 'd-block', 'w-100', 'h-auto' ],
+							classes: [ 'block', 'w-full', 'h-auto' ],
 						}, with_context = false
 					)
 				-}}
@@ -27,7 +21,5 @@
 			</div>
 		</div>
 	</div>
-
-	{{- include( 'layouts/caption.html.twig', { caption: layout.caption } ) -}}
 
 </div>
