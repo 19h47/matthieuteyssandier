@@ -8,7 +8,7 @@ import { gsap } from 'gsap';
 
 const { colors } = matthieuteyssandier;
 
-favicon(colors[gsap.utils.random(colors.length)]);
+favicon(gsap.utils.random(colors));
 
 // eslint-disable-next-line new-cap
 const app = new modular({

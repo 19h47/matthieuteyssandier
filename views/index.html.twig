@@ -26,13 +26,78 @@
 
 	</head>
 
-	<body data-module-load="main" data-theme-url="{{ current_url }}">
+	<body data-module-load="main" data-theme-url="{{ current_url }}" data-theme="light" class="text-black bg-gray-light">
 
 		{% block header %}
 			{{- include( 'header.html.twig', { classes: [] } ) -}}
 		{% endblock %}
 
-		<div class="Site-wrapper" data-load-container data-load="container" data-color="{{ post.meta( 'color' ) | default( '#000000' ) }}">
+		<div class="container">
+			<div class="py-20 md:p-10 bg-gray-light rounded-5xl">
+				<header class="flex justify-center w-full md:justify-end">
+					<ul class="flex -m-2">
+						{% for social in options_theme.socials %}
+							<li class="m-2">
+								<a class="block text-black border-black button" href="{{ social.link.url }}"{{ social.link.target ? ' rel="noopener norefer" target="_blank"' }}>
+									{{- social.link.title -}}
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</header>
+
+				<div class="my-16">
+					<p class="mb-10 text-xs text-center uppercase text-gray-dark">
+						{{- options_theme.description.tagline | nl2br -}}
+					</p>
+					<p class="tracking-tight text-center text-black uppercase text-8xl">
+						{{- options_theme.description.title -}}
+					</p>
+				</div>
+
+				<div class="text-center">
+					<p class="mb-4 text-xs uppercase text-gray-dark">{{- options_theme.email.title | nl2br -}}</p>
+					<p>
+						<button class="inline-flex items-center text-white border-none button bg-red-bright" type="button" data-email="{{ options_theme.email.address }}">
+							{{- __( 'copy the mail', 'matthieuteyssandier' ) -}}{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-current' ] } ) -}}
+						</button>
+					</p>
+				</div>
+
+				<div class="mt-8 text-center">
+					<p class="mb-10 text-xs uppercase text-gray-dark">{{ options_theme.copyright }}</p>
+				</div>
+			</div>
+		</div>
+
+		{% for case in case_studies %}
+			<div class="h-screen pb-10 pt-43" style="background-color: {{ case.meta( 'color' ) }};">
+				<div class="container h-full">
+					<div class="h-full row">
+						<div class="flex flex-col col-4/12">
+							<ul class="flex flex-wrap -mx-3 -my-2">
+								{% for cat in case.terms( 'case_study_cat' ) %}
+									<li class="mx-3 my-2"><p class="button">{{- cat.name -}}</p></li>
+								{% endfor %}
+							</ul>
+
+							<p class="mt-auto">
+								<a class="inline-flex items-center bg-white border-none button" href="{{ case.link }}">{{- __( 'Discover' ) -}}{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-current' ] } ) -}}</a>
+							</p>
+						</div>
+
+						<div class="h-full col-8/12">
+							<div class="relative h-full overflow-hidden after:z-20 after:bg-black after:w-full after:absolute after:top-0 after:right-0 after:bottom-0 after:h-full after:mix-blend-hard-light after:opacity-20 rounded-5xl">
+								<div class="absolute z-30 bottom-0 left-0 right-0 mx-10 mb-10 uppercase text-white break-words text-15xl leading-[.85]">{{- case.title -}}</div>
+								{{- include( 'components/image.html.twig', { size: 'size-8', image: case.thumbnail, classes: [ 'relative', 'z-10', 'w-full', 'h-full', 'object-cover', 'object-center' ] } ) -}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+
+		<div data-load-container data-load="container" data-color="{{ post.meta( 'color' ) | default( '#000000' ) }}">
 			<div id="{{ post.id ? "page-#{post.id}" : 'page' }}" {{ body_class( 'page-content' ) }} data-module-scroll="main">
 
 

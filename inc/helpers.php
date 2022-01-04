@@ -119,3 +119,15 @@ function get_theme_version() : string {
 function get_theme_name() : string {
 	return wp_get_theme()->Name;
 }
+
+
+/**
+ * Retrive the icons of the theme
+ */
+function get_theme_icon( string $icon, array $args = array() ) : void {
+	$template     = 'svg/use.html.twig';
+	$data         = $args;
+	$data['icon'] = $icon;
+
+	Timber::render( $template, $data );
+}

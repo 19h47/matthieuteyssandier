@@ -6,45 +6,43 @@
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 
-<div class="pt-11 pb-14">
-	<div class="container">
-		<div class="items-center row">
-			<div class="lg:col-8/12">
-				<div class="flex items-center Site-title pe-auto font-family-title">
+<div class="container pt-11 pb-14">
+	<div class="items-center row">
+		<div class="lg:col-8/12">
+			<div class="flex items-center Site-title pe-auto font-family-title">
 
-					<a class="mr-1.5 text-7xl" href="{{ site.link }}">{{- site.title -}}</a>
+				<a class="mr-1.5 text-7xl text-current" href="{{ site.link }}">{{- site.title -}}</a>
 
-					<div class="overflow-hidden Color-picker position-relative" data-module-color-picker style="width: 48px;">
-						<ul class="flex">
-							{% for case in case_studies %}
-								<li class="mr-1.5 last:mr-0" style="z-index: {{ ( case_studies | length ) - loop.index }};">
-									<button
-										class="block w-12 h-12 rounded-full"
-										type="button"
-										aria-label="{{ case.title }}"
-										style="background-color: {{ case.meta( 'color' ) }};"
-										data-module-nav-button
-										data-nav-button-color="{{ case.meta( 'color' ) }}"
-										data-nav-button-function="open"
-										data-nav-button-id="{{ case.id }}"
-									></button>
-								</li>
-							{% endfor %}
-						</ul>
-					</div>
-
-					<a class="ml-1.5 text-7xl" href="{{ site.link }}">{{- 'now' | date( 'Y' ) -}}</a>
-
+				<div class="overflow-hidden Color-picker position-relative" data-module-color-picker style="width: 48px;">
+					<ul class="flex">
+						{% for case in case_studies %}
+							<li class="mr-1.5 last:mr-0" style="z-index: {{ ( case_studies | length ) - loop.index }};">
+								<button
+									class="block w-12 h-12 rounded-full"
+									type="button"
+									aria-label="{{ case.title }}"
+									style="background-color: {{ case.meta( 'color' ) }};"
+									data-module-nav-button
+									data-nav-button-color="{{ case.meta( 'color' ) }}"
+									data-nav-button-function="open"
+									data-nav-button-id="{{ case.id }}"
+								></button>
+							</li>
+						{% endfor %}
+					</ul>
 				</div>
-			</div>
 
-			<div class="flex justify-end lg:col-4/12">
-				<button type="button" class="flex items-center button">
-					<span class="w-2.5 h-2.5 mr-1 bg-black rounded-full inline-block"></span>
-					Info
-				</button>
-			</div>
+				<a class="ml-1.5 text-7xl text-current" href="{{ site.link }}">{{- 'now' | date( 'Y' ) -}}</a>
 
+			</div>
 		</div>
+
+		<div class="flex justify-end lg:col-4/12">
+			<button type="button" class="flex items-center button" data-module-theme-switcher>
+				<span class="w-2.5 h-2.5 mr-1 bg-current rounded-full inline-block"></span>
+				Info
+			</button>
+		</div>
+
 	</div>
 </div>

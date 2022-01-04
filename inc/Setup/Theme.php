@@ -154,6 +154,15 @@ class Theme {
 
 		$twig->addFunction( new TwigFunction( 'uniqid', 'uniqid' ) );
 
+		$twig->addFunction(
+			new TwigFunction(
+				'icon',
+				function( $icon, $args = array() ) {
+					return get_theme_icon( $icon, $args );
+				}
+			)
+		);
+
 		return $twig;
 	}
 
@@ -245,7 +254,8 @@ class Theme {
 			)
 		);
 
-		$context['public_email'] = get_option( 'public_email' );
+		$context['public_email']  = get_option( 'public_email' );
+		$context['options_theme'] = get_field( 'options_theme', 'options' );
 
 		return $context;
 	}

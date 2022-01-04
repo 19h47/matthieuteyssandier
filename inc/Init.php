@@ -8,7 +8,7 @@
 
 namespace MatthieuTeyssandier;
 
-use MatthieuTeyssandier\{ Setup, Post, PostTemplate };
+use MatthieuTeyssandier\{ Setup, Post, PostTemplate, Plugins };
 
 /**
  * Init
@@ -32,6 +32,7 @@ class Init {
 			PostTemplate\BodyClass::class,
 			WPImageEditor::class,
 			Media::class,
+			Plugins\ACF::class,
 		);
 	}
 
