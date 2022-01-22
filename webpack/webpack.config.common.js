@@ -5,19 +5,13 @@
  * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  */
 
-const webpack = require('webpack');
-
 // Plugins
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
-const dotenv = require('dotenv');
-
 const resolve = require('./webpack.utils');
-
-dotenv.config({ path: resolve('.env') });
 
 // Manifest plugin
 const manifestPlugin = new WebpackManifestPlugin({
@@ -27,13 +21,12 @@ const manifestPlugin = new WebpackManifestPlugin({
 module.exports = {
 	output: {
 		path: resolve('/dist'),
-		publicPath: process.env.PUBLIC_PATH,
 	},
 	optimization: {
 		splitChunks: {
 			// include all types of chunks
 			chunks: 'all',
-			name: 'vendors'
+			name: 'vendors',
 		},
 	},
 	resolve: {
@@ -190,9 +183,6 @@ module.exports = {
 			excludeWarnings: true,
 			alwaysNotify: true,
 		}),
-		new webpack.DefinePlugin({
-			'process.env': dotenv.parsed,
-		}),
-		new ESLintPlugin()
+		new ESLintPlugin(),
 	],
 };

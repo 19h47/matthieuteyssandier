@@ -1,90 +1,81 @@
 <?php // phpcs:ignore
 /**
- * ACF
+ * Theme Settings Fields
  *
- * @package MatthieuTeyssandier
- * @subpackage MatthieuTeyssandier/Plugins/ACF
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
  */
 
-namespace MatthieuTeyssandier\Plugins;
+namespace MatthieuTeyssandier\Plugins\ACF;
 
 /**
- * WordPress
+ * Theme Settings Fields
  */
-class ACF {
+class ThemeSettingsFields {
 	/**
 	 * Runs initialization tasks.
 	 *
 	 * @return void
 	 */
 	public function run() {
-		add_action( 'acf/init', array( $this, 'add_options_theme' ) );
-		add_action( 'init', array( $this, 'add_options_theme_fields' ) );
+		add_action( 'acf/init', array( $this, 'fields' ) );
 	}
 
-		/**
-	 * Add options pages
+	/**
+	 * Registers the field group.
+	 *
+	 * @return void
 	 */
-	public function add_options_theme() {
-		$parent = acf_add_options_page(
-			array(
-				'page_title' => __( 'Theme Settings', 'cns' ),
-				'capability' => 'edit_posts',
-			)
-		);
-	}
-
-
-	public function add_options_theme_fields() {
+	public function fields() {
 
 		$field_email = array(
 			'key'        => 'field_email',
-			'label'      => __( 'Email', 'matthieu-teyssandier' ),
+			'label'      => __( 'Email', 'matthieuteyssandier' ),
 			'name'       => 'email',
 			'type'       => 'group',
 			'layout'     => 'block',
 			'sub_fields' => array(
 				array(
 					'key'         => 'field_email_title',
-					'label'       => __( 'Title', 'matthieu-teyssandier' ),
+					'label'       => __( 'Title', 'matthieuteyssandier' ),
 					'name'        => 'title',
 					'type'        => 'textarea',
 					'rows'        => 2,
 					'new_lines'   => '',
-					'placeholder' => __( 'Title', 'matthieu-teyssandier' ),
+					'placeholder' => __( 'Title', 'matthieuteyssandier' ),
 				),
 				array(
 					'key'         => 'field_email_address',
-					'label'       => __( 'Address', 'matthieu-teyssandier' ),
+					'label'       => __( 'Address', 'matthieuteyssandier' ),
 					'name'        => 'address',
 					'type'        => 'email',
-					'placeholder' => __( 'example@example.com', 'matthieu-teyssandier' ),
+					'placeholder' => __( 'example@example.com', 'matthieuteyssandier' ),
 				),
 			),
 		);
 
 		$field_description = array(
 			'key'        => 'field_description',
-			'label'      => __( 'Description', 'matthieu-teyssandier' ),
+			'label'      => __( 'Description', 'matthieuteyssandier' ),
 			'name'       => 'description',
 			'type'       => 'group',
 			'layout'     => 'block',
 			'sub_fields' => array(
 				array(
 					'key'         => 'field_description_tagline',
-					'label'       => __( 'Tagline', 'matthieu-teyssandier' ),
+					'label'       => __( 'Tagline', 'matthieuteyssandier' ),
 					'name'        => 'tagline',
 					'type'        => 'textarea',
 					'rows'        => 2,
 					'new_lines'   => '',
-					'placeholder' => __( 'Tagline', 'matthieu-teyssandier' ),
+					'placeholder' => __( 'Tagline', 'matthieuteyssandier' ),
 				),
 				array(
 					'key'         => 'field_description_title',
-					'label'       => __( 'Title', 'matthieu-teyssandier' ),
+					'label'       => __( 'Title', 'matthieuteyssandier' ),
 					'name'        => 'title',
 					'type'        => 'text',
-					'placeholder' => __( 'Title', 'matthieu-teyssandier' ),
+					'placeholder' => __( 'Title', 'matthieuteyssandier' ),
 				),
 			),
 		);
@@ -94,7 +85,7 @@ class ACF {
 			'label'       => 'Copyright',
 			'name'        => 'copyright',
 			'type'        => 'text',
-			'placeholder' => __( 'Copyright', 'matthieu-teyssandier' ),
+			'placeholder' => __( 'Copyright', 'matthieuteyssandier' ),
 		);
 
 		$field_socials = array(
@@ -103,11 +94,11 @@ class ACF {
 			'name'         => 'socials',
 			'type'         => 'repeater',
 			'layout'       => 'block',
-			'button_label' => __( 'Add Social', 'matthieu-teyssandier' ),
+			'button_label' => __( 'Add Social', 'matthieuteyssandier' ),
 			'sub_fields'   => array(
 				array(
 					'key'           => 'field_socials_link',
-					'label'         => __( 'Link', 'matthieu-teyssandier' ),
+					'label'         => __( 'Link', 'matthieuteyssandier' ),
 					'name'          => 'link',
 					'type'          => 'link',
 					'return_format' => 'array',
@@ -117,7 +108,7 @@ class ACF {
 
 		$group = array(
 			'key'        => 'field_options_theme',
-			'label'      => __( 'Options Theme', 'matthieu-teyssandier' ),
+			'label'      => __( 'Options Theme', 'matthieuteyssandier' ),
 			'name'       => 'options_theme',
 			'type'       => 'group',
 			'layout'     => 'block',
@@ -153,4 +144,3 @@ class ACF {
 		}
 	}
 }
-
