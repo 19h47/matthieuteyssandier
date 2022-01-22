@@ -143,7 +143,7 @@ class CaseStudyFields {
 		return array(
 			'key'        => 'field_content' . $key,
 			'label'      => __( 'Content', 'matthieuteyssandier' ),
-			'name'       => 'content' . $key,
+			'name'       => 'content',
 			'type'       => 'group',
 			'sub_fields' => array(
 				array(
