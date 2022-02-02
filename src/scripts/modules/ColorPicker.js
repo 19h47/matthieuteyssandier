@@ -10,8 +10,8 @@ class ColorPicker extends M {
 		super(m);
 
 		this.events = {
-			mouseenter: 'mouseenter',
-			mouseleave: 'mouseleave',
+			mouseover: 'mouseover',
+			mouseout: 'mouseout',
 		};
 
 		this.el.style.setProperty('width', `${WIDTH}px`);
@@ -58,12 +58,12 @@ class ColorPicker extends M {
 		);
 	}
 
-	mouseenter() {
+	mouseover() {
 		this.timeline.timeScale(1);
 		this.timeline.play();
 	}
 
-	mouseleave() {
+	mouseout() {
 		if (!html.classList.contains('has-nav-open')) {
 			this.close();
 		}

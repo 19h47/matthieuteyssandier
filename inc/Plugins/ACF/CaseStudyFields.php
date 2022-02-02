@@ -35,6 +35,16 @@ class CaseStudyFields {
 			'type'  => 'color_picker',
 		);
 
+		$preview = array(
+			'key'           => 'field_preview',
+			'label'         => __( 'Preview', 'matthieuteyssandier' ),
+			'name'          => 'preview',
+			'type'          => 'image',
+			'return_format' => 'array',
+			'preview_size'  => 'full',
+			'library'       => 'all',
+		);
+
 		$credits = array(
 			'key'          => 'field_credits',
 			'label'        => __( 'Credits', 'matthieuteyssandier' ),
@@ -121,6 +131,7 @@ class CaseStudyFields {
 					'title'    => __( 'Case Study Options', 'matthieuteyssandier' ),
 					'fields'   => array(
 						$color,
+						$preview,
 						$this->content(),
 						$credits,
 						$link,
@@ -185,7 +196,7 @@ class CaseStudyFields {
 			'name'          => 'image',
 			'type'          => 'image',
 			'return_format' => 'array',
-			'preview_size'  => 'medium',
+			'preview_size'  => 'large',
 			'library'       => 'all',
 		);
 

@@ -1,0 +1,16 @@
+/*
+ * Info
+ *
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
+ */
+
+@layer components {
+	.info {
+		@apply opacity-0 invisible;
+	}
+	.has-info-open .info {
+		@apply opacity-100 visible;
+	}
+}

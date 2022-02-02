@@ -7,8 +7,8 @@
  #}
 
 <div class="container pt-11 pb-14">
-	<div class="items-center row">
-		<div class="lg:col-8/12">
+	<div class="items-center row relative">
+		<div class="lg:col-9/12">
 			<div class="flex items-center Site-title pe-auto font-family-title">
 
 				<a class="mr-1.5 text-7xl text-current" href="{{ site.link }}">{{- site.title -}}</a>
@@ -37,10 +37,15 @@
 			</div>
 		</div>
 
-		<div class="flex justify-end lg:col-4/12">
-			<button type="button" class="flex items-center button" data-module-theme-switcher>
+		<div class="absolute top-0 right-0 bottom-0 z-40 flex items-center">
+			<button
+				type="button"
+				class="flex items-center button"
+				data-module-theme-switcher
+				data-module-info-button
+			>
 				<span class="w-2.5 h-2.5 mr-1 bg-current rounded-full inline-block"></span>
-				Info
+				{{- __( 'Info', 'matthieuteyssandier' ) -}}
 			</button>
 		</div>
 

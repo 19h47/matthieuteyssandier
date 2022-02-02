@@ -43,7 +43,6 @@ window.onload = async () => {
 			$style.addEventListener('load', () => init());
 		}
 	} else {
-		console.warn(`"${matthieuteyssandier.text_domain}-main-css" stylesheet not found`);
+		console.warn(`The "${matthieuteyssandier.text_domain}-main-css" stylesheet not found`);
 	}
-
 };

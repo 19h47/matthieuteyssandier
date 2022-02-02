@@ -6,8 +6,8 @@ class ThemeSwitcher extends M {
 		super(m);
 
 		this.events = {
-			click: 'toggle'
-		}
+			click: 'toggle',
+		};
 	}
 
 	// eslint-disable-next-line class-methods-use-this
@@ -28,4 +28,4 @@ class ThemeSwitcher extends M {
 	}
 }
 
-export default ThemeSwitcher
+export default ThemeSwitcher;

@@ -1,0 +1,39 @@
+{#
+ # Layouts: Medias
+ #
+ # @package WordPress
+ # @subpackage MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+
+<div class="my-6 {{ classes | join( ' ' ) }}" data-scroll>
+	<div class="container">
+		<div class="row">
+			{% for i in range(0, 1) %}
+				{% if props['media_' ~ i ] %}
+					<div class="col-6/12">
+						{% for media in props['media_' ~ i ] %}
+
+							{% if 'video' == media.acf_fc_layout %}
+								{{- include( 'components/video-player.html.twig', { video: media.video, poster: media.poster } ) -}}
+							{% endif %}
+
+							{% if 'image' == media.acf_fc_layout %}
+								{{-
+									include(
+										'components/image.html.twig',
+										{
+											size: 'size-6',
+											image: media.image,
+											classes: [ 'rounded-3xl', 'max-w-full', 'mx-auto', 'h-auto' ]
+										}
+									)
+								-}}
+							{% endif %}
+						{% endfor %}
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</div>

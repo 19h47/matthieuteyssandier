@@ -32,9 +32,11 @@ class Init {
 			PostTemplate\BodyClass::class,
 			WPImageEditor::class,
 			Media::class,
+			Plugins\ACF\AdminHead::class,
 			Plugins\ACF\OptionsPage::class,
 			Plugins\ACF\ThemeSettingsFields::class,
 			Plugins\ACF\CaseStudyFields::class,
+			Plugins\ACF\FrontPageFields::class,
 		);
 	}
 

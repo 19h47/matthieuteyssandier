@@ -10,4 +10,3 @@
 require_once get_template_directory() . '/vendor/autoload.php';
 
 MatthieuTeyssandier\Init::run_services();
-

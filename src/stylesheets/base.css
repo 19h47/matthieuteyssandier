@@ -8,6 +8,24 @@
 
 @layer base {
 	body {
-		@apply text-black;
+		@apply text-black font-body;
+	}
+
+	/* Neue Montreal regular */
+	@font-face {
+		font-family: 'Neue Montreal';
+		src: url('../fonts/neue-montreal-regular.woff2') format('woff2');
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	/* Neue Montreal bold */
+	@font-face {
+		font-family: 'Neue Montreal';
+		src: url('../fonts/neue-montreal-bold.woff2') format('woff2');
+		font-weight: 700;
+		font-style: normal;
+		font-display: swap;
 	}
 }

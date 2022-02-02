@@ -1,5 +1,5 @@
 {#
- # Single: Case study
+ # Single: Case Study
  #
  # @package WordPress
  # @subpackage MatthieuTeyssandier
@@ -8,10 +8,6 @@
 {% extends 'index.html.twig' %}
 
 {% block content %}
-
-	{% for layout in post.meta('layouts') %}
-		{{ dump(layout)}}
-	{% endfor %}
 
 	<div class="container my-6 first:mt-0 last:mb-0">
 		<div class="row">
@@ -41,8 +37,26 @@
 		{% if post.meta( 'content' ).french or post.meta( 'content' ).english %}
 			<div class="my-32 row">
 				<div class="lg:col-6/12">
-					<p class="text-4xl leading-normal tracking-tight indent-1/3">{{- post.meta( 'content' ).french -}}</p>
-					<p class="mt-10 text-4xl leading-normal tracking-tight indent-1/3 text-gray-dark">{{- post.meta( 'content' ).english -}}</p>
+					<p class="text-4xl leading-normal tracking-tight indent-1/3">
+						{{- post.meta( 'content' ).english -}}
+					</p>
+					<p class="mt-10 text-4xl leading-normal tracking-tight indent-1/3 text-gray-dark">
+						{{- post.meta( 'content' ).french -}}
+					</p>
+				</div>
+
+				<div class="lg:ml-2/12 lg:col-4/12">
+					<p class="button inline-flex">{{- __( 'Credits', 'matthieuteyssandier' ) -}}</p>
+					<div class="mt-10">
+						<ul class="-my-4 leading-none text-2xl">
+							{% for credit in post.meta( 'credits' ) %}
+								<li class="my-4"><strong>{{ credit.key }}</strong>: {{ credit.value }}</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<a class="text-2xl mt-4 underline inline-block" href="{{ post.meta( 'link' ) }}" target="_blank" rel="noopener noreferer">
+						{{- __( 'Visit website', 'matthieuteyssandier' ) -}}
+					</a>
 				</div>
 			</div>
 		{% endif %}
@@ -51,37 +65,48 @@
 	{{ parent() }}
 
 	{% if post.prev %}
-		<div class="container first:mt-0 last:mb-0">
+		<div class="container mt-33">
 			<div class="row">
-				<div class="col-lg-3 d-lg-flex flex-lg-column justify-content-lg-between mb-lg-40">
-					{% embed 'components/text-inview.html.twig' %}
-						{% block content %}
-							<a class="Navigation-link text-uppercase" href="{{ post.prev.link }}" data-load="caseStudy" data-module-transition-button data-transition-button-color="{{ post.prev.meta( 'color' ) | default( '#000000' ) }}">Next</a>
-						{% endblock %}
-					{% endembed %}
-					{% embed 'components/text-inview.html.twig' %}
-						{% block content %}
-							<a class="Navigation-link color-yellow-dark-grayish text-uppercase" href="{{ post.prev.link }}" data-load="caseStudy" data-module-transition-button data-transition-button-color="{{ post.prev.meta( 'color' ) | default( '#000000' ) }}">Suivant</a>
-						{% endblock %}
-					{% endembed %}
-				</div>
-				<div class="mt-40 col-lg-9 mt-lg-0">
-					{{-
-						include(
-							'components/tease-case-study.html.twig',
-							{
-								size: 'size-9',
-								case: {
-									id: post.prev.id,
-									thumbnail: post.prev.thumbnail,
-									color: post.prev.meta( 'color' ),
-									title: post.prev.title,
-									link: post.prev.link
+
+				<div class="d-flex {{ post.prev.meta( 'preview' ) ? 'col-8/12' : 'col-full' }}">
+					<div class="relative overflow-hidden h-full">
+						{{-
+							include(
+								'components/image.html.twig',
+								{
+									size: post.prev.meta( 'preview' ) ? 'size-8' : 'size-12',
+									image: post.prev.thumbnail,
+									classes: [ 'absolute', 'inset-0', 'z-10', 'rounded-3xl', 'w-full', 'h-full', 'object-cover', 'object-center' ]
 								}
-							}
-						)
-					-}}
+							)
+						-}}
+						<div class="relative z-30 my-10 px-10 flex items-end w-full min-h-223">
+							<div class="uppercase text-white break-words text-15xl leading-[.85] w-9.5/12">
+								{{- post.prev.title -}}
+							</div>
+							<div class="w-2.5/12 flex">
+								<a href="{{ post.prev.link }}" class="ml-auto inline-flex items-center bg-white text-black border-none button">
+									{{- __( 'Next Project', 'matthieuteyssandier' ) -}}{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-black' ] } ) -}}
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
+
+				{% if post.prev.meta( 'preview' ) %}
+					<div class="col-4/12 d-flex">
+						{{-
+							include(
+								'components/image.html.twig',
+								{
+									size: 'size-4',
+									image: post.prev.meta( 'preview' ),
+									classes: [ 'rounded-3xl', 'w-full', 'h-full', 'object-cover', 'object-center' ]
+								}
+							)
+						-}}
+					</div>
+				{% endif	%}
 			</div>
 		</div>
 	{% endif %}

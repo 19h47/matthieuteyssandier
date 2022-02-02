@@ -16,7 +16,7 @@
 	}
 
 	.row > * {
-		@apply px-3 max-w-full flex-shrink-0;
+		@apply col max-w-full flex-shrink-0;
 	}
 
 	.col {

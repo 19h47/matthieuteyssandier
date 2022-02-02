@@ -1,5 +1,5 @@
 {#
- # Front page
+ # Front Page
  #
  # @package WordPress
  # @subpackage MatthieuTeyssandier
@@ -7,4 +7,36 @@
 
 {% extends 'index.html.twig' %}
 
-{% block content %}{% endblock %}
+{% block content %}
+	{% if post.meta( 'case_studies' ) %}
+		<div class="fixed inset-0 pb-6 pt-37">
+			<div class="container h-full">
+				<div class="row flex h-full">
+					{% for case_study in get_posts( post.meta( 'case_studies' ) ) %}
+						<article class="{{ loop.first ? 'grow-0.8' : 'grow-0.2' }}">
+							<div class="relative h-full rounded-5xl overflow-hidden after:bg-black after:mix-blend-hard-light after:z-20 after:absolute after:inset-0 after:opacity-20">
+								{{-
+									include(
+										'components/image.html.twig',
+										{
+											classes: [ 'z-10', 'object-cover', 'object-center', 'h-full', 'w-full', 'absolute', 'inset-0' ],
+											image: case_study.thumbnail,
+											size: 'size-8'
+										}
+									)
+								-}}
+								<div class="absolute bottom-0 right-0 left-0 z-30 mb-10 mx-10">
+									<h2 class=" uppercase text-white break-words text-15xl leading-[.85]">
+										{{- case_study.title -}}
+									</h2>
+								</div>
+							</div>
+						</article>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}
+
+{% block footer %}{% endblock %}

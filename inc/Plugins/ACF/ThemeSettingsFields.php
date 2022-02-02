@@ -134,7 +134,7 @@ class ThemeSettingsFields {
 			acf_add_local_field_group(
 				array(
 					'key'      => 'group_options_theme',
-					'title'    => __( 'Options Theme', 'matthieuteyssandier' ),
+					'title'    => __( 'Theme Settings', 'matthieuteyssandier' ),
 					'fields'   => array(
 						$group,
 					),
