@@ -26,13 +26,13 @@
 
 	</head>
 
-	<body data-module-load="main" data-theme-url="{{ current_url }}" data-theme="light" class="text-black bg-gray-light transition-colors">
+	<body data-module-load="main" data-theme-url="{{ current_url }}" data-theme="light" class="text-black transition-colors bg-gray-light">
 
 		{% block header %}
 			{{- include( 'header.html.twig', { classes: [] } ) -}}
 		{% endblock %}
 
-		<div class="info fixed inset-0 h-full overflow-auto z-20">
+		<div class="fixed inset-0 z-20 h-full overflow-auto info">
 			<div class="container mb-6 mt-37">
 				<div class="py-20 md:p-10 bg-gray-light rounded-5xl">
 					<header class="flex justify-center w-full md:justify-end">
@@ -72,7 +72,7 @@
 			</div>
 		</div>
 
-		{# <div class="fixed top-0 right-0 bottom-0 left-0">
+		{# <div class="fixed top-0 bottom-0 left-0 right-0">
 			{% for case in case_studies %}
 				<div
 					class="h-screen pb-10 pt-43 absolute top-0 right-0 bottom-0 left-0 {{ loop.first ? 'opacity-100 visibile' : 'opacity-0 invisible' }}"
@@ -142,7 +142,7 @@
 		</div>
 
 		{{ function( 'wp_footer' ) }}
-		<canvas class="inset-0 absolute h-full w-full pointer-events-none z-5" data-module-nav-backdrop></canvas>
+		<canvas class="absolute inset-0 w-full h-full pointer-events-none z-5" data-module-nav-backdrop></canvas>
 		<div id="svg-sprite" style="display: none;">{{- include( 'icons.svg' ) -}}</div>
 
 	</body>

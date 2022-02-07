@@ -1,3 +1,4 @@
+export { default as CaseStudies } from 'modules/CaseStudies';
 export { default as ColorPicker } from 'modules/ColorPicker';
 export { default as InfoButton } from 'modules/InfoButton';
 export { default as Load } from 'modules/Load';

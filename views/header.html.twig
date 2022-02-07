@@ -6,19 +6,19 @@
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 
-<div class="container pt-11 pb-14">
-	<div class="items-center row relative">
+<div class="container relative z-50 pointer-events-none pt-11 pb-14">
+	<div class="items-center row">
 		<div class="lg:col-9/12">
-			<div class="flex items-center Site-title pe-auto font-family-title">
+			<div class="flex items-center font-family-title">
 
-				<a class="mr-1.5 text-7xl text-current" href="{{ site.link }}">{{- site.title -}}</a>
+				<a class="mr-1.5 text-7xl text-current pointer-events-auto" href="{{ site.link }}">{{- site.title -}}</a>
 
-				<div class="overflow-hidden Color-picker position-relative" data-module-color-picker style="width: 48px;">
+				<div class="relative overflow-hidden" data-module-color-picker style="width: 48px;">
 					<ul class="flex">
 						{% for case in case_studies %}
 							<li class="mr-1.5 last:mr-0" style="z-index: {{ ( case_studies | length ) - loop.index }};">
 								<button
-									class="block w-12 h-12 rounded-full"
+									class="block w-12 h-12 rounded-full pointer-events-auto"
 									type="button"
 									aria-label="{{ case.title }}"
 									style="background-color: {{ case.meta( 'color' ) }};"
@@ -32,15 +32,17 @@
 					</ul>
 				</div>
 
-				<a class="ml-1.5 text-7xl text-current" href="{{ site.link }}">{{- 'now' | date( 'Y' ) -}}</a>
+				<a class="ml-1.5 text-7xl text-current pointer-events-auto" href="{{ site.link }}">{{- 'now' | date( 'Y' ) -}}</a>
 
 			</div>
+
+
 		</div>
 
-		<div class="absolute top-0 right-0 bottom-0 z-40 flex items-center">
+		<div class="flex justify-end lg:col-3/12">
 			<button
 				type="button"
-				class="flex items-center button"
+				class="flex items-center pointer-events-auto button"
 				data-module-theme-switcher
 				data-module-info-button
 			>

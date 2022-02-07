@@ -11,10 +11,10 @@
 	{% if post.meta( 'case_studies' ) %}
 		<div class="fixed inset-0 pb-6 pt-37">
 			<div class="container h-full">
-				<div class="row flex h-full">
+				<div class="flex h-full row" data-module-case-studies>
 					{% for case_study in get_posts( post.meta( 'case_studies' ) ) %}
-						<article class="{{ loop.first ? 'grow-0.8' : 'grow-0.2' }}">
-							<div class="relative h-full rounded-5xl overflow-hidden after:bg-black after:mix-blend-hard-light after:z-20 after:absolute after:inset-0 after:opacity-20">
+						<a data-case-studies="item" href="{{ case_study.link }}" class="transition-all {{ loop.first ? 'md:grow-0.8' : 'md:grow-0.2' }}">
+							<div class="relative h-full overflow-hidden rounded-5xl after:bg-black after:mix-blend-hard-light after:z-20 after:absolute after:inset-0 after:opacity-20">
 								{{-
 									include(
 										'components/image.html.twig',
@@ -25,13 +25,13 @@
 										}
 									)
 								-}}
-								<div class="absolute bottom-0 right-0 left-0 z-30 mb-10 mx-10">
+								<div class="absolute bottom-0 left-0 right-0 z-30 mx-10 mb-10">
 									<h2 class=" uppercase text-white break-words text-15xl leading-[.85]">
 										{{- case_study.title -}}
 									</h2>
 								</div>
 							</div>
-						</article>
+						</a>
 					{% endfor %}
 				</div>
 			</div>
