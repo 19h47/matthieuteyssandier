@@ -3,21 +3,22 @@
  #
  # @package WordPress
  # @subpackage MatthieuTeyssandier
+ #
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 
-<div class="container py-6">
+<div class="container pb-6">
 	<div class="row">
 		<div class="flex justify-between w-full">
 			<ul class="flex -m-2">
 				<li class="m-2">
-					<a class="block text-black border-black button" href="mailto:{{ options_theme.email.address }}" rel="noopener noreferer" target="_blank">
+					<a class="block border-current button" href="mailto:{{ options_theme.email.address }}" rel="noopener noreferer" target="_blank">
 						{{- __( 'Mail', 'matthieuteyssandier' ) -}}
 					</a>
 				</li>
 				{% for social in options_theme.socials %}
 					<li class="m-2">
-						<a class="block text-black border-black button" href="{{ social.link.url }}"{{ social.link.target ? ' rel="noopener norefer" target="_blank"' }}>
+						<a class="block border-current button" href="{{ social.link.url }}"{{ social.link.target ? ' rel="noopener norefer" target="_blank"' }}>
 							{{- social.link.title -}}
 						</a>
 					</li>

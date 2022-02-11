@@ -6,12 +6,12 @@
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 
-<div class="container relative z-50 pointer-events-none pt-11 pb-14">
-	<div class="items-center row">
+<div class="container relative z-50 py-10 pointer-events-none">
+	<div class="items-start row">
 		<div class="lg:col-9/12">
 			<div class="flex items-center font-family-title">
 
-				<a class="mr-1.5 text-7xl text-current pointer-events-auto" href="{{ site.link }}">{{- site.title -}}</a>
+				<a class="mr-1.5 text-6xl text-current pointer-events-auto leading-none" href="{{ site.link }}">{{- site.title -}}</a>
 
 				<div class="relative overflow-hidden" data-module-color-picker style="width: 48px;">
 					<ul class="flex">
@@ -32,7 +32,7 @@
 					</ul>
 				</div>
 
-				<a class="ml-1.5 text-7xl text-current pointer-events-auto" href="{{ site.link }}">{{- 'now' | date( 'Y' ) -}}</a>
+				<a class="ml-1.5 text-6xl text-current pointer-events-auto leading-none" href="{{ site.link }}">{{- 'now' | date( 'Y' ) -}}</a>
 
 			</div>
 
@@ -40,15 +40,13 @@
 		</div>
 
 		<div class="flex justify-end lg:col-3/12">
-			<button
-				type="button"
+			<a
+				href="{{ options_theme.about_page_link }}"
 				class="flex items-center pointer-events-auto button"
-				data-module-theme-switcher
-				data-module-info-button
 			>
 				<span class="w-2.5 h-2.5 mr-1 bg-current rounded-full inline-block"></span>
 				{{- __( 'Info', 'matthieuteyssandier' ) -}}
-			</button>
+			</a>
 		</div>
 
 	</div>

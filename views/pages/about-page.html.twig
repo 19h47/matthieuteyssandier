@@ -1,0 +1,52 @@
+{#
+ # About Page
+ #
+ # @package WordPress
+ # @subpackage MatthieuTeyssandier
+ #}
+
+{% extends 'index.html.twig' %}
+
+{% block content %}
+
+	<div class="container pb-6">
+		<div class="py-20 md:p-10 bg-gray-light rounded-5xl">
+			<header class="flex justify-center w-full md:justify-end">
+				<ul class="flex -m-2">
+					{% for social in options_theme.socials %}
+						<li class="m-2">
+							<a class="block text-black border-black button" href="{{ social.link.url }}"{{ social.link.target ? ' rel="noopener norefer" target="_blank"' }}>
+								{{- social.link.title -}}
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</header>
+
+			<div class="my-16">
+				<p class="mb-10 text-xs text-center uppercase text-gray-dark">
+					{{- options_theme.description.tagline | nl2br -}}
+				</p>
+				<p class="tracking-tight text-center text-black uppercase text-8xl">
+					{{- options_theme.description.title | nl2br -}}
+				</p>
+			</div>
+
+			<div class="text-center">
+				<p class="mb-4 text-xs uppercase text-gray-dark">{{- options_theme.email.title | nl2br -}}</p>
+				<p>
+					<button class="inline-flex items-center text-white border-none button bg-red-bright" type="button" data-email="{{ options_theme.email.address }}">
+						{{- __( 'copy the mail', 'matthieuteyssandier' ) -}}{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-current' ] } ) -}}
+					</button>
+				</p>
+			</div>
+
+			<div class="mt-8 text-center">
+				<p class="mb-10 text-xs uppercase text-gray-dark">{{ options_theme.copyright }}</p>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}

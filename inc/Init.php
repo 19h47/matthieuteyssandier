@@ -8,8 +8,6 @@
 
 namespace MatthieuTeyssandier;
 
-use MatthieuTeyssandier\{ Setup, Post, PostTemplate, Plugins };
-
 /**
  * Init
  */
@@ -22,17 +20,21 @@ class Init {
 	 */
 	public static function get_services() : array {
 		return array(
-			Setup\Theme::class,
 			Setup\Enqueue::class,
-			Setup\WordPress::class,
-			Setup\Supports::class,
 			Setup\Settings::class,
+			Setup\Theme::class,
+			Setup\NavMenu::class,
+			Setup\Supports::class,
+			Setup\WordPress::class,
+			Setup\WordPress::class,
+			Template\PostStates::class,
 			Post\CaseStudy::class,
 			Taxonomy\CaseStudyCat::class,
 			PostTemplate\BodyClass::class,
 			WPImageEditor::class,
 			Media::class,
-			Plugins\ACF\AdminHead::class,
+			Plugins\ACF\Admin\Head::class,
+			Plugins\ACF\Admin\EnqueueScripts::class,
 			Plugins\ACF\OptionsPage::class,
 			Plugins\ACF\ThemeSettingsFields::class,
 			Plugins\ACF\CaseStudyFields::class,

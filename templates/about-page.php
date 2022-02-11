@@ -1,6 +1,6 @@
 <?php
 /**
- * Front Page
+ * Template Name: About Page
  *
  * @package WordPress
  * @subpackage MatthieuTeyssandier
@@ -12,10 +12,10 @@
 
 use Timber\{ Timber };
 
-$filenames = array( 'pages/front-page.html.twig' );
+$filename = 'pages/about-page.html.twig';
 
 $data             = Timber::context();
-$data['post']     = Timber::get_post();
-$data['template'] = 'front-page';
+$data['mode']     = 'dark';
+$data['template'] = 'about-page';
 
-Timber::render( $filenames, $data );
+Timber::render( $filename, $data );

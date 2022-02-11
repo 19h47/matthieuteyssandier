@@ -1,21 +1,14 @@
-const spacing = {
-	33: `${132 / 16}rem`,
-	37: `${148 / 16}rem`,
-	43: `${172 / 16}rem`,
-	'1/12': `${(1 / 12) * 100}%`,
-	'2/12': `${(2 / 12) * 100}%`,
-	'2.5/12': `${(2.5 / 12) * 100}%`,
-	'9.5/12': `${(9.5 / 12) * 100}%`,
-};
+/**
+ * Tailwind config
+ */
 
 const minHeight = {
 	223: `${892 / 16}rem`,
 };
 
-const fontSize = {
-	'15xl': `${180 / 16}rem`,
-};
-
+const fontSize = require('./tailwind/tailwind.config.fontSize');
+const spacing = require('./tailwind/tailwind.config.spacing');
+const transitionTimingFunction = require('./tailwind/tailwind.config.transitionTimingFunction');
 const lineHeight = {};
 
 const flexGrow = {
@@ -40,6 +33,11 @@ const textIndent = {
 	'1/3': `${(1 / 3) * 100}%`,
 };
 
+const transitionProperty = {
+	'flex-grow': 'flex-grow',
+
+}
+
 const letterSpacing = {
 	tight: '-0.01em',
 };
@@ -61,13 +59,15 @@ module.exports = {
 			colors,
 			borderRadius,
 			flexGrow,
-			fontSize,
 			letterSpacing,
 			lineHeight,
 			minHeight,
 			spacing,
 			textIndent,
 			zIndex,
+			fontSize,
+			transitionProperty,
+			transitionTimingFunction
 		},
 	},
 	plugins: [],

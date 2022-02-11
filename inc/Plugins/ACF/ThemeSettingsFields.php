@@ -74,7 +74,9 @@ class ThemeSettingsFields {
 					'key'         => 'field_description_title',
 					'label'       => __( 'Title', 'matthieuteyssandier' ),
 					'name'        => 'title',
-					'type'        => 'text',
+					'type'        => 'textarea',
+					'rows'        => 2,
+					'new_lines'   => '',
 					'placeholder' => __( 'Title', 'matthieuteyssandier' ),
 				),
 			),
@@ -106,6 +108,17 @@ class ThemeSettingsFields {
 			),
 		);
 
+		$field_about_page_link = array(
+			'key'            => 'field_about_page_link',
+			'label'          => __( 'About Page', 'matthieuteyssandier' ),
+			'name'           => 'about_page_link',
+			'type'           => 'page_link',
+			'post_type'      => array( 'page' ),
+			'allow_null'     => 0,
+			'allow_archives' => 0,
+			'multiple'       => 0,
+		);
+
 		$group = array(
 			'key'        => 'field_options_theme',
 			'label'      => __( 'Options Theme', 'matthieuteyssandier' ),
@@ -117,6 +130,7 @@ class ThemeSettingsFields {
 				$field_description,
 				$field_email,
 				$field_copyright,
+				$field_about_page_link,
 			),
 		);
 

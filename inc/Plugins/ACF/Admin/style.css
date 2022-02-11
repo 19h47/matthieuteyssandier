@@ -1,0 +1,8 @@
+.acf-image-uploader .image-wrap {
+	float: none;
+}
+
+.acf-image-uploader .image-wrap img {
+	width: 100%;
+	margin: 0 auto;
+}

@@ -2,15 +2,14 @@
 /**
  * Themes
  *
- * @package ledermannfilms
+ * @package WordPress
  * @subpackage MatthieuTeyssandier/Setup/Theme
  */
 
 namespace MatthieuTeyssandier\Setup;
 
-use Timber\{ Timber };
+use Timber\{ Timber, Site };
 use Twig\{ TwigFunction };
-use MatthieuTeyssandier\Models\{ ProjectPost };
 
 $timber = new Timber();
 
@@ -19,7 +18,7 @@ Timber::$dirname = array( 'views', 'templates', 'dist' );
 /**
  * Theme
  */
-class Theme {
+class Theme extends Site {
 
 	/**
 	 * Constructor
@@ -87,28 +86,6 @@ class Theme {
 				}
 			)
 		);
-
-		if ( function_exists( 'pll_the_languages' ) ) {
-			$twig->addFunction(
-				new TwigFunction(
-					'pll_the_languages',
-					function( $args = array() ) {
-						return pll_the_languages( array_merge( $args, array( 'raw' => 1 ) ) );
-					}
-				)
-			);
-		}
-
-		if ( function_exists( 'pll__' ) ) {
-			$twig->addFunction(
-				new TwigFunction(
-					'pll__',
-					function ( string $string ) : string {
-						return pll__( $string );
-					}
-				)
-			);
-		}
 
 		if ( function_exists( 'sanitize_title' ) ) {
 			$twig->addFunction(

@@ -2,10 +2,11 @@
 /**
  * Textdomain
  *
- * @package ledermannfilms
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier/Setup/Textdomain
  */
 
-namespace LF\Setup;
+namespace MatthieuTeyssandier\Setup;
 
 /**
  * Supports
@@ -28,6 +29,6 @@ class Textdomain {
 	 * @return void
 	 */
 	public function add_theme_textdomain() : void {
-		load_theme_textdomain( 'ledermannfilms', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'matthieuteyssandier', get_template_directory() . '/languages' );
 	}
 }

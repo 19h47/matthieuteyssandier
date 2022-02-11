@@ -3,7 +3,7 @@
  * Supports
  *
  * @package WordPress
- * @subpackage MatthieuTeyssandier
+ * @subpackage MatthieuTeyssandier/Setup/Supports
  */
 
 namespace MatthieuTeyssandier\Setup;
