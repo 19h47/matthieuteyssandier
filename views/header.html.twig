@@ -6,9 +6,9 @@
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 
-<div class="container relative z-50 py-10 pointer-events-none">
-	<div class="items-start row">
-		<div class="lg:col-9/12">
+<div class="container relative z-50 py-2 pointer-events-none md:py-10">
+	<div class="items-center -my-px row lg:items-start">
+		<div class="col-9/12">
 			<div class="flex items-center font-family-title">
 
 				<a class="mr-1.5 text-6xl text-current pointer-events-auto leading-none" href="{{ site.link }}">{{- site.title -}}</a>
@@ -18,7 +18,7 @@
 						{% for case in case_studies %}
 							<li class="mr-1.5 last:mr-0" style="z-index: {{ ( case_studies | length ) - loop.index }};">
 								<button
-									class="block w-12 h-12 rounded-full pointer-events-auto"
+									class="block rounded-full pointer-events-auto w-11 h-11 lg:w-12 lg:h-12"
 									type="button"
 									aria-label="{{ case.title }}"
 									style="background-color: {{ case.meta( 'color' ) }};"
@@ -39,7 +39,7 @@
 
 		</div>
 
-		<div class="flex justify-end lg:col-3/12">
+		<div class="flex justify-end col-3/12">
 			<a
 				href="{{ options_theme.about_page_link }}"
 				class="flex items-center pointer-events-auto button"

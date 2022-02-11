@@ -15,20 +15,20 @@ class CaseStudies extends M {
 		console.log('grow', currentTarget);
 
 		this.$('item').forEach($item => {
-			$item.classList.add('md:grow-0.2');
-			$item.classList.remove('md:grow-0.8');
+			$item.classList.add('lg:grow-0.2');
+			$item.classList.remove('lg:grow-0.8');
 		});
 
 		this.$('title').forEach($title => {
-			$title.classList.add('opacity-0');
-			$title.classList.remove('opacity-100');
+			$title.classList.add('lg:opacity-0');
+			$title.classList.remove('lg:opacity-100');
 		});
 
-		currentTarget.classList.remove('md:grow-0.2');
-		currentTarget.classList.add('md:grow-0.8');
+		currentTarget.classList.remove('lg:grow-0.2');
+		currentTarget.classList.add('lg:grow-0.8');
 
-		this.$('title', currentTarget)[0].classList.remove('opacity-0');
-		this.$('title', currentTarget)[0].classList.add('opacity-100');
+		this.$('title', currentTarget)[0].classList.remove('lg:opacity-0');
+		this.$('title', currentTarget)[0].classList.add('lg:opacity-100');
 	}
 }
 

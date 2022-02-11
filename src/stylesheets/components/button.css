@@ -8,6 +8,6 @@
 
 @layer components {
 	.button {
-		@apply text-xs uppercase leading-none p-4 border rounded-full border-current;
+		@apply text-center text-xs uppercase leading-none p-4 border rounded-full border-current;
 	}
 }

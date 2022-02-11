@@ -9,14 +9,14 @@
 
 {% block content %}
 	{% if post.meta( 'case_studies' ) %}
-		<div class="fixed inset-0 pb-6 pt-37">
+		<div class="fixed inset-0 pt-16 pb-6 lg:pt-37">
 			<div class="container h-full">
-				<div class="flex h-full row" data-module-case-studies>
+				<div class="flex flex-col h-full row lg:flex-row" data-module-case-studies>
 					{% for case_study in get_posts( post.meta( 'case_studies' ) ) %}
 						<a
 							data-case-studies="item"
 							href="{{ case_study.link }}"
-							class="transition-flex-grow duration-1000 ease-out-expo group {{ loop.first ? 'md:grow-0.8' : 'md:grow-0.2' }}"
+							class="my-1 lg:my-0 transition-flex-grow duration-1000 ease-out-expo group grow {{ loop.first ? 'lg:grow-0.8' : 'lg:grow-0.2' }}"
 						>
 							<div class="relative h-full overflow-hidden rounded-5xl after:bg-black after:mix-blend-hard-light after:z-20 after:absolute after:inset-0 after:opacity-20">
 								{{-
@@ -29,7 +29,7 @@
 										}
 									)
 								-}}
-								<div class="absolute bottom-0 left-0 right-0 z-30 mx-10 mb-10 delay-0 group-hover:delay-1000 transition-opacity {{ loop.first ? 'opacity-100' : 'opacity-0' }}" data-case-studies="title">
+								<div class="absolute bottom-0 left-0 right-0 z-30 mx-6 lg:mx-10 mb-6 lg:mb-10 delay-0 lg:group-hover:delay-1000 lg:transition-opacity {{ loop.first ? 'lg:opacity-100' : 'lg:opacity-0' }}" data-case-studies="title">
 									<h2 class=" uppercase text-white break-words text-15xl leading-[.85]">
 										{{- case_study.title -}}
 									</h2>

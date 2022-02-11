@@ -2,7 +2,7 @@ import { module as M } from 'modujs';
 import { html } from 'utils/environment';
 import gsap from 'gsap';
 
-const WIDTH = 48;
+let WIDTH = 44;
 const MARGIN = 6;
 
 class ColorPicker extends M {
@@ -13,6 +13,10 @@ class ColorPicker extends M {
 			mouseover: 'mouseover',
 			mouseout: 'mouseout',
 		};
+
+		if (window.matchMedia("(min-width: 1024px)").matches) {
+			WIDTH = 48
+		}
 
 		this.el.style.setProperty('width', `${WIDTH}px`);
 	}

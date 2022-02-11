@@ -78,22 +78,24 @@
 				{% block content %}
 					{% block blocks %}
 
-						<div data-scroll-section class="my-6 first:mt-0 last:mb-0">
-							{% for layout in post.meta( 'layouts' ) %}
-								{{-
-									include(
-										"layouts/#{ layout.acf_fc_layout | lower | replace( { '_' : '-' } ) }.html.twig",
-										{
-											props: layout,
-											index: loop.index,
-											classes: [ loop.first ? 'is-first' : '', loop.last ? 'is-last' : '', 'first:mt-0 last:mb-0' ],
-											color: post.meta( 'color' ),
-										},
-										ignore_missing = true
-									)
-								-}}
-							{% endfor %}
-						</div>
+						{% if post.meta( 'layouts' ) %}
+							<div class="my-6 first:mt-0 last:mb-0">
+								{% for layout in post.meta( 'layouts' ) %}
+									{{-
+										include(
+											"layouts/#{ layout.acf_fc_layout | lower | replace( { '_' : '-' } ) }.html.twig",
+											{
+												props: layout,
+												index: loop.index,
+												classes: [ loop.first ? 'is-first' : '', loop.last ? 'is-last' : '', 'first:mt-0 last:mb-0' ],
+												color: post.meta( 'color' ),
+											},
+											ignore_missing = true
+										)
+									-}}
+								{% endfor %}
+							</div>
+						{% endif %}
 
 					{% endblock %}
 				{% endblock %}
