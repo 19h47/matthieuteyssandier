@@ -37,10 +37,10 @@
 			{{- include( 'header.html.twig', { classes: [] } ) -}}
 		{% endblock %}
 
-		<div class="fixed top-0 bottom-0 left-0 right-0 z-40">
+		<div class="fixed top-0 bottom-0 left-0 right-0 z-40 pointer-events-none">
 			{% for case in case_studies %}
 				<div
-					class="absolute top-0 bottom-0 left-0 right-0 invisible h-screen pb-10 transition-all opacity-0 pt-43"
+					class="absolute top-0 bottom-0 left-0 right-0 invisible h-screen pb-10 transition-all opacity-0 pointer-events-auto pt-43"
 
 					data-module-nav-item="{{ case.id }}"
 				>
