@@ -15,28 +15,38 @@ class NavButton extends M {
 	}
 
 	toggle() {
-		const fn = this.getData('function');
+		const fn = this.getData('function') || 'close';
 
 		if ('open' === fn) {
-			html.classList.add('has-nav-open');
-
-			html.style.setProperty('overflow', 'hidden');
-			html.style.setProperty('height', '100%');
-
-			this.call('stop', false, 'Scroll', 'main');
+			this.open();
 		}
 
 		if ('close' === fn) {
-			html.classList.remove('has-nav-open');
-
-			html.style.removeProperty('overflow');
-			html.style.removeProperty('height');
-
-			this.call('start', null, 'Scroll', 'main');
+			this.close();
 		}
 
-		// this.call(fn, null, 'NavBody', this.getData('id'));
 		this.call(fn, { color: this.color, x: scroll.x, y: scroll.y }, 'NavBackdrop');
+	}
+
+	open() {
+		html.classList.add('has-nav-open');
+
+		html.style.setProperty('overflow', 'hidden');
+		html.style.setProperty('height', '100%');
+
+		this.call('stop', false, 'Scroll', 'main');
+		this.call('close', null, 'NavItem');
+		this.call('open', null, 'NavItem', this.getData('id'));
+	}
+
+	close() {
+		html.classList.remove('has-nav-open');
+
+		html.style.removeProperty('overflow');
+		html.style.removeProperty('height');
+
+		this.call('start', null, 'Scroll', 'main');
+		this.call('close', null, 'NavItem');
 	}
 }
 

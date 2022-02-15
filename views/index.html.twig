@@ -37,11 +37,12 @@
 			{{- include( 'header.html.twig', { classes: [] } ) -}}
 		{% endblock %}
 
-		{# <div class="fixed top-0 bottom-0 left-0 right-0">
+		<div class="fixed top-0 bottom-0 left-0 right-0 z-40">
 			{% for case in case_studies %}
 				<div
-					class="h-screen pb-10 pt-43 absolute top-0 right-0 bottom-0 left-0 {{ loop.first ? 'opacity-100 visibile' : 'opacity-0 invisible' }}"
-					style="background-color: {{ case.meta( 'color' ) }};"
+					class="absolute top-0 bottom-0 left-0 right-0 invisible h-screen pb-10 transition-all opacity-0 pt-43"
+
+					data-module-nav-item="{{ case.id }}"
 				>
 					<div class="container h-full">
 						<div class="h-full row">
@@ -69,7 +70,7 @@
 					</div>
 				</div>
 			{% endfor %}
-		</div> #}
+		</div>
 
 		<div data-load-container data-load="container" data-mode="{{ mode | default( 'light' ) }}">
 			<div id="{{ post.id ? "page-#{post.id}" : 'page' }}" {{ body_class( 'page-content' ) }} data-module-scroll="main">

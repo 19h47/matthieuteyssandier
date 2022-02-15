@@ -21,6 +21,9 @@ class Load extends M {
 			console.info('Load.loading', transition);
 
 			gsap.to(oldContainer, { duration: 0.3, opacity: 0 });
+			this.call('close', null, 'NavButton');
+			this.call('close', null, 'NavItem');
+			this.call('close', null, 'NavBackdrop');
 		});
 
 		load.on('loaded', (transition, oldContainer, newContainer) => {
