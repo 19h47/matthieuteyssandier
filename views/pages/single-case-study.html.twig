@@ -70,7 +70,7 @@
 				<div class="row">
 
 					<div class="d-flex {{ post.prev.meta( 'preview' ) ? 'col-8/12' : 'col-full' }}">
-						<div class="relative h-full overflow-hidden">
+						<a href="{{ post.prev.link }}" class="relative h-full overflow-hidden">
 							{{-
 								include(
 									'components/image.html.twig',
@@ -83,15 +83,15 @@
 							-}}
 							<div class="relative z-30 flex flex-col w-full px-6 my-6 lg:px-10 lg:my-10 lg:flex-row-reverse lg:items-end min-h-99 lg:min-h-223">
 								<div class="lg:w-2.5/12 lg:flex ml-auto lg:ml-0">
-									<a href="{{ post.prev.link }}" class="inline-flex items-center ml-auto text-black bg-white border-none button">
+									<p class="inline-flex items-center ml-auto text-black bg-white border-none button">
 										{{- __( 'Next Project', 'matthieuteyssandier' ) -}}{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-black' ] } ) -}}
-									</a>
+									</p>
 								</div>
 								<div class="uppercase mt-auto lg:mt-0 text-white break-words text-15xl leading-[.85] lg:w-9.5/12">
 									{{- post.prev.title -}}
 								</div>
 							</div>
-						</div>
+						</a>
 					</div>
 
 					{% if post.prev.meta( 'preview' ) %}

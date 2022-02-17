@@ -1,53 +1,41 @@
 {#
- # Tease: Case study
+ # Tease: Case Study
  #
  # @package WordPress
  # @subpackage MatthieuTeyssandier
  #}
 
-{% set id = 'case-study-' ~ case.id %}
-
-<div
-	id="{{ id }}"
-	class="Tease-case-study position-relative{{ classes ? ' ' ~ classes | join( ' ' ) : '' }}"
-	data-module-hover
-	data-hover-color="{{ case.color }}"
-	data-reveal-color="{{ case.color }}"
-	data-scroll
-	data-scroll-call="play,Reveal"
-	data-scroll-id="{{ id }}"
-	data-module-reveal="{{ id }}"
+<a
+	href="{{ case_study.link }}"
+	class="Tease-case-study {{ classes ? classes | join( ' ' ) : '' }}"
+	{{ attributes ? attributes | map( ( value, key ) => "#{key}=\"#{value}\"" ) | join( ' ' ) | raw }}
 >
-	<a
-		class="top-0 bottom-0 d-block position-absolute end-0 start-0 z-index-2"
-		href="{{ case.link }}"
-		{{ case.title ? " aria-label=\"#{ case.title }\"" : '' }}
-		data-load="caseStudy"
-		data-module-transition-button
-		data-transition-button-color="{{ case.color | default( '#000000' ) }}"
-	></a>
-	<div class="overflow-hidden Tease-case-study__body position-relative z-index-1">
-		<canvas class="top-0 bottom-0 position-absolute end-0 start-0 h-100 w-100 z-index-2" data-hover="canvas" data-reveal="canvas"></canvas>
+	<div class="relative h-full overflow-hidden Tease-case-study rounded-5xl after:bg-black after:mix-blend-hard-light after:z-20 after:absolute after:inset-0 after:opacity-20">
 		{{-
 			include(
 				'components/image.html.twig',
 				{
-					size: size | default( 'size-2' ),
-					attributes: { style: 'opacity: 0; visibility: hidden;', 'data-reveal': 'image' },
-					image: case.thumbnail, size: size | default( 'large' ),
-					classes: [ 'position-absolute', 'top-0', 'end-0', 'bottom-0', 'start-0', 'h-100', 'w-100', 'z-index-1' ],
-				},
-				with_context = false
+					classes: [ 'absolute', 'inset-0', 'z-10', 'rounded-3xl', 'w-full', 'h-full', 'object-cover', 'object-center' ],
+					image: case_study.thumbnail,
+					size: 'size-8'
+				}
 			)
 		-}}
-	</div>
 
-	{% embed 'components/text-inview.html.twig' %}
-		{% block content %}
-			<span class="mt-16 Tease-case-study__title font-family-title text-uppercase d-flex">
-				{{- case.title -}}
-				{{- include( 'svg/use.html.twig', { classes: [ 'mt-8', 'ms-auto' ], icon: 'arrow-right' }, with_context = false ) -}}
-			</span>
-		{% endblock %}
-	{% endembed %}
-</div>
+		<div
+			class="absolute bottom-0 left-0 right-0 z-30 flex h-full flex-col mx-6 duration-1000 lg:justify-end lg:flex-row-reverse lg:items-end ease-out-expo lg:mx-10 mb-6 delay-0 lg:group-hover:delay-500 lg:transition-all {{ loop.first ? 'lg:opacity-100 lg:translate-y-0' : 'lg:opacity-0 lg:translate-y-10' }}"
+			data-case-studies="title"
+		>
+			{% if next %}
+				<div class="lg:w-2.5/12 lg:flex ml-auto lg:ml-0">
+					<p class="inline-flex items-center ml-auto text-black bg-white border-none button">
+						{{- __( 'Next Project', 'matthieuteyssandier' ) -}}{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-black' ] } ) -}}
+					</p>
+				</div>
+			{% endif %}
+			<h2 class="uppercase text-white text-15xl leading-[.85] lg:w-9.5/12 mt-auto lg:mt-0">
+				{{- case_study.title -}}
+			</h2>
+		</div>
+	</div>
+</a>

@@ -20,13 +20,17 @@ function init() {
 
 	html.classList.add('is-loaded');
 	html.classList.add('is-ready');
-	html.classList.add('is-first-hit');
+	html.classList.add('is-first-load');
 	html.classList.remove('is-loading');
 
 	window.addEventListener('mousemove', ({ clientX, clientY }) => {
 		scroll.x = clientX;
 		scroll.y = clientY;
 	});
+
+	setTimeout(() => {
+		html.classList.add('has-dom-ready');
+	}, 500);
 }
 
 window.onload = async () => {

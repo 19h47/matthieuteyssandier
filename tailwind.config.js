@@ -6,6 +6,7 @@
 const fontSize = require('./tailwind/tailwind.config.fontSize');
 const minHeight = require('./tailwind/tailwind.config.minHeight');
 const spacing = require('./tailwind/tailwind.config.spacing');
+const transitionProperty = require('./tailwind/tailwind.config.transitionProperty');
 const transitionTimingFunction = require('./tailwind/tailwind.config.transitionTimingFunction');
 
 const lineHeight = {};
@@ -32,10 +33,7 @@ const textIndent = {
 	'1/3': `${(1 / 3) * 100}%`,
 };
 
-const transitionProperty = {
-	'flex-grow': 'flex-grow',
 
-}
 
 const letterSpacing = {
 	tight: '-0.01em',

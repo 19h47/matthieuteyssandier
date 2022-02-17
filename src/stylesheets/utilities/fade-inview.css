@@ -1,0 +1,17 @@
+/**
+ * Fade In View
+ *
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ */
+
+@layer utilities {
+	.fade-inview {
+		@apply opacity-0 transition-opacity ease-out-expo duration-1000;
+	}
+
+	.is-inview.fade-inview {
+		@apply opacity-100;
+	}
+}

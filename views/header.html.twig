@@ -6,10 +6,10 @@
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 
-<div class="container relative z-50 py-2 pointer-events-none md:py-10">
+<div class="container relative z-50 py-2 pointer-events-none header md:py-10">
 	<div class="items-center -my-px row lg:items-start">
 		<div class="col-9/12">
-			<div class="flex items-center font-family-title">
+			<div class="flex items-center font-family-title header-left">
 
 				<a class="mr-1.5 text-6xl text-current pointer-events-auto leading-none" href="{{ site.link }}">{{- site.title -}}</a>
 
@@ -42,7 +42,8 @@
 		<div class="flex justify-end col-3/12">
 			<a
 				href="{{ options_theme.about_page_link }}"
-				class="flex items-center pointer-events-auto button"
+				class="flex items-center pointer-events-auto button header-right"
+				style="transition-delay: 0.1s;"
 			>
 				<span class="w-2.5 h-2.5 mr-1 bg-current rounded-full inline-block"></span>
 				{{- __( 'Info', 'matthieuteyssandier' ) -}}

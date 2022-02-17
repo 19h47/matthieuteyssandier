@@ -1,0 +1,17 @@
+/*
+ * Tease Case Study
+ *
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ * @package WordPress
+ * @subpackage MatthieuTeyssandier
+ */
+
+@layer components {
+	.Front-page .Tease-case-study {
+		@apply lg:opacity-0 lg:translate-y-10;
+	}
+
+	.has-dom-ready .Front-page .Tease-case-study {
+		@apply lg:opacity-100 lg:translate-y-0;
+	}
+}
