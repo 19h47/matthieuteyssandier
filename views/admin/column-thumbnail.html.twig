@@ -1,0 +1,10 @@
+{#
+ # Column Thumbnail
+ #}
+
+<a
+	href="{{ href }}"
+	{{ attributes ? attributes | map( ( value, key ) => "#{key}=\"#{value}\"" ) | join( ' ' ) | raw }}
+>
+	{{- include( 'components/image.html.twig', { image: thumbnail, size: 'thumbnail' }, with_context = false ) -}}
+</a>

@@ -1,0 +1,18 @@
+{#
+ # Video
+ #
+ # @package WordPress
+ # @subpackage MatthieuTeyssandier
+ #}
+
+{% if video.url %}
+
+	<video
+		class="{{ classes ? classes | join( ' ' ) : '' }}"
+		muted
+		playsInline
+		autoplay
+		src="{{ video.url }}"
+	/>
+
+{% endif %}

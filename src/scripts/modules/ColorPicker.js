@@ -2,7 +2,7 @@ import { module as M } from 'modujs';
 import { html } from 'utils/environment';
 import gsap from 'gsap';
 
-let WIDTH = 44;
+let WIDTH = 20;
 const MARGIN = 6;
 
 class ColorPicker extends M {

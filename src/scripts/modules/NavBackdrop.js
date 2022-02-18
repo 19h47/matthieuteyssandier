@@ -7,7 +7,9 @@ import diameter from 'utils/math';
 
 gsap.registerPlugin(CustomEase);
 
-CustomEase.create("easeOutCubic", "0.215,0.61,0.355,1");
+CustomEase.create("custom", "M0,0,C0.11,0.494,0.192,0.726,0.318,0.852,0.45,0.984,0.504,1,1,1");
+
+console.log(CustomEase);
 
 class NavBackdrop extends M {
 	init() {
@@ -44,7 +46,7 @@ class NavBackdrop extends M {
 
 		gsap.to(props, {
 			duration: 1.5,
-			ease: 'easeOutCubic',
+			ease: 'power4.out',
 			radiusX: this.radius,
 			onUpdate: () => drawEllipse(props, this.context, false),
 		});
@@ -62,7 +64,7 @@ class NavBackdrop extends M {
 
 		gsap.to(props, {
 			duration: 1,
-			ease: 'easeOutCubic',
+			ease: 'power4.out',
 			radiusX: 0,
 			onUpdate: () => drawEllipse(props, this.context, true),
 			onComplete: () => this.call('close', null, 'ColorPicker'),

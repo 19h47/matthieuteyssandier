@@ -18,7 +18,7 @@
 						{% for case in case_studies %}
 							<li class="mr-1.5 last:mr-0" style="z-index: {{ ( case_studies | length ) - loop.index }};">
 								<button
-									class="block rounded-full pointer-events-auto w-11 h-11 lg:w-12 lg:h-12"
+									class="block w-5 h-5 rounded-full pointer-events-auto lg:w-12 lg:h-12"
 									type="button"
 									aria-label="{{ case.title }}"
 									style="background-color: {{ case.meta( 'color' ) }};"

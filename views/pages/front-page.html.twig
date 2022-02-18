@@ -9,7 +9,7 @@
 
 {% block content %}
 	{% if post.meta( 'case_studies' ) %}
-		<div class="fixed inset-0 pt-16 pb-6 lg:pt-37">
+		<div class="fixed inset-0 pt-16 pb-3 lg:pb-6 lg:pt-37">
 			<div class="container h-full">
 				<div
 					class="flex flex-col h-full row lg:flex-row"
@@ -28,18 +28,18 @@
 										'lg:my-0',
 										'transition-flex-grow-transform-opacity',
 										'duration-1000',
-										'ease-out-cubic',
+										'ease-out-quint',
 										'group',
 										'grow',
+										'basis-0',
 										loop.first ? 'lg:grow-0.8' : 'lg:grow-0.2'
 									],
 									next: false
 								}
-							)
 						-%}
 							{% block title %}
 								<div
-									class="absolute bottom-0 left-0 right-0 z-30 flex h-full flex-col mx-6 lg:duration-450 lg:justify-end lg:flex-row-reverse lg:items-end out-cubic lg:mx-10 mb-6 delay-0 lg:group-hover:delay-500 lg:transition-transform-opacity {{ loop.first ? 'lg:opacity-100 lg:translate-y-0' : 'lg:opacity-0 lg:translate-y-10' }}"
+									class="absolute bottom-0 left-0 right-0 z-30 flex h-full flex-col mx-6 lg:duration-450 lg:justify-end lg:flex-row-reverse lg:items-end out-quint lg:mx-10 mb-6 delay-0 lg:group-hover:delay-500 lg:transition-transform-opacity {{ loop.first ? 'lg:opacity-100 lg:translate-y-0' : 'lg:opacity-0 lg:translate-y-10' }}"
 									data-case-studies="title"
 								>
 									{% if next %}

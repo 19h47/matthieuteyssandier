@@ -18,4 +18,4 @@ $data             = Timber::context();
 $data['mode']     = 'dark';
 $data['template'] = 'about-page';
 
-Timber::render( $filename, $data );
+Timber::render( $filename, $data, 600, 'CACHE_OBJECT' );

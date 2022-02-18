@@ -14,4 +14,4 @@ $template = 'pages/single-case-study.html.twig';
 $data         = Timber::context();
 $data['post'] = Timber::get_post();
 
-Timber::render( $template, $data );
+Timber::render( $template, $data, 600, 'CACHE_OBJECT' );

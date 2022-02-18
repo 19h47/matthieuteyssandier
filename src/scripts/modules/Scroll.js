@@ -20,7 +20,7 @@ class Scroll extends M {
 		this.scroll = new Native({
 			el: this.el,
 			getDirection: true,
-			resetNativeScroll: false,
+			resetNativeScroll: true,
 		});
 
 		this.direction = 'down';

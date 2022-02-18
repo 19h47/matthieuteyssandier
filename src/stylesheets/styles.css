@@ -3,6 +3,7 @@
 @import './components/tease-case-study.css';
 @import './base.css';
 @import './utilities/fade-inview.css';
+@import './utilities/fade-up-inview.css';
 @import './utilities/grid.css';
 @import './utilities/has-dom-ready.css';
 

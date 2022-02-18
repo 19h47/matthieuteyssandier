@@ -12,7 +12,16 @@
 			<div>
 				{% for media in props.media %}
 					{% if 'video' == media.acf_fc_layout %}
-						{{- include( 'components/video-player.html.twig', { video: media.video, poster: media.poster } ) -}}
+						{{-
+							include(
+								'components/video.html.twig',
+								{
+									video: media.video,
+									poster: media.poster,
+									classes: [ 'rounded-3xl', 'max-w-full', 'mx-auto', 'h-auto' ]
+								}
+							)
+						-}}
 					{% endif %}
 
 					{% if 'image' == media.acf_fc_layout %}

@@ -8,7 +8,7 @@
 
 namespace MatthieuTeyssandier\Post;
 
-use WP_Post;
+use Timber\{ Timber };
 
 /**
  * Project class
@@ -58,7 +58,7 @@ class CaseStudy {
 				vertical-align: middle;
 				width: 80px;
 				height: 80px;
-				object-fit: contain;
+				object-fit: cover;
 				object-position: center;
 				border-radius: 50%;
 				overflow: hidden;
@@ -88,10 +88,6 @@ class CaseStudy {
 			}
 
 			$new_columns[ $key ] = $value;
-
-			if ( 'title' === $key ) {
-				$new_columns['custom_date'] = __( 'Date', 'matthieuteyssandier' );
-			}
 		}
 		return $new_columns;
 	}
@@ -110,27 +106,20 @@ class CaseStudy {
 		switch ( $column_name ) {
 			case 'thumbnail':
 				$color     = get_field( 'color', $post_id );
-				$thumbnail = get_the_post_thumbnail( $post_id, 'thumbnail' );
+				$thumbnail = get_post_thumbnail_id( $post_id );
 				$html      = '—';
 
 				if ( $thumbnail ) {
-					$html  = '<a href="' . esc_attr( get_edit_post_link( $post_id ) ) . '"';
-					$html .= $color ? ' style="background-color: ' . $color . ';"' : '';
-					$html .= '>';
-					$html .= $thumbnail;
-					$html .= '</a>';
-				}
-
-				echo wp_kses_post( $html );
-
-				break;
-
-			case 'custom_date':
-				$date = get_field( 'date', $post_id );
-				$html = '—';
-
-				if ( $date ) {
-					$html = $date;
+					$html = Timber::render(
+						'admin/column-thumbnail.html.twig',
+						array(
+							'href'       => get_edit_post_link( $post_id ),
+							'attributes' => array(
+								'style' => $color ? 'background-color: ' . $color . ';' : '',
+							),
+							'thumbnail'  => $thumbnail,
+						)
+					);
 				}
 
 				echo wp_kses_post( $html );

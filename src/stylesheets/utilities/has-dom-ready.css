@@ -9,7 +9,7 @@
 @layer utilities {
 	.header-left,
 	.header-right {
-		@apply opacity-0 transition-opacity ease-out-cubic duration-1000;
+		@apply opacity-0 transition-opacity ease-out-quint duration-1000;
 	}
 
 	.has-dom-ready .header-left,

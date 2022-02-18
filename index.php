@@ -21,4 +21,4 @@ $templates = array( 'index.html.twig' );
 $data         = Timber::context();
 $data['post'] = Timber::get_post();
 
-Timber::render( $templates, $data );
+Timber::render( $templates, $data, 600, 'CACHE_OBJECT' );

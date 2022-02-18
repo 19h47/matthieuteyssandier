@@ -9,26 +9,31 @@
 
 {% block content %}
 
-	<div class="pb-6 mt-14 lg:mt-0">
+	<div class="relative z-0 pb-6 mt-14 lg:mt-36">
 		<div class="container my-6 first:mt-0 last:mb-0">
 			<div class="row">
+
+				<div>
+					<h1 class="uppercase text-15xl leading-[.85] break-words fade-up-inview" data-scroll>
+						{{- post.title -}}
+					</h1>
+				</div>
+
 				{% if post.terms( 'case_study_cat' ) %}
-					<div class="lg:col-2/12">
-						<ul class="flex flex-wrap -mx-3 -my-2">
+					<div class="mt-10">
+
+						<ul class="flex flex-wrap -m-2">
 							{% for cat in post.terms( 'case_study_cat' ) %}
-								<li class="mx-3 my-2"><p class="button">{{- cat.name -}}</p></li>
+								<li class="m-2 fade-up-inview" data-scroll style="transition-delay: {{ loop.index0 * 0.1 }}s;"><p class="button">{{- cat.name -}}</p></li>
 							{% endfor %}
 						</ul>
+
 					</div>
 				{% endif %}
-
-				<div class="lg:col-10/12 mt-6 lg:mt-0 {{ post.terms( 'case_study_cat' ) ? '' : 'lg:ml-2/12' }}">
-					<h1 class="uppercase text-15xl leading-[.85] break-words">{{- post.title -}}</h1>
-				</div>
 			</div>
 
 			{% if post.thumbnail %}
-				<div class="mt-20 lg:mt-32 row">
+				<div class="mt-20 row fade-inview" data-scroll>
 					<div>
 						{{- include( 'components/image.html.twig', { size: 'size-12', image: post.thumbnail, classes: [ 'rounded-5xl', 'max-w-full', 'mx-auto', 'h-auto' ] } ) -}}
 					</div>
@@ -36,7 +41,7 @@
 			{% endif %}
 
 			{% if post.meta( 'content' ).french or post.meta( 'content' ).english %}
-				<div class="my-32 row">
+				<div class="my-32 row fade-inview" data-scroll>
 					<div class="lg:col-6/12">
 						<p class="text-4xl leading-normal tracking-tight indent-1/3">
 							{{- post.meta( 'content' ).english -}}
@@ -70,7 +75,6 @@
 				<div class="row">
 
 					<div class="d-flex {{ post.prev.meta( 'preview' ) ? 'col-8/12' : 'col-full' }}">
-
 						{{- include(
 							'components/tease-case-study.html.twig',
 								{
@@ -81,29 +85,6 @@
 								}
 							)
 						-}}
-
-						{# <a href="{{ post.prev.link }}" class="relative block h-full overflow-hidden">
-							{{-
-								include(
-									'components/image.html.twig',
-									{
-										size: post.prev.meta( 'preview' ) ? 'size-8' : 'size-12',
-										image: post.prev.thumbnail,
-										classes: [ 'absolute', 'inset-0', 'z-10', 'rounded-3xl', 'w-full', 'h-full', 'object-cover', 'object-center' ]
-									}
-								)
-							-}}
-							<div class="relative z-30 flex flex-col w-full px-6 my-6 lg:px-10 lg:my-10 lg:flex-row-reverse lg:items-end min-h-99 lg:min-h-223">
-								<div class="lg:w-2.5/12 lg:flex ml-auto lg:ml-0">
-									<p class="inline-flex items-center ml-auto text-black bg-white border-none button">
-										{{- __( 'Next Project', 'matthieuteyssandier' ) -}}{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-black' ] } ) -}}
-									</p>
-								</div>
-								<div class="uppercase mt-auto lg:mt-0 text-white break-words text-15xl leading-[.85] lg:w-9.5/12">
-									{{- post.prev.title -}}
-								</div>
-							</div>
-						</a> #}
 					</div>
 
 					{% if post.prev.meta( 'preview' ) %}

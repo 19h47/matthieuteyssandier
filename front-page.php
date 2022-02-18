@@ -18,4 +18,4 @@ $data             = Timber::context();
 $data['post']     = Timber::get_post();
 $data['template'] = 'front-page';
 
-Timber::render( $filenames, $data );
+Timber::render( $filenames, $data, 600, 'CACHE_OBJECT' );
