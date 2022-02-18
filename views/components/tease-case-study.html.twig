@@ -1,13 +1,17 @@
 {#
  # Tease: Case Study
  #
+ # @param string size
+ # @param boolean next
+ # @param array classes
+ #
  # @package WordPress
  # @subpackage MatthieuTeyssandier
  #}
 
 <a
 	href="{{ case_study.link }}"
-	class="Tease-case-study {{ classes ? classes | join( ' ' ) : '' }}"
+	class="Tease-case-study block {{ classes ? classes | join( ' ' ) : '' }}"
 	{{ attributes ? attributes | map( ( value, key ) => "#{key}=\"#{value}\"" ) | join( ' ' ) | raw }}
 >
 	<div class="relative h-full overflow-hidden Tease-case-study rounded-5xl after:bg-black after:mix-blend-hard-light after:z-20 after:absolute after:inset-0 after:opacity-20">
@@ -17,25 +21,24 @@
 				{
 					classes: [ 'absolute', 'inset-0', 'z-10', 'rounded-3xl', 'w-full', 'h-full', 'object-cover', 'object-center' ],
 					image: case_study.thumbnail,
-					size: 'size-8'
+					size: size | default( 'size-8' )
 				}
 			)
 		-}}
 
-		<div
-			class="absolute bottom-0 left-0 right-0 z-30 flex h-full flex-col mx-6 duration-450 lg:justify-end lg:flex-row-reverse lg:items-end ease-out-expo lg:mx-10 mb-6 delay-0 lg:group-hover:delay-500 lg:transition-transform-opacity {{ loop.first ? 'lg:opacity-100 lg:translate-y-0' : 'lg:opacity-0 lg:translate-y-10' }}"
-			data-case-studies="title"
-		>
-			{% if next %}
-				<div class="lg:w-2.5/12 lg:flex ml-auto lg:ml-0">
-					<p class="inline-flex items-center ml-auto text-black bg-white border-none button">
-						{{- __( 'Next Project', 'matthieuteyssandier' ) -}}{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-black' ] } ) -}}
-					</p>
+		{% block title %}
+			<div class="relative z-30 flex flex-col w-full px-6 my-6 lg:px-10 lg:my-10 lg:flex-row-reverse lg:items-end min-h-99 lg:min-h-223">
+				{% if next %}
+					<div class="lg:w-2.5/12 lg:flex ml-auto lg:ml-0">
+						<p class="inline-flex items-center ml-auto text-black bg-white border-none button">
+							{{- __( 'Next Project', 'matthieuteyssandier' ) -}}{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-black' ] } ) -}}
+						</p>
+					</div>
+				{% endif %}
+				<div class="uppercase mt-auto lg:mt-0 text-white break-words text-15xl leading-[.85] lg:w-9.5/12">
+					{{- case_study.title -}}
 				</div>
-			{% endif %}
-			<h2 class="uppercase text-white text-15xl leading-[.85] lg:w-9.5/12 mt-auto lg:mt-0">
-				{{- case_study.title -}}
-			</h2>
-		</div>
+			</div>
+		{% endblock %}
 	</div>
 </a>

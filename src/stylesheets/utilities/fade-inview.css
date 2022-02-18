@@ -8,7 +8,7 @@
 
 @layer utilities {
 	.fade-inview {
-		@apply opacity-0 transition-opacity ease-out-expo duration-1000;
+		@apply opacity-0 transition-opacity ease-out-cubic duration-1000;
 	}
 
 	.is-inview.fade-inview {

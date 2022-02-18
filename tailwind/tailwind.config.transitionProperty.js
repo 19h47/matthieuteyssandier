@@ -3,5 +3,5 @@ module.exports = {
 	'flex-grow-transform': 'flex-grow, transform',
 	'flex-grow-transform-opacity': 'flex-grow, transform, opacity',
 	'transform-opacity': 'transform, opacity',
-
-}
+	'opacity-visibility': 'opacity, visibility',
+};

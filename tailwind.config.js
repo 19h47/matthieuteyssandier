@@ -6,13 +6,9 @@
 const fontSize = require('./tailwind/tailwind.config.fontSize');
 const minHeight = require('./tailwind/tailwind.config.minHeight');
 const spacing = require('./tailwind/tailwind.config.spacing');
+const transitionDuration = require('./tailwind/tailwind.config.transitionDuration');
 const transitionProperty = require('./tailwind/tailwind.config.transitionProperty');
 const transitionTimingFunction = require('./tailwind/tailwind.config.transitionTimingFunction');
-
-const transitionDuration = {
-	'450': '450ms',
-
-};
 
 const lineHeight = {};
 

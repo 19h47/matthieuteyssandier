@@ -1,5 +1,6 @@
 const rem = value => `${value / 16}rem`;
-const clamp = (min, max, multiplier) => `clamp(${rem(min)}, calc(${rem(min)} + ((1vw - 3.75px) * ${multiplier})), ${rem(max)})`
+const clamp = (min, max, multiplier) =>
+	`clamp(${rem(min)}, calc(${rem(min)} + ((1vw - 3.75px) * ${multiplier})), ${rem(max)})`;
 
 module.exports = {
 	'text-base': clamp(16, 24, 0.5178),

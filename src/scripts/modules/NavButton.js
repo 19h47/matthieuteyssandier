@@ -36,7 +36,8 @@ class NavButton extends M {
 
 		this.call('stop', false, 'Scroll', 'main');
 		this.call('close', null, 'NavItem');
-		this.call('open', null, 'NavItem', this.getData('id'));
+
+		setTimeout(() => this.call('open', null, 'NavItem', this.getData('id')), 500);
 	}
 
 	close() {

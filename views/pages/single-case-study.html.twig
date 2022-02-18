@@ -66,11 +66,23 @@
 		{{ parent() }}
 
 		{% if post.prev %}
-			<div class="container mt-33">
+			<div class="container mt-33" data-thumbnail="{{ post.prev.thumbnail }}">
 				<div class="row">
 
 					<div class="d-flex {{ post.prev.meta( 'preview' ) ? 'col-8/12' : 'col-full' }}">
-						<a href="{{ post.prev.link }}" class="relative h-full overflow-hidden">
+
+						{{- include(
+							'components/tease-case-study.html.twig',
+								{
+									case_study: post.prev,
+									size: post.prev.meta( 'preview' ) ? 'size-8' : 'size-12',
+									next: true,
+									classes: [ 'min-h-99', 'lg:min-h-223', 'h-full' ]
+								}
+							)
+						-}}
+
+						{# <a href="{{ post.prev.link }}" class="relative block h-full overflow-hidden">
 							{{-
 								include(
 									'components/image.html.twig',
@@ -91,7 +103,7 @@
 									{{- post.prev.title -}}
 								</div>
 							</div>
-						</a>
+						</a> #}
 					</div>
 
 					{% if post.prev.meta( 'preview' ) %}

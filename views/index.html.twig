@@ -40,8 +40,7 @@
 		<div class="fixed top-0 bottom-0 left-0 right-0 z-40 pointer-events-none">
 			{% for case in case_studies %}
 				<div
-					class="absolute top-0 bottom-0 left-0 right-0 invisible h-screen pb-10 transition-all opacity-0 pointer-events-auto pt-43"
-
+					class="absolute top-0 bottom-0 left-0 right-0 invisible h-screen pb-10 opacity-0 pointer-events-auto transition-opacity-visibility duration-450 ease-out-cubic pt-43"
 					data-module-nav-item="{{ case.id }}"
 				>
 					<div class="container h-full">
@@ -49,12 +48,12 @@
 							<div class="flex flex-col col-4/12">
 								<ul class="flex flex-wrap -mx-3 -my-2">
 									{% for cat in case.terms( 'case_study_cat' ) %}
-										<li class="mx-3 my-2"><p class="button">{{- cat.name -}}</p></li>
+										<li class="mx-3 my-2"><p class="text-black button">{{- cat.name -}}</p></li>
 									{% endfor %}
 								</ul>
 
 								<p class="mt-auto">
-									<a class="inline-flex items-center bg-white border-none button" href="{{ case.link }}">
+									<a class="inline-flex items-center text-black bg-white border-none button" href="{{ case.link }}">
 										{{- __( 'Discover' ) -}}{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-current' ] } ) -}}
 									</a>
 								</p>
