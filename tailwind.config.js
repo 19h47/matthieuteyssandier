@@ -9,6 +9,11 @@ const spacing = require('./tailwind/tailwind.config.spacing');
 const transitionProperty = require('./tailwind/tailwind.config.transitionProperty');
 const transitionTimingFunction = require('./tailwind/tailwind.config.transitionTimingFunction');
 
+const transitionDuration = {
+	'450': '450ms',
+
+};
+
 const lineHeight = {};
 
 const flexGrow = {
@@ -63,6 +68,7 @@ module.exports = {
 			textIndent,
 			zIndex,
 			fontSize,
+			transitionDuration,
 			transitionProperty,
 			transitionTimingFunction
 		},
