@@ -26,7 +26,7 @@ class ColorPicker extends M {
 
 		const width = children.length * WIDTH + (children.length - 1) * MARGIN;
 
-		this.timeline = gsap.timeline({ paused: true, defaults: { ease: 'power4.inOut' } });
+		this.timeline = gsap.timeline({ paused: true, defaults: { ease: 'power4.out', } });
 
 		this.timeline.fromTo(
 			this.el,

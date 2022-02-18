@@ -9,6 +9,8 @@ class CaseStudies extends M {
 				item: 'grow',
 			},
 		};
+
+		this.$('item').forEach($item => $item.addEventListener('focus', this.grow.bind(this)));
 	}
 
 	grow({ currentTarget }) {

@@ -12,8 +12,8 @@ class Load extends M {
 	init() {
 		// eslint-disable-next-line new-cap
 		const load = new modularLoad({
-			enterDelay: 500,
-			exitDelay: 500,
+			enterDelay: 1000,
+			exitDelay: 1000,
 		});
 
 		// eslint-disable-next-line no-unused-vars
@@ -56,7 +56,7 @@ class Load extends M {
 
 			this.call('update', newContainer, 'app');
 
-			gsap.to(newContainer, { duration: 0.5, opacity: 1 });
+			gsap.to(newContainer, { duration: 1, ease: 'power4.out', opacity: 1 });
 		});
 
 		load.on('images', () => {
