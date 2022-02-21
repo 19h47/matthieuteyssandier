@@ -35,8 +35,18 @@
 			<div class="px-3 text-center lg:px-0">
 				<p class="mb-4 text-xs uppercase text-gray-dark">{{- options_theme.email.title | nl2br -}}</p>
 				<p>
-					<button class="inline-flex items-center text-white border-none button bg-red-bright" type="button" data-email="{{ options_theme.email.address }}">
-						{{- __( 'copy the mail', 'matthieuteyssandier' ) -}}{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-current' ] } ) -}}
+
+					<button
+						class="inline-flex items-center text-white border-none button bg-red-bright"
+						type="button"
+						data-module-copy
+						data-copy-label="{{ __( 'Copy the mail', 'matthieuteyssandier' ) }}"
+						data-copy-success="{{ __( 'Email copied', 'matthieuteyssandier' ) }}"
+						data-copy-error="{{ __( 'Email not copied', 'matthieuteyssandier' ) }}"
+						data-copy-item="{{ options_theme.email.address }}"
+					>
+						<span data-copy="label">{{- __( 'Copy the mail', 'matthieuteyssandier' ) -}}</span>
+						{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-current' ] } ) -}}
 					</button>
 				</p>
 			</div>
