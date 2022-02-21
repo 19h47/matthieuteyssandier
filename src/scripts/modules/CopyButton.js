@@ -1,6 +1,6 @@
 import { module as M } from 'modujs';
 
-class Copy extends M {
+class CopyButton extends M {
 	constructor(m) {
 		super(m);
 
@@ -41,4 +41,4 @@ class Copy extends M {
 	}
 }
 
-export default Copy;
+export default CopyButton;

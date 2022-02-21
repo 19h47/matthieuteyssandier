@@ -39,13 +39,13 @@
 					<button
 						class="inline-flex items-center text-white border-none button bg-red-bright"
 						type="button"
-						data-module-copy
-						data-copy-label="{{ __( 'Copy the mail', 'matthieuteyssandier' ) }}"
-						data-copy-success="{{ __( 'Email copied', 'matthieuteyssandier' ) }}"
-						data-copy-error="{{ __( 'Email not copied', 'matthieuteyssandier' ) }}"
-						data-copy-item="{{ options_theme.email.address }}"
+						data-module-copy-button
+						data-copy-button-label="{{ __( 'Copy the mail', 'matthieuteyssandier' ) }}"
+						data-copy-button-success="{{ __( 'Email copied', 'matthieuteyssandier' ) }}"
+						data-copy-button-error="{{ __( 'Email not copied', 'matthieuteyssandier' ) }}"
+						data-copy-button-item="{{ options_theme.email.address }}"
 					>
-						<span data-copy="label">{{- __( 'Copy the mail', 'matthieuteyssandier' ) -}}</span>
+						<span data-copy-button="label">{{- __( 'Copy the mail', 'matthieuteyssandier' ) -}}</span>
 						{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-current' ] } ) -}}
 					</button>
 				</p>
@@ -53,7 +53,7 @@
 
 			<div class="px-3 mt-10 text-center lg:mt-8 lg:px-0">
 				<p class="text-xs uppercase lg:mb-10 text-gray-dark">
-					{{- options_theme.copyright | replace({ '{year}': "now" | date( "Y" ) }) -}}
+					{{- options_theme.copyright | replace({ '{year}': "now" | date( "Y" ), '{19h47}': '<a href="https://19h47.fr" targte="_blank" rel="noopener noreferer">19h47</a>' }) -}}
 				</p>
 			</div>
 		</div>
