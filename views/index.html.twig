@@ -38,9 +38,10 @@
 		<div class="fixed inset-0 z-40 pointer-events-none">
 			{% for case_study in case_studies %}
 				<div
-					class="absolute inset-0 invisible h-full pb-6 overflow-hidden opacity-0 pointer-events-auto lg:pb-10 transition-opacity-visibility duration-450 ease-out-quint pt-37 lg:pt-33"
+					class="absolute inset-0 invisible h-full pt-16 pb-3 overflow-hidden opacity-0 pointer-events-auto lg:pb-6 transition-opacity-visibility duration-450 ease-out-quint lg:pt-33"
 					data-module-nav-item="{{ case_study.id }}"
 				>
+
 					<div class="container h-full">
 						<div class="h-full row">
 							<div class="flex flex-col lg:col-4/12">
@@ -70,7 +71,19 @@
 											{
 												size: 'size-8',
 												image: case_study.thumbnail,
-												classes: [ 'relative', 'z-10', 'w-full', 'lg:h-full', 'object-cover', 'object-center' ]
+												classes: [
+													case_study.mobile_thumbnail ? 'hidden lg:block' : '',
+													'relative', 'z-10', 'w-full', 'lg:h-full', 'object-cover', 'object-center' ]
+											}
+										)
+									-}}
+									{{-
+										include(
+											'components/image.html.twig',
+											{
+												size: 'size-2',
+												image: case_study.mobile_thumbnail,
+												classes: [ 'lg:hidden', 'relative', 'z-10', 'w-full', 'lg:h-full', 'object-cover', 'object-center' ]
 											}
 										)
 									-}}

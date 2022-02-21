@@ -39,6 +39,7 @@ class Init {
 			Plugins\ACF\ThemeSettingsFields::class,
 			Plugins\ACF\CaseStudyFields::class,
 			Plugins\ACF\FrontPageFields::class,
+			Plugins\ACF\MobileThumbnailFields::class,
 		);
 	}
 
