@@ -9,7 +9,7 @@
 
 {% block content %}
 	{% if post.meta( 'case_studies' ) %}
-		<div class="fixed inset-0 pt-16 pb-3 lg:pb-6 lg:pt-37">
+		<div class="fixed inset-0 pt-16 pb-3 lg:pb-6 lg:pt-33">
 			<div class="container h-full">
 				<div
 					class="flex flex-col h-full row lg:flex-row"
@@ -32,6 +32,11 @@
 										'group',
 										'grow',
 										'basis-0',
+										'lg:mx-3',
+										'mx-2',
+										'!px-0',
+										'relative',
+										'!w-auto',
 										loop.first ? 'lg:grow-0.8' : 'lg:grow-0.2'
 									],
 									next: false
@@ -49,7 +54,7 @@
 											</p>
 										</div>
 									{% endif %}
-									<h2 class="uppercase text-white text-7xl whitespace-nowrap font-bold leading-[.85] lg:w-9.5/12 mt-auto lg:mt-0">
+									<h2 class="uppercase text-white text-7xl break-words lg:break-normal lg:whitespace-nowrap font-bold leading-[.85] lg:w-9.5/12 mt-auto lg:mt-0">
 										{{- case_study.title -}}
 									</h2>
 								</div>

@@ -9,8 +9,6 @@ gsap.registerPlugin(CustomEase);
 
 CustomEase.create("custom", "M0,0,C0.11,0.494,0.192,0.726,0.318,0.852,0.45,0.984,0.504,1,1,1");
 
-console.log(CustomEase);
-
 class NavBackdrop extends M {
 	init() {
 		this.resize = this.resize.bind(this);

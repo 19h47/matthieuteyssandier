@@ -36,7 +36,8 @@ class Load extends M {
 
 			gsap.set(newContainer, { opacity: 0 });
 
-			const { mode } = newContainer.dataset;
+			const { mode, template } = newContainer.dataset;
+			const { url } = oldContainer.dataset;
 
 			if ('light' === mode) {
 				body.classList.remove('bg-red-very-dark', 'text-gray-light');
@@ -49,10 +50,20 @@ class Load extends M {
 				body.classList.add('bg-red-very-dark', 'text-gray-light');
 				body.setAttribute('data-mode', 'dark');
 			}
+
+			console.log(template);
+
+			if ('about-page' === template) {
+				this.call('close', { url }, 'AboutPageButton');
+			}
+
+			if ('about-page' !== template) {
+				this.call('open', null, 'AboutPageButton');
+			}
 		});
 
 		load.on('ready', (transition, newContainer) => {
-			console.info('Load.ready', transition);
+			// console.info('Load.ready', transition);
 
 			this.call('update', newContainer, 'app');
 
@@ -60,7 +71,7 @@ class Load extends M {
 		});
 
 		load.on('images', () => {
-			console.log('Load.images');
+			// console.log('Load.images');
 			this.call('update', null, 'Scroll', 'main');
 		});
 	}

@@ -14,7 +14,7 @@
 	class="Tease-case-study block {{ classes ? classes | join( ' ' ) : '' }}"
 	{{ attributes ? attributes | map( ( value, key ) => "#{key}=\"#{value}\"" ) | join( ' ' ) | raw }}
 >
-	<div class="relative h-full overflow-hidden Tease-case-study rounded-5xl after:bg-black after:mix-blend-hard-light after:z-20 after:absolute after:inset-0 after:opacity-20">
+	<div class="absolute inset-0 h-full overflow-hidden Tease-case-study rounded-5xl after:bg-black after:mix-blend-hard-light after:z-20 after:absolute after:inset-0 after:opacity-20">
 		{{-
 			include(
 				'components/image.html.twig',
@@ -27,7 +27,7 @@
 		-}}
 
 		{% block title %}
-			<div class="relative z-30 flex flex-col w-full px-6 my-6 lg:px-10 lg:my-10 lg:flex-row-reverse lg:items-end min-h-99 lg:min-h-223">
+			<div class="relative z-30 flex flex-col w-full h-full p-6 lg:p-10 lg:flex-row-reverse lg:items-end">
 				{% if next %}
 					<div class="lg:w-2.5/12 lg:flex ml-auto lg:ml-0">
 						<p class="inline-flex items-center ml-auto text-black bg-white border-none button">

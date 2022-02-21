@@ -9,9 +9,9 @@
 
 {% block content %}
 
-	<div class="relative z-0 pb-6 mt-14 lg:mt-36">
+	<div class="relative z-0 pb-6 mt-14 lg:mt-33.5">
 		<div class="container my-6 first:mt-0 last:mb-0">
-			<div class="row">
+			<div class="text-center row">
 
 				<div>
 					<h1 class="uppercase text-7xl font-bold leading-[.85] break-words fade-up-inview" data-scroll>
@@ -22,9 +22,11 @@
 				{% if post.terms( 'case_study_cat' ) %}
 					<div class="mt-10">
 
-						<ul class="flex flex-wrap -m-2">
+						<ul class="inline-flex flex-wrap justify-center -m-2">
 							{% for cat in post.terms( 'case_study_cat' ) %}
-								<li class="m-2 fade-up-inview" data-scroll style="transition-delay: {{ loop.index0 * 0.1 }}s;"><p class="button">{{- cat.name -}}</p></li>
+								<li class="m-2 fade-up-inview" data-scroll style="transition-delay: {{ loop.index0 * 0.1 }}s;">
+									<p class="button">{{- cat.name -}}</p>
+								</li>
 							{% endfor %}
 						</ul>
 
@@ -33,9 +35,20 @@
 			</div>
 
 			{% if post.thumbnail %}
-				<div class="mt-20 row fade-inview" data-scroll>
+				<div class="mt-9 lg:mt-11 row">
 					<div>
-						{{- include( 'components/image.html.twig', { size: 'size-12', image: post.thumbnail, classes: [ 'rounded-5xl', 'max-w-full', 'mx-auto', 'h-auto' ] } ) -}}
+						<div class="relative overflow-hidden pb-908/1872 rounded-5xl fade-inview" data-scroll>
+							{{-
+								include(
+									'components/image.html.twig',
+									{
+										size: 'size-12',
+										image: post.thumbnail,
+										classes: [ 'absolute', 'inset-0', 'w-full', 'h-full', 'object-cover', 'object-center' ]
+									}
+								)
+							-}}
+						</div>
 					</div>
 				</div>
 			{% endif %}
@@ -74,21 +87,21 @@
 			<div class="container mt-33" data-thumbnail="{{ post.prev.thumbnail }}">
 				<div class="row">
 
-					<div class="d-flex {{ post.prev.meta( 'preview' ) ? 'col-8/12' : 'col-full' }}">
+					<div class="d-flex col-full {{ post.prev.meta( 'preview' ) ? 'lg:col-8/12' : '' }}">
 						{{- include(
 							'components/tease-case-study.html.twig',
 								{
 									case_study: post.prev,
 									size: post.prev.meta( 'preview' ) ? 'size-8' : 'size-12',
 									next: true,
-									classes: [ 'min-h-99', 'lg:min-h-223', 'h-full' ]
+									classes: [ 'pb-396/389', post.prev.meta( 'preview' ) ? 'lg:pb-892/1241' : 'lg:pb-892/1872' , 'relative' ]
 								}
 							)
 						-}}
 					</div>
 
 					{% if post.prev.meta( 'preview' ) %}
-						<div class="col-4/12 d-flex">
+						<div class="hidden lg:col-4/12 lg:flex">
 							{{-
 								include(
 									'components/image.html.twig',

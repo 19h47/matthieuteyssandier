@@ -11,7 +11,6 @@
     itemtype="http://schema.org/WebPage"
     {{ html_class( 'no-js no-touch is-ontop is-loading' ) }}
     {{ site.language_attributes }}
-    data-template="{{ template | default( 'index' ) }}"
 >
 
 	<head>
@@ -28,7 +27,6 @@
 
 	<body
 		data-module-load="main"
-		data-theme-url="{{ current_url }}"
 		data-mode="{{ mode | default( 'light' ) }}"
 		class="transition-colors ease-out-quint duration-1000 {{ 'dark' == mode ? 'bg-red-very-dark text-gray-light' : 'bg-gray-light text-black' }}"
 	>
@@ -40,7 +38,7 @@
 		<div class="fixed inset-0 z-40 pointer-events-none">
 			{% for case_study in case_studies %}
 				<div
-					class="absolute inset-0 invisible h-full pb-6 overflow-hidden opacity-0 pointer-events-auto lg:pb-10 transition-opacity-visibility duration-450 ease-out-quint pt-37 lg:pt-43"
+					class="absolute inset-0 invisible h-full pb-6 overflow-hidden opacity-0 pointer-events-auto lg:pb-10 transition-opacity-visibility duration-450 ease-out-quint pt-37 lg:pt-33"
 					data-module-nav-item="{{ case_study.id }}"
 				>
 					<div class="container h-full">
@@ -48,7 +46,9 @@
 							<div class="flex flex-col lg:col-4/12">
 								<ul class="flex flex-wrap -mx-3 -my-2">
 									{% for cat in case_study.terms( 'case_study_cat' ) %}
-										<li class="mx-3 my-2"><p class="text-black button">{{- cat.name -}}</p></li>
+										<li class="mx-3 my-2">
+											<p class="text-black button">{{- cat.name -}}</p>
+										</li>
 									{% endfor %}
 								</ul>
 
@@ -61,7 +61,7 @@
 
 							<div class="mt-auto lg:h-full lg:col-8/12 lg:mt-0">
 								<a href="{{ case_study.link }}" class="relative block overflow-hidden lg:h-full after:z-20 after:bg-black after:w-full after:absolute after:top-0 after:right-0 after:bottom-0 after:h-full after:mix-blend-hard-light after:opacity-20 rounded-5xl">
-									<div class="absolute font-bold z-30 bottom-0 left-0 right-0 mx-10 mb-10 uppercase text-white break-words font-bold text-7xl leading-[.85]">
+									<div class="absolute z-30 bottom-0 left-0 right-0 mx-6 mb-6.25 lg:mx-10 lg:mb-10 uppercase text-white break-words font-bold text-7xl leading-[.85]">
 										{{- case_study.title -}}
 									</div>
 									{{-
@@ -82,7 +82,7 @@
 			{% endfor %}
 		</div>
 
-		<div data-load-container data-load="container" data-mode="{{ mode | default( 'light' ) }}">
+		<div data-load-container data-url="{{ current_url }}" data-load="container" data-mode="{{ mode | default( 'light' ) }}" data-template="{{ template | default( 'index' ) }}">
 			<div id="{{ post.id ? "page-#{post.id}" : 'page' }}" {{ body_class( 'page-content' ) }} data-module-scroll="main">
 
 

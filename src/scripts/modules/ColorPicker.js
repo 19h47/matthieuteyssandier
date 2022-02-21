@@ -2,7 +2,7 @@ import { module as M } from 'modujs';
 import { html } from 'utils/environment';
 import gsap from 'gsap';
 
-let WIDTH = 20;
+let WIDTH = 31;
 const MARGIN = 6;
 
 class ColorPicker extends M {
@@ -14,8 +14,8 @@ class ColorPicker extends M {
 			mouseout: 'mouseout',
 		};
 
-		if (window.matchMedia("(min-width: 1024px)").matches) {
-			WIDTH = 48
+		if (window.matchMedia('(min-width: 1024px)').matches) {
+			WIDTH = 44;
 		}
 
 		this.el.style.setProperty('width', `${WIDTH}px`);
@@ -26,7 +26,7 @@ class ColorPicker extends M {
 
 		const width = children.length * WIDTH + (children.length - 1) * MARGIN;
 
-		this.timeline = gsap.timeline({ paused: true, defaults: { ease: 'power4.out', } });
+		this.timeline = gsap.timeline({ paused: true, defaults: { ease: 'power4.out' } });
 
 		this.timeline.fromTo(
 			this.el,

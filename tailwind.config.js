@@ -10,7 +10,10 @@ const transitionDuration = require('./tailwind/tailwind.config.transitionDuratio
 const transitionProperty = require('./tailwind/tailwind.config.transitionProperty');
 const transitionTimingFunction = require('./tailwind/tailwind.config.transitionTimingFunction');
 
-const lineHeight = {};
+const lineHeight = {
+	7.75: `${31 / 16}rem`,
+	11: `${44 / 16}rem`,
+};
 
 const flexGrow = {
 	0.2: 0.2,

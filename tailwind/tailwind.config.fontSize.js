@@ -5,6 +5,7 @@ const clamp = (min, max, multiplier) =>
 module.exports = {
 	'text-base': clamp(16, 24, 0.5178),
 	'text-sm': clamp(20, 40, 1.2945),
+	'5xl': clamp(30, 62, 2.0712),
 	'6xl': clamp(35, 70, 2.2654),
 	'7xl': [clamp(40, 80, 2.589), 0.85],
 	'8xl': [clamp(50, 100, 3.2362), 0.9],
