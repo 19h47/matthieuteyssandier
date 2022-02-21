@@ -22,9 +22,9 @@
 				{% if post.terms( 'case_study_cat' ) %}
 					<div class="mt-10">
 
-						<ul class="inline-flex flex-wrap justify-center -m-2">
+						<ul class="inline-flex flex-wrap justify-center -m-1 lg:-m-2">
 							{% for cat in post.terms( 'case_study_cat' ) %}
-								<li class="m-2 fade-up-inview" data-scroll style="transition-delay: {{ loop.index0 * 0.1 }}s;">
+								<li class="m-1 lg:m-2 fade-up-inview" data-scroll style="transition-delay: {{ loop.index0 * 0.1 }}s;">
 									<p class="button">{{- cat.name -}}</p>
 								</li>
 							{% endfor %}

@@ -44,7 +44,7 @@ class NavBackdrop extends M {
 
 		gsap.to(props, {
 			duration: 1.5,
-			ease: 'power4.out',
+			ease: 'power4.inOut',
 			radiusX: this.radius,
 			onUpdate: () => drawEllipse(props, this.context, false),
 		});
