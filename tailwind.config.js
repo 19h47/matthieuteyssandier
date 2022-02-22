@@ -11,6 +11,7 @@ const transitionProperty = require('./tailwind/tailwind.config.transitionPropert
 const transitionTimingFunction = require('./tailwind/tailwind.config.transitionTimingFunction');
 
 const lineHeight = {
+	0: '0',
 	7.75: `${31 / 16}rem`,
 	11: `${44 / 16}rem`,
 };

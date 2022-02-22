@@ -36,22 +36,9 @@ class Load extends M {
 
 			gsap.set(newContainer, { opacity: 0 });
 
-			const { mode, template } = newContainer.dataset;
+
 			const { url } = oldContainer.dataset;
-
-			if ('light' === mode) {
-				body.classList.remove('bg-red-very-dark', 'text-gray-light');
-				body.classList.add('bg-gray-light', 'text-black');
-				body.setAttribute('data-mode', 'light');
-			}
-
-			if ('dark' === mode) {
-				body.classList.remove('bg-gray-light', 'text-black');
-				body.classList.add('bg-red-very-dark', 'text-gray-light');
-				body.setAttribute('data-mode', 'dark');
-			}
-
-			console.log(template);
+			const { template } = newContainer.dataset;
 
 			if ('about-page' === template) {
 				this.call('close', { url }, 'AboutPageButton');
@@ -66,6 +53,20 @@ class Load extends M {
 			// console.info('Load.ready', transition);
 
 			this.call('update', newContainer, 'app');
+
+			const { mode } = newContainer.dataset;
+
+			if ('light' === mode) {
+				body.classList.remove('bg-red-very-dark', 'text-gray-light');
+				body.classList.add('bg-gray-light', 'text-black');
+				body.setAttribute('data-mode', 'light');
+			}
+
+			if ('dark' === mode) {
+				body.classList.remove('bg-gray-light', 'text-black');
+				body.classList.add('bg-red-very-dark', 'text-gray-light');
+				body.setAttribute('data-mode', 'dark');
+			}
 
 			gsap.to(newContainer, { duration: 1, ease: 'power4.out', opacity: 1 });
 		});

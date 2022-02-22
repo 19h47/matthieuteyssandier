@@ -40,31 +40,42 @@
 		</div>
 
 		<div class="flex justify-end col-3/12">
-			{% if post.link == options_theme.about_page_link %}
+
 				<a
-					href="{{ site.link }}"
-					class="flex items-center pointer-events-auto button header-right"
+					href="{{ post.link == options_theme.about_page_link ? site.link : options_theme.about_page_link }}"
+					class="flex items-center pointer-events-auto button header-right before:w-2.5 before:h-2.5 before:mr-1 before:bg-current before:rounded-full before:inline-block"
 					style="transition-delay: 0.1s;"
 					data-module-about-page-button
-					data-about-page-button-open='{"label":"{{ __( 'Info', 'matthieuteyssandier' ) }}","url":"{{ options_theme.about_page_link }}"}'
-					data-about-page-button-close='{"label":"{{ __( 'Close', 'matthieuteyssandier' ) }}","url":"{{ site.link }}"}'
+					data-about-page-button-open='{"url":"{{ options_theme.about_page_link }}"}'
+					data-about-page-button-close='{"url":"{{ site.link }}"}'
 				>
-					<span class="w-2.5 h-2.5 mr-1 bg-current rounded-full inline-block"></span>
-					<span data-about-page-button="label">{{- __( 'Close', 'matthieuteyssandier' ) -}}</span>
+					<div class="overflow-hidden">
+						<span
+							data-about-page-button="label"
+							text="{{- __( 'Info', 'matthieuteyssandier' ) -}}"
+							class="
+								after:absolute
+								after:top-full
+								after:right-0
+								after:left-0
+								after:content-[attr(text)]
+								relative
+								transition-transform
+								duration-800
+								ease-out-quint
+								inline-block
+								{{ post.link == options_theme.about_page_link ? 'translate-y-0' :  '-translate-y-full' }}"
+							>
+							{{- __( 'Close', 'matthieuteyssandier' ) -}}
+						</span>
+						{# <span
+							data-about-page-button="label"
+							class="transition-transform-opacity duration-800 ease-out-quint inline-block {{ post.link == options_theme.about_page_link ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full' }}">
+
+						</span> #}
+					</div>
 				</a>
-			{% else %}
-				<a
-					href="{{ options_theme.about_page_link }}"
-					class="flex items-center pointer-events-auto button header-right"
-					style="transition-delay: 0.1s;"
-					data-module-about-page-button
-					data-about-page-button-open='{"label":"{{ __( 'Info', 'matthieuteyssandier' ) }}","url":"{{ options_theme.about_page_link }}"}'
-					data-about-page-button-close='{"label":"{{ __( 'Close', 'matthieuteyssandier' ) }}","url":"{{ site.link }}"}'
-				>
-					<span class="w-2.5 h-2.5 mr-1 bg-current rounded-full inline-block"></span>
-					<span data-about-page-button="label">{{- __( 'Info', 'matthieuteyssandier' ) -}}</span>
-				</a>
-			{% endif %}
+
 		</div>
 
 	</div>

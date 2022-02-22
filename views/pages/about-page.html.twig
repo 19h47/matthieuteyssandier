@@ -10,11 +10,11 @@
 {% block content %}
 
 	<div class="container pb-6">
-		<div class="py-10 lg:p-20 bg-gray-light rounded-5xl">
-			<header class="flex justify-center w-full md:justify-end">
-				<ul class="flex -m-2">
+		<div class="py-10 lg:px-20 bg-gray-light rounded-5xl">
+			<header class="flex justify-center w-full">
+				<ul class="flex -m-1">
 					{% for social in options_theme.socials %}
-						<li class="m-2">
+						<li class="m-1">
 							<a class="block text-black border-black button" href="{{ social.link.url }}"{{ social.link.target ? ' rel="noopener norefer" target="_blank"' }}>
 								{{- social.link.title -}}
 							</a>
@@ -23,7 +23,7 @@
 				</ul>
 			</header>
 
-			<div class="px-3 mt-5 mb-10 lg:mb-16 lg:my-16 lg:px-0">
+			<div class="px-3 mt-5 mb-10 lg:my-10 lg:px-0">
 				<p class="mb-10 text-xs text-center uppercase text-gray-dark">
 					{{- options_theme.description.tagline | nl2br -}}
 				</p>
@@ -52,7 +52,7 @@
 			</div>
 
 			<div class="px-3 mt-10 text-center lg:mt-8 lg:px-0">
-				<p class="text-xs uppercase lg:mb-10 text-gray-dark">
+				<p class="text-xs uppercase text-gray-dark">
 					{{- options_theme.copyright | replace({ '{year}': "now" | date( "Y" ), '{19h47}': '<a href="https://19h47.fr" targte="_blank" rel="noopener noreferer">19h47</a>' }) -}}
 				</p>
 			</div>
