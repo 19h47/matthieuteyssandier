@@ -4,11 +4,6 @@ import { body, html } from 'utils/environment';
 import { gsap } from 'gsap';
 
 class Load extends M {
-	// eslint-disable-next-line no-useless-constructor
-	constructor(m) {
-		super(m);
-	}
-
 	init() {
 		// eslint-disable-next-line new-cap
 		const load = new modularLoad({

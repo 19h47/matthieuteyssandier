@@ -15,8 +15,27 @@
 				<ul class="flex -m-1">
 					{% for social in options_theme.socials %}
 						<li class="m-1">
-							<a class="block text-black border-black button" href="{{ social.link.url }}"{{ social.link.target ? ' rel="noopener norefer" target="_blank"' }}>
-								{{- social.link.title -}}
+							<a class="block text-black border-black group button" href="{{ social.link.url }}"{{ social.link.target ? ' rel="noopener norefer" target="_blank"' }}>
+								<div class="overflow-hidden">
+									<span
+										text="{{ social.link.title }}"
+										class="
+											after:absolute
+											after:top-full
+											after:right-0
+											after:left-0
+											after:content-[attr(text)]
+											relative
+											transition-transform
+											duration-800
+											ease-out-quint
+											inline-block
+											group-hover:-translate-y-full
+										"
+									>
+										{{- social.link.title -}}
+									</span>
+								</div>
 							</a>
 						</li>
 					{% endfor %}
@@ -40,13 +59,28 @@
 						class="inline-flex items-center text-white border-none button bg-red-bright"
 						type="button"
 						data-module-copy-button
-						data-copy-button-label="{{ __( 'Copy the mail', 'matthieuteyssandier' ) }}"
+						data-copy-button-label="{{ __( 'Copy the mail →', 'matthieuteyssandier' ) }}"
 						data-copy-button-success="{{ __( 'Email copied', 'matthieuteyssandier' ) }}"
 						data-copy-button-error="{{ __( 'Email not copied', 'matthieuteyssandier' ) }}"
 						data-copy-button-item="{{ options_theme.email.address }}"
 					>
-						<span data-copy-button="label">{{- __( 'Copy the mail', 'matthieuteyssandier' ) -}}</span>
-						{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-current' ] } ) -}}
+						<div class="overflow-hidden">
+							<span data-copy-button="label" text="{{ __( 'Copy the mail →', 'matthieuteyssandier' ) }}"
+								class="
+									after:absolute
+									after:top-full
+									after:right-0
+									after:left-0
+									after:content-[attr(text)]
+									relative
+									transition-transform
+									duration-800
+									ease-out-quint
+									inline-block
+									group-hover:-translate-y-full
+								"
+							>{{- __( 'Copy the mail →', 'matthieuteyssandier' ) -}}</span>
+						</div>
 					</button>
 				</p>
 			</div>

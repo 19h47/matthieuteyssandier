@@ -38,35 +38,46 @@
 		<div class="fixed inset-0 z-40 pointer-events-none">
 			{% for case_study in case_studies %}
 				<div
-					class="absolute inset-0 invisible h-full pt-16 pb-3 overflow-hidden opacity-0 pointer-events-auto lg:pb-6 transition-opacity-visibility duration-450 ease-out-quint lg:pt-33"
+					class="absolute inset-0 invisible h-full pb-3 overflow-hidden opacity-0 pointer-events-auto pt-37 lg:pb-6 transition-opacity-visibility duration-450 ease-out-quint lg:pt-33"
 					data-module-nav-item="{{ case_study.id }}"
 				>
 
 					<div class="container h-full">
 						<div class="h-full row">
 							<div class="flex flex-col lg:col-4/12">
-								<ul class="flex flex-wrap -m-1 lg:-my-2 lg:-mx-3">
-									{% for cat in case_study.terms( 'case_study_cat' ) %}
-										<li class="m-1 lg:mx-3 lg:my-2 fade-up-inview" data-nav-item="item" style="transition-delay: {{ loop.index0 * 0.1 }}s;">
-											<p class="text-black button">{{- cat.name -}}</p>
-										</li>
-									{% endfor %}
-								</ul>
+								{% if case_study.terms( 'case_study_cat' ) %}
+									<div class="lg:mt-auto">
+										<ul class="flex flex-wrap -m-1 lg:-my-2 lg:-mx-3">
+											{% for cat in case_study.terms( 'case_study_cat' ) %}
+												<li class="m-1 lg:mx-3 lg:my-2 fade-up-inview" data-nav-item="item" style="transition-delay: {{ loop.index0 * 0.1 }}s;">
+													<p class="text-black button">{{- cat.name -}}</p>
+												</li>
+											{% endfor %}
+										</ul>
+									</div>
+								{% endif %}
 
-								<p class="hidden mt-auto lg:block">
+								<div class="hidden lg:block {{ case_study.terms( 'case_study_cat' ) ? 'mt-10' : '' }}">
 									<a
 										class="inline-flex items-center text-black bg-white border-none button fade-up-inview"
 										data-nav-item="item"
 										href="{{ case_study.link }}"
 										style="transition-delay: {{ ( case_study.terms( 'case_study_cat' ) | length ) * 0.1 }}s;"
 									>
-										{{- __( 'Discover' ) -}}{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-current' ] } ) -}}
+										<div class="overflow-hidden">
+											<span
+												text="{{ __( 'Discover →', 'matthieuteyssandier' ) }}"
+												class="after:absolute after:top-full after:right-0 after:left-0 after:content-[attr(text)] relative transition-transform duration-800 ease-out-quint inline-block group-hover:-translate-y-full"
+											>
+												{{- __( 'Discover →', 'matthieuteyssandier' ) -}}
+											</span>
+										</div>
 									</a>
-								</p>
+								</div>
 							</div>
 
 							<div class="mt-auto lg:h-full lg:col-8/12 lg:mt-0 fade-up-inview" data-nav-item="item">
-								<a href="{{ case_study.link }}" class="relative block overflow-hidden lg:h-full after:z-20 after:bg-black after:w-full after:absolute after:top-0 after:right-0 after:bottom-0 after:h-full after:mix-blend-hard-light after:opacity-20 rounded-5xl">
+								<a href="{{ case_study.link }}" class="relative block overflow-hidden group lg:h-full after:z-20 after:bg-black after:w-full after:absolute after:top-0 after:right-0 after:bottom-0 after:h-full after:mix-blend-hard-light after:opacity-20 rounded-5xl">
 									<div class="fade-up-inview absolute z-30 bottom-0 left-0 right-0 mx-6 mb-6.25 lg:mx-10 lg:mb-10 uppercase text-white break-words font-bold text-7xl leading-[.85]" data-nav-item="item" style="transition-delay: {{ 0.1 + ( case_study.terms( 'case_study_cat' ) | length ) * 0.1 }}s;">
 										{{- case_study.title -}}
 									</div>
@@ -78,7 +89,17 @@
 												image: case_study.thumbnail,
 												classes: [
 													case_study.mobile_thumbnail ? 'hidden lg:block' : '',
-													'relative', 'z-10', 'w-full', 'lg:h-full', 'object-cover', 'object-center' ]
+													'relative',
+													'z-10',
+													'w-full',
+													'lg:h-full',
+													'object-cover',
+													'object-center',
+													'group-hover:scale-110',
+													'transition-transform',
+													'duration-2000',
+													'ease-out-quint',
+												]
 											}
 										)
 									-}}

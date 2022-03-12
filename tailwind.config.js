@@ -5,6 +5,7 @@
 
 const fontSize = require('./tailwind/tailwind.config.fontSize');
 const minHeight = require('./tailwind/tailwind.config.minHeight');
+const minWidth = require('./tailwind/tailwind.config.minWidth');
 const spacing = require('./tailwind/tailwind.config.spacing');
 const transitionDuration = require('./tailwind/tailwind.config.transitionDuration');
 const transitionProperty = require('./tailwind/tailwind.config.transitionProperty');
@@ -63,6 +64,7 @@ module.exports = {
 			flexGrow,
 			letterSpacing,
 			lineHeight,
+			minWidth,
 			minHeight,
 			spacing,
 			textIndent,

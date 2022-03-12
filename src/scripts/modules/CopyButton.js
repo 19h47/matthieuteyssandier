@@ -17,6 +17,7 @@ class CopyButton extends M {
 
 		this.copyTimeout = setTimeout(() => {
 			this.$('label')[0].innerText = this.getData('label');
+			this.$('label')[0].setAttribute('text', this.getData('label'));
 		}, 1500);
 
 		const item = this.getData('item');
@@ -26,13 +27,16 @@ class CopyButton extends M {
 			navigator.clipboard.writeText(item).then(
 				() => {
 					this.$('label')[0].innerText = this.getData('success');
+					this.$('label')[0].setAttribute('text', this.getData('success'));
 				},
 				() => {
 					this.$('label')[0].innerText = this.getData('error');
+					this.$('label')[0].setAttribute('text', this.getData('error'));
 				},
 			);
 		} else {
 			this.$('label')[0].innerText = this.getData('error');
+			this.$('label')[0].setAttribute('text', this.getData('error'));
 		}
 	}
 

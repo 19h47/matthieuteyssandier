@@ -13,13 +13,46 @@
 			<ul class="flex justify-center -m-1 lg:-m-2 lg:justify-start">
 				<li class="w-1/3 m-1 lg:m-2 lg:w-auto fade-up-inview" data-scroll>
 					<a class="block border-current button" href="mailto:{{ options_theme.email.address }}" rel="noopener noreferer" target="_blank">
-						{{- __( 'Mail', 'matthieuteyssandier' ) -}}
+
+						<div class="overflow-hidden">
+							<span data-copy-button="label" text="{{ __( 'Mail', 'matthieuteyssandier' ) }}"
+								class="
+									after:absolute
+									after:top-full
+									after:right-0
+									after:left-0
+									after:content-[attr(text)]
+									relative
+									transition-transform
+									duration-800
+									ease-out-quint
+									inline-block
+									group-hover:-translate-y-full
+								"
+							>{{- __( 'Mail', 'matthieuteyssandier' ) -}}</span>
+						</div>
 					</a>
 				</li>
 				{% for social in options_theme.socials %}
 					<li class="w-1/3 m-1 lg:m-2 lg:w-auto fade-up-inview" data-scroll style="transition-delay: {{ loop.index * 0.1 }}s;">
 						<a class="block border-current button" href="{{ social.link.url }}"{{ social.link.target ? ' rel="noopener norefer" target="_blank"' }}>
-							{{- social.link.title -}}
+							<div class="overflow-hidden">
+								<span data-copy-button="label" text="{{ social.link.title }}"
+									class="
+										after:absolute
+										after:top-full
+										after:right-0
+										after:left-0
+										after:content-[attr(text)]
+										relative
+										transition-transform
+										duration-800
+										ease-out-quint
+										inline-block
+										group-hover:-translate-y-full
+									"
+								>{{- social.link.title -}}</span>
+							</div>
 						</a>
 					</li>
 				{% endfor %}

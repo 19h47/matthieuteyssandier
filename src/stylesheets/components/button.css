@@ -10,4 +10,12 @@
 	.button {
 		@apply text-center text-xs uppercase leading-none p-4 border rounded-full border-current;
 	}
+
+	.button:hover span {
+		@apply -translate-y-full;
+	}
+
+	.button.is-open:hover span {
+		@apply translate-y-0;
+	}
 }
