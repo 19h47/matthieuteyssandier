@@ -222,12 +222,15 @@ class Theme extends Site {
 	public function add_to_context( array $context ) : array {
 		global $wp;
 
+		$case_studies_on_front = get_field( 'case_studies', get_option( 'page_on_front' ) );
+
 		$context['current_url'] = home_url( add_query_arg( array(), $wp->request ) );
 
 		$context['case_studies'] = Timber::get_posts(
 			array(
 				'post_type'      => 'case_study',
 				'posts_per_page' => -1,
+				'post__not_in'   => $case_studies_on_front,
 			)
 		);
 
