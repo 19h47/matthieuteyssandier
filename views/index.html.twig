@@ -49,7 +49,11 @@
 									<div class="lg:mt-auto">
 										<ul class="flex flex-wrap -m-1 lg:-my-2 lg:-mx-3">
 											{% for cat in case_study.terms( 'case_study_cat' ) %}
-												<li class="m-1 lg:mx-3 lg:my-2 fade-up-inview" data-nav-item="item" style="transition-delay: {{ loop.index0 * 0.1 }}s;">
+												<li
+													class="m-1 duration-1000 translate-y-10 opacity-0 lg:mx-3 lg:my-2 is-inview:opacity-100 is-inview:translate-y-0 transition-transform-opacity ease-out-quint"
+													data-nav-item="cat"
+													style="transition-delay: {{ loop.index0 * 0.1 }}s;"
+												>
 													<p class="text-black button">{{- cat.name -}}</p>
 												</li>
 											{% endfor %}
@@ -59,7 +63,7 @@
 
 								<div class="hidden lg:block {{ case_study.terms( 'case_study_cat' ) ? 'mt-10' : '' }}">
 									<a
-										class="inline-flex items-center text-black bg-white border-none button fade-up-inview"
+										class="inline-flex items-center text-black duration-1000 translate-y-10 bg-white border-none opacity-0 button is-inview:opacity-100 is-inview:translate-y-0 transition-transform-opacity ease-out-quint"
 										data-nav-item="item"
 										href="{{ case_study.link }}"
 										style="transition-delay: {{ ( case_study.terms( 'case_study_cat' ) | length ) * 0.1 }}s;"
@@ -76,9 +80,11 @@
 								</div>
 							</div>
 
-							<div class="mt-auto lg:h-full lg:col-8/12 lg:mt-0 fade-up-inview" data-nav-item="item">
+							<div class="mt-auto duration-1000 translate-y-10 opacity-0 lg:h-full lg:col-8/12 lg:mt-0 is-inview:opacity-100 is-inview:translate-y-0 transition-transform-opacity ease-out-quint" data-nav-item="item">
 								<a href="{{ case_study.link }}" class="relative block overflow-hidden group lg:h-full after:z-20 after:bg-black after:w-full after:absolute after:top-0 after:right-0 after:bottom-0 after:h-full after:mix-blend-hard-light after:opacity-20 rounded-5xl">
-									<div class="fade-up-inview absolute z-30 bottom-0 left-0 right-0 mx-6 mb-6.25 lg:mx-10 lg:mb-10 uppercase text-white break-words font-bold text-7xl leading-[.85]" data-nav-item="item" style="transition-delay: {{ 0.1 + ( case_study.terms( 'case_study_cat' ) | length ) * 0.1 }}s;">
+									<div
+										class="opacity-0 transition-transform-opacity ease-out-quint duration-1000 translate-y-10 is-inview:opacity-100 is-inview:translate-y-0 absolute z-30 bottom-0 left-0 right-0 mx-6 mb-6.25 lg:mx-10 lg:mb-10 uppercase text-white break-words font-bold text-7xl leading-[.85]" data-nav-item="item"
+										style="transition-delay: {{ 0.1 + ( ( case_study.terms( 'case_study_cat' ) | length ) * 0.1 ) }}s;">
 										{{- case_study.title -}}
 									</div>
 									{{-
@@ -161,6 +167,16 @@
 		{{ function( 'wp_footer' ) }}
 		<canvas class="absolute inset-0 w-full h-full pointer-events-none z-5" data-module-nav-backdrop></canvas>
 		<div id="svg-sprite" style="display: none;">{{- include( 'icons.svg' ) -}}</div>
+
+		<div class="fixed inset-0 z-50 flex items-center transition-all duration-1000 js-loader bg-gray-light is-first-load:opacity-0 is-first-load:invisible">
+			<div class="container">
+				<div class="row">
+					<div>
+						<span class="inline-block transition-opacity duration-1000 opacity-0 text-7xl js-loader-progress tabular-nums ease-out-quint">100</span>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</body>
 

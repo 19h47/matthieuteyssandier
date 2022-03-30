@@ -6,7 +6,7 @@
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 
-<div class="my-6 fade-inview {{ classes | join( ' ' ) }}" data-scroll>
+<div class="my-6 opacity-0 transition-opacity ease-out-cubic duration-1000 is-inview:opacity-100 {{ classes | join( ' ' ) }}" data-scroll>
 	<div class="container">
 		<div class="row">
 			<div>
@@ -29,7 +29,7 @@
 							include(
 								'components/image.html.twig',
 								{
-									size: 'size-12',
+									size: 'size-6',
 									image: media.image,
 									classes: [ 'rounded-3xl', 'max-w-full', 'mx-auto', 'h-auto' ]
 								}

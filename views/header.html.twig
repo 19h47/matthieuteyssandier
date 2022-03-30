@@ -9,7 +9,7 @@
 <div class="container relative z-50 py-2 pointer-events-none header lg:py-11">
 	<div class="items-center -my-px row">
 		<div class="col-9/12">
-			<div class="flex items-center font-family-title header-left">
+			<div class="flex items-center transition-opacity duration-1000 opacity-0 font-family-title is-first-load:opacity-100 ease-out-quint">
 
 				<a class="mr-1.5 text-5xl text-current pointer-events-auto leading-7.75 lg:leading-11" href="{{ site.link }}">{{- site.title -}}</a>
 
@@ -43,13 +43,13 @@
 
 				<a
 					href="{{ post.link == options_theme.about_page_link ? site.link : options_theme.about_page_link }}"
-					class="flex items-center pointer-events-auto button header-right before:w-2.5 before:h-2.5 before:mr-1 before:bg-current text-left before:rounded-full before:inline-block {{ post.link == options_theme.about_page_link ? '' : 'is-open' }}"
+					class="flex items-center pointer-events-auto button opacity-0 transition-opacity ease-out-quint duration-1000 is-first-load:opacity-100 before:w-2.5 before:h-2.5 before:mr-1 before:bg-current text-left before:rounded-full before:inline-block {{ post.link == options_theme.about_page_link ? '' : 'is-open' }}"
 					style="transition-delay: 0.1s;"
 					data-module-about-page-button
 					data-about-page-button-open='{"label":"{{ __( 'Infos', 'matthieuteyssandier' ) }}","url":"{{ options_theme.about_page_link }}"}'
 					data-about-page-button-close='{"label":"{{ __( 'Close', 'matthieuteyssandier' ) }}","url":"{{ site.link }}"}'
 				>
-					<div class="overflow-hidden">
+					<div class="overflow-hidden" style="min-width: 38.85px;">
 						<span
 							data-about-page-button="label"
 							text="{{- post.link == options_theme.about_page_link ? __( 'Close', 'matthieuteyssandier' ) : __( 'Infos', 'matthieuteyssandier' ) -}}"

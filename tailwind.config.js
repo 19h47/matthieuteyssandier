@@ -2,6 +2,7 @@
  * Tailwind config
  */
 
+const plugin = require('tailwindcss/plugin')
 
 const fontSize = require('./tailwind/tailwind.config.fontSize');
 const minHeight = require('./tailwind/tailwind.config.minHeight');
@@ -75,5 +76,11 @@ module.exports = {
 			transitionTimingFunction
 		},
 	},
-	plugins: [],
+	plugins: [
+		plugin(({ addVariant }) => addVariant('is-loading', 'html.is-loading &')),
+		plugin(({ addVariant }) => addVariant('is-loaded', 'html.is-loaded &')),
+		plugin(({ addVariant }) => addVariant('is-first-load', 'html.is-first-load &')),
+		plugin(({ addVariant }) => addVariant('has-dom-ready', 'html.has-dom-ready &')),
+		plugin(({ addVariant }) => addVariant('is-inview', ' &.is-inview')),
+	],
 };

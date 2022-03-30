@@ -14,17 +14,18 @@
 	"author": "Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)",
 	"main": "dist/js/main.js",
 	"scripts": {
-		"prod": "19h47-scripts prod",
-		"dev": "19h47-scripts dev"
+		"dev": "19h47-scripts dev",
+		"prod": "19h47-scripts prod"
 	},
 	"dependencies": {
-		"gsap": "^3.9.1",
+		"gsap": "^3.10.0",
 		"locomotive-scroll": "^4.1.4",
 		"modujs": "^1.4.2",
 		"modularload": "^1.2.8",
 		"tailwindcss": "^3.0.23"
 	},
 	"devDependencies": {
+		"@19h47/prettier-config": "19h47/prettier-config",
 		"@19h47/scripts": "19h47/19h47-scripts"
 	}
 }

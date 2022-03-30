@@ -15,6 +15,7 @@
 					class="flex flex-col h-full row lg:flex-row"
 					data-module-case-studies
 				>
+
 					{%- for case_study in get_posts( post.meta( 'case_studies' ) ) -%}
 						{%- embed 'components/tease-case-study.html.twig' with
 								{
@@ -23,7 +24,12 @@
 										'data-case-studies': 'item',
 										'style': 'transition-delay: 0s, ' ~ loop.index0 * 0.1 ~ 's, ' ~ loop.index0 * 0.1 ~ 's',
 									},
+									size: 'size-4',
 									classes: [
+										'lg:opacity-0',
+										'lg:translate-y-10',
+										'lg:has-dom-ready:opacity-100',
+										'lg:has-dom-ready:translate-y-0',
 										'my-1',
 										'lg:my-0',
 										'transition-flex-grow-transform-opacity',

@@ -1,7 +1,7 @@
 /* global matthieuteyssandier */
 import modular from 'modujs';
 import * as modules from 'modules';
-// import Loader from 'vendors/Loader';
+import Loader from 'vendors/Loader';
 import { html, scroll } from 'utils/environment';
 import favicon from 'utils/favicon';
 import { gsap } from 'gsap';
@@ -35,10 +35,10 @@ function init() {
 
 window.onload = async () => {
 	const $style = document.getElementById(`${matthieuteyssandier.text_domain}-main-css`);
-	// const loader = new Loader();
-	// loader.init();
+	const loader = new Loader();
+	loader.init();
 
-	// await loader.timeline.play();
+	await loader.timeline.play();
 
 	if ($style) {
 		if ($style.isLoaded) {

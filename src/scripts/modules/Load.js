@@ -6,14 +6,14 @@ import { gsap } from 'gsap';
 class Load extends M {
 	init() {
 		// eslint-disable-next-line new-cap
-		const load = new modularLoad({
-			enterDelay: 1000,
-			exitDelay: 1000,
-		});
+		const load = new modularLoad({});
 
 		// eslint-disable-next-line no-unused-vars
 		load.on('loading', (transition, oldContainer) => {
 			console.info('Load.loading', transition);
+
+			html.classList.remove('has-dom-ready');
+			html.classList.add('is-loading');
 
 			gsap.to(oldContainer, { duration: 0.3, opacity: 0 });
 
@@ -26,6 +26,8 @@ class Load extends M {
 
 		load.on('loaded', (transition, oldContainer, newContainer) => {
 			console.info('Load.loaded', transition);
+
+			html.classList.remove('is-loading');
 
 			this.call('destroy', oldContainer, 'app');
 
@@ -42,6 +44,8 @@ class Load extends M {
 			if ('about-page' !== template) {
 				this.call('open', null, 'AboutPageButton');
 			}
+
+			gsap.delayedCall(0.7, () => html.classList.add('has-dom-ready'));
 		});
 
 		load.on('ready', (transition, newContainer) => {

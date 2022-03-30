@@ -5,8 +5,16 @@ class NavItem extends M {
 		this.el.classList.remove('opacity-0', 'invisible');
 		this.el.classList.add('opacity-100', 'visible');
 
-		this.$('item').forEach($tag => {
-			$tag.classList.add('is-inview');
+		console.log(this.$('item'), this.$('tag'));
+
+
+		this.$('cat').forEach(($cat, index) => {
+			$cat.style.setProperty('transition-delay', `${((this.$('cat').length - 1) - index) * 0.1}s`);
+			$cat.classList.add('is-inview');
+		});
+
+		this.$('item').forEach($item => {
+			$item.classList.add('is-inview');
 		});
 	}
 
@@ -14,8 +22,14 @@ class NavItem extends M {
 		this.el.classList.remove('opacity-100', 'visible');
 		this.el.classList.add('opacity-0', 'invisible');
 
-		this.$('item').forEach($tag => {
-			$tag.classList.remove('is-inview');
+
+		this.$('cat').forEach(($cat, index) => {
+			$cat.classList.remove('is-inview');
+			$cat.style.setProperty('transition-delay', `${index * 0.1}s`);
+		});
+
+		this.$('item').forEach($item => {
+			$item.classList.remove('is-inview');
 		});
 	}
 }
