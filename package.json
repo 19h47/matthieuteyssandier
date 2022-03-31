@@ -18,7 +18,7 @@
 		"prod": "19h47-scripts prod"
 	},
 	"dependencies": {
-		"gsap": "^3.10.0",
+		"gsap": "^3.10.1",
 		"locomotive-scroll": "^4.1.4",
 		"modujs": "^1.4.2",
 		"modularload": "^1.2.8",

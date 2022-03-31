@@ -230,6 +230,13 @@ class Theme extends Site {
 			array(
 				'post_type'      => 'case_study',
 				'posts_per_page' => -1,
+			)
+		);
+
+		$context['case_studies_header'] = Timber::get_posts(
+			array(
+				'post_type'      => 'case_study',
+				'posts_per_page' => -1,
 				'post__not_in'   => $case_studies_on_front,
 			)
 		);

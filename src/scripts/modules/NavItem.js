@@ -5,9 +5,6 @@ class NavItem extends M {
 		this.el.classList.remove('opacity-0', 'invisible');
 		this.el.classList.add('opacity-100', 'visible');
 
-		console.log(this.$('item'), this.$('tag'));
-
-
 		this.$('cat').forEach(($cat, index) => {
 			$cat.style.setProperty('transition-delay', `${((this.$('cat').length - 1) - index) * 0.1}s`);
 			$cat.classList.add('is-inview');

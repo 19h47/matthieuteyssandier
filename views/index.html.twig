@@ -169,13 +169,27 @@
 		<div id="svg-sprite" style="display: none;">{{- include( 'icons.svg' ) -}}</div>
 
 		<div class="fixed inset-0 z-50 flex items-center transition-all duration-1000 js-loader bg-gray-light is-first-load:opacity-0 is-first-load:invisible">
-			<div class="container">
+			<div class="container relative z-1">
 				<div class="row">
 					<div>
-						<span class="inline-block transition-opacity duration-1000 opacity-0 text-7xl js-loader-progress tabular-nums ease-out-quint">100</span>
+						<div class="flex items-center lg:mx-14">
+							<span class="inline-block text-black transition-opacity duration-1000 opacity-0 text-7xl js-loader-progress tabular-nums ease-out-quint">100</span>
+
+							<ul class="relative w-full ml-auto h-11 js-loader-wrapper">
+								{% for case in case_studies %}
+									<li class="absolute inset-y-0 right-0 w-11 js-loader-item">
+										<span class="block w-full h-full rounded-full" style="background-color: {{ case.meta( 'color' ) }};"></span>
+									</li>
+								{% endfor %}
+							</ul>
+
+						</div>
+
 					</div>
 				</div>
 			</div>
+
+			<canvas class="absolute inset-0 w-full h-full pointer-events-none z-2 js-loader-canvas" data-color="{{ 'dark' == mode ? '#242021' : '#eae9e8' }}"></canvas>
 		</div>
 
 	</body>
