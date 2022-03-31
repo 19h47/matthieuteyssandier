@@ -176,11 +176,16 @@
 							<span class="inline-block text-black transition-opacity duration-1000 opacity-0 text-7xl js-loader-progress tabular-nums ease-out-quint">100</span>
 
 							<ul class="relative w-full ml-auto h-11 js-loader-wrapper">
+
 								{% for case in case_studies %}
 									<li class="absolute inset-y-0 right-0 w-11 js-loader-item">
 										<span class="block w-full h-full rounded-full" style="background-color: {{ case.meta( 'color' ) }};"></span>
 									</li>
 								{% endfor %}
+
+								<li class="absolute inset-y-0 right-0 w-11 js-loader-item">
+									<span class="block w-full h-full rounded-full" style="background-color: {{ 'dark' == mode ? '#242021' : '#eae9e8' }};"></span>
+								</li>
 							</ul>
 
 						</div>
