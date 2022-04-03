@@ -1,4 +1,4 @@
-import { module as M } from 'modujs';
+import { module as M } from '@19h47/modular';
 import { html, scroll } from 'utils/environment';
 
 class NavButton extends M {

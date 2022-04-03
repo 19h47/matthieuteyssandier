@@ -1,4 +1,4 @@
-import { module as M } from 'modujs';
+import { module as M } from '@19h47/modular';
 import { html } from 'utils/environment';
 import gsap from 'gsap';
 

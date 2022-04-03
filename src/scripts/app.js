@@ -1,6 +1,5 @@
 /* global matthieuteyssandier */
-import modular from 'modujs';
-import * as modules from 'modules';
+import modular from '@19h47/modular';
 import Loader from 'vendors/Loader';
 import { html, scroll } from 'utils/environment';
 import favicon from 'utils/favicon';
@@ -11,9 +10,7 @@ const { colors } = matthieuteyssandier;
 favicon(gsap.utils.random(colors));
 
 // eslint-disable-next-line new-cap
-const app = new modular({
-	modules,
-});
+const app = new modular({ modules: [] });
 
 function init() {
 	app.init(app);

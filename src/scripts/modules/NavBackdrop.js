@@ -1,4 +1,4 @@
-import { module as M } from 'modujs';
+import { module as M } from '@19h47/modular';
 import Circle from 'vendors/Circle';
 
 class NavBackdrop extends M {
