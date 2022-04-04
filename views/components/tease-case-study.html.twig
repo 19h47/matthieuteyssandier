@@ -47,13 +47,13 @@
 					<div class="lg:w-2.5/12 lg:flex ml-auto lg:ml-0">
 						<div class="inline-flex items-center ml-auto text-black bg-white border-none button">
 							<div class="overflow-hidden">
-								<span data-copy-button="label" text="{{ __( 'Next Project  →', 'matthieuteyssandier' ) }}"
+								<span data-copy-button="label" data-text="{{ __( 'Next Project  →', 'matthieuteyssandier' ) }}"
 									class="
 										after:absolute
 										after:top-full
 										after:right-0
 										after:left-0
-										after:content-[attr(text)]
+										after:content-[attr(data-text)]
 										relative
 										transition-transform
 										duration-800

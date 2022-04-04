@@ -5,16 +5,16 @@ class NavButton extends M {
 	constructor(m) {
 		super(m);
 
+		this.color = this.getData('color');
+
 		this.events = {
 			click: 'toggle',
 		};
 	}
 
-	init() {
-		this.color = this.getData('color');
-	}
-
 	toggle() {
+		console.info('NavButton.toggle()', { color: this.color, x: scroll.x, y: scroll.y });
+
 		const fn = this.getData('function') || 'close';
 
 		if ('open' === fn) {

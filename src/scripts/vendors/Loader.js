@@ -37,7 +37,6 @@ class Loader {
 				this.$progress.classList.add('opacity-100');
 			},
 			onComplete: () => {
-				console.log('onComplete');
 				this.$progress.classList.remove('opacity-100');
 				this.$progress.classList.add('opacity-0');
 			},

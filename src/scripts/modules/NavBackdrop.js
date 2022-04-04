@@ -3,6 +3,7 @@ import Circle from 'vendors/Circle';
 
 class NavBackdrop extends M {
 	init() {
+		console.info('🚀 NavBackdrop.init()');
 		this.circle = new Circle(this.el);
 	}
 

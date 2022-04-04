@@ -12,8 +12,10 @@ favicon(gsap.utils.random(colors));
 // eslint-disable-next-line new-cap
 const app = new modular({ modules: [] });
 
+console.log(app);
+
 function init() {
-	app.init(app);
+	app.initModules();
 
 	html.classList.add('is-loaded');
 	html.classList.add('is-ready');
@@ -33,9 +35,10 @@ function init() {
 window.onload = async () => {
 	const $style = document.getElementById(`${matthieuteyssandier.text_domain}-main-css`);
 	const loader = new Loader();
+
 	loader.init();
 
-	await loader.timeline.play();
+	await Promise.all([loader.timeline.play(), app.collectModules(app)]);
 
 	if ($style) {
 		if ($style.isLoaded) {

@@ -15,13 +15,13 @@
 					<a class="block border-current button" href="mailto:{{ options_theme.email.address }}" rel="noopener noreferer" target="_blank">
 
 						<div class="overflow-hidden">
-							<span data-copy-button="label" text="{{ __( 'Mail', 'matthieuteyssandier' ) }}"
+							<span data-copy-button="label" data-text="{{ __( 'Mail', 'matthieuteyssandier' ) }}"
 								class="
 									after:absolute
 									after:top-full
 									after:right-0
 									after:left-0
-									after:content-[attr(text)]
+									after:content-[attr(data-text)]
 									relative
 									transition-transform
 									duration-800
@@ -37,13 +37,13 @@
 					<li class="w-1/3 m-1 duration-1000 translate-y-10 opacity-0 lg:m-2 lg:w-auto is-inview:opacity-100 is-inview:translate-y-0 transition-transform-opacity ease-out-quint" data-scroll style="transition-delay: {{ loop.index * 0.1 }}s;">
 						<a class="block border-current button" href="{{ social.link.url }}"{{ social.link.target ? ' rel="noopener norefer" target="_blank"' }}>
 							<div class="overflow-hidden">
-								<span data-copy-button="label" text="{{ social.link.title }}"
+								<span data-copy-button="label" data-text="{{ social.link.title }}"
 									class="
 										after:absolute
 										after:top-full
 										after:right-0
 										after:left-0
-										after:content-[attr(text)]
+										after:content-[attr(data-text)]
 										relative
 										transition-transform
 										duration-800

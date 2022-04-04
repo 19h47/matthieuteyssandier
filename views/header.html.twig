@@ -52,13 +52,13 @@
 					<div class="overflow-hidden" style="min-width: 38.85px;">
 						<span
 							data-about-page-button="label"
-							text="{{- post.link == options_theme.about_page_link ? __( 'Close', 'matthieuteyssandier' ) : __( 'Infos', 'matthieuteyssandier' ) -}}"
+							data-text="{{- post.link == options_theme.about_page_link ? __( 'Close', 'matthieuteyssandier' ) : __( 'Infos', 'matthieuteyssandier' ) -}}"
 							class="
 								after:absolute
 								after:top-full
 								after:right-0
 								after:left-0
-								after:content-[attr(text)]
+								after:content-[attr(data-text)]
 								relative
 								transition-transform
 								duration-800

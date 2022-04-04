@@ -35,6 +35,8 @@ class Circle {
 
 
 	open({ color, x, y }) {
+		console.info('Circle.open()', { color, x, y });
+
 		this.x = x;
 		this.y = y;
 		this.radius = diameter(this.el.width, this.el.height, x, y);
@@ -54,7 +56,7 @@ class Circle {
 			ease: 'power4.inOut',
 			radiusX: this.radius,
 			onUpdate: () => this.draw(props, false),
-			onComplete: () => console.log('Circle.open.onComplete'),
+			// onComplete: () => console.log('Circle.open.onComplete'),
 		});
 	}
 

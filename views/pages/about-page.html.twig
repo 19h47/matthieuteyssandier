@@ -18,13 +18,13 @@
 							<a class="block text-black border-black group button" href="{{ social.link.url }}"{{ social.link.target ? ' rel="noopener norefer" target="_blank"' }}>
 								<div class="overflow-hidden">
 									<span
-										text="{{ social.link.title }}"
+										data-text="{{ social.link.title }}"
 										class="
 											after:absolute
 											after:top-full
 											after:right-0
 											after:left-0
-											after:content-[attr(text)]
+											after:content-[attr(data-text)]
 											relative
 											transition-transform
 											duration-800
@@ -65,13 +65,13 @@
 						data-copy-button-item="{{ options_theme.email.address }}"
 					>
 						<div class="overflow-hidden">
-							<span data-copy-button="label" text="{{ __( 'Copy the mail →', 'matthieuteyssandier' ) }}"
+							<span data-copy-button="label" data-text="{{ __( 'Copy the mail →', 'matthieuteyssandier' ) }}"
 								class="
 									after:absolute
 									after:top-full
 									after:right-0
 									after:left-0
-									after:content-[attr(text)]
+									after:content-[attr(data-text)]
 									relative
 									transition-transform
 									duration-800

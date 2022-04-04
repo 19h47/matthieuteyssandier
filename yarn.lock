@@ -3,8 +3,8 @@
 
 
 "@19h47/modular@19h47/19h47-modular":
-  version "2.0.0"
-  resolved "https://codeload.github.com/19h47/19h47-modular/tar.gz/fc22bf8852da19ebcc4927ae3c36ccf73ce7262e"
+  version "2.0.2"
+  resolved "https://codeload.github.com/19h47/19h47-modular/tar.gz/b1b7f58247fc5122cfbaba723109b5e6bf34bb5a"
 
 "@19h47/prettier-config@19h47/prettier-config":
   version "0.0.0"
@@ -1804,9 +1804,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001317:
-  version "1.0.30001324"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001324.tgz#e17c3a8b34822b02d5d15639d570057550074884"
-  integrity sha512-/eYp1J6zYh1alySQB4uzYFkLmxxI8tk0kxldbNHXp8+v+rdMKdUBNjRLz7T7fz6Iox+1lIdYpc7rq6ZcXfTukg==
+  version "1.0.30001325"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001325.tgz#2b4ad19b77aa36f61f2eaf72e636d7481d55e606"
+  integrity sha512-sB1bZHjseSjDtijV1Hb7PB2Zd58Kyx+n/9EotvZ4Qcz2K3d0lWB8dB4nb8wN/TsOGFq3UuAm0zQZNQ4SoR7TrQ==
 
 caw@^2.0.0, caw@^2.0.1:
   version "2.0.1"
