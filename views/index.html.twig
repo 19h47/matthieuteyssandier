@@ -52,7 +52,7 @@
 												<li
 													class="m-1 duration-1000 translate-y-10 opacity-0 lg:mx-3 lg:my-2 is-inview:opacity-100 is-inview:translate-y-0 transition-transform-opacity ease-out-quint"
 													data-nav-item="cat"
-													style="transition-delay: {{ loop.index0 * 0.1 }}s;"
+													style="transition-delay: {{ ( ( case_study.terms( 'case_study_cat' ) | length ) - 1) - loop.index * 0.1 }}s;"
 												>
 													<p class="text-black button">{{- cat.name -}}</p>
 												</li>
@@ -80,8 +80,8 @@
 								</div>
 							</div>
 
-							<div class="mt-auto duration-1000 translate-y-10 opacity-0 lg:h-full lg:col-8/12 lg:mt-0 is-inview:opacity-100 is-inview:translate-y-0 transition-transform-opacity ease-out-quint" data-nav-item="item">
-								<a href="{{ case_study.link }}" class="relative block overflow-hidden group lg:h-full after:z-20 after:bg-black after:w-full after:absolute after:top-0 after:right-0 after:bottom-0 after:h-full after:mix-blend-hard-light after:opacity-20 rounded-5xl">
+							<div class="mt-auto duration-1000 translate-y-10 opacity-0 h-1/2 lg:h-full lg:col-8/12 lg:mt-0 is-inview:opacity-100 is-inview:translate-y-0 transition-transform-opacity ease-out-quint" data-nav-item="item">
+								<a href="{{ case_study.link }}" class="relative block h-full overflow-hidden group after:z-20 after:bg-black after:w-full after:absolute after:top-0 after:right-0 after:bottom-0 after:h-full after:mix-blend-hard-light after:opacity-20 rounded-xl lg:rounded-5xl">
 									<div
 										class="opacity-0 transition-transform-opacity ease-out-quint duration-1000 translate-y-10 is-inview:opacity-100 is-inview:translate-y-0 absolute z-30 bottom-0 left-0 right-0 mx-6 mb-6.25 lg:mx-10 lg:mb-10 uppercase text-white break-words font-bold text-7xl leading-[.85]" data-nav-item="item"
 										style="transition-delay: {{ 0.1 + ( ( case_study.terms( 'case_study_cat' ) | length ) * 0.1 ) }}s;">
@@ -178,12 +178,12 @@
 							<ul class="relative w-full ml-auto h-11 js-loader-wrapper">
 
 								{% for case in case_studies %}
-									<li class="absolute inset-y-0 right-0 w-11 js-loader-item">
+									<li class="absolute inset-y-0 right-0 w-11 js-loader-item" style="opacity: 0;">
 										<span class="block w-full h-full rounded-full" style="background-color: {{ case.meta( 'color' ) }};"></span>
 									</li>
 								{% endfor %}
 
-								<li class="absolute inset-y-0 right-0 w-11 js-loader-item">
+								<li class="absolute inset-y-0 right-0 w-11 js-loader-item" srtle="opacity: 0;">
 									<span class="block w-full h-full rounded-full" style="background-color: {{ 'dark' == mode ? '#242021' : '#eae9e8' }};"></span>
 								</li>
 							</ul>

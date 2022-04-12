@@ -15,7 +15,7 @@
 						{% for media in props['media_' ~ i ] %}
 
 							{% if 'video' == media.acf_fc_layout %}
-								{{- include( 'components/video.html.twig', { video: media.video, classes: [ 'rounded-3xl', 'max-w-full', 'mx-auto', 'h-auto' ] } ) -}}
+								{{- include( 'components/video.html.twig', { video: media.video, classes: [ 'rounded-xl', 'lg:rounded-5xl', 'max-w-full', 'mx-auto', 'h-auto' ] } ) -}}
 							{% endif %}
 
 							{% if 'image' == media.acf_fc_layout %}
@@ -25,7 +25,7 @@
 										{
 											size: 'size-3',
 											image: media.image,
-											classes: [ 'rounded-3xl', 'max-w-full', 'mx-auto', 'h-auto' ]
+											classes: [ 'rounded-xl', 'lg:rounded-5xl', 'max-w-full', 'mx-auto', 'h-auto' ]
 										}
 									)
 								-}}

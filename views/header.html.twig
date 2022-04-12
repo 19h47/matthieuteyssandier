@@ -53,19 +53,21 @@
 						<span
 							data-about-page-button="label"
 							data-text="{{- post.link == options_theme.about_page_link ? __( 'Close', 'matthieuteyssandier' ) : __( 'Infos', 'matthieuteyssandier' ) -}}"
-							class="
-								after:absolute
-								after:top-full
-								after:right-0
-								after:left-0
-								after:content-[attr(data-text)]
-								relative
-								transition-transform
-								duration-800
-								ease-out-quint
-								inline-block
-								{{ post.link == options_theme.about_page_link ? '' : '-translate-y-full ' }}
-							"
+							class="{{
+								[
+									'after:absolute',
+									'after:top-full',
+									'after:right-0',
+									'after:left-0',
+									'after:content-[attr(data-text)]',
+									'relative',
+									'transition-transform',
+									'duration-800',
+									'ease-out-quint',
+									'inline-block',
+									post.link == options_theme.about_page_link ? '' : '-translate-y-full '
+								] | join( ' ' )
+							}}"
 						>
 							{{- post.link == options_theme.about_page_link ? __( 'Close', 'matthieuteyssandier' ) : __( 'Infos', 'matthieuteyssandier' ) -}}
 						</span>

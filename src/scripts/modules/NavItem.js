@@ -6,8 +6,8 @@ class NavItem extends M {
 		this.el.classList.add('opacity-100', 'visible');
 
 		this.$('cat').forEach(($cat, index) => {
-			$cat.style.setProperty('transition-delay', `${((this.$('cat').length - 1) - index) * 0.1}s`);
 			$cat.classList.add('is-inview');
+			$cat.style.setProperty('transition-delay', `${index * 0.1}s`);
 		});
 
 		this.$('item').forEach($item => {
@@ -22,7 +22,7 @@ class NavItem extends M {
 
 		this.$('cat').forEach(($cat, index) => {
 			$cat.classList.remove('is-inview');
-			$cat.style.setProperty('transition-delay', `${index * 0.1}s`);
+			$cat.style.setProperty('transition-delay', `${((this.$('cat').length - 1) - index) * 0.1}s`);
 		});
 
 		this.$('item').forEach($item => {

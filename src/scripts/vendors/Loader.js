@@ -43,7 +43,14 @@ class Loader {
 		});
 
 		this.timeline.to(this.$progress, { duration: 0.5, opacity: 1 }, 0);
-		this.timeline.to(this.items, { duration: 0.5, opacity: 1 }, 0);
+		this.timeline.to(
+			this.items[this.items.length - 1],
+			{
+				duration: 0.5,
+				opacity: 1,
+			},
+			0,
+		);
 
 		this.timeline.from(
 			this.$progress,
@@ -51,7 +58,18 @@ class Loader {
 			0,
 		);
 
-		this.timeline.to(this.items, { x: 0, duration: 1.5, stagger: 0.1 }, 0.5);
+		this.items.forEach(($item, i) => {
+			this.timeline.to(
+				$item,
+				{
+					x: 0,
+					duration: 2,
+					onStart: () => gsap.set($item, { opacity: 1 }),
+					onComplete: () => gsap.set($item, { opacity: 0 }),
+				},
+				0.5 + i * 0.1,
+			);
+		});
 
 		return this.timeline.add(
 			() =>
@@ -64,7 +82,7 @@ class Loader {
 						this.itemParentBoundingClientRect.top +
 						this.itemBoundingClientRect.height / 2,
 				}),
-			1.5 + (this.items.length * 0.1),
+			1.5 + this.items.length * 0.1,
 		);
 	}
 }

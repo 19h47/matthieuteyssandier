@@ -12,8 +12,6 @@ favicon(gsap.utils.random(colors));
 // eslint-disable-next-line new-cap
 const app = new modular({ modules: [] });
 
-console.log(app);
-
 function init() {
 	app.initModules();
 

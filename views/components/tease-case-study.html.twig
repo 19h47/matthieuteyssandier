@@ -14,7 +14,10 @@
 	class="Tease-case-study block group {{ classes ? classes | join( ' ' ) : '' }}"
 	{{ attributes ? attributes | map( ( value, key ) => "#{key}=\"#{value}\"" ) | join( ' ' ) | raw }}
 >
-	<div class="absolute inset-0 h-full overflow-hidden Tease-case-study rounded-5xl after:bg-black after:mix-blend-hard-light after:z-20 after:absolute after:inset-0 after:opacity-20">
+	<div
+		class="absolute inset-0 h-full overflow-hidden Tease-case-study rounded-xl lg:rounded-5xl after:bg-black after:mix-blend-hard-light after:z-20 after:absolute after:inset-0 after:opacity-20"
+		style="-webkit-mask-image: -webkit-radial-gradient(white, black);"
+	>
 		{{-
 			include(
 				'components/image.html.twig',
@@ -27,7 +30,8 @@
 						'absolute',
 						'inset-0',
 						'z-10',
-						'rounded-3xl',
+						'rounded-xl',
+						'lg:rounded-5xl',
 						'w-full',
 						'h-full',
 						'object-cover',
