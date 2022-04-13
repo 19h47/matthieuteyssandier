@@ -43,14 +43,14 @@ class Loader {
 		});
 
 		this.timeline.to(this.$progress, { duration: 0.5, opacity: 1 }, 0);
-		this.timeline.to(
-			this.items[this.items.length - 1],
-			{
-				duration: 0.5,
-				opacity: 1,
-			},
-			0,
-		);
+		// this.timeline.to(
+		// 	this.items[this.items.length - 1],
+		// 	{
+		// 		duration: 0.5,
+		// 		opacity: 1,
+		// 	},
+		// 	0,
+		// );
 
 		this.timeline.from(
 			this.$progress,

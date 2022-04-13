@@ -1,4 +1,5 @@
 import { module as M } from '@19h47/modular';
+import gsap from 'gsap'
 
 class AboutPageButton extends M {
 	open() {
@@ -7,13 +8,13 @@ class AboutPageButton extends M {
 		this.el.setAttribute('href', url);
 		this.el.classList.add('is-open');
 
-		this.$('label')[0].setAttribute('text', label);
+		this.$('label')[0].setAttribute('data-text', label);
 		this.$('label')[0].classList.remove('translate-y-0');
 		this.$('label')[0].classList.add('-translate-y-full');
 
-		setTimeout(() => {
+		gsap.delayedCall(() => {
 			this.$('label')[0].innerHTML = label;
-		}, 1000);
+		}, 1);
 	}
 
 	close({ url: oldUrl }) {
@@ -27,8 +28,8 @@ class AboutPageButton extends M {
 		this.$('label')[0].classList.remove('-translate-y-full');
 		this.$('label')[0].classList.add('translate-y-0');
 
-		setTimeout(() => {
-			this.$('label')[0].setAttribute('text', label);
+		gsap.delayedCall(() => {
+			this.$('label')[0].setAttribute('data-text', label);
 		}, 1000);
 	}
 }

@@ -28,7 +28,7 @@
 	<body
 		data-module-load="main"
 		data-mode="{{ mode | default( 'light' ) }}"
-		class="transition-colors ease-out-quint duration-1000 {{ 'dark' == mode ? 'bg-red-very-dark text-gray-light' : 'bg-gray-light text-black' }}"
+		class="lg:h-full transition-colors ease-out-quint duration-1000 {{ 'dark' == mode ? 'bg-red-very-dark text-gray-light' : 'bg-gray-light text-black' }}"
 	>
 
 		{% block header %}
@@ -38,13 +38,13 @@
 		<div class="fixed inset-0 z-40 pointer-events-none">
 			{% for case_study in case_studies %}
 				<div
-					class="absolute inset-0 invisible h-full pb-3 overflow-hidden opacity-0 pointer-events-auto pt-37 lg:pb-6 transition-opacity-visibility duration-450 ease-out-quint lg:pt-33"
+					class="absolute inset-x-0 bottom-0 invisible pb-3 overflow-hidden opacity-0 pointer-events-auto lg:inset-0 pt-37 lg:pb-6 transition-opacity-visibility duration-450 ease-out-quint lg:pt-33"
 					data-module-nav-item="{{ case_study.id }}"
 				>
 
-					<div class="container h-full">
-						<div class="h-full row">
-							<div class="flex flex-col lg:col-4/12">
+					<div class="container lg:h-full">
+						<div class="row lg:h-full">
+							<div class="flex flex-col lg:col-4/12 lg:h-full">
 								{% if case_study.terms( 'case_study_cat' ) %}
 									<div class="lg:mt-auto">
 										<ul class="flex flex-wrap -m-1 lg:-my-2 lg:-mx-3">
@@ -80,7 +80,7 @@
 								</div>
 							</div>
 
-							<div class="mt-auto duration-1000 translate-y-10 opacity-0 h-1/2 lg:h-full lg:col-8/12 lg:mt-0 is-inview:opacity-100 is-inview:translate-y-0 transition-transform-opacity ease-out-quint" data-nav-item="item">
+							<div class="flex flex-col mt-3 duration-1000 translate-y-10 opacity-0 lg:h-full lg:mt-0 lg:col-8/12 is-inview:opacity-100 is-inview:translate-y-0 transition-transform-opacity ease-out-quint" data-nav-item="item">
 								<a href="{{ case_study.link }}" class="relative block h-full overflow-hidden group after:z-20 after:bg-black after:w-full after:absolute after:top-0 after:right-0 after:bottom-0 after:h-full after:mix-blend-hard-light after:opacity-20 rounded-xl lg:rounded-5xl">
 									<div
 										class="opacity-0 transition-transform-opacity ease-out-quint duration-1000 translate-y-10 is-inview:opacity-100 is-inview:translate-y-0 absolute z-30 bottom-0 left-0 right-0 mx-6 mb-6.25 lg:mx-10 lg:mb-10 uppercase text-white break-words font-bold text-7xl leading-[.85]" data-nav-item="item"
@@ -98,7 +98,7 @@
 													'relative',
 													'z-10',
 													'w-full',
-													'lg:h-full',
+													'h-full',
 													'object-cover',
 													'object-center',
 													'group-hover:scale-110',
@@ -115,10 +115,26 @@
 											{
 												size: 'size-2',
 												image: case_study.mobile_thumbnail,
-												classes: [ 'lg:hidden', 'relative', 'z-10', 'w-full', 'lg:h-full', 'object-cover', 'object-center' ]
+												classes: [ 'lg:hidden', 'relative', 'z-10', 'w-full', 'h-full', 'object-cover', 'object-center' ]
 											}
 										)
 									-}}
+								</a>
+
+								<a
+									class="inline-flex justify-center mt-3 text-center text-black duration-1000 translate-y-10 bg-white border-none opacity-0 lg:hidden button is-inview:opacity-100 is-inview:translate-y-0 transition-transform-opacity ease-out-quint"
+									data-nav-item="item"
+									href="{{ case_study.link }}"
+									style="transition-delay: {{ ( case_study.terms( 'case_study_cat' ) | length ) * 0.1 }}s;"
+								>
+									<div class="overflow-hidden">
+										<span
+											data-text="{{ __( 'Discover →', 'matthieuteyssandier' ) }}"
+											class="after:absolute after:top-full after:right-0 after:left-0 after:content-[attr(data-text)] relative transition-transform duration-800 ease-out-quint inline-block group-hover:-translate-y-full"
+										>
+											{{- __( 'Discover →', 'matthieuteyssandier' ) -}}
+										</span>
+									</div>
 								</a>
 							</div>
 						</div>
@@ -183,7 +199,7 @@
 									</li>
 								{% endfor %}
 
-								<li class="absolute inset-y-0 right-0 w-11 js-loader-item" srtle="opacity: 0;">
+								<li class="absolute inset-y-0 right-0 w-11 js-loader-item" style="opacity: 0;">
 									<span class="block w-full h-full rounded-full" style="background-color: {{ 'dark' == mode ? '#242021' : '#eae9e8' }};"></span>
 								</li>
 							</ul>

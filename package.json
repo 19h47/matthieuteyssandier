@@ -22,7 +22,7 @@
 		"gsap": "^3.10.3",
 		"locomotive-scroll": "^4.1.4",
 		"modularload": "^1.2.8",
-		"tailwindcss": "^3.0.23"
+		"tailwindcss": "^3.0.24"
 	},
 	"devDependencies": {
 		"@19h47/prettier-config": "19h47/prettier-config",

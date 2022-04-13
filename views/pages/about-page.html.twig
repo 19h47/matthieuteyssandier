@@ -10,12 +10,17 @@
 {% block content %}
 
 	<div class="container pb-6">
-		<div class="py-10 lg:px-20 bg-gray-light rounded-xl lg:rounded-5xl">
+		<div class="py-10 translate-y-10 opacity-0 lg:px-20 bg-gray-light rounded-xl lg:rounded-5xl has-dom-ready:opacity-100 has-dom-ready:translate-y-0 transition-transform-opacity duration-800 ease-out-quint">
 			<header class="flex justify-center w-full">
 				<ul class="flex -m-1">
 					{% for social in options_theme.socials %}
 						<li class="m-1">
-							<a class="block text-black border-black group button" href="{{ social.link.url }}"{{ social.link.target ? ' rel="noopener norefer" target="_blank"' }}>
+							<a
+								class="block text-black duration-1000 translate-y-10 border-black opacity-0 has-dom-ready:opacity-100 has-dom-ready:translate-y-0 transition-transform-opacity ease-out-quint group button"
+								href="{{ social.link.url }}"
+								{{ social.link.target ? ' rel="noopener norefer" target="_blank"' }}
+								style="transition-delay: {{ 0.1 + loop.index0 * 0.1 }}s;"
+							>
 								<div class="overflow-hidden">
 									<span
 										data-text="{{ social.link.title }}"
@@ -43,18 +48,28 @@
 			</header>
 
 			<div class="px-3 mt-5 mb-10 lg:my-10 lg:px-0">
-				<p class="mb-10 text-xs text-center uppercase text-gray-dark">
+				<p
+					class="mb-10 text-xs text-center uppercase duration-1000 translate-y-10 opacity-0 text-gray-dark has-dom-ready:opacity-100 has-dom-ready:translate-y-0 transition-transform-opacity ease-out-quint"
+					style="transition-delay: {{ 0.1 + ( ( options_theme.socials | length ) * 0.1 ) }}s;"
+				>
 					{{- options_theme.description.tagline | nl2br -}}
 				</p>
-				<p class="tracking-tight text-center text-black uppercase text-8xl">
+				<p
+					class="tracking-tight text-center text-black uppercase duration-1000 translate-y-10 opacity-0 text-8xl has-dom-ready:opacity-100 has-dom-ready:translate-y-0 transition-transform-opacity ease-out-quint"
+					style="transition-delay: {{ 0.2 + ( ( options_theme.socials | length ) * 0.1 ) }}s;"
+				>
 					{{- options_theme.description.title | nl2br -}}
 				</p>
 			</div>
 
 			<div class="px-3 text-center lg:px-0">
-				<p class="mb-4 text-xs uppercase text-gray-dark">{{- options_theme.email.title | nl2br -}}</p>
-				<p>
-
+				<p
+					class="mb-4 text-xs uppercase duration-1000 translate-y-10 opacity-0 text-gray-dark has-dom-ready:opacity-100 has-dom-ready:translate-y-0 transition-transform-opacity ease-out-quint"
+					style="transition-delay: {{ 0.3 + ( ( options_theme.socials | length ) * 0.1 ) }}s;"
+				>
+					{{- options_theme.email.title | nl2br -}}
+				</p>
+				<p class="duration-1000 translate-y-10 opacity-0 has-dom-ready:opacity-100 has-dom-ready:translate-y-0 transition-transform-opacity ease-out-quint" style="transition-delay: {{ 0.4 + ( ( options_theme.socials | length ) * 0.1 ) }}s;">
 					<button
 						class="inline-flex items-center text-white border-none button bg-red-bright"
 						type="button"
@@ -65,20 +80,24 @@
 						data-copy-button-item="{{ options_theme.email.address }}"
 					>
 						<div class="overflow-hidden">
-							<span data-copy-button="label" data-text="{{ __( 'Copy the mail →', 'matthieuteyssandier' ) }}"
-								class="
-									after:absolute
-									after:top-full
-									after:right-0
-									after:left-0
-									after:content-[attr(data-text)]
-									relative
-									transition-transform
-									duration-800
-									ease-out-quint
-									inline-block
-									group-hover:-translate-y-full
-								"
+							<span
+								data-copy-button="label"
+								data-text="{{ __( 'Copy the mail →', 'matthieuteyssandier' ) }}"
+								class="{{
+									[
+										'after:absolute',
+										'after:top-full',
+										'after:right-0',
+										'after:left-0',
+										'after:content-[attr(data-text)]',
+										'relative',
+										'transition-transform',
+										'duration-800',
+										'ease-out-quint',
+										'inline-block',
+										'group-hover:-translate-y-full'
+									] | join( ' ' )
+								}}"
 							>{{- __( 'Copy the mail →', 'matthieuteyssandier' ) -}}</span>
 						</div>
 					</button>
@@ -86,8 +105,11 @@
 			</div>
 
 			<div class="px-3 mt-10 text-center lg:mt-8 lg:px-0">
-				<p class="text-xs uppercase text-gray-dark">
-					{{- options_theme.copyright | replace({ '{year}': "now" | date( "Y" ), '{19h47}': '<a href="https://19h47.fr" targte="_blank" rel="noopener noreferer">19h47</a>' }) -}}
+				<p
+					class="text-xs uppercase duration-1000 translate-y-10 opacity-0 text-gray-dark has-dom-ready:opacity-100 has-dom-ready:translate-y-0 transition-transform-opacity ease-out-quint"
+					style="transition-delay: {{ 0.5 + ( ( options_theme.socials | length ) * 0.1 ) }}s;"
+				>
+					{{- options_theme.copyright | replace({ '{year}': "now" | date( "Y" ), '{19h47}': '<a class="text-black" href="https://19h47.fr" targte="_blank" rel="noopener noreferer">19h47</a>' }) -}}
 				</p>
 			</div>
 		</div>
