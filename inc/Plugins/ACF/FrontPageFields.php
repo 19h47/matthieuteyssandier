@@ -17,7 +17,7 @@ class FrontPageFields {
 	 *
 	 * @return void
 	 */
-	public function run() {
+	public function run(){
 		add_action( 'acf/init', array( $this, 'fields' ) );
 	}
 

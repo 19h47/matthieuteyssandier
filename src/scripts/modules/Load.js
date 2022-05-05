@@ -14,6 +14,7 @@ class Load extends M {
 
 			html.classList.remove('has-dom-ready');
 			html.classList.add('is-loading');
+			body.classList.add('cursor-wait');
 
 			gsap.to(oldContainer, { duration: 0.3, opacity: 0 });
 
@@ -28,6 +29,7 @@ class Load extends M {
 			console.info('Load.loaded', transition);
 
 			html.classList.remove('is-loading');
+			body.classList.remove('cursor-wait');
 
 			this.call('destroy', oldContainer, 'app');
 
@@ -36,6 +38,12 @@ class Load extends M {
 
 			const { url } = oldContainer.dataset;
 			const { template } = newContainer.dataset;
+
+			body.classList.remove('overflow-hidden');
+
+			if ('front-page' === template) {
+				body.classList.add('overflow-hidden');
+			}
 
 			if ('about-page' === template) {
 				this.call('close', { url }, 'AboutPageButton');

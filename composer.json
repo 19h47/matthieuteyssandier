@@ -10,7 +10,8 @@
 	],
 	"require": {
 		"timber/timber": "2.0.0-alpha.4",
-		"19h47/wp-form-controls": "dev-master"
+		"19h47/wp-form-controls": "dev-master",
+		"twig/html-extra": "^3.3"
 	},
 	"autoload": {
 		"psr-4": {
@@ -22,10 +23,6 @@
 		]
 	},
 	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/19h47/mastercard-api-client.git"
-		},
 		{
 			"type": "package",
 			"package": {

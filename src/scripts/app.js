@@ -1,7 +1,7 @@
 /* global matthieuteyssandier */
 import modular from '@19h47/modular';
 import Loader from 'vendors/Loader';
-import { html, scroll } from 'utils/environment';
+import { body, html, scroll } from 'utils/environment';
 import favicon from 'utils/favicon';
 import { gsap } from 'gsap';
 
@@ -19,6 +19,7 @@ function init() {
 	html.classList.add('is-ready');
 	html.classList.add('is-first-load');
 	html.classList.remove('is-loading');
+	body.classList.remove('cursor-wait');
 
 	window.addEventListener('mousemove', ({ clientX, clientY }) => {
 		scroll.x = clientX;
