@@ -1,6 +1,6 @@
 <?php // phpcs:ignore
 /**
- * ACF
+ * Options Page
  *
  * @package WordPress
  * @subpackage MatthieuTeyssandier/Plugins/ACF
@@ -27,7 +27,7 @@ class OptionsPage {
 	public function add_options_theme() {
 		$parent = acf_add_options_page(
 			array(
-				'page_title' => __( 'Theme Settings', 'cns' ),
+				'page_title' => __( 'Theme Settings', 'matthieuteyssandier' ),
 				'capability' => 'edit_posts',
 				'icon_url'   => 'dashicons-admin-settings',
 			)

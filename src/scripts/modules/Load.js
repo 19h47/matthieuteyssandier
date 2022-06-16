@@ -6,11 +6,11 @@ import { gsap } from 'gsap';
 class Load extends M {
 	init() {
 		// eslint-disable-next-line new-cap
-		const load = new modularLoad({});
+		this.load = new modularLoad({});
 
 		// eslint-disable-next-line no-unused-vars
-		load.on('loading', (transition, oldContainer) => {
-			console.info('Load.loading', transition);
+		this.load.on('loading', (transition, oldContainer) => {
+			// console.info('Load.loading', transition);
 
 			html.classList.remove('has-dom-ready');
 			html.classList.add('is-loading');
@@ -25,8 +25,8 @@ class Load extends M {
 			}
 		});
 
-		load.on('loaded', (transition, oldContainer, newContainer) => {
-			console.info('Load.loaded', transition);
+		this.load.on('loaded', (transition, oldContainer, newContainer) => {
+			// console.info('Load.loaded', transition, oldContainer, newContainer);
 
 			html.classList.remove('is-loading');
 			body.classList.remove('cursor-wait');
@@ -56,7 +56,7 @@ class Load extends M {
 			gsap.delayedCall(0.7, () => html.classList.add('has-dom-ready'));
 		});
 
-		load.on('ready', (transition, newContainer) => {
+		this.load.on('ready', (_, newContainer) => {
 			// console.info('Load.ready', transition);
 
 			this.call('update', newContainer, 'app');
@@ -78,10 +78,14 @@ class Load extends M {
 			gsap.to(newContainer, { duration: 1, ease: 'power4.out', opacity: 1 });
 		});
 
-		load.on('images', () => {
+		this.load.on('images', () => {
 			// console.log('Load.images');
 			this.call('update', null, 'Scroll', 'main');
 		});
+	}
+
+	goTo(href = '/') {
+		this.load.goTo(href);
 	}
 }
 

@@ -10,7 +10,7 @@ class CopyButton extends M {
 			click: 'copy',
 		};
 
-		console.log(navigator.userAgent);
+		// console.log(navigator.userAgent);
 	}
 
 	async copy() {

@@ -3,7 +3,7 @@
  * WP Image Editor
  *
  * @package WordPress
- * @subpackage LauraGeley
+ * @subpackage MatthieuTeyssandier
  */
 
 namespace MatthieuTeyssandier;

@@ -35,7 +35,7 @@ class Circle {
 
 
 	open({ color, x, y }) {
-		console.info('Circle.open()', { color, x, y });
+		// console.info('Circle.open()', { color, x, y });
 
 		this.x = x;
 		this.y = y;
