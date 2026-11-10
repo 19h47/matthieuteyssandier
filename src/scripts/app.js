@@ -1,51 +1,18 @@
-/* global matthieuteyssandier */
-import modular from '@19h47/modular';
-import Loader from 'vendors/Loader';
-import { body, html, scroll } from 'utils/environment';
-import favicon from 'utils/favicon';
-import { gsap } from 'gsap';
+import { load } from "piecesjs";
 
-const { colors } = matthieuteyssandier;
-
-favicon(gsap.utils.random(colors));
-
-// eslint-disable-next-line new-cap
-const app = new modular({ modules: [] });
-
-function init() {
-	app.initModules();
-
-	html.classList.add('is-loaded');
-	html.classList.add('is-ready');
-	html.classList.add('is-first-load');
-	html.classList.remove('is-loading');
-	body.classList.remove('cursor-wait');
-
-	window.addEventListener('mousemove', ({ clientX, clientY }) => {
-		scroll.x = clientX;
-		scroll.y = clientY;
-	});
-
-	setTimeout(() => {
-		html.classList.add('has-dom-ready');
-	}, 500);
-}
-
-window.onload = async () => {
-	const $style = document.getElementById(`${matthieuteyssandier.text_domain}-main-css`);
-	const loader = new Loader();
-
-	loader.init();
-
-	await Promise.all([loader.timeline.play(), app.collectModules(app)]);
-
-	if ($style) {
-		if ($style.isLoaded) {
-			init();
-		} else {
-			$style.addEventListener('load', () => init());
-		}
-	} else {
-		console.warn(`The "${matthieuteyssandier.text_domain}-main-css" stylesheet not found`);
+load("cinq-modal", async () => {
+	// Invoker commands open and close the modal: Safari 26.2, Chrome 139 for request-close.
+	if (!("command" in HTMLButtonElement.prototype)) {
+		await import("invokers-polyfill");
 	}
-};
+
+	await import("@agencecinq/modal");
+});
+load("mt-loader", () => import("./components/Loader.ts"));
+load("mt-color-picker", () => import("./components/ColorPicker.ts"));
+load("mt-previews", () => import("./components/Previews.ts"));
+load("mt-animations", () => import("./components/Animations.ts"));
+load("mt-copy-button", () => import("./components/CopyButton.ts"));
+load("mt-video", () => import("./components/Video.ts"));
+load("mt-back-link", () => import("./components/BackLink.ts"));
+load("mt-gravity", () => import("./components/Gravity.ts"));

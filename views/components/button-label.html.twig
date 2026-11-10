@@ -1,0 +1,14 @@
+{#
+ # Components: Button Label
+ #
+ # Label of a `.button` (or of a `.group` link holding one) that rolls up
+ # on hover and focus, see components/button.css.
+ #
+ # @param {string} label Text of the button.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+<span class="block overflow-hidden">
+	<span class="button__label" data-text="{{ label | e }}">{{- label -}}</span>
+</span>

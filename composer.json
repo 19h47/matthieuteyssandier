@@ -1,44 +1,53 @@
 {
+	"require": {
+		"timber/timber": "^2.3",
+		"twig/html-extra": "^3.8",
+		"19h47/wp-get-theme": "dev-master"
+	},
 	"name": "19h47/matthieuteyssandier",
-	"description": "WP theme for Matthieu Teyssandier",
-	"type": "wordress-theme",
+	"version": "2.0.0",
+	"description": "WordPress theme for Matthieu Teyssandier",
+	"type": "wordpress-theme",
 	"authors": [
 		{
-			"name": "19h47",
-			"email": "jeremylevron@19h47.fr"
+			"name": "Jérémy Levron",
+			"email": "jeremylevron@19h47.fr",
+			"homepage": "https://19h47.fr"
 		}
 	],
-	"require": {
-		"timber/timber": "2.0.0-alpha.4",
-		"19h47/wp-form-controls": "dev-master",
-		"twig/html-extra": "^3.3"
-	},
 	"autoload": {
 		"psr-4": {
-			"MatthieuTeyssandier\\": "./inc"
+			"MatthieuTeyssandier\\": "./includes"
 		},
 		"files": [
-			"./inc/helpers.php",
-			"./vendor/19h47/wp-form-controls/wp-form-controls.php"
+			"./vendor/19h47/wp-get-theme/wp-get-theme.php"
 		]
 	},
 	"repositories": [
 		{
 			"type": "package",
 			"package": {
-				"name": "19h47/wp-form-controls",
+				"name": "19h47/wp-get-theme",
 				"version": "master",
 				"source": {
-					"url": "https://gist.github.com/5bc7dc96204d7290ce781a54756e0a7b.git",
+					"url": "https://gist.github.com/806c10bd977aa63929dd14e2035e9d28.git",
 					"type": "git",
-					"reference": "master"
+					"reference": "main"
 				}
 			}
 		}
 	],
+	"require-dev": {
+		"wp-coding-standards/wpcs": "^3.3",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.2"
+	},
+	"scripts": {
+		"phpcs": "phpcs",
+		"phpcbf": "phpcbf"
+	},
 	"config": {
 		"allow-plugins": {
-			"composer/installers": false
+			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
 	}
 }

@@ -5,10 +5,11 @@
 vendor
 wpcs
 
-# Webpack #
+# Node.js #
 ###########
-dist
 node_modules
+.pnpm-store
+.pnpm-debug.log
 
 # OS generated files #
 ######################
@@ -19,3 +20,7 @@ node_modules
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Build directories #
+#####################
+dist

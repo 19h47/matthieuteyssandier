@@ -1,0 +1,51 @@
+{#
+ # Components: Loader
+ #
+ # On arrival on the site or on reload, not when following a link of the
+ # site: the counter runs to 100 while a dot per case study slides across,
+ # then the page color fills the screen from the last dot. Shown while the root has `data-loading`, set in the head of
+ # index.html.twig, skipped under `prefers-reduced-motion: reduce`.
+ # Decorative: hidden from assistive technologies.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+<mt-loader class="fixed inset-0 z-70 hidden items-center bg-white loading:flex" aria-hidden="true">
+	<div class="relative z-10 container">
+		<div class="flex items-center lg:mx-14">
+			<span class="text-7xl text-black tabular-nums opacity-0" data-dom="progress">100</span>
+
+			<ul class="relative ml-auto h-11 w-full" data-dom="track">
+				{%- for case_study in case_studies -%}
+					<li class="absolute inset-y-0 right-0 w-11 opacity-0" data-dom="dot">
+						<span
+							class="block size-full rounded-full"
+							style="background-color: {{ case_study.meta( 'color' ) }};"
+						></span>
+					</li>
+				{%- endfor -%}
+
+				<li class="absolute inset-y-0 right-0 w-11 opacity-0" data-dom="dot">
+					<span
+						class="{{
+							html_classes(
+								'block size-full rounded-full',
+								'dark' == mode ? 'bg-black' : 'bg-gray-light'
+							)
+						}}"
+					></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div
+		class="{{
+			html_classes(
+				'absolute inset-0 z-20 [clip-path:circle(0)]',
+				'dark' == mode ? 'bg-black' : 'bg-gray-light'
+			)
+		}}"
+		data-dom="reveal"
+	></div>
+</mt-loader>

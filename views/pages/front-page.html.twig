@@ -1,77 +1,43 @@
 {#
  # Front Page
  #
- # @package WordPress
- # @subpackage MatthieuTeyssandier
+ # The case studies chosen on the front page, side by side, filling the
+ # screen (see the `cards` utility).
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
+{% set fixed = true %}
 
 {% extends 'index.html.twig' %}
 
 {% block content %}
-	{% if post.meta( 'case_studies' ) %}
-		<div class="fixed inset-0 pt-16 pb-3 lg:pb-6 lg:pt-33">
-			<div class="container h-full">
-				<div
-					class="flex flex-col h-full row lg:flex-row"
-					data-module-case-studies
-				>
+	<h1 class="sr-only">{{ site.title }}</h1>
 
-					{%- for case_study in get_posts( post.meta( 'case_studies' ) ) -%}
-						{%- embed 'components/tease-case-study.html.twig' with
+	{%- if front_ids | length -%}
+		<div class="fixed inset-0 pt-16 pb-3 lg:pt-33 lg:pb-6">
+			<div class="container h-full">
+				<div class="flex h-full cards flex-col gap-2 lg:flex-row lg:gap-6">
+					{%- for case_study in get_posts( front_ids ) -%}
+						{{-
+							include(
+								'components/tease-case-study.html.twig',
 								{
 									case_study: case_study,
-									attributes: {
-										'data-case-studies': 'item',
-										'style': 'transition-delay: 0s, ' ~ loop.index0 * 0.1 ~ 's, ' ~ loop.index0 * 0.1 ~ 's',
-									},
 									size: 'size-4',
-									classes: [
-										'lg:opacity-0',
-										'lg:translate-y-10',
-										'lg:has-dom-ready:opacity-100',
-										'lg:has-dom-ready:translate-y-0',
-										'my-1',
-										'lg:my-0',
-										'transition-flex-grow-transform-opacity',
-										'duration-800',
-										'ease-out-quint',
-										'group',
-										'grow',
-										'basis-0',
-										'lg:mx-3',
-										'mx-2',
-										'!px-0',
-										'relative',
-										'!w-auto',
-										'transform-gpu',
-										loop.first ? 'lg:grow-0.8' : 'lg:grow-0.2'
-									],
-									next: false
+									loading: 'eager',
+									heading: 'h2',
+									title_classes: [ 'lg:break-normal lg:whitespace-nowrap' ],
+									classes: [ 'enter' ],
+									attributes: { style: '--index: ' ~ loop.index0 ~ ';' },
 								}
-						-%}
-							{% block title %}
-								<div
-									class="absolute bottom-0 left-0 right-0 z-30 flex h-full flex-col p-6 lg:duration-450 lg:justify-end lg:flex-row-reverse lg:items-end out-quint lg:p-10 delay-0 lg:group-hover:delay-500 lg:transition-transform-opacity {{ loop.first ? 'lg:opacity-100 lg:translate-y-0' : 'lg:opacity-0 lg:translate-y-10' }}"
-									data-case-studies="title"
-								>
-									{% if next %}
-										<div class="lg:w-2.5/12 lg:flex ml-auto lg:ml-0">
-											<p class="inline-flex items-center ml-auto text-black bg-white border-none button">
-												{{- __( 'Next Project', 'matthieuteyssandier' ) -}}{{- icon( 'arrow-right', { classes: [ 'ml-1', 'w-2', 'h-2', 'fill-black' ] } ) -}}
-											</p>
-										</div>
-									{% endif %}
-									<h2 class="uppercase text-white text-7xl break-words lg:break-normal lg:whitespace-nowrap font-bold leading-[.85] lg:w-9.5/12 mt-auto lg:mt-0">
-										{{- case_study.title -}}
-									</h2>
-								</div>
-							{% endblock %}
-						{% endembed %}
+							)
+						-}}
 					{%- endfor -%}
 				</div>
 			</div>
 		</div>
-	{% endif %}
+	{%- endif -%}
 {% endblock %}
 
 {% block footer %}{% endblock %}

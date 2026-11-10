@@ -1,0 +1,45 @@
+/*
+ * Front page cards, side by side from `lg`: the first one is wide until
+ * another one is hovered or focused. Its `[data-title]` shows only then.
+ */
+@utility cards {
+	& > * {
+		flex: 1 1 0;
+		min-width: 0;
+		min-height: 0;
+	}
+
+	@variant lg {
+		& > * {
+			transition: flex-grow 800ms var(--ease-out);
+		}
+
+		& > :is(:first-child, :hover, :focus-visible) {
+			flex-grow: 4;
+		}
+
+		&:has(> :is(:hover, :focus-visible)) > :first-child:not(:hover, :focus-visible) {
+			flex-grow: 1;
+		}
+
+		& [data-title] {
+			opacity: 0;
+			translate: 0 2.5rem;
+			transition:
+				opacity 450ms var(--ease-out),
+				translate 450ms var(--ease-out);
+		}
+
+		& > :is(:first-child, :hover, :focus-visible) [data-title] {
+			opacity: 1;
+			translate: 0;
+			transition-delay: 500ms;
+		}
+
+		&:has(> :is(:hover, :focus-visible)) > :first-child:not(:hover, :focus-visible) [data-title] {
+			opacity: 0;
+			translate: 0 2.5rem;
+			transition-delay: 0ms;
+		}
+	}
+}

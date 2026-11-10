@@ -1,8 +1,16 @@
-@import './components/button';
-@import './components/info';
-@import './base';
-@import './utilities/grid';
+@import "tailwindcss";
 
-@tailwind components;
-@tailwind base;
-@tailwind utilities;
+@import "./theme.css";
+
+/* Base */
+@import "./base/base.css";
+@import "./base/font-face.css";
+
+/* Utilities */
+@import "./utilities/container.css";
+@import "./utilities/layout-grid.css";
+@import "./utilities/enter.css";
+@import "./utilities/cards.css";
+
+/* Components */
+@import "./components/button.css";

@@ -1,0 +1,25 @@
+{#
+ # Blocks: Media
+ #
+ # One image or video, full width.
+ #
+ # @param {object} props ACF layout row (`media`: flexible content, one row).
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+{%- if props.media | length -%}
+	<div class="container" data-reveal>
+		{%- for media in props.media -%}
+			{{-
+				include(
+					'components/media.html.twig',
+					{
+						media: media,
+						size: 'size-6',
+					}
+				)
+			-}}
+		{%- endfor -%}
+	</div>
+{%- endif -%}

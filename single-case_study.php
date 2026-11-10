@@ -1,17 +1,16 @@
-<?php // phpcs:ignore
+<?php
 /**
- * Single: Case study
+ * Single case study
  *
- * @package WordPress
- * @subpackage MatthieuTeyssandier
- * @since 0.0.0
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package MatthieuTeyssandier
+ * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  */
 
-use Timber\{ Timber };
+use Timber\Timber;
 
-$template = 'pages/single-case-study.html.twig';
+$templates = array( 'pages/single-case-study.html.twig' );
+$data      = Timber::context();
 
-$data         = Timber::context();
-$data['post'] = Timber::get_post();
-
-Timber::render( $template, $data, 600, 'CACHE_OBJECT' );
+Timber::render( $templates, $data );

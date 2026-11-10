@@ -6,16 +6,21 @@
  # @param string icon
  #
  # @file views/svg/use.html.twig
- # @package WordPress
- # @subpackage CaptainWild
+ # @package MatthieuTeyssandier
  #
  # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
 <svg
-	class="{{ icon }}{{ classes is defined ? ' ' ~ classes | join(' ') }}"
-	{{ id is defined ? "id=\"#{ id }\"" }}
-	aria-label="{{ description | default( site.description ) }}"
-	{{ attributes ? attributes | map( ( value, key ) => "#{key}=\"#{value}\"" ) | join( ' ' )  | raw }}
+	class="{{
+		html_classes(
+			icon,
+			classes | default( [] ) | join( ' ' ),
+			( classes | default( [] ) | filter( class => class starts with 'fill-' ) | length ) == 0
+				? 'fill-current'
+		)
+	}}"
+	{{ html_attr( id is defined ? { id: id } ) }}
+	{{ html_attr( attributes ) }}
 >
 	<use xlink:href="#{{ icon }}" href="#{{ icon }}"></use>
 </svg>

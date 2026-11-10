@@ -1,158 +1,152 @@
 {#
  # Single: Case Study
  #
- # @package WordPress
- # @subpackage MatthieuTeyssandier
+ # Title, categories and cover, the text in English and in French, the
+ # credits, the media blocks, then the next case study.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
-
 {% extends 'index.html.twig' %}
 
 {% block content %}
+	<div class="relative z-0 mt-14 space-y-6 pb-6 lg:mt-33.5">
+		<div class="container">
+			<div class="text-center">
+				<h1 class="enter text-7xl font-bold break-words uppercase">{{- post.title -}}</h1>
 
-	<div class="relative z-0 pb-6 mt-14 lg:mt-33.5">
-		<div class="container my-6 first:mt-0 last:mb-0">
-			<div class="text-center row">
-
-				<div>
-					<h1 class="uppercase text-7xl font-bold leading-[.85] break-words is-inview:opacity-100 is-inview:translate-y-0 opacity-0 transition-transform-opacity ease-out-quint duration-1000 translate-y-10" data-scroll>
-						{{- post.title -}}
-					</h1>
-				</div>
-
-				{% if post.terms( 'case_study_cat' ) %}
-					<div class="mt-10">
-
-						<ul class="inline-flex flex-wrap justify-center -m-1 lg:-m-2">
-							{% for cat in post.terms( 'case_study_cat' ) %}
-								<li class="m-1 duration-1000 translate-y-10 opacity-0 lg:m-2 is-inview:opacity-100 is-inview:translate-y-0 transition-transform-opacity ease-out-quint" data-scroll style="transition-delay: {{ loop.index0 * 0.1 }}s;">
-									<p class="button">{{- cat.name -}}</p>
-								</li>
-							{% endfor %}
-						</ul>
-
-					</div>
-				{% endif %}
+				{%- if post.terms( 'case_study_cat' ) -%}
+					<ul class="mt-10 inline-flex flex-wrap justify-center gap-2 lg:gap-4">
+						{%- for term in post.terms( 'case_study_cat' ) -%}
+							<li class="enter" style="--index: {{ loop.index }};">
+								<p class="button">{{- term.name -}}</p>
+							</li>
+						{%- endfor -%}
+					</ul>
+				{%- endif -%}
 			</div>
 
-			{% if post.thumbnail %}
-				<div class="mt-9 lg:mt-11 row">
-					<div>
-						<div
-							class="{{
-								[
-									'relative ',
-									'overflow-hidden ',
-									'duration-1000',
-									'transition-transform-opacity',
-									'translate-y-10',
-									'opacity-0',
-									'pb-908/1872',
-									'rounded-xl',
-									'lg:rounded-5xl',
-									'ease-out-cubic',
-									'is-inview:opacity-100',
-									'is-inview:translate-y-0'
-								] | join( ' ' )
-							}}"
-							data-scroll
-						>
-							{{-
-								include(
-									'components/image.html.twig',
-									{
-										size: 'size-6',
-										image: post.thumbnail,
-										classes: [ 'absolute', 'inset-0', 'w-full', 'h-full', 'object-cover', 'object-center' ]
-									}
-								)
-							-}}
-						</div>
-					</div>
+			{%- if post.thumbnail -%}
+				<div
+					class="relative mt-9 aspect-1872/908 enter overflow-hidden rounded-xl lg:mt-11 lg:rounded-5xl"
+					style="--index: 2;"
+				>
+					{{-
+						include(
+							'components/image.html.twig',
+							{
+								size: 'size-6',
+								image: post.thumbnail,
+								loading: 'eager',
+								classes: [ 'absolute inset-0 size-full object-cover' ],
+							}
+						)
+					-}}
 				</div>
-			{% endif %}
+			{%- endif -%}
 
-			{% if post.meta( 'content' ).french or post.meta( 'content' ).english or post.meta( 'credits' ) or post.meta( 'link' ) %}
-				<div class="my-20 lg:my-32 row is-inview:opacity-100" data-scroll>
-					{% if post.meta( 'content' ).french or post.meta( 'content' ).english %}
-						<div class="lg:col-6/12 {{ post.meta( 'credits' ) or post.meta( 'link' ) ? 'mb-10 lg:mb-0' : '' }}">
-							<p class="text-4xl leading-normal tracking-tight indent-1/3">
-								{{- post.meta( 'content' ).english -}}
-							</p>
-							<p class="mt-10 text-4xl leading-normal tracking-tight indent-1/3 text-gray-dark">
-								{{- post.meta( 'content' ).french -}}
-							</p>
+			{%- if
+				post.meta( 'content' ).english
+					or post.meta( 'content' ).french
+					or post.meta( 'credits' )
+					or post.meta( 'link' ) -%}
+				<div class="my-20 layout-grid gap-y-10 lg:my-32">
+					{%- if post.meta( 'content' ).english or post.meta( 'content' ).french -%}
+						<div
+							class="col-span-12 space-y-10 text-4xl leading-normal tracking-tight lg:col-span-6"
+							data-reveal
+						>
+							{%- if post.meta( 'content' ).english -%}
+								<p class="indent-[33.333%]" lang="en">{{- post.meta( 'content' ).english -}}</p>
+							{%- endif -%}
+
+							{%- if post.meta( 'content' ).french -%}
+								<p class="indent-[33.333%] text-gray-dark" lang="fr">
+									{{- post.meta( 'content' ).french -}}
+								</p>
+							{%- endif -%}
 						</div>
-					{% endif %}
+					{%- endif -%}
 
+					{%- if post.meta( 'credits' ) or post.meta( 'link' ) -%}
+						<div
+							class="col-span-12 border-t border-black/10 pt-10 lg:col-span-4 lg:col-start-9 lg:border-none lg:pt-0"
+							data-reveal
+						>
+							<h2 class="button inline-flex">{{- __( 'Credits', 'matthieuteyssandier' ) -}}</h2>
 
-					{% if post.meta( 'credits' ) or post.meta( 'link' ) %}
-						<div class="lg:hidden"><hr class="w-full h-px border-none bg-black/10"></div>
+							{%- if post.meta( 'credits' ) -%}
+								<dl class="mt-10 space-y-8 text-base leading-none">
+									{%- for credit in post.meta( 'credits' ) -%}
+										<div>
+											<dt class="inline font-bold">{{ credit.key }}</dt>:<dd class="inline">
+												{{ credit.value }}
+											</dd>
+										</div>
+									{%- endfor -%}
+								</dl>
+							{%- endif -%}
 
-						<div class="lg:ml-2/12 lg:col-4/12 {{ post.meta( 'content' ).french or post.meta( 'content' ).english ? 'mt-10 lg:mt-0' }}">
-							<p>
-								<span class="inline-flex button">
-									{{- __( 'Credits', 'matthieuteyssandier' ) -}}
-								</span>
-							</p>
-							<div class="mt-10">
-								<ul class="-my-4 text-base leading-none">
-									{% for credit in post.meta( 'credits' ) %}
-										<li class="my-4"><strong>{{ credit.key }}</strong>: {{ credit.value }}</li>
-									{% endfor %}
-								</ul>
-							</div>
-							{% if post.meta( 'link' ) %}
+							{%- if post.meta( 'link' ) -%}
 								<a
-									class="inline-block mt-4 text-base underline"
-									href="{{ post.meta( 'link' ) }}"
-									target="_blank" rel="noopener noreferer"
+									class="mt-4 inline-block text-base underline"
+									href="{{ post.meta( 'link' ) | e }}"
 								>
 									{{- __( 'Visit website', 'matthieuteyssandier' ) -}}
 								</a>
-							{% endif %}
+							{%- endif -%}
 						</div>
-					{% endif %}
-
+					{%- endif -%}
 				</div>
-			{% endif %}
-
+			{%- endif -%}
 		</div>
 
-		{{ parent() }}
+		{%- for block in post.meta( 'layouts' ) -%}
+			{{-
+				include(
+					'blocks/' ~ ( block.acf_fc_layout | replace( { '_': '-' } ) ) ~ '.html.twig',
+					{ props: block },
+					ignore_missing: true
+				)
+			-}}
+		{%- endfor -%}
 
-		{% if post.prev %}
-			<div class="container mt-6 lg:mt-33">
-				<div class="row">
-
-					<div class="d-flex col-full {{ post.prev.meta( 'preview' ) ? 'lg:col-8/12' : '' }}">
-						{{- include(
+		{%- if post.prev -%}
+			<div class="container lg:pt-27" data-reveal>
+				<div class="layout-grid">
+					{{-
+						include(
 							'components/tease-case-study.html.twig',
-								{
-									case_study: post.prev,
-									size: post.prev.meta( 'preview' ) ? 'size-4' : 'size-6',
-									next: true,
-									classes: [ 'pb-396/389', post.prev.meta( 'preview' ) ? 'lg:pb-892/1241' : 'lg:pb-892/1872' , 'relative' ]
-								}
-							)
-						-}}
-					</div>
+							{
+								case_study: post.prev,
+								size: post.prev.meta( 'preview' ) ? 'size-4' : 'size-6',
+								next: true,
+								classes: [
+									'col-span-12 aspect-389/396',
+									post.prev.meta( 'preview' )
+										? 'lg:col-span-8 lg:aspect-1241/892'
+										: 'lg:aspect-1872/892',
+								],
+							}
+						)
+					-}}
 
-					{% if post.prev.meta( 'preview' ) %}
-						<div class="hidden lg:col-4/12 lg:flex">
+					{%- if post.prev.meta( 'preview' ) -%}
+						<div class="hidden lg:col-span-4 lg:block">
 							{{-
 								include(
 									'components/image.html.twig',
 									{
 										size: 'size-2',
 										image: post.prev.meta( 'preview' ),
-										classes: [ 'rounded-xl', 'lg:rounded-5xl', 'w-full', 'h-full', 'object-cover', 'object-center' ]
+										classes: [ 'size-full rounded-xl object-cover lg:rounded-5xl' ],
 									}
 								)
 							-}}
 						</div>
-					{% endif	%}
+					{%- endif -%}
 				</div>
 			</div>
-		{% endif %}
+		{%- endif -%}
 	</div>
 {% endblock %}

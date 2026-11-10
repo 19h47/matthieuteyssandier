@@ -1,0 +1,110 @@
+{#
+ # Components: Preview
+ #
+ # Modal preview of a case study, opened from its color in the header. Its
+ # color (`reveal`) fills the screen from the pointer, then the categories,
+ # the cover and the links (`entry`) come in, see
+ # src/scripts/components/Previews.ts.
+ #
+ # @param {object} case_study Case study post.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+{%- if case_study -%}
+	<cinq-modal>
+		<dialog
+			id="preview-{{ case_study.id }}"
+			class="fixed inset-0 m-0 size-full max-h-none max-w-none overflow-hidden bg-transparent p-0 text-inherit backdrop:bg-transparent"
+			aria-label="{{ case_study.title | e }}"
+			style="--color: {{ case_study.meta( 'color' ) }};"
+			data-preview
+		>
+			<div class="absolute inset-0 bg-(--color)" data-dom="reveal"></div>
+
+			<div class="relative flex h-full flex-col" data-dom="content">
+				{{- include( 'header.html.twig', { current: 'preview-' ~ case_study.id } ) -}}
+
+				<div class="container mt-auto pb-3 lg:min-h-0 lg:flex-1 lg:pb-6">
+					<div class="layout-grid gap-y-3 lg:h-full">
+						<div class="col-span-12 flex flex-col lg:col-span-4">
+							{%- if case_study.terms( 'case_study_cat' ) -%}
+								<ul class="flex flex-wrap gap-2 lg:mt-auto lg:gap-x-6 lg:gap-y-4">
+									{%- for term in case_study.terms( 'case_study_cat' ) -%}
+										<li data-dom="entry"><p class="button text-black">{{- term.name -}}</p></li>
+									{%- endfor -%}
+								</ul>
+							{%- endif -%}
+
+							<a
+								class="button mt-10 hidden items-center self-start border-none bg-white text-black lg:inline-flex"
+								data-dom="entry"
+								href="{{ case_study.link }}"
+							>
+								{{-
+									include(
+										'components/button-label.html.twig',
+										{ label: __( 'Discover →', 'matthieuteyssandier' ) }
+									)
+								-}}
+							</a>
+						</div>
+
+						<div class="col-span-12 flex flex-col lg:col-span-8 lg:h-full" data-dom="entry">
+							<a
+								class="group relative block aspect-389/396 overflow-hidden rounded-xl after:absolute after:inset-0 after:z-20 after:bg-black after:opacity-20 after:mix-blend-hard-light lg:aspect-auto lg:h-full lg:rounded-5xl"
+								href="{{ case_study.link }}"
+							>
+								<span
+									class="absolute inset-x-0 bottom-0 z-30 mx-6 mb-6.25 text-7xl font-bold break-words text-white uppercase lg:mx-10 lg:mb-10"
+								>
+									{{- case_study.title -}}
+								</span>
+
+								{{-
+									include(
+										'components/image.html.twig',
+										{
+											image: case_study.thumbnail,
+											size: 'size-4',
+											alt: '',
+											classes: [
+												case_study.meta( 'mobile_thumbnail' ) ? 'hidden lg:block' : '',
+												'absolute inset-0 z-10 size-full object-cover',
+												'motion-safe:transition-transform motion-safe:duration-2000 motion-safe:ease-out group-hover:scale-110',
+											],
+										}
+									)
+								-}}
+								{{-
+									include(
+										'components/image.html.twig',
+										{
+											image: case_study.meta( 'mobile_thumbnail' ),
+											size: 'size-2',
+											alt: '',
+											classes: [ 'absolute inset-0 z-10 size-full object-cover lg:hidden' ],
+										}
+									)
+								-}}
+							</a>
+
+							<a
+								class="button mt-3 inline-flex justify-center border-none bg-white text-black lg:hidden"
+								data-dom="entry"
+								href="{{ case_study.link }}"
+							>
+								{{-
+									include(
+										'components/button-label.html.twig',
+										{ label: __( 'Discover →', 'matthieuteyssandier' ) }
+									)
+								-}}
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</dialog>
+	</cinq-modal>
+{%- endif -%}

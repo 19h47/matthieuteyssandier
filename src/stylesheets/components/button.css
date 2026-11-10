@@ -1,21 +1,34 @@
-/*
- * Button
- *
- * @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
- * @package WordPress
- * @subpackage MatthieuTeyssandier
- */
-
 @layer components {
 	.button {
-		@apply text-center text-xs uppercase leading-none p-4 border rounded-full border-current;
+		@apply rounded-full border border-current p-4 text-center text-xs leading-none uppercase;
 	}
 
-	.no-touch .button:hover span {
-		@apply -translate-y-full;
-	}
+	/*
+	 * Rolling label (components/button-label.html.twig): the label slides up
+	 * and its copy, painted below in `::after`, takes its place. The copy is
+	 * hidden from assistive technologies (`/ ""`) so the label is read once.
+	 */
+	.button__label {
+		@apply relative inline-block;
 
-	.no-touch .button.is-open:hover span {
-		@apply translate-y-0;
+		&::after {
+			@apply absolute inset-x-0 top-full;
+
+			content: attr(data-text) / "";
+		}
+
+		@variant motion-safe {
+			transition: translate 800ms var(--ease-out);
+		}
+
+		@media (hover: hover) {
+			:is(.button, .group):hover & {
+				translate: 0 -100%;
+			}
+		}
+
+		:is(.button, .group):focus-visible & {
+			translate: 0 -100%;
+		}
 	}
 }

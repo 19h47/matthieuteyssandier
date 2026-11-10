@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Checkout turns an annotated tag into a lightweight one: fetch it again to read its message.
+      - name: Name the release
+        id: release
+        run: |
+          git fetch --force origin "refs/tags/$GITHUB_REF_NAME:refs/tags/$GITHUB_REF_NAME"
+          NAME="$GITHUB_REF_NAME"
+          if [ "$(git cat-file -t "$GITHUB_REF_NAME")" = "tag" ]; then
+            SUBJECT="$(git tag -l --format='%(contents:subject)' "$GITHUB_REF_NAME")"
+            if [ -n "$SUBJECT" ]; then
+              NAME="$GITHUB_REF_NAME · $SUBJECT"
+            fi
+          fi
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Build production package
+        run: |
+          chmod +x deploy.sh
+          ./deploy.sh release.log
+
+      - name: Create theme ZIP
+        run: |
+          THEME_SLUG="$(basename "$PWD")"
+          cd ..
+          zip -r "${THEME_SLUG}.zip" "${THEME_SLUG}" -x "*.git*"
+          mv "${THEME_SLUG}.zip" "${GITHUB_WORKSPACE}/${THEME_SLUG}.zip"
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ steps.release.outputs.name }}
+          files: ${{ format('{0}.zip', github.event.repository.name) }}
+          generate_release_notes: true

@@ -1,0 +1,57 @@
+{#
+ # Components: Color Picker
+ #
+ # One dot per case study, in its color, opening its preview. The dots are
+ # stacked under the first one, and spread on hover or keyboard focus
+ # (src/scripts/components/ColorPicker.ts); only the first one takes the
+ # pointer until they are spread. In a preview header (`current`),
+ # they stay spread, and open the next preview over the current one.
+ #
+ # @param {array} items Case studies.
+ # @param {string} [current] Id of the preview dialog holding the dots.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+{%- if items | length -%}
+	<mt-color-picker
+		class="block shrink-0 [--gap:--spacing(1.5)] [--size:--spacing(7.75)] lg:[--size:--spacing(11)]"
+		style="--count: {{ items | length }};"
+		{{ html_attr( { 'data-static': current is not empty } ) }}
+	>
+		<ul
+			class="{{
+				html_classes(
+					'flex w-[calc(var(--count)*var(--size)+(var(--count)-1)*var(--gap))] gap-(--gap)',
+					current ? '' : '[clip-path:inset(0_calc(100%-var(--size))_0_0)]'
+				)
+			}}"
+			data-dom="list"
+		>
+			{%- for case_study in items -%}
+				<li
+					class="{{
+						html_classes(
+							'z-[calc(var(--count)-var(--index))]',
+							current
+								? ''
+								: '[transform:translateX(calc(var(--index)*(var(--size)+var(--gap))*-1))] not-first:opacity-0'
+						)
+					}}"
+					style="--index: {{ loop.index0 }};"
+					data-dom="item"
+				>
+					<button
+						class="pointer-events-auto block size-(--size) rounded-full"
+						type="button"
+						aria-label="{{ case_study.title | e }}"
+						aria-haspopup="dialog"
+						style="background-color: {{ case_study.meta( 'color' ) }};"
+						commandfor="preview-{{ case_study.id }}"
+						command="show-modal"
+					></button>
+				</li>
+			{%- endfor -%}
+		</ul>
+	</mt-color-picker>
+{%- endif -%}

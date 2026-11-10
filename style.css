@@ -2,13 +2,17 @@
  * Theme Name: Matthieu Teyssandier
  * Theme URI: https://matthieuteyssandier.com/
  * Author: Jérémy Levron
- * Author URI: https://www.19h47.fr/
- * Description: WP Theme for Matthieu Teyssandier
+ * Author URI: https://19h47.fr/
+ * Description: WordPress theme for Matthieu Teyssandier.
  * Version: 2.0.0
  * License: GNU General Public License v2 or later
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * Tags: Timber, Twig, Vite, Tailwind, TypeScript
+ * Requires at least: 6.8
+ * Tested up to: 7.1
+ * Requires PHP: 8.4
  * Text Domain: matthieuteyssandier
- * Tags: Timber, Twig, Vite, Tailwind
+ * Domain Path: /languages
  *
  * This theme, like WordPress, is licensed under the GPL.
  * Use it to make something cool, have fun, and share what you've learned with others. 😎

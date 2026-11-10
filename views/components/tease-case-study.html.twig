@@ -1,79 +1,73 @@
 {#
- # Tease: Case Study
+ # Components: Tease Case Study
  #
- # @param string size
- # @param boolean next
- # @param array classes
+ # Link to a case study: its cover, rounded, and its title over it.
  #
- # @package WordPress
- # @subpackage MatthieuTeyssandier
+ # @param {object} case_study Case study post.
+ # @param {string} [size] Image size. Defaults to 'size-6'.
+ # @param {string} [loading] Loading attribute of the image. Defaults to 'lazy'.
+ # @param {string} [heading] Element of the title. Defaults to 'p'.
+ # @param {array} [title_classes] Additional classes of the title.
+ # @param {boolean} [next] Labels the link as the next project.
+ # @param {array} [classes] Layout classes of the link (size, placement).
+ # @param {object} [attributes] Additional attributes of the link.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
  #}
-
-<a
-	href="{{ case_study.link }}"
-	class="Tease-case-study block group {{ classes ? classes | join( ' ' ) : '' }}"
-	{{ attributes ? attributes | map( ( value, key ) => "#{key}=\"#{value}\"" ) | join( ' ' ) | raw }}
->
-	<div
-		class="absolute inset-0 h-full overflow-hidden Tease-case-study rounded-xl lg:rounded-5xl after:bg-black after:mix-blend-hard-light after:z-20 after:absolute after:inset-0 after:opacity-20"
-		style="-webkit-mask-image: -webkit-radial-gradient(white, black);"
+{%- if case_study -%}
+	<a
+		class="{{ html_classes( 'group relative block', classes | default( [] ) | join( ' ' ) ) }}"
+		href="{{ case_study.link }}"
+		{{ html_attr( attributes ) }}
 	>
-		{{-
-			include(
-				'components/image.html.twig',
-				{
-					classes: [
-						'group-hover:scale-110',
-						'transition-transform',
-						'duration-2000',
-						'ease-out-quint',
-						'absolute',
-						'inset-0',
-						'z-10',
-						'rounded-xl',
-						'lg:rounded-5xl',
-						'w-full',
-						'h-full',
-						'object-cover',
-						'object-center',
-						'transform-gpu'
-					],
-					loading: 'eager',
-					image: case_study.thumbnail,
-					size: size | default( 'size-6' )
-				}
-			)
-		-}}
+		<div
+			class="absolute inset-0 overflow-hidden rounded-xl after:absolute after:inset-0 after:z-20 after:bg-black after:opacity-20 after:mix-blend-hard-light lg:rounded-5xl"
+		>
+			{{-
+				include(
+					'components/image.html.twig',
+					{
+						image: case_study.thumbnail,
+						size: size | default( 'size-6' ),
+						loading: loading,
+						alt: '',
+						classes: [
+							'absolute inset-0 z-10 size-full object-cover',
+							'motion-safe:transition-transform motion-safe:duration-2000 motion-safe:ease-out group-hover:scale-110',
+						],
+					}
+				)
+			-}}
+		</div>
 
-		{% block title %}
-			<div class="relative z-30 flex flex-col w-full h-full p-6 lg:p-10 lg:flex-row-reverse lg:items-end">
-				{% if next %}
-					<div class="lg:w-2.5/12 lg:flex ml-auto lg:ml-0">
-						<div class="inline-flex items-center ml-auto text-black bg-white border-none button">
-							<div class="overflow-hidden">
-								<span data-copy-button="label" data-text="{{ __( 'Next Project  →', 'matthieuteyssandier' ) }}"
-									class="
-										after:absolute
-										after:top-full
-										after:right-0
-										after:left-0
-										after:content-[attr(data-text)]
-										relative
-										transition-transform
-										duration-800
-										ease-out-quint
-										inline-block
-										group-hover:-translate-y-full
-									"
-								>{{- __( 'Next Project  →', 'matthieuteyssandier' ) -}}</span>
-							</div>
-						</div>
-					</div>
-				{% endif %}
-				<div class="uppercase mt-auto lg:mt-0 text-white break-words text-7xl font-bold leading-[.85] lg:w-9.5/12">
-					{{- case_study.title -}}
-				</div>
-			</div>
-		{% endblock %}
-	</div>
-</a>
+		<div
+			class="relative z-30 flex size-full flex-col gap-6 p-6 lg:flex-row-reverse lg:items-end lg:p-10"
+			data-title
+		>
+			{%- if next -%}
+				<p
+					class="button ml-auto inline-flex shrink-0 items-center border-none bg-white text-black lg:ml-0"
+				>
+					{{-
+						include(
+							'components/button-label.html.twig',
+							{ label: __( 'Next Project →', 'matthieuteyssandier' ) }
+						)
+					-}}
+				</p>
+			{%- endif -%}
+
+			<{{ heading | default( 'p' ) }}
+				class="{{
+					html_classes(
+						'mt-auto text-7xl font-bold break-words text-white uppercase lg:mt-0 lg:flex-1',
+						title_classes | default( [] ) | join( ' ' )
+					)
+				}}"
+			>
+				{{- case_study.title -}}
+			</{{ heading | default( 'p' ) }}>
+		</div>
+	</a>
+{%- endif -%}
