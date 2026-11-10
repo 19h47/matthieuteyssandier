@@ -1,0 +1,8 @@
+{
+	"plugins": [
+		"@zackad/prettier-plugin-twig",
+		"prettier-plugin-tailwindcss"
+	],
+	"twigFollowOfficialCodingStandards": false,
+	"tailwindStylesheet": "./src/stylesheets/styles.css"
+}

@@ -1,0 +1,7 @@
+/* Full width: the site has no maximum width (Tailwind's `container` has one per breakpoint). */
+@utility container {
+	@apply w-full;
+
+	max-width: none;
+	padding-inline: var(--container-padding-x);
+}

@@ -1,0 +1,117 @@
+{#
+ # Image
+ #
+ # @param {array} image Image object, attachment ID, or placeholder array ({ src, alt, width, height, placeholder: true }).
+ # @param {array} [classes] Additional classes to add to the img tag. Optional.
+ # @param {string} [loading] Loading attribute for the img tag. Defaults to 'lazy'. Optional.
+ # @param {object} [attributes] Additional attributes to add to the img tag. Optional.
+ # @param {string} [size] Image size to use. Defaults to 'large' unless the image is a GIF, in which case 'large' is used. Optional.
+ # @param {string} [alt] Alt text for the image. If not provided, the image's alt text will be used. Optional.
+ #
+ # Renders nothing when the attachment no longer exists (media deleted from the library).
+ #
+ # Since the towebp filter doesn't work on srcset, we need to manually convert each URL to webp format.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+
+{%- set image = image.placeholder ? image : image ? get_image( image ) -%}
+
+{%- if image.placeholder -%}
+	<img
+		class="{{ html_classes( classes | default( [] ) | join( ' ' ) ) }}"
+		loading="{{ loading | default( 'lazy' ) }}"
+		src="{{ image.src | e }}"
+		alt="{{ ( alt ?? image.alt ) | e }}"
+		width="{{ image.width | e }}"
+		height="{{ image.height | e }}"
+		{{ html_attr( attributes ) }}
+	/>
+{%- elseif image -%}
+	{% set size = 'image/gif' == image.post_mime_type ? 'full' : size | default( 'large' ) %}
+	{% set width = 'image/svg+xml' == image.post_mime_type
+		? image.width
+		: image.sizes[ size ].width ? image.sizes[ size ].width : image.width
+	-%}
+	{% set height = 'image/svg+xml' == image.post_mime_type
+		? image.height
+		: image.sizes[ size ].height ? image.sizes[ size ].height : image.height
+	-%}
+
+	<picture
+		{{ html_attr( size ? { 'data-size': size } ) }}
+		data-mime-type="{{ image.post_mime_type }}"
+	>
+		{%- if
+			'image/svg+xml' != image.post_mime_type
+				and 'image/gif' != image.post_mime_type
+				and image.srcset( size ) -%}
+			<source
+				type="image/webp"
+				srcset="{{
+					image.srcset( size )
+						| split( ', ' )
+						| map(
+							url => url
+								| split( ' ' )
+								| map( ( part, i ) => i == 0 ? part | towebp( 82 ) : part )
+								| join( ' ' )
+						)
+						| join( ', ' )
+				}}"
+				sizes="{{ sizes
+					? sizes
+					: image.img_sizes
+						? image.img_sizes( size ) | e
+						: image.srcset( size )
+							? fn( 'wp_get_attachment_image_sizes', image.id, size ) | e
+							: '100vw' }}"
+			/>
+			<source
+				type="{{ image.post_mime_type }}"
+				srcset="{{ image.srcset( size ) }}"
+				sizes="{{ sizes
+					? sizes
+					: image.img_sizes
+						? image.img_sizes( size ) | e
+						: image.srcset( size )
+							? fn( 'wp_get_attachment_image_sizes', image.id, size ) | e
+							: '100vw' }}"
+			/>
+		{%- endif -%}
+
+		{#- A cropped size with no same-ratio sibling has no srcset: still offer its WebP. -#}
+		{%- if
+			'image/svg+xml' != image.post_mime_type
+				and 'image/gif' != image.post_mime_type
+				and not image.srcset( size ) -%}
+			<source type="image/webp" srcset="{{ image.src( size ) | towebp( 82 ) }}" />
+		{%- endif -%}
+
+		<img
+			class="{{ html_classes( classes | default( [] ) | join( ' ' ) ) }}"
+			loading="{{ loading | default( 'lazy' ) }}"
+			src="{{ image.src( size ) | e }}"
+			alt="{{ ( alt ?? image.alt ) | e }}"
+			width="{{ width | e }}"
+			height="{{ height | e }}"
+			{{ html_attr( attributes ) }}
+			{{
+				html_attr(
+					'image/svg+xml' != image.post_mime_type and image.srcset( size )
+						? {
+							srcset: image.srcset( size ),
+							sizes: sizes
+								? sizes
+								: image.img_sizes
+									? image.img_sizes( size )
+									: image.srcset( size )
+										? fn( 'wp_get_attachment_image_sizes', image.id, size )
+										: '100vw',
+						}
+				)
+			}}
+		/>
+	</picture>
+{%- endif -%}

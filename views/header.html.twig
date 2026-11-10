@@ -1,0 +1,91 @@
+{#
+ # Header
+ #
+ # Site title, the color of each case study that is not on the front page
+ # (each opens its preview), and the link to the about page.
+ #
+ # @param {boolean} [transition] Keep the header in place across page
+ #   navigations (view transition). Only for the page header: a name must be
+ #   unique among the rendered elements.
+ # @param {string} [current] Id of the preview dialog this header belongs to.
+ #   Its colors then open the next preview over it, and the about link gives
+ #   way to a button closing the preview.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+<header
+	class="{{
+		html_classes(
+			'pointer-events-none relative z-50 container py-2 lg:py-11',
+			{ '[view-transition-name:site-header]': transition }
+		)
+	}}"
+>
+	<div class="layout-grid items-center">
+		<div
+			class="col-span-9 flex items-center gap-1.5 motion-safe:transition-opacity motion-safe:duration-1000 motion-safe:ease-out loading:opacity-0"
+		>
+			<a class="pointer-events-auto text-5xl leading-7.75 lg:leading-11" href="{{ site.link }}">
+				{{- site.title -}}
+			</a>
+
+			{{-
+				include(
+					'components/color-picker.html.twig',
+					{
+						items: case_studies | filter( case_study => case_study.id not in front_ids ),
+						current: current,
+					}
+				)
+			-}}
+		</div>
+
+		<div
+			class="col-span-3 flex justify-end motion-safe:transition-opacity motion-safe:delay-100 motion-safe:duration-1000 motion-safe:ease-out loading:opacity-0"
+		>
+			{%- if current -%}
+				<button
+					class="button pointer-events-auto flex items-center gap-1 text-left before:inline-block before:size-2.5 before:rounded-full before:bg-current"
+					type="button"
+					commandfor="{{ current }}"
+					command="request-close"
+					data-dom="close"
+				>
+					{{-
+						include(
+							'components/button-label.html.twig',
+							{ label: __( 'Close', 'matthieuteyssandier' ) }
+						)
+					-}}
+				</button>
+			{%- elseif post.link == options_theme.about_page_link -%}
+				<mt-back-link class="contents">
+					<a
+						class="button pointer-events-auto flex items-center gap-1 text-left before:inline-block before:size-2.5 before:rounded-full before:bg-current"
+						href="{{ site.link }}"
+					>
+						{{-
+							include(
+								'components/button-label.html.twig',
+								{ label: __( 'Close', 'matthieuteyssandier' ) }
+							)
+						-}}
+					</a>
+				</mt-back-link>
+			{%- elseif options_theme.about_page_link -%}
+				<a
+					class="button pointer-events-auto flex items-center gap-1 text-left before:inline-block before:size-2.5 before:rounded-full before:bg-current"
+					href="{{ options_theme.about_page_link | e }}"
+				>
+					{{-
+						include(
+							'components/button-label.html.twig',
+							{ label: __( 'Infos', 'matthieuteyssandier' ) }
+						)
+					-}}
+				</a>
+			{%- endif -%}
+		</div>
+	</div>
+</header>

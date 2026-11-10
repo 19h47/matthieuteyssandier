@@ -1,0 +1,102 @@
+{#
+ # Index
+ #
+ # Document shell, and default view for the pages without a template of
+ # their own (legal pages): title and editor content.
+ #
+ # Child templates set `mode` ('dark' on the about page) and `fixed` (the
+ # front page fills the viewport and does not scroll) before extending.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+<!DOCTYPE html>
+
+<html class="antialiased" {{ site.language_attributes }}>
+	<head>
+		<meta charset="{{ site.charset }}" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		{#-
+			The loader plays when the visitor arrives on the site or reloads, not from
+			a link of the site: see components/loader.html.twig. Set before the first paint.
+		-#}
+		<script>
+			(() => {
+				const [navigation] = performance.getEntriesByType('navigation');
+				const internal = document.referrer && new URL(document.referrer).origin === location.origin;
+
+				if ((!internal || 'reload' === navigation?.type) && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+					document.documentElement.dataset.loading = '';
+				}
+			})();
+		</script>
+		{#- Without a site icon, a dot in the color of a random case study. -#}
+		{%- set colors =
+			case_studies | map( case_study => case_study.meta( 'color' ) ) | filter( color => color )
+		-%}
+		{%- if not fn( 'has_site_icon' ) and ( colors | length ) -%}
+			<link
+				rel="icon"
+				href="data:image/svg+xml,{{
+					( "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='8' fill='"
+						~ random( colors )
+						~ "'/></svg>" ) | url_encode
+				}}"
+			/>
+		{%- endif -%}
+		{{ function( 'wp_head' ) }}
+	</head>
+
+	<body
+		class="{{
+			html_classes(
+				body_class,
+				'min-h-dvh',
+				{
+					'bg-black text-gray-light': 'dark' == mode,
+					'bg-gray-light text-black': 'dark' != mode,
+					'overflow-hidden': fixed,
+				}
+			)
+		}}"
+	>
+		{{- function( 'wp_body_open' ) -}}
+
+		{%- block header -%}
+			{{- include( 'header.html.twig', { transition: true } ) -}}
+		{%- endblock -%}
+
+		<main id="content">
+			{%- block content -%}
+				<div class="container pb-6">
+					<h1 class="enter text-7xl font-bold break-words uppercase">{{- post.title -}}</h1>
+
+					{%- if post.content -%}
+						<div class="mt-10 max-w-3xl enter space-y-4 text-base" style="--index: 1;">
+							{{- post.content -}}
+						</div>
+					{%- endif -%}
+				</div>
+			{%- endblock -%}
+		</main>
+
+		{%- block footer -%}
+			{{- include( 'footer.html.twig' ) -}}
+		{%- endblock -%}
+
+		{%- for case_study in case_studies | filter( case_study => case_study.id not in front_ids ) -%}
+			{{- include( 'components/preview.html.twig', { case_study: case_study } ) -}}
+		{%- endfor -%}
+
+		{{- include( 'components/loader.html.twig' ) -}}
+
+		{{- function( 'wp_footer' ) -}}
+
+		<div id="svg-sprite" style="display: none;">
+			{{- include( 'public/sprite.svg', ignore_missing: true ) -}}
+		</div>
+
+		<mt-previews hidden></mt-previews>
+		<mt-animations hidden></mt-animations>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+{#
+ # Components: Tease Case Study
+ #
+ # Link to a case study: its cover, rounded, and its title over it.
+ #
+ # @param {object} case_study Case study post.
+ # @param {string} [size] Image size. Defaults to 'size-6'.
+ # @param {string} [loading] Loading attribute of the image. Defaults to 'lazy'.
+ # @param {string} [heading] Element of the title. Defaults to 'p'.
+ # @param {array} [title_classes] Additional classes of the title.
+ # @param {boolean} [next] Labels the link as the next project.
+ # @param {array} [classes] Layout classes of the link (size, placement).
+ # @param {object} [attributes] Additional attributes of the link.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+{%- if case_study -%}
+	<a
+		class="{{ html_classes( 'group relative block', classes | default( [] ) | join( ' ' ) ) }}"
+		href="{{ case_study.link }}"
+		{{ html_attr( attributes ) }}
+	>
+		<div
+			class="absolute inset-0 overflow-hidden rounded-xl after:absolute after:inset-0 after:z-20 after:bg-black after:opacity-20 after:mix-blend-hard-light lg:rounded-5xl"
+		>
+			{{-
+				include(
+					'components/image.html.twig',
+					{
+						image: case_study.thumbnail,
+						size: size | default( 'size-6' ),
+						loading: loading,
+						alt: '',
+						classes: [
+							'absolute inset-0 z-10 size-full object-cover',
+							'motion-safe:transition-transform motion-safe:duration-2000 motion-safe:ease-out group-hover:scale-110',
+						],
+					}
+				)
+			-}}
+		</div>
+
+		<div
+			class="relative z-30 flex size-full flex-col gap-6 p-6 lg:flex-row-reverse lg:items-end lg:p-10"
+			data-title
+		>
+			{%- if next -%}
+				<p
+					class="button ml-auto inline-flex shrink-0 items-center border-none bg-white text-black lg:ml-0"
+				>
+					{{-
+						include(
+							'components/button-label.html.twig',
+							{ label: __( 'Next Project →', 'matthieuteyssandier' ) }
+						)
+					-}}
+				</p>
+			{%- endif -%}
+
+			<{{ heading | default( 'p' ) }}
+				class="{{
+					html_classes(
+						'mt-auto text-7xl font-bold break-words text-white uppercase lg:mt-0 lg:flex-1',
+						title_classes | default( [] ) | join( ' ' )
+					)
+				}}"
+			>
+				{{- case_study.title -}}
+			</{{ heading | default( 'p' ) }}>
+		</div>
+	</a>
+{%- endif -%}

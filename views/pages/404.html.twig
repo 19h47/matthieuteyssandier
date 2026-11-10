@@ -1,0 +1,39 @@
+{#
+ # 404
+ #
+ # Balls in the colors of the case studies and the "404" and "Back to home"
+ # pictures fall and can be thrown around (src/scripts/components/Gravity.ts);
+ # clicking "Back to home" leads to the front page. The title and the link
+ # are also in the markup, for assistive technologies and the keyboard.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+{% set fixed = true %}
+
+{% extends 'index.html.twig' %}
+
+{% block content %}
+	<h1 class="sr-only">{{ __( 'Page not found', 'matthieuteyssandier' ) }}</h1>
+
+	<a
+		class="button fixed bottom-6 left-1/2 z-10 -translate-x-1/2 bg-gray-light not-focus:sr-only"
+		href="{{ site.link }}"
+	>
+		{{- __( 'Back to home', 'matthieuteyssandier' ) -}}
+	</a>
+
+	<mt-gravity
+		class="fixed inset-0 block"
+		data-colors="{{
+			case_studies
+				| map( case_study => case_study.meta( 'color' ) )
+				| filter( color => color )
+				| json_encode
+				| e
+		}}"
+		data-home="{{ site.link }}"
+	></mt-gravity>
+{% endblock %}
+
+{% block footer %}{% endblock %}

@@ -1,0 +1,33 @@
+{#
+ # Components: Media
+ #
+ # Image or video row of the case study media blocks, rounded.
+ #
+ # @param {object} media ACF flexible content row (`image` or `video` layout).
+ # @param {string} [size] Image size.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+{%- if 'video' == media.acf_fc_layout -%}
+	{{-
+		include(
+			'components/video.html.twig',
+			{
+				video: media.video,
+				classes: [ 'mx-auto h-auto max-w-full rounded-xl lg:rounded-5xl' ],
+			}
+		)
+	-}}
+{%- elseif 'image' == media.acf_fc_layout -%}
+	{{-
+		include(
+			'components/image.html.twig',
+			{
+				image: media.image,
+				size: size,
+				classes: [ 'mx-auto h-auto max-w-full rounded-xl lg:rounded-5xl' ],
+			}
+		)
+	-}}
+{%- endif -%}

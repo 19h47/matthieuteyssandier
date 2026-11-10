@@ -1,0 +1,43 @@
+{#
+ # Front Page
+ #
+ # The case studies chosen on the front page, side by side, filling the
+ # screen (see the `cards` utility).
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+{% set fixed = true %}
+
+{% extends 'index.html.twig' %}
+
+{% block content %}
+	<h1 class="sr-only">{{ site.title }}</h1>
+
+	{%- if front_ids | length -%}
+		<div class="fixed inset-0 pt-16 pb-3 lg:pt-33 lg:pb-6">
+			<div class="container h-full">
+				<div class="flex h-full cards flex-col gap-2 lg:flex-row lg:gap-6">
+					{%- for case_study in get_posts( front_ids ) -%}
+						{{-
+							include(
+								'components/tease-case-study.html.twig',
+								{
+									case_study: case_study,
+									size: 'size-4',
+									loading: 'eager',
+									heading: 'h2',
+									title_classes: [ 'lg:break-normal lg:whitespace-nowrap' ],
+									classes: [ 'enter' ],
+									attributes: { style: '--index: ' ~ loop.index0 ~ ';' },
+								}
+							)
+						-}}
+					{%- endfor -%}
+				</div>
+			</div>
+		</div>
+	{%- endif -%}
+{% endblock %}
+
+{% block footer %}{% endblock %}

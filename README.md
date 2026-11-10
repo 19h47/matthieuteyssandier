@@ -1,75 +1,73 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby WordPress blog starter
-</h1>
+# Matthieu Teyssandier
 
-Kick off your wordpress gatsby project with this blog boilerplate. This starter ships with the main Gatsby Wordpress configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+WordPress theme of [matthieuteyssandier.com](https://matthieuteyssandier.com), built on Timber/Twig, Vite, Tailwind CSS v4 and TypeScript.
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
+## Requirements
 
-## 🚀 Quick start
+- WordPress 6.8+ (script modules, speculation rules), PHP 8.4
+- [Advanced Custom Fields](https://www.advancedcustomfields.com/) PRO and [Classic Editor](https://wordpress.org/plugins/classic-editor/)
+- Composer, pnpm, Node 22
 
-To get your project started or to just try it out, you can **follow the [Gatsby Wordpress Quickstart](https://github.com/gatsbyjs/gatsby-source-wordpress-experimental/blob/master/docs/getting-started.md#quick-start)** instructions
+## Getting started
 
-## 🧐 What's inside?
+```bash
+cp .env.sample .env   # APP_URL of the local site
+composer install
+pnpm install
+pnpm build            # also generates public/sprite.svg from src/icons/
+pnpm dev              # local dev server
+composer phpcs        # WordPress Coding Standards
+```
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+Set `WP_DEBUG` to `true` in `wp-config.php` while developing: otherwise Timber caches the Twig templates (an admin notice says so).
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
+## Template hierarchy
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+Root PHP files load the Timber context and render a single Twig view.
 
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+| Entry point | Twig view | Purpose |
+| --- | --- | --- |
+| `front-page.php` | `pages/front-page.html.twig` | The case studies chosen on the front page, side by side |
+| `single-case_study.php` | `pages/single-case-study.html.twig` | Case study: text, credits, media blocks, next case study |
+| `page-templates/about-page.php` | `pages/about-page.html.twig` | About page (dark) |
+| `404.php` | `pages/404.html.twig` | Not found, with falling balls |
+| `index.php` | `index.html.twig` | Document shell, and pages without a template (legal pages) |
 
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+Every page renders the header previews: one modal `<dialog>` per case study that is not on the front page (`components/preview.html.twig`), opened from its color in the header with [invoker commands](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API) and [`@agencecinq/modal`](https://agencecinq.github.io/ui/).
 
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
+Pages navigate with [cross-document view transitions](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API): they cross-fade, the header stays in place. The loader plays on arrival on the site and on reload, not when following a link of the site.
 
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.com/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+## Content
 
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.com/docs/gatsby-config/) for more detail). **\*Wordpress Users:** This is where you configure your wordpress URL, and provide other plugin settings.\*
+- **Case studies** (`case_study`, categories `case_study_cat`): color, cover, mobile cover, preview image, text in English and French, credits, link, and media blocks (`layouts`: one or two images or videos).
+- **Front page**: up to three case studies (`case_studies`).
+- **Settings → Theme**: social links, presentation, email, copyright, about page.
 
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.com/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process. **\*Wordpress Users:** This is where you customize how gatsby consumes your wordpress graphql schema, and generates your gatsby content schema. The starter will handle post and blog types.\*
+## Migration from 2.x to 3.0
 
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.com/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
+3.0 rebuilds the theme on Vite, Tailwind CSS v4, TypeScript and Timber 2 stable. Field names and keys are unchanged, so the content stays as it is. Three changes need an action:
 
-9.  **`LICENSE`**: This Gatsby starter is licensed under the 0BSD license. This means that you can see this file as a placeholder and replace it with your own license.
+1. **WordPress 6.8 and PHP 8.4** are required. Update WordPress, ACF PRO and Classic Editor first.
+2. **The about page template moved** from `templates/about-page.php` to `page-templates/about-page.php`. Reassign it to the about page, in the editor (Page Attributes → Template) or with WP-CLI:
 
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
+   ```bash
+   wp post list --post_type=page --meta_key=_wp_page_template --meta_value=templates/about-page.php --field=ID \
+     | xargs -I % wp post meta update % _wp_page_template page-templates/about-page.php
+   ```
 
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+3. **The theme options moved** from the top-level "Theme Settings" menu to **Settings → Theme**. The values are kept.
 
-12. **`README.md`**: A text file containing useful reference information about your project.
+Removed in 3.0:
 
-## 🎓 Learning Gatsby
+- The social and email settings added to Settings → General (`instagram`, `twitter`, `linkedin`, `public_email` options): the theme reads the social links and the email from Settings → Theme only. The options stay in the database, unused.
+- The page transitions of modularload, the smooth scroll of locomotive-scroll, and the canvas circles: view transitions, `<dialog>` and CSS `clip-path` replace them.
+- The image quality forced to 100: WordPress compresses again (82 by default).
+- The removal of the canonical link: WordPress, or an SEO plugin, prints it again.
 
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
+## Deployment
 
--   **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+`deploy.sh` installs the production dependencies, builds the assets and removes the development files. The `.github/workflows/release.yml` workflow runs it on a `v*` tag and attaches the theme ZIP to the GitHub release.
 
--   **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
+## Translations
 
-## 💫 Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-wordpress-blog)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gatsbyjs/gatsby-starter-wordpress-blog)
-
-<!-- AUTO-GENERATED-CONTENT:END -->
+The text domain is `matthieuteyssandier`; the template is `languages/matthieuteyssandier.pot`.

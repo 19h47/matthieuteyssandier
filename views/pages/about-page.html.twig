@@ -1,0 +1,114 @@
+{#
+ # About Page
+ #
+ # Social links, presentation, a button copying the email address, and the
+ # copyright. Dark page.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+{% set mode = 'dark' %}
+
+{% extends 'index.html.twig' %}
+
+{% block content %}
+	<div class="container pb-6">
+		<div class="enter rounded-xl bg-gray-light py-10 text-black lg:rounded-5xl lg:px-20">
+			{%- if options_theme.socials | length -%}
+				<ul class="flex justify-center gap-2">
+					{%- for social in options_theme.socials | filter( social => social.link.url ) -%}
+						<li class="enter" style="--index: {{ loop.index }};">
+							<a
+								class="button block border-black"
+								href="{{ social.link.url | e }}"
+								{{
+									html_attr(
+										social.link.target
+											? {
+												target: social.link.target,
+												rel: 'noopener',
+											}
+									)
+								}}
+							>
+								{{- include( 'components/button-label.html.twig', { label: social.link.title } ) -}}
+							</a>
+						</li>
+					{%- endfor -%}
+				</ul>
+			{%- endif -%}
+
+			<div class="my-10 space-y-10 px-3 text-center lg:px-0">
+				{%- if options_theme.description.tagline -%}
+					<p
+						class="enter text-xs text-gray-dark uppercase"
+						style="--index: {{ ( options_theme.socials | length ) + 1 }};"
+					>
+						{{- options_theme.description.tagline | nl2br -}}
+					</p>
+				{%- endif -%}
+
+				<h1
+					class="enter text-8xl tracking-tight uppercase"
+					style="--index: {{ ( options_theme.socials | length ) + 2 }};"
+				>
+					{{- options_theme.description.title | default( post.title ) | nl2br -}}
+				</h1>
+			</div>
+
+			{%- if options_theme.email.address -%}
+				<div class="space-y-4 px-3 text-center lg:px-0">
+					{%- if options_theme.email.title -%}
+						<p
+							class="enter text-xs text-gray-dark uppercase"
+							style="--index: {{ ( options_theme.socials | length ) + 3 }};"
+						>
+							{{- options_theme.email.title | nl2br -}}
+						</p>
+					{%- endif -%}
+
+					<mt-copy-button
+						class="block enter"
+						style="--index: {{ ( options_theme.socials | length ) + 4 }};"
+						data-success="{{ __( 'Email copied', 'matthieuteyssandier' ) }}"
+						data-error="{{ __( 'Email not copied', 'matthieuteyssandier' ) }}"
+					>
+						<button
+							class="button inline-flex items-center border-none bg-red text-white"
+							type="button"
+							data-dom="button"
+							data-copy="{{ options_theme.email.address | e }}"
+						>
+							{{-
+								include(
+									'components/button-label.html.twig',
+									{ label: __( 'Copy the mail →', 'matthieuteyssandier' ) }
+								)
+							-}}
+						</button>
+						<span class="sr-only" role="status" data-dom="status"></span>
+					</mt-copy-button>
+				</div>
+			{%- endif -%}
+
+			{%- if options_theme.copyright -%}
+				<p
+					class="mt-10 enter px-3 text-center text-xs text-gray-dark uppercase lg:mt-8 lg:px-0"
+					style="--index: {{ ( options_theme.socials | length ) + 5 }};"
+				>
+					{{-
+						options_theme.copyright
+							| e
+							| replace( {
+								'{year}': 'now' | date( 'Y' ),
+								'{19h47}': '<a class="text-black" href="https://19h47.fr">19h47</a>',
+							} )
+							| raw
+					-}}
+				</p>
+			{%- endif -%}
+		</div>
+	</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

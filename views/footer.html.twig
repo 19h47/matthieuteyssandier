@@ -1,0 +1,50 @@
+{#
+ # Footer
+ #
+ # Mail and social links, copyright.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+<footer class="container pb-6">
+	<div class="flex flex-col items-center justify-between gap-6 lg:flex-row">
+		<ul class="flex flex-wrap justify-center gap-2 lg:justify-start lg:gap-4">
+			{%- if options_theme.email.address -%}
+				<li>
+					<a class="button block" href="mailto:{{ options_theme.email.address }}">
+						{{-
+							include(
+								'components/button-label.html.twig',
+								{ label: __( 'Mail', 'matthieuteyssandier' ) }
+							)
+						-}}
+					</a>
+				</li>
+			{%- endif -%}
+
+			{%- for social in options_theme.socials | filter( social => social.link.url ) -%}
+				<li>
+					<a
+						class="button block"
+						href="{{ social.link.url | e }}"
+						{{
+							html_attr(
+								social.link.target
+									? {
+										target: social.link.target,
+										rel: 'noopener',
+									}
+							)
+						}}
+					>
+						{{- include( 'components/button-label.html.twig', { label: social.link.title } ) -}}
+					</a>
+				</li>
+			{%- endfor -%}
+		</ul>
+
+		<p class="text-center text-xs uppercase lg:text-left">
+			{{- __( 'All rights reserved %s', 'matthieuteyssandier' ) | format( 'now' | date( 'Y' ) ) -}}
+		</p>
+	</div>
+</footer>

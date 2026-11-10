@@ -1,0 +1,9 @@
+/*
+ * Page layout grid: 12 columns, 0.5rem gutter below `lg`, 1.5rem above
+ * (`--grid-*` in theme.css).
+ */
+@utility layout-grid {
+	display: grid;
+	grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+	column-gap: var(--grid-gutter);
+}

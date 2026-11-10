@@ -1,0 +1,567 @@
+# Copyright (C) 2026 Jérémy Levron
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Matthieu Teyssandier 3.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/matthieuteyssandier\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-10T14:56:39+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: matthieuteyssandier\n"
+
+#. translators: %s: Number of case studies..
+#: includes/Post/CaseStudy.php:200
+#, php-format
+msgid "%s case study moved to the Trash."
+msgid_plural "%s case study moved to the Trash."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: Number of case studies.
+#: includes/Post/CaseStudy.php:196
+#, php-format
+msgid "%s case study not updated, somebody is editing it."
+msgid_plural "%s case studies not updated, somebody is editing them."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: Number of case studies.
+#: includes/Post/CaseStudy.php:198
+#, php-format
+msgid "%s case study permanently deleted."
+msgid_plural "%s case study permanently deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: Number of case studies.
+#: includes/Post/CaseStudy.php:202
+#, php-format
+msgid "%s case study restored from the Trash."
+msgid_plural "%s case study restored from the Trash."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: Number of case studies.
+#: includes/Post/CaseStudy.php:193
+#, php-format
+msgid "%s case study updated."
+msgid_plural "%s case studies updated."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Taxonomy/CaseStudyCat.php:57
+msgid "&larr; Back to Categories"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:194
+msgid "1 case study not updated, somebody is editing it."
+msgstr ""
+
+#. Template Name of the theme
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:116
+#: includes/Template/PostStates.php:41
+msgid "About Page"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:57
+msgid "Add Credit"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:117
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:242
+msgid "Add Layout"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:219
+msgctxt "case study type"
+msgid "Add New"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:220
+msgid "Add New Case Study"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:46
+msgid "Add New Category"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:102
+msgid "Add Social"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:49
+msgid "Add or remove categories"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:52
+msgid "Address"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:229
+msgid "All Case Studies"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:39
+msgid "All Categories"
+msgstr ""
+
+#: views/footer.html.twig:47
+msgid "All rights reserved %s"
+msgstr ""
+
+#: views/pages/404.html.twig:23
+msgid "Back to home"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/FrontPageFields.php:54
+msgid "Case Studies"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:217
+msgctxt "case study type generale name"
+msgid "Case Studies"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:253
+msgid "Case Study"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:218
+msgctxt "case study type singular name"
+msgid "Case Study"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:230
+msgid "Case Study Archives"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:231
+msgid "Case Study Attributes"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:134
+msgid "Case Study Options"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:173
+msgid "Case Study draft updated."
+msgstr ""
+
+#: includes/Post/CaseStudy.php:169
+msgid "Case Study published."
+msgstr ""
+
+#. translators: %s: date and time of the revision
+#: includes/Post/CaseStudy.php:168
+#, php-format
+msgid "Case Study restored to revision from %s."
+msgstr ""
+
+#: includes/Post/CaseStudy.php:170
+msgid "Case Study saved."
+msgstr ""
+
+#: includes/Post/CaseStudy.php:172
+#, php-format
+msgid "Case Study scheduled for: %s."
+msgstr ""
+
+#: includes/Post/CaseStudy.php:171
+msgid "Case Study submitted."
+msgstr ""
+
+#: includes/Post/CaseStudy.php:163 includes/Post/CaseStudy.php:166
+msgid "Case Study updated."
+msgstr ""
+
+#: includes/Post/CaseStudy.php:239
+msgid "Case studies list"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:238
+msgid "Case studies list navigation"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:241
+msgid "Case study published privately."
+msgstr ""
+
+#: includes/Post/CaseStudy.php:240
+msgid "Case study published."
+msgstr ""
+
+#: includes/Post/CaseStudy.php:242
+msgid "Case study reverted to draft."
+msgstr ""
+
+#: includes/Post/CaseStudy.php:243
+msgid "Case study scheduled."
+msgstr ""
+
+#: includes/Post/CaseStudy.php:244
+msgid "Case study updated."
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:36
+msgctxt "case study category general name"
+msgid "Categories"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:54
+msgid "Categories list"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:53
+msgid "Categories list navigation"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:37
+msgctxt "case study category singular name"
+msgid "Category"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:50
+msgid "Choose from the most used categories"
+msgstr ""
+
+#: views/header.html.twig:57 views/header.html.twig:70
+msgid "Close"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:36
+msgid "Color"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:103
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:159
+msgid "Content"
+msgstr ""
+
+#: views/pages/about-page.html.twig:85
+msgid "Copy the mail →"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:93
+msgid "Copyright"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:53
+msgid "Credits"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:165
+msgid "Custom field deleted."
+msgstr ""
+
+#: includes/Post/CaseStudy.php:164
+msgid "Custom field updated."
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:62
+msgid "Description"
+msgstr ""
+
+#: views/components/preview.html.twig:107 views/components/preview.html.twig:52
+msgid "Discover →"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:221
+msgid "Edit Case Study"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:43
+msgid "Edit Category"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:36
+msgid "Email"
+msgstr ""
+
+#: views/pages/about-page.html.twig:73
+msgid "Email copied"
+msgstr ""
+
+#: views/pages/about-page.html.twig:74
+msgid "Email not copied"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:179
+msgid "English Content"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:234
+msgctxt "case study"
+msgid "Featured Image"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:165
+msgid "French"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:169
+msgid "French Content"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/FrontPageFields.php:50
+msgid "Front Page Options"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:215
+msgid "Image"
+msgstr ""
+
+#: views/header.html.twig:83
+msgid "Infos"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:232
+msgid "Insert into case study"
+msgstr ""
+
+#. Author of the theme
+#: style.css
+msgid "Jérémy Levron"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:61
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:65
+msgid "Key"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:109
+msgid "Layouts"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:80
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:106
+msgid "Link"
+msgstr ""
+
+#: views/footer.html.twig:18
+msgid "Mail"
+msgstr ""
+
+#. Theme Name of the theme
+#: style.css
+msgid "Matthieu Teyssandier"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:89
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:233
+msgid "Media"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:96
+msgid "Medias"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/MobileThumbnailFields.php:45
+#: includes/Plugins/ACF/IncludeFields/MobileThumbnailFields.php:57
+msgid "Mobile Thumbnail"
+msgstr ""
+
+#. translators: Category heading when selecting from the most used terms.
+#: includes/Taxonomy/CaseStudyCat.php:56
+msgctxt "project category"
+msgid "Most Used"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:222
+msgid "New Case Study"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:47
+msgid "New Category Name"
+msgstr ""
+
+#: views/components/tease-case-study.html.twig:55
+msgid "Next Project →"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:52
+msgid "No Categories"
+msgstr ""
+
+#: includes/Vite.php:93
+msgid "No Vite Manifest exists. Should hot server be running?"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:227
+msgid "No case studies found in Trash."
+msgstr ""
+
+#: includes/Post/CaseStudy.php:226
+msgid "No case studies found."
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:51
+msgid "No categories found."
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:127
+msgid "Options Theme"
+msgstr ""
+
+#: views/pages/404.html.twig:17
+msgid "Page not found"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:228
+msgid "Parent Case Study:"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:41
+msgid "Parent Category"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:42
+msgid "Parent Category:"
+msgstr ""
+
+#: views/components/video.html.twig:18
+msgid "Pause the video"
+msgstr ""
+
+#: views/components/video.html.twig:17 views/components/video.html.twig:32
+msgid "Play the video"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:40
+msgid "Popular Categories"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:43
+msgid "Preview"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:152 includes/Post/CaseStudy.php:158
+msgid "Preview Case Study"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:236
+msgctxt "case study"
+msgid "Remove featured image"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:225
+msgid "Search Case Studies"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:38
+msgid "Search Categories"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:48
+msgid "Separate categories with commas"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:235
+msgctxt "case study"
+msgid "Set featured image"
+msgstr ""
+
+#: views/components/skip-links.html.twig:13
+msgid "Skip to content"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:69
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:74
+msgid "Tagline"
+msgstr ""
+
+#: includes/Plugins/ACF/Init.php:40
+msgid "Theme"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:154
+msgid "Theme Settings"
+msgstr ""
+
+#: includes/Admin/Notices.php:50
+msgid "This theme requires the Advanced Custom Fields plugin. Install and activate it to edit theme options and case studies."
+msgstr ""
+
+#: includes/Post/CaseStudy.php:86
+msgid "Thumbnail"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:43
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:48
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:78
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:83
+msgid "Title"
+msgstr ""
+
+#. translators: 1: WP_DEBUG constant. 2: define() snippet for wp-config.php. 3: Twig cache path.
+#: includes/Admin/Notices.php:69
+#, php-format
+msgid "Twig templates are cached because %1$s is false (WordPress default on a fresh install). Set %2$s in wp-config.php while developing, or delete %3$s after editing a Twig file."
+msgstr ""
+
+#. translators: %s: asset path
+#: includes/Vite.php:135
+#, php-format
+msgid "Unknown Vite build asset: %s"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:45
+msgid "Update Category"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:233
+msgid "Uploaded to this case study"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:237
+msgctxt "case study"
+msgid "Use as featured image"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:69
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:73
+msgid "Value"
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/CaseStudyFields.php:224
+msgid "Video"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:223
+msgid "View Case Studies"
+msgstr ""
+
+#: includes/Post/CaseStudy.php:146 includes/Post/CaseStudy.php:224
+msgid "View Case Study"
+msgstr ""
+
+#: includes/Taxonomy/CaseStudyCat.php:44
+msgid "View Category"
+msgstr ""
+
+#: views/pages/single-case-study.html.twig:92
+msgid "Visit website"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "WordPress theme for Matthieu Teyssandier."
+msgstr ""
+
+#: includes/Plugins/ACF/IncludeFields/ThemeFields.php:55
+msgid "example@example.com"
+msgstr ""
+
+#. Author URI of the theme
+#: style.css
+msgid "https://19h47.fr/"
+msgstr ""
+
+#. Theme URI of the theme
+#: style.css
+msgid "https://matthieuteyssandier.com/"
+msgstr ""

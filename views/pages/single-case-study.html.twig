@@ -1,0 +1,152 @@
+{#
+ # Single: Case Study
+ #
+ # Title, categories and cover, the text in English and in French, the
+ # credits, the media blocks, then the next case study.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+{% extends 'index.html.twig' %}
+
+{% block content %}
+	<div class="relative z-0 mt-14 space-y-6 pb-6 lg:mt-33.5">
+		<div class="container">
+			<div class="text-center">
+				<h1 class="enter text-7xl font-bold break-words uppercase">{{- post.title -}}</h1>
+
+				{%- if post.terms( 'case_study_cat' ) -%}
+					<ul class="mt-10 inline-flex flex-wrap justify-center gap-2 lg:gap-4">
+						{%- for term in post.terms( 'case_study_cat' ) -%}
+							<li class="enter" style="--index: {{ loop.index }};">
+								<p class="button">{{- term.name -}}</p>
+							</li>
+						{%- endfor -%}
+					</ul>
+				{%- endif -%}
+			</div>
+
+			{%- if post.thumbnail -%}
+				<div
+					class="relative mt-9 aspect-1872/908 enter overflow-hidden rounded-xl lg:mt-11 lg:rounded-5xl"
+					style="--index: 2;"
+				>
+					{{-
+						include(
+							'components/image.html.twig',
+							{
+								size: 'size-6',
+								image: post.thumbnail,
+								loading: 'eager',
+								classes: [ 'absolute inset-0 size-full object-cover' ],
+							}
+						)
+					-}}
+				</div>
+			{%- endif -%}
+
+			{%- if
+				post.meta( 'content' ).english
+					or post.meta( 'content' ).french
+					or post.meta( 'credits' )
+					or post.meta( 'link' ) -%}
+				<div class="my-20 layout-grid gap-y-10 lg:my-32">
+					{%- if post.meta( 'content' ).english or post.meta( 'content' ).french -%}
+						<div
+							class="col-span-12 space-y-10 text-4xl leading-normal tracking-tight lg:col-span-6"
+							data-reveal
+						>
+							{%- if post.meta( 'content' ).english -%}
+								<p class="indent-[33.333%]" lang="en">{{- post.meta( 'content' ).english -}}</p>
+							{%- endif -%}
+
+							{%- if post.meta( 'content' ).french -%}
+								<p class="indent-[33.333%] text-gray-dark" lang="fr">
+									{{- post.meta( 'content' ).french -}}
+								</p>
+							{%- endif -%}
+						</div>
+					{%- endif -%}
+
+					{%- if post.meta( 'credits' ) or post.meta( 'link' ) -%}
+						<div
+							class="col-span-12 border-t border-black/10 pt-10 lg:col-span-4 lg:col-start-9 lg:border-none lg:pt-0"
+							data-reveal
+						>
+							<h2 class="button inline-flex">{{- __( 'Credits', 'matthieuteyssandier' ) -}}</h2>
+
+							{%- if post.meta( 'credits' ) -%}
+								<dl class="mt-10 space-y-8 text-base leading-none">
+									{%- for credit in post.meta( 'credits' ) -%}
+										<div>
+											<dt class="inline font-bold">{{ credit.key }}</dt>:<dd class="inline">
+												{{ credit.value }}
+											</dd>
+										</div>
+									{%- endfor -%}
+								</dl>
+							{%- endif -%}
+
+							{%- if post.meta( 'link' ) -%}
+								<a
+									class="mt-4 inline-block text-base underline"
+									href="{{ post.meta( 'link' ) | e }}"
+								>
+									{{- __( 'Visit website', 'matthieuteyssandier' ) -}}
+								</a>
+							{%- endif -%}
+						</div>
+					{%- endif -%}
+				</div>
+			{%- endif -%}
+		</div>
+
+		{%- for block in post.meta( 'layouts' ) -%}
+			{{-
+				include(
+					'blocks/' ~ ( block.acf_fc_layout | replace( { '_': '-' } ) ) ~ '.html.twig',
+					{ props: block },
+					ignore_missing: true
+				)
+			-}}
+		{%- endfor -%}
+
+		{%- if post.prev -%}
+			<div class="container lg:pt-27" data-reveal>
+				<div class="layout-grid">
+					{{-
+						include(
+							'components/tease-case-study.html.twig',
+							{
+								case_study: post.prev,
+								size: post.prev.meta( 'preview' ) ? 'size-4' : 'size-6',
+								next: true,
+								classes: [
+									'col-span-12 aspect-389/396',
+									post.prev.meta( 'preview' )
+										? 'lg:col-span-8 lg:aspect-1241/892'
+										: 'lg:aspect-1872/892',
+								],
+							}
+						)
+					-}}
+
+					{%- if post.prev.meta( 'preview' ) -%}
+						<div class="hidden lg:col-span-4 lg:block">
+							{{-
+								include(
+									'components/image.html.twig',
+									{
+										size: 'size-2',
+										image: post.prev.meta( 'preview' ),
+										classes: [ 'size-full rounded-xl object-cover lg:rounded-5xl' ],
+									}
+								)
+							-}}
+						</div>
+					{%- endif -%}
+				</div>
+			</div>
+		{%- endif -%}
+	</div>
+{% endblock %}

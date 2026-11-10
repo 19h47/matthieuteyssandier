@@ -1,0 +1,63 @@
+{#
+ # Components: Video
+ #
+ # Muted looping video, played inline. A button pauses and resumes it
+ # (src/scripts/components/Video.ts); it does not start on its own when the
+ # visitor prefers reduced motion.
+ #
+ # @param {array} video ACF file array.
+ # @param {array} [classes] Classes of the video element.
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+{%- if video.url -%}
+	<mt-video
+		class="relative mx-auto block w-fit max-w-full"
+		data-play="{{ __( 'Play the video', 'matthieuteyssandier' ) }}"
+		data-pause="{{ __( 'Pause the video', 'matthieuteyssandier' ) }}"
+	>
+		<video
+			class="{{ html_classes( classes | default( [] ) | join( ' ' ) ) }}"
+			src="{{ video.url }}"
+			muted
+			playsinline
+			loop
+			data-dom="video"
+		></video>
+
+		<button
+			class="absolute right-4 bottom-4 flex size-11 items-center justify-center rounded-full bg-white text-black lg:right-6 lg:bottom-6"
+			type="button"
+			aria-label="{{ __( 'Play the video', 'matthieuteyssandier' ) }}"
+			data-dom="toggle"
+		>
+			{{-
+				include(
+					'svg/use.html.twig',
+					{
+						icon: 'play',
+						classes: [ 'size-4' ],
+						attributes: {
+							'aria-hidden': 'true',
+							'data-dom': 'play',
+						},
+					}
+				)
+			-}}
+			{{-
+				include(
+					'svg/use.html.twig',
+					{
+						icon: 'pause',
+						classes: [ 'hidden', 'size-4' ],
+						attributes: {
+							'aria-hidden': 'true',
+							'data-dom': 'pause',
+						},
+					}
+				)
+			-}}
+		</button>
+	</mt-video>
+{%- endif -%}

@@ -1,0 +1,53 @@
+{
+	"require": {
+		"timber/timber": "^2.3",
+		"twig/html-extra": "^3.8",
+		"19h47/wp-get-theme": "dev-master"
+	},
+	"name": "19h47/matthieuteyssandier",
+	"version": "3.0.0",
+	"description": "WordPress theme for Matthieu Teyssandier",
+	"type": "wordpress-theme",
+	"authors": [
+		{
+			"name": "Jérémy Levron",
+			"email": "jeremylevron@19h47.fr",
+			"homepage": "https://19h47.fr"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"MatthieuTeyssandier\\": "./includes"
+		},
+		"files": [
+			"./vendor/19h47/wp-get-theme/wp-get-theme.php"
+		]
+	},
+	"repositories": [
+		{
+			"type": "package",
+			"package": {
+				"name": "19h47/wp-get-theme",
+				"version": "master",
+				"source": {
+					"url": "https://gist.github.com/806c10bd977aa63929dd14e2035e9d28.git",
+					"type": "git",
+					"reference": "main"
+				}
+			}
+		}
+	],
+	"require-dev": {
+		"wp-coding-standards/wpcs": "^3.3",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.2"
+	},
+	"scripts": {
+		"phpcs": "phpcs",
+		"phpcbf": "phpcbf"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}

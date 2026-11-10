@@ -1,0 +1,43 @@
+@theme {
+	--font-sans: "Neue Montreal", ui-sans-serif, system-ui, sans-serif;
+	--default-font-family: var(--font-sans);
+
+	--color-black: #242021;
+	--color-gray-dark: #939393;
+	--color-gray-light: #eae9e8;
+	--color-red: #fd4d2e;
+
+	/*
+	 * Fluid sizes, minimum at 375px wide, maximum at 1920px (1302px for 4xl).
+	 * Line height of the document unless the design sets one.
+	 */
+	--text-4xl: clamp(1.25rem, 0.9466rem + 1.2945vw, 2rem);
+	--text-4xl--line-height: 1.5;
+	--text-5xl: clamp(1.875rem, 1.3896rem + 2.0712vw, 3.875rem);
+	--text-5xl--line-height: 1.5;
+	--text-6xl: clamp(2.1875rem, 1.6565rem + 2.2654vw, 4.375rem);
+	--text-6xl--line-height: 1.5;
+	--text-7xl: clamp(2.5rem, 1.8932rem + 2.589vw, 5rem);
+	--text-7xl--line-height: 0.85;
+	--text-8xl: clamp(3.125rem, 2.3665rem + 3.2362vw, 6.25rem);
+	--text-8xl--line-height: 0.9;
+
+	--tracking-tight: -0.01em;
+
+	--radius-5xl: 2.5rem;
+
+	--container-padding-x: 0.5rem;
+	--grid-columns: 12;
+	--grid-gutter: 0.5rem;
+
+	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+	--ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+	--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@media (width >= 64rem) {
+	:root {
+		--container-padding-x: 1.5rem;
+		--grid-gutter: 1.5rem;
+	}
+}

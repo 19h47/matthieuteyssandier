@@ -1,0 +1,26 @@
+{#
+ # Use
+ #
+ # @param array classes
+ # @param string id
+ # @param string icon
+ #
+ # @file views/svg/use.html.twig
+ # @package MatthieuTeyssandier
+ #
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+<svg
+	class="{{
+		html_classes(
+			icon,
+			classes | default( [] ) | join( ' ' ),
+			( classes | default( [] ) | filter( class => class starts with 'fill-' ) | length ) == 0
+				? 'fill-current'
+		)
+	}}"
+	{{ html_attr( id is defined ? { id: id } ) }}
+	{{ html_attr( attributes ) }}
+>
+	<use xlink:href="#{{ icon }}" href="#{{ icon }}"></use>
+</svg>

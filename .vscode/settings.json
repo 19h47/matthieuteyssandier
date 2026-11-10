@@ -1,0 +1,23 @@
+{
+	"[php]": {
+		"editor.defaultFormatter": "valeryanm.vscode-phpsab",
+		"editor.formatOnSave": true
+	},
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+	},
+	"html.validate.styles": false,
+	"phpcs.enable": true,
+	"phpcs.executablePath": "vendor/bin/phpcs",
+	"phpcs.standard": "phpcs.xml",
+	"phpcs.autoConfigSearch": false,
+	"phpsab.snifferEnable": true,
+	"phpsab.fixerEnable": true,
+	"phpsab.autoFixOnSave": true,
+	"phpsab.autoRulesetSearch": false,
+	"phpsab.executablePathCS": "vendor/bin/phpcs",
+	"phpsab.executablePathCBF": "vendor/bin/phpcbf",
+	"phpsab.standard": "phpcs.xml",
+	"phpsab.composerJsonPath": "composer.json"
+}

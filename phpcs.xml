@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<ruleset name="MatthieuTeyssandier-Standards">
+    <description>Coding standards for the Matthieu Teyssandier WordPress theme.</description>
+
+    <file>.</file>
+    <arg name="extensions" value="php" />
+
+    <rule ref="WordPress" />
+
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array">
+                <element value="matthieuteyssandier" />
+            </property>
+        </properties>
+    </rule>
+
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/dist/*</exclude-pattern>
+
+    <rule ref="WordPress.Files.FileName">
+        <properties>
+            <property name="strict_class_file_names" value="false" />
+        </properties>
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName" />
+        <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
+    </rule>
+</ruleset>

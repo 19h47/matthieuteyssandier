@@ -1,0 +1,31 @@
+{#
+ # Blocks: Medias
+ #
+ # Two images or videos side by side from `lg`, stacked below.
+ #
+ # @param {object} props ACF layout row (`media_0`, `media_1`: flexible content, one row each).
+ #
+ # @package MatthieuTeyssandier
+ # @author Jérémy Levron <jeremylevron@19h47.fr> (https://19h47.fr)
+ #}
+{%- if ( props.media_0 | length ) or ( props.media_1 | length ) -%}
+	<div class="container" data-reveal>
+		<div class="layout-grid gap-y-6">
+			{%- for column in [ props.media_0, props.media_1 ] | filter( column => column | length ) -%}
+				<div class="col-span-12 lg:col-span-6">
+					{%- for media in column -%}
+						{{-
+							include(
+								'components/media.html.twig',
+								{
+									media: media,
+									size: 'size-3',
+								}
+							)
+						-}}
+					{%- endfor -%}
+				</div>
+			{%- endfor -%}
+		</div>
+	</div>
+{%- endif -%}
